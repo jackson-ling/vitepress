@@ -1,0 +1,52 @@
+ '/docs/Java/第一阶段':
+                    [
+                        {
+                            text: '基础语法',
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            items:
+                                [
+                                    {
+                                        text: '1.基本内容介绍', link: '/docs/Java/第一阶段/基本语法/1.基本内容介绍.md'
+                                    },
+                                    {
+                                        text: '2.转移符', link: '/docs/Java/第一阶段/基本语法/2.转义符.md'
+                                    }
+                                ],
+                        },
+                        {
+                            text: '面向对象基础',
+                            items:
+                                [
+                                    {
+                                        text: '27.类与对象', link: 'docs/Java/第一阶段/面向对象基础/27.类与对象.md',
+                                    }
+                                ]
+                        },
+                        {
+                            text: '面向对象中级',
+                            items:
+                                [
+                                    {
+                                        text: '37.包', link: 'docs/Java/第一阶段/面向对象中级/37.包.md',
+                                    }
+                                ]
+                        },
+                        {
+                            text: '第一阶段项目',
+                            items:
+                                [
+                                    {
+                                        text: '零钱通项目', link: '/',
+                                    },
+                                    {
+                                        text: '房屋出租系统', link: '/',
+                                    }
+                                ]
+                        }
+
+                    ],
+                '/docs/Java/第二阶段':
+                    [],
+                '/docs/Java/第三阶段':
+                    [],

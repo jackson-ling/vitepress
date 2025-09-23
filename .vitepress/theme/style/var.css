@@ -1,0 +1,32 @@
+
+/* .vitepress/theme/style/var.css */
+
+/* VPFeatures 页卡悬浮效果 */
+.VPFeatures .items .item {
+  transition: transform 0.3s;
+}
+
+.VPFeatures .items .item:hover {
+  transform: translateY(-20px);
+}
+
+/* Feature透明 （阴影背景效果）*/
+.VPFeature {
+    border: 1px solid transparent;
+    box-shadow: 0 10px 30px 0 rgb(0 0 0 / 15%);
+    background-color: transparent;
+}
+
+/* 配置feature的底色为白色 */
+.VPFeature {
+  background-color: var(--vp-body-background) !important; /* 使用VitePress的背景色变量 */
+}
+
+/* 自定义feature的样式 */
+.VPFeature {
+  padding: 20px 40px; /* 上下和左右的内边距 */
+  margin: 20px;       /* 外边距 */
+  max-height: 170px; /* 容器框的高度 */
+}
+
+

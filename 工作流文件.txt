@@ -1,0 +1,53 @@
+name: Deploy VitePress site to Pages
+on:
+  push:
+    branches: [main]  # 监听 main 分支的 push 事件
+permissions:
+  contents: read    # 读取仓库内容
+  pages: write      # 允许部署到 GitHub Pages
+  id-token: write   # 允许使用 id-token 进行认证
+concurrency:
+  group: pages
+  cancel-in-progress: false  # 保证每次只会有一个部署在进行中
+jobs:
+  # 构建工作
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 保证检查所有提交，尤其是需要获取历史信息时
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8.6.12  # 指定 pnpm 版本
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # 使用 Node.js 18
+          cache: pnpm  # 启用 pnpm 缓存
+      - name: Setup Pages
+        uses: actions/configure-pages@v4  # 配置 GitHub Pages
+      - name: Install dependencies
+        run: pnpm install  # 安装依赖
+      - name: Build with VitePress
+        run: |
+          pnpm run docs:build  # 构建 VitePress 项目
+          touch .vitepress/dist/.nojekyll  # 防止 GitHub Pages 使用 Jekyll 处理这个站点
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3  # 使用 v3 上传构建产物
+        with:
+          path: .vitepress/dist  # 上传 .vitepress/dist 目录
+  # 部署工作
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # 从后续的输出中获取部署后的页面URL
+    needs: build  # 确保部署在构建完成后进行
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4  # 使用 v4 部署构建产物
