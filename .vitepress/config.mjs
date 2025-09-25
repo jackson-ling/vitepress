@@ -343,19 +343,20 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="git.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Git',
-                                        link: '/docs/测试界面.md'
+                                        text: '<img src="linux.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Linux',
+                                        link: 'docs/DevOps/Linux/1. 基本介绍.md'
                                     },
                                     {
-                                        text: '<img src="linux.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Linux',
-                                        link: '/docs/测试界面.md'
+                                        text: '<img src="docker.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Docker',
+                                        link: 'docs/DevOps/Docker/1. Docker安装.md'
                                     },
                                     {
                                         text: '<img src="ngnix.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> Ngnix',
                                         link: '/docs/测试界面.md'
                                     },
+
                                     {
-                                        text: '<img src="docker.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Docker',
+                                        text: '<img src="git.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Git',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -377,6 +378,10 @@ export default defineConfig({
                                     {
                                         text: '前端模块',
                                         link: 'docs/项目/Tlias智能学习辅助系统/前端模块/1. 页面基本结构.md'
+                                    },
+                                    {
+                                        text: '项目部署',
+                                        link: 'docs/项目/Tlias智能学习辅助系统/项目部署/Linux 部署/1. 前端部署.md'
                                     }
                                 ]
                         },
@@ -384,6 +389,10 @@ export default defineConfig({
                             text: '苍穹外卖',
                             items:
                                 [
+                                    {
+                                        text: '开发环境搭建',
+                                        link: '/docs/测试界面.md'
+                                    },
                                     {
                                         text: '后端模块',
                                         link: '/docs/测试界面.md'
@@ -951,6 +960,26 @@ export default defineConfig({
                                 ]
                         }
                     ],
+                'docs/DevOps/Linux':
+                    [
+                        {
+                            text: 'Linux',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/DevOps/Linux')
+                                ]
+                        }
+                    ],
+                'docs/DevOps/Docker':
+                    [
+                        {
+                            text: 'Docker',
+                            items:
+                                [
+                                    ...setSidebarDefault("docs/DevOps/Docker")
+                                ]
+                        }
+                    ],
                 'docs/项目/Tlias智能学习辅助系统/后端模块':
                     [
                         {
@@ -971,6 +1000,17 @@ export default defineConfig({
                                 ]
                         }
                     ],
+                'docs/项目/Tlias智能学习辅助系统/项目部署':
+                    [
+                        {
+                            text: 'Tlias项目部署',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/Tlias智能学习辅助系统/项目部署')
+                                ]
+                        }
+                    ],
+
                 '/docs/Python/PyCharm/文章':
                     [
                         {

@@ -21,12 +21,12 @@ hero:
       link: /docs/warning.md
       
 features:
-  - title:  TIP 1
-    details: <strong>保持耐心，成功需要时间</strong> ⏳
+  - title:  TIP 1 
+    details: <strong>保持耐心，成功需要时间，耐住寂寞，不要急于求成</strong> ⏳
   - title: TIP 2
-    details: <strong>我亦无他，唯手熟尔，基础是一切的核心</strong> 💪
+    details: <strong>保持大量练习，大量重复，降低预期，基础是一切的核心</strong> 💪
   - title: TIP 3
-    details: <strong>请保持大量练习，学习需要循序渐进，警惕赶进度</strong> 🚀️
+    details: <strong>专注一件事，不要贪多，内化、理解、思考，循序渐进</strong> 🚀️
 ---
 
 
