@@ -390,8 +390,8 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '开发环境搭建',
-                                        link: '/docs/测试界面.md'
+                                        text: '项目介绍',
+                                        link: 'docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
                                     },
                                     {
                                         text: '后端模块',
@@ -1010,7 +1010,36 @@ export default defineConfig({
                                 ]
                         }
                     ],
-
+                'docs/项目/苍穹外卖/项目介绍':
+                    [
+                        {
+                            text: '苍穹外卖-项目介绍',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/苍穹外卖/项目介绍')
+                                ]
+                        }
+                    ],
+                'docs/项目/苍穹外卖/后端模块':
+                    [
+                        {
+                            text: '苍穹外卖-后端模块',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/苍穹外卖/后端模块')
+                                ]
+                        }
+                    ],
+                'docs/项目/苍穹外卖/前端模块':
+                    [
+                        {
+                            text: '苍穹外卖-前端模块',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/苍穹外卖/前端模块')
+                                ]
+                        }
+                    ],
                 '/docs/Python/PyCharm/文章':
                     [
                         {

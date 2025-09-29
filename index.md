@@ -22,11 +22,11 @@ hero:
       
 features:
   - title:  TIP 1 
-    details: <strong>保持耐心，成功需要时间，耐住寂寞，不要急于求成</strong> ⏳
+    details: <strong>明确目标，保持耐心，耐住寂寞，切勿急于求成</strong> ⏳
   - title: TIP 2
-    details: <strong>保持大量练习，大量重复，降低预期，基础是一切的核心</strong> 💪
+    details: <strong>大量练习，大量重复，降低预期，基础是一切的核心</strong> 💪
   - title: TIP 3
-    details: <strong>专注一件事，不要贪多，内化、理解、思考，循序渐进</strong> 🚀️
+    details: <strong>专注一件事，不要贪多，内化、思考、复盘，循序渐进</strong> 🚀️
 ---
 
 
