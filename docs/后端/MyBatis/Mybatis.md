@@ -318,7 +318,7 @@ public void testUpdate(){
 
 > #### 相关注解：<span style="color:red">@Select</span>，<span style="color:red">@Param</span>
 >
-> #### <span style="color:red">@param 注解的作用</span>：是<span style="color:red">为接口的方法形参起名字</span>的，因为对接口传入的形参在编译成字节码文件的时候不会保留形参的名字，这样的话，mybatis 就不知道哪个值对应哪个值了，这样的话，mybatis 就不知道哪个值对应哪个值了
+> #### <span style="color:red">@param 注解的作用</span>：是<span style="color:red">为接口的方法形参起名字</span>的，因为对接口传入的形参在编译成字节码文件的时候不会保留形参的名字，这样的话，mybatis 就不知道哪个值对应哪个值了
 >
 > #### ⚠️ 注意点：<span style="color:red">基于官方骨架创建的 springboot 项目</span>中，接口编译时会保留方法形参名，<span style="color:red">@Param 注解可以省略</span> (#{形参名})，官方骨架创建的会保留形参名字，这就是可以省略的原因所在
 
