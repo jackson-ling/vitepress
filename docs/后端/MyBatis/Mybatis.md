@@ -426,7 +426,7 @@ public void testFindByUsernameAndPassword(){
 
 #### （1）<span style="color:red">&lt;if&gt;</span> 标签：判断条件是否成立，如果<span style="color:red">条件为 true，则拼接 SQL</span>，具有 <span style="color:red">test 属性</span>，属性值为<span style="color:red">判断条件</span>
 
-#### （2）<span style="color:red">&lt;set&gt;</span> 标签：可以<span style="color:red">自动生成 set 关键字</span>，常配合 if 标签（用于条件的判断）使用，然后进行 SQL 语句的拼接，同时还可以<span style="color:red">自动去除更新字段后面多余的逗号</span>
+#### （2）<span style="color:red">&lt;set&gt;</span> 标签：可以<span style="color:red">自动生成 set 关键字</span>，常配合 if 标签（用于条件的判断）使用，然后进行 SQL 语句的拼接，同时还可以<span style="color:red">自动去除更新字段后面多余的逗号</span>，具有<span style="color:red">parameterType 属性</span>，当指定 parameterType 后，在 SQL 语句中可以通过 #{属性名} 或 ${属性名} 的方式引用参数的属性（针对实体类或 Map），MyBatis 会根据类型信息找到对应的属性值，<span style="color:red">当然也可以不指定，MyBatis 也能通过反射自动推断参数类型</span>
 
 #### （3）<span style="color:red">&lt;where&gt;</span> 标签：根据查询条件，来生成 where 关键字，并会<span style="color:red">自动去除条件前面多余的 and 或 or</span>
 

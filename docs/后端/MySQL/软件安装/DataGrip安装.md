@@ -36,3 +36,7 @@ aside: right
 ## 设置
 
 > #### 隶属 JetBrains 公司旗下产品，可参考其他产品的设置，大部分是互通的
+
+## 查看历史查询控制台
+
+> #### 快捷键：<span style="color:red">Ctrl + E</span>

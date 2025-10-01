@@ -395,7 +395,7 @@ export default defineConfig({
                                     },
                                     {
                                         text: '后端模块',
-                                        link: '/docs/测试界面.md'
+                                        link: 'docs/项目/苍穹外卖/后端模块/Day 2/1. 新增员工.md'
                                     },
                                     {
                                         text: '前端模块',
@@ -1016,7 +1016,22 @@ export default defineConfig({
                             text: '苍穹外卖-项目介绍',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/苍穹外卖/项目介绍')
+                                    {
+                                        text: '初始化SQL脚本',
+                                        link: 'docs/项目/苍穹外卖/项目介绍/初始化SQL脚本.md'
+                                    },
+                                    {
+                                        text: '数据库设计文档',
+                                        link: 'docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
+                                    },
+                                    {
+                                        text: 'Day 1',
+                                        items:
+                                            [
+                                                ...setSidebarDefault('docs/项目/苍穹外卖/项目介绍/Day 1')
+                                            ]
+                                    }
+
                                 ]
                         }
                     ],
