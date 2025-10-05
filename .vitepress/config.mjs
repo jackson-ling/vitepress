@@ -66,10 +66,6 @@ export default defineConfig({
                                                 },
                                             ]
                                     },
-                                    {
-                                        text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信开发者工具',
-                                        link: '/docs/测试界面.md'
-                                    },
                                 ]
                         },
             */
@@ -288,14 +284,10 @@ export default defineConfig({
                                     },
                                     {
                                         text: '<img src="redis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Redis',
-                                        link: '/docs/测试界面.md'
+                                        link: 'docs/后端/Redis/1. 基本介绍.md'
                                     },
 
                                 ]
-                        },
-                        {
-                            text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
-                            link: '/docs/测试界面.md'
                         },
                         {
                             text: '框架',
@@ -335,8 +327,23 @@ export default defineConfig({
 
                         },
                         {
-                            text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 设计模式',
-                            link: '/docs/测试界面.md'
+                            text: '其他',
+                            items:
+                                [
+                                    {
+                                        text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信小程序',
+                                        link: 'docs/后端/微信小程序/1. HttpClient.md'
+                                    },
+                                    {
+                                        text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
+                                        link: '/docs/测试界面.md'
+                                    },
+
+                                    {
+                                        text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 设计模式',
+                                        link: '/docs/测试界面.md'
+                                    },
+                                ]
                         },
                         {
                             text: "DevOps",
@@ -900,6 +907,16 @@ export default defineConfig({
                                 ]
                         }
                     ],
+                'docs/后端/微信小程序':
+                    [
+                        {
+                            text: '微信小程序',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/后端/微信小程序')
+                                ]
+                        }
+                    ],
                 'docs/后端/MySQL':
                     [
                         {
@@ -937,6 +954,16 @@ export default defineConfig({
                             items:
                                 [
                                     ...setSidebarDefault("docs/后端/MySQL/MySQL作业"),
+                                ]
+                        }
+                    ],
+                'docs/后端/Redis':
+                    [
+                        {
+                            text: 'Redis',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/后端/Redis')
                                 ]
                         }
                     ],

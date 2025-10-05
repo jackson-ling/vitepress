@@ -53,7 +53,7 @@ aside: left
 >
 > #### （2）用户名和密码替换为自己的
 
-```properrties
+```properties
 # 数据库访问的url地址
 spring.datasource.url=jdbc:mysql://localhost:3306/web
 # 数据库驱动类类名

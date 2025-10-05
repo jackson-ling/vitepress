@@ -128,8 +128,10 @@ userList: [
 
 #### （2）语法
 
-```hrml
-<tr v-for="(item,index) in items" :key="item.id">{{item}}</tr>
+```html
+<tr v-for="(item,index) in items" :key="item.id">
+  {{item}}
+</tr>
 ```
 
 > #### items 为遍历的数组
