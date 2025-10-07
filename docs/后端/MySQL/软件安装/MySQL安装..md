@@ -70,6 +70,10 @@ datadir=D:\javatool\mysql-5.7.19-winx64\data\
 
 #### 6. 使用<span style = "color:red;font-weight:bold">管理员</span>身份打开 cmd , 并切换到 D:\javatool\mysql-5.7.19-winx64\bin 目录下（<span style = "color:red;font-weight:bold">改成自己的路径</span>）, 执行<span style = "color:blue;font-weight:bold">mysqld -install</span>
 
+```bash
+cd /D 安装目录
+```
+
 #### 7. 初始化数据库: <span style = "color:blue;font-weight:bold">mysqld --initialize-insecure --user=mysql</span>，如果执行成功，会生成 data 目录
 
 ![alt text](data目录.png)

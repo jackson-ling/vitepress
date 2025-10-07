@@ -1697,3 +1697,171 @@ import UserList from "./views/user/UserList.vue";
 
 <style scoped></style>
 ```
+
+## vuex 状态管理
+
+### 基本介绍
+
+> #### vuex 是一个专为 Vue.js 应用程序开发的状态管理库
+>
+> #### vuex 可以在多个组件之间<span style="color:red">共享数据</span>，并且共享的数据是响应式的，即数据的变更能及时渲染到模板
+>
+> #### vuex 采用集中式存储管理所有组件的状态
+
+#### 每一个 Vuex 应用的核心就是 store（仓库），“ store ” 基本上就是一个容器，它包含着你的应用中大部分的<span style="color:red">状态 （state）</span>，Vuex 和单纯的全局对象有以下两点不同
+
+> #### （1）Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新
+>
+> #### （2）你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地<span style="color:red">提交 （commit） mutation</span>。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用
+
+### 安装 vuex
+
+```bash
+npm install vuex@next --save
+```
+
+### 几个核心概念
+
+> #### state：状态对象，集中定义各个组件共享的数据
+>
+> #### mutations：类似于一个事件，用于修改共享数据，要求必须是同步函数
+>
+> #### actions：类似于 mutation，可以包含异步操作，通过调用 mutation 来改变共享数据
+
+### 入门案例
+
+#### 第一步：创建带有 vuex 功能的前端项目
+
+> #### 注：在创建的前端工程中，可以发现自动创建了 vuex 相关的文件(src/store/index.js)，并且在 main.js 中创建 Vue 实例时，需要将 store 对象传入，代码如下
+
+```js
+import Vue from "vue";
+import App from "./App.vue";
+import store from "./store";
+
+Vue.config.productionTip = false;
+
+new Vue({
+  store, //使用vuex功能
+  render: (h) => h(App),
+}).$mount("#app");
+```
+
+#### 第二步：在 src / store / index.js 文件中集中定义和管理共享数据
+
+```js
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+
+Vue.use(Vuex);
+
+//集中管理多个组件共享的数据
+export default new Vuex.Store({
+  //集中定义共享数据
+  state: {
+    name: "未登录游客",
+  },
+  getters: {},
+  //通过当前属性中定义的函数修改共享数据，必须都是同步操作
+  mutations: {},
+  //通过actions调用mutation，在actions中可以进行异步操作
+  actions: {},
+  modules: {},
+});
+```
+
+#### 第三步：在视图组件中展示共享数据
+
+> #### 注意点：<span style="color:red">$store.state</span> 为固定写法，用于访问<span style="color:red">共享数据</span>
+
+```html
+<template>
+  <div class="hello">
+    <h1>欢迎你，{{$store.state.name}}</h1>
+  </div>
+</template>
+```
+
+#### 第四步：在 mutations 中定义函数，用于修改共享数据
+
+```js
+//通过当前属性中定义的函数修改共享数据，必须都是同步操作
+mutations: {
+  setName(state,newName) {
+    state.name = newName
+  }
+},
+```
+
+#### 第五步：在视图组件中调用 mutations 中定义的函数
+
+> #### 注意点：<span style="color:red">mutations 中定义的函数</span>不能直接调用，必须通过状态对象的 <span style="color:red">commit 方法来调用</span>
+
+```vue
+<template>
+  <div id="app">
+    欢迎你，{{ $store.state.name }}
+    <input
+      type="button"
+      value="通过mutations修改共享数据"
+      @click="handleUpdate"
+    />
+    <input
+      type="button"
+      value="调用actions中定义的函数"
+      @click="handleCallAction"
+    />
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
+  </div>
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+
+export default {
+  name: "App",
+  components: {
+    HelloWorld,
+  },
+  methods: {
+    handleUpdate() {
+      // mutations中定义的函数不能直接调用，必须通过这种方式来调用
+      // setName为mutations中定义的函数名称，lisi为传递的参数
+      this.$store.commit("setName", "lisi");
+    },
+    handleCallAction() {
+      // 调用actions中定义的函数，setNameByAxios为函数名称
+      this.$store.dispatch("setNameByAxios");
+    },
+  },
+};
+</script>
+```
+
+#### 第六步：如果在修改共享数据的过程中有异步操作，则需要将异步操作的代码编写在 actions 的函数中
+
+> #### 注意点：在 actions 中定义的函数可以声明 <span style="color:red">context 参数</span>，通过此参数可以<span style="color:red">调用 mutations 中定义的函数</span>
+
+```js
+//通过actions调用mutation，在actions中可以进行异步操作
+actions: {
+  setNameByAxios(context){
+    axios({ //异步请求
+      url: '/api/admin/employee/login',
+      method: 'post',
+      data: {
+        username: 'admin',
+        password: '123456'
+      }
+    }).then(res => {
+      if(res.data.code == 1){
+        //异步请求后，需要修改共享数据
+        //在actions中调用mutation中定义的setName函数
+        context.commit('setName',res.data.data.name)
+      }
+    })
+  }
+},
+```

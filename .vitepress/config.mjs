@@ -176,7 +176,7 @@ export default defineConfig({
                                 ]
                         },
                         {
-                            text: '前端三件套',
+                            text: '前端四件套',
                             items:
                                 [
                                     {
@@ -190,6 +190,10 @@ export default defineConfig({
                                     {
                                         text: '<img src="javascript.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> JavaScript',
                                         link: 'docs/前端/JavaScript/JavaScript.md'
+                                    },
+                                    {
+                                        text: '<img src="typescript.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> TypeScript',
+                                        link: 'docs/前端/TypeScript/TypeScript.md'
                                     },
                                 ]
                         },
@@ -404,10 +408,20 @@ export default defineConfig({
                                         text: '后端模块',
                                         link: 'docs/项目/苍穹外卖/后端模块/Day 2/1. 新增员工.md'
                                     },
+                                ]
+                        },
+                        {
+                            text: '中州养老',
+                            items:
+                                [
                                     {
-                                        text: '前端模块',
+                                        text: '项目介绍',
                                         link: '/docs/测试界面.md'
-                                    }
+                                    },
+                                    {
+                                        text: '后端模块',
+                                        link: '/docs/测试界面.md'
+                                    },
                                 ]
                         },
                     ]
