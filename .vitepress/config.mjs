@@ -301,12 +301,12 @@ export default defineConfig({
                                         text: '<img src="spring.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Spring',
                                         link: 'docs/后端/Spring/1. AOP.md'
                                     },
+                                    // {
+                                    //     text: '<img src="springmvc.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringMVC',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
                                     {
-                                        text: '<img src="springmvc.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringMVC',
-                                        link: '/docs/测试界面.md'
-                                    },
-                                    {
-                                        text: '<img src="mybatis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MyBaits',
+                                        text: '<img src="mybatis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MyBatis',
                                         link: 'docs/后端/MyBatis/Mybatis.md'
                                     },
                                     {
@@ -320,11 +320,19 @@ export default defineConfig({
                             items:
                                 [
                                     {
+                                        text: '<img src="mybatisplus.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MyBatis Plus',
+                                        link: 'docs/后端/MyBatis Plus/MyBatis Plus.md'
+                                    },
+                                    {
                                         text: '<img src="springcloud.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringCloud',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
                                         text: '<img src="rabbitmq.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> RabbitMQ',
+                                        link: '/docs/测试界面.md'
+                                    },
+                                    {
+                                        text: '<img src="elasticsearch.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Elasticsearch',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]

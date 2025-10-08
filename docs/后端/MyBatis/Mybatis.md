@@ -7,6 +7,8 @@ aside: left
  
 - - -
 
+> <h3>官网：<a href="https://mybatis.org/mybatis-3/zh_CN/getting-started.html">https://mybatis.org/mybatis-3/zh_CN/getting-started.html</a></h3>
+
 ## 基本介绍
 
 ### 什么是 MyBatis?
@@ -14,8 +16,6 @@ aside: left
 > #### （1）MyBatis 是一款优秀的<span style="color: red;">持久层框架</span>，用于简化 JDBC 的开发
 >
 > #### （2）MyBatis 本是 Apache 的一个开源项目 iBatis，2010 年这个项目由 apache 迁移到了 google code，并且改名为 MyBatis 。2013 年 11 月迁移到 Github
->
-> #### （3）官网：https://mybatis.org/mybatis-3/zh/index.html
 
 ### 持久层与框架
 
