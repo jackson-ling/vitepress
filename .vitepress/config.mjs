@@ -424,7 +424,7 @@ export default defineConfig({
                                 [
                                     {
                                         text: '项目介绍',
-                                        link: '/docs/测试界面.md'
+                                        link: 'docs/项目/中州养老/项目介绍/Day1/1. 项目介绍.md'
                                     },
                                     {
                                         text: '后端模块',
@@ -438,6 +438,10 @@ export default defineConfig({
                 text: '🤖AI',
                 items:
                     [
+                        {
+                          text: 'ROS2（AIC大赛）',
+                          link: 'docs/AI/ROS2/ros2.md'
+                        },
                         {
                             text: 'SpringAI',
                             link: '/docs/测试界面.md'
@@ -1101,6 +1105,26 @@ export default defineConfig({
                             items:
                                 [
                                     ...setSidebarDefault('docs/项目/苍穹外卖/前端模块')
+                                ]
+                        }
+                    ],
+                'docs/项目/中州养老/项目介绍':
+                    [
+                        {
+                            text: '中州养老-项目介绍',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/中州养老/项目介绍')
+                                ]
+                        }
+                    ],
+                'docs/项目/中州养老/后端模块':
+                    [
+                        {
+                            text: '中州养老-后端模块',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/项目/中州养老/后端模块')
                                 ]
                         }
                     ],
