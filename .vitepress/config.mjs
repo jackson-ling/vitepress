@@ -439,8 +439,8 @@ export default defineConfig({
                 items:
                     [
                         {
-                          text: 'ROS2（AIC大赛）',
-                          link: 'docs/AI/ROS2/ros2.md'
+                            text: 'AI 编程开发',
+                            link: 'docs/AI/AI编程开发/AI编程开发.md'
                         },
                         {
                             text: 'SpringAI',
@@ -449,6 +449,10 @@ export default defineConfig({
                         {
                             text: 'LangChain4j',
                             link: '/docs/测试界面.md'
+                        },
+                        {
+                            text: 'ROS2（AIC大赛）',
+                            link: 'docs/AI/ROS2/ros2.md'
                         },
                     ]
             },

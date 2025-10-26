@@ -25,6 +25,23 @@ outline: [2, 3]
 
 视频讲解：https://www.bilibili.com/video/BV1hFA8eKE6C
 
+### 代码框架
+
+```java
+void dfs(参数) {
+    if (终止条件) {
+        存放结果;
+        return;
+    }
+
+    for (选择：本节点所连接的其他节点) {
+        处理节点;
+        dfs(图，选择的节点); // 递归
+        回溯，撤销处理结果
+    }
+}
+```
+
 ## 98. 所有可达路径
 
 题目链接：https://kamacoder.com/problempage.php?pid=1170
@@ -32,6 +49,74 @@ outline: [2, 3]
 文章讲解：https://www.programmercarl.com/kamacoder/0098.%E6%89%80%E6%9C%89%E5%8F%AF%E8%BE%BE%E8%B7%AF%E5%BE%84.html
 
 视频讲解：https://www.bilibili.com/video/BV1VePeepEpP
+
+### 题解
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    // 收集符合条件的路径
+    static List<List<Integer>> result = new ArrayList<>();
+    // 收集 1 节点到终点的路径
+    static List<Integer> path = new ArrayList<>();
+
+    public static void dfs(int[][] graph, int x, int n) {
+        // 终止条件
+        if (x == n) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        // 节点编号从 1 到 n
+        for (int i = 1; i <= n; i++) {
+            // 找到与 x 链接的节点
+            if (graph[x][i] == 1){
+                // 遍历到的节点胶乳到路径中来
+                path.add(i);
+                // 进入下一层递归
+                dfs(graph, i, n);
+                // 回溯，撤销本节点
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        // 邻接矩阵表示无向图（下标从 1 开始）
+        int [][] graph = new int[n + 1][n + 1];
+
+        for (int i = 0; i < m; i++) {
+            int s = scanner.nextInt();
+            int t = scanner.nextInt();
+            // 1 代表 s 和 t 之间是相连的
+            graph[s][t] = 1;
+        }
+
+        // 无论什么路径，已知是从 1 节点出发
+        path.add(1);
+
+        dfs(graph,1,n);
+
+        // 输出结果
+        if (result.isEmpty()){
+            System.out.println(-1);
+        }
+        for (List<Integer> pa : result) {
+            for (int i = 0; i < pa.size() - 1; i++) {
+                System.out.print(pa.get(i) + " ");
+            }
+            System.out.println(pa.get(pa.size() - 1));
+        }
+    }
+
+}
+```
 
 ## 广搜理论基础
 
