@@ -183,3 +183,25 @@ mysql -u root -p(密码)
 ```bash
 mysql -h 主机名（可填localhost） -P 端口（默认是3306） -u 用户名 -p 密码
 ```
+
+## ⚠️ 服务无法启动
+
+<img src="./服务无法启动.png" style="width:500px;margin:0 auto"/>
+
+### 方案一
+
+```
+1. 删除data目录
+2. 以管理员身份进入bin目录，执行命令：mysqld  --initialize-insecure（重新初始化data目录）
+3. 重新启动服务，问题解决
+```
+
+### 方案二（需要恢复数据）
+
+#### （1）修改 ini 配置文件，在末尾加上如下代码，并保存
+
+```bash
+innodb_force_recovery = 6
+```
+
+#### （2）重启服务，问题解决，同时数据恢复
