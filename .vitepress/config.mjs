@@ -983,7 +983,30 @@ export default defineConfig({
                             text: 'MySQL作业',
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/MySQL/MySQL作业"),
+                                    {
+                                        text: '1. 多表查询练习（必做）',
+                                        link: "docs/后端/MySQL/MYSQL作业/1. 多表查询练习（必做）.md"
+                                    },
+                                    {
+                                        text: '2. 作业一',
+                                        link: "docs/后端/MySQL/MYSQL作业/2. 作业一.md"
+                                    },
+                                    {
+                                        text: '3. 作业二',
+                                        link: "docs/后端/MySQL/MYSQL作业/3. 作业二.md"
+                                    },
+                                    {
+                                        text: '4. 作业三',
+                                        link: "docs/后端/MySQL/MYSQL作业/4. 作业三.md"
+                                    },
+                                    {
+                                        text: '5. 作业四',
+                                        link: "docs/后端/MySQL/MYSQL作业/5. 作业四.md"
+                                    },
+                                    {
+                                        text: '6. 作业五',
+                                        link: "docs/后端/MySQL/MYSQL作业/6. 作业五.md"
+                                    },
                                 ]
                         }
                     ],
