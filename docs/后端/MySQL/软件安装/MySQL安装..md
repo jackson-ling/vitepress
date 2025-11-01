@@ -205,3 +205,11 @@ innodb_force_recovery = 6
 ```
 
 #### （2）重启服务，问题解决，同时数据恢复
+
+#### （3）立即备份数据，删除 data 文件夹，使用如下命令重新初始化 data 目录
+
+```bash
+mysqld --initialize-insecure
+```
+
+#### （4）执行 sql 脚本，重新恢复数据
