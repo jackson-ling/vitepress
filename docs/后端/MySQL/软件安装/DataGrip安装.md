@@ -26,17 +26,26 @@ aside: right
 <img src="./DataGrip-4.png" style="width:600px;margin:0px auto"/>
 <br/>
 
-## ⭐ 打开查询窗口
+## 设置
 
-> #### 快捷键：<span style="color:red">Ctrl + Shift + Q</span>
+> #### DataGrip 是 JetBrains 公司旗下产品，可参考其他产品的设置（如 IDEA），大部分是互通的
+
+## 常用操作
+
+### 查看历史查询控制台
+
+> #### 快捷键：<span style="color:red">Ctrl + E</span>
+
+### 打开查询窗口
+
+> #### 首先选中一个数据库，快捷键：<span style="color:red">Ctrl + Shift + Q</span>
 
 <img src="./DataGrip-5.png" style="width:800px;margin:0px auto"/>
 <br/>
 
-## 设置
+### ⭐ 运行快捷键
 
-> #### 隶属 JetBrains 公司旗下产品，可参考其他产品的设置，大部分是互通的
+> #### 继承 SQLyog 的运行风格，修改运行快捷键为<span style="color:red"> F9</span>
 
-## 查看历史查询控制台
-
-> #### 快捷键：<span style="color:red">Ctrl + E</span>
+<br/>
+<img src="./DataGrip-6.png" style="width:800px;margin:0px auto"/>

@@ -22,7 +22,8 @@ layout: home
   snake: "🐍",
   rocket: "🚀",
   planning: "📋",
-  researching: "🔍",
+  mag: "🔍",
+  mag_right: "🔎",
   learning: "📚",
   communicating: "📢",
   pending: "⏳"

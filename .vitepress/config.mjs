@@ -84,7 +84,7 @@ export default defineConfig({
                                     {text: '⭐优质开源项目', link: '/docs/测试界面.md'},
                                 ]
                         },
-                        {text: '📚常用网站', link: 'docs/笔记/常用网站.md'},
+                        {text: '🔎常用网站', link: 'docs/笔记/常用网站.md'},
                         {text: '🖊️随笔', link: '/docs/测试界面.md'},
                         {
                             text: 'Markdown',
@@ -284,7 +284,7 @@ export default defineConfig({
                                 [
                                     {
                                         text: '<img src="mysql.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MySQL',
-                                        link: 'docs/后端/MySQL/MySQL/1. 基本介绍.md'
+                                        link: 'docs/后端/MySQL/MySQL/基础篇/1. 基本介绍.md'
                                     },
                                     {
                                         text: '<img src="redis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Redis',
@@ -976,10 +976,37 @@ export default defineConfig({
                             text: 'MySQL',
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/MySQL/MySQL"),
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: '基础篇',
+                                        items:
+                                            [
+                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/基础篇"),
+                                            ]
+                                    },
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: '进阶篇',
+                                        items:
+                                            [
+                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/进阶篇"),
+                                            ]
+                                    },
+                                    // {
+                                    //     text: '运维篇',
+                                    //     items:
+                                    //         [
+                                    //             ...setSidebarDefault("docs/后端/MySQL/MySQL/运维篇"),
+                                    //         ]
+                                    // },
+
                                 ]
                         },
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: 'MySQL作业',
                             items:
                                 [
