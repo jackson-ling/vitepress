@@ -84,7 +84,7 @@ export default defineConfig({
                                     {text: '⭐优质开源项目', link: '/docs/测试界面.md'},
                                 ]
                         },
-                        {text: '🔎常用网站', link: 'docs/笔记/常用网站.md'},
+                        {text: '🔍常用网站', link: 'docs/笔记/常用网站.md'},
                         {text: '🖊️随笔', link: '/docs/测试界面.md'},
                         {
                             text: 'Markdown',
