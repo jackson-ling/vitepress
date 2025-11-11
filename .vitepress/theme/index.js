@@ -21,7 +21,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
     app.component('confetti', confetti);  // 注册组件
-    app.component('HomeUnderline' , HomeUnderline);
+    // app.component('HomeUnderline' , HomeUnderline);
     }
 }
 

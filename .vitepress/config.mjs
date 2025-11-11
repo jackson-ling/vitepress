@@ -131,6 +131,7 @@ export default defineConfig({
                             link: '/docs/测试界面.md'
                         },
                         {text: '蓝桥杯', link: '/docs/测试界面.md'},
+                        {text: '左程云 🚀', link: '/docs/测试界面.md'},
                         {
                             text: '代码随想录', items:
                                 [
