@@ -642,11 +642,11 @@ export default defineConfig({
                 'docs/算法/左程云':
                     [
                         {
-                            text:'左程云算法',
+                            text: '左程云算法',
                             items:
-                            [
-                                ...setSidebarDefault('docs/算法/左程云'),
-                            ]
+                                [
+                                    ...setSidebarDefault('docs/算法/左程云'),
+                                ]
                         }
                     ],
 
@@ -1007,13 +1007,15 @@ export default defineConfig({
                                                 ...setSidebarDefault("docs/后端/MySQL/MySQL/进阶篇"),
                                             ]
                                     },
-                                    // {
-                                    //     text: '运维篇',
-                                    //     items:
-                                    //         [
-                                    //             ...setSidebarDefault("docs/后端/MySQL/MySQL/运维篇"),
-                                    //         ]
-                                    // },
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: '运维篇',
+                                        items:
+                                            [
+                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/运维篇"),
+                                            ]
+                                    },
 
                                 ]
                         },
