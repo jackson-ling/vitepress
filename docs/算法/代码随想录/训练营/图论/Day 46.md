@@ -23,13 +23,13 @@ outline: [2, 3]
 
 #### 1、图中的线是如何连在一起的
 
-> #### 在搜索的过程中，我们可以枚举，用 26 个字母替换当前字符串的每一个字符，在看替换后是否在 strList 里出现过，就可以判断两个字符串是否是链接的
+> #### 在搜索的过程中，我们可以枚举，用 26 个字母替换当前字符串的每一个字符，在看替换后是否在 strList 里出现过，就可以判断两个字符串是否是连接的
 
 #### 2、起点和终点的最短路径长度
 
 > #### （1）首先题目中并没有给出点与点之间的连线，而是要我们自己去连，条件是字符只能差一个
 >
-> #### （2）所以判断点与点之间的关系，需要判断是不是差一个字符，如果差一个字符，那就是有链接
+> #### （2）所以判断点与点之间的关系，需要判断是不是差一个字符，如果差一个字符，那就是有连接
 >
 > #### （3）然后就是求起点和终点的最短路径长度，<span style="color: red;">在无权图中，求最短路，用深搜或者广搜就行，没必要用最短路算法</span>
 
@@ -67,7 +67,6 @@ public class Main {
 
         while (!q.isEmpty()) {
             String word = q.poll();
-            int path = map.get(word);
             for (int i = 0; i < word.length(); i++) {
                 char[] arr = word.toCharArray();
                 for (char c = 'a'; c <= 'z'; c++) {
@@ -75,11 +74,14 @@ public class Main {
                     String word2 = new String(arr);
                     // 到达终点
                     if (word2.equals(endStr)) {
-                        System.out.println(path + 1);
+                        // 到达当前节点的路径 = 到达上一个节点的路径 + 1
+                        System.out.println(map.get(word) + 1);
                         return;
                     }
+                    // 替换后的新字符串如果是字典序中的字符串，并且没有被访问过，则加入队列
                     if (wordList.contains(word2) && !map.containsKey(word2)) {
-                        map.put(word2, path + 1);
+                        // 到达当前节点的路径 = 到达上一个节点的路径 + 1
+                        map.put(word2, map.get(word) + 1);
                         q.offer(word2);
                     }
                 }
@@ -107,24 +109,37 @@ public class Main {
 ### 题解
 
 ```java
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     // 邻接表
     public static List<List<Integer>> adjList = new ArrayList<>();
 
     public static void dfs(boolean[] visited, int key) {
-        // 不重复访问节点
-        if (visited[key]) {
-            return;
+        // 首先处理当前节点
+        visited[x] = true;
+        List<Integer> list = adjList.get(x);
+        for (Integer val : list) {
+            if (!visited[val]) {
+                visited[val] = true;
+                dfs(val, visited);
+            }
         }
-        visited[key] = true;
-        List<Integer> newKeys = adjList.get(key);
-        for (Integer newKey : newKeys) {
-            dfs(visited, newKey);
+    }
+
+    public static void bfs(boolean[] visited, int key) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.add(key);
+        visited[key] = true; // 只要加入队列就标记为访问过
+        while (!queue.isEmpty()) {
+            int curKey = queue.poll();
+            List<Integer> list = adjList.get(curKey);
+            for (int nextKey : list) {
+                if (!visited[nextKey]) {
+                    queue.add(nextKey);
+                    visited[nextKey] = true;
+                }
+            }
         }
     }
 
@@ -134,27 +149,31 @@ public class Main {
         int vertices_num = sc.nextInt();
         // 边
         int line_num = sc.nextInt();
-        // 初始化邻接表
-        for (int i = 0; i < vertices_num; i++) {
+        // 初始化邻接表（实际使用时节点编号和下标索引对应）
+        for (int i = 0; i <= vertices_num; i++) {
             adjList.add(new LinkedList<>());
         }
-        // 构造邻接表
+        // 输入 k 条边
         for (int i = 0; i < line_num; i++) {
             int s = sc.nextInt();
             int t = sc.nextInt();
-            adjList.get(s - 1).add(t - 1);
+            // 节点编号和索引下标对应
+            adjList.get(s).add(t);
         }
 
-        boolean[] visited = new boolean[vertices_num];
-        dfs(visited, 0);
+        // n 个节点，节点编号和索引下标对应
+        boolean[] visited = new boolean[vertices_num + 1];
 
-        for (int i = 0; i < vertices_num; i++) {
-            // 如果有节点未访问，说明不能到达所有节点
+        dfs(visited, 1);
+    //  bfs(visited, 1);
+
+        for (int i = 1; i <= vertices_num; i++) {
             if (!visited[i]) {
                 System.out.println(-1);
                 return;
             }
         }
+
         System.out.println(1);
     }
 }

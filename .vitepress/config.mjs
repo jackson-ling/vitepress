@@ -11,6 +11,7 @@ export default defineConfig({
     // head: [['link', {rel: 'icon', href: "/vitepress/标签logo.png"}]], // 网页标签页的图标
 
     head: [['link', {rel: 'icon', href: "/标签logo.png"}]],
+
     title: "jackson凌の文档站", // 网站标签页的名称
     description: "A VitePress Site",
     themeConfig: {
@@ -125,19 +126,20 @@ export default defineConfig({
                 text: '⭐算法', items:
                     [
                         {text: '学习路线🔍', link: '/docs/测试界面.md'},
-                        {text: '算法集锦📝', link: '/docs/算法/算法集锦'},
+                        {text: '算法集锦📝', link: '/docs/算法/算法集锦/算法集锦'},
+                        {text: '蓝桥杯', link: '/docs/测试界面.md'},
                         {
-                            text: '<img src="leetcode.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 力扣',
+                            text: '<img src="leetcode.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 灵神题单',
                             link: '/docs/测试界面.md'
                         },
-                        {text: '蓝桥杯', link: '/docs/测试界面.md'},
-                        {text: '左程云 🚀', link: '/docs/测试界面.md'},
+                        {text: '🎯左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
                         {
                             text: '代码随想录', items:
                                 [
                                     {text: '基本介绍', link: 'docs/算法/代码随想录/代码随想录介绍.md'},
                                     {text: '算法训练营', link: 'docs/算法/代码随想录/训练营/数组/Day 1.md'},
                                     {text: '题目汇总', link: 'docs/算法/代码随想录/题目汇总.md'},
+
                                 ]
                         },
                         {
@@ -635,6 +637,16 @@ export default defineConfig({
                                             ]
                                     },
                                 ]
+                        }
+                    ],
+                'docs/算法/左程云':
+                    [
+                        {
+                            text:'左程云算法',
+                            items:
+                            [
+                                ...setSidebarDefault('docs/算法/左程云'),
+                            ]
                         }
                     ],
 

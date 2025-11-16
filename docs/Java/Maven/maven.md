@@ -623,7 +623,7 @@ outline: [2, 3]
 
 ### Maven 的打包方式
 
-> #### （1）jar：普通模块打包，springboot 项目基本都是 jar 包（内嵌 tomcat 运行）
+> #### （1）jar（<span style="color:red">默认</span>）：普通模块打包，springboot 项目基本都是 jar 包（内嵌 tomcat 运行）
 >
 > #### （2）war：普通 web 程序打包，需要部署在外部的 tomcat 服务器中运行
 >
@@ -920,4 +920,146 @@ outline: [2, 3]
         <url>http://localhost:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
 </distributionManagement>
+```
+
+## 分模块搭建项目
+
+### ⚠️ 层级不显示问题
+
+<br/>
+<img src="./maven层级.png" style="width:700px"/>
+
+### ⚠️ 解决已忽略的 pom
+
+<br/>
+<img src="./解决已忽略的pom.png" style="width:700px"/>
+
+### 创建方法
+
+#### （1）创建 springboot 项目，删除不必要的文件夹，只留下 pom 文件
+
+> #### ⚠️ 注意：这里只做依赖的管理，不写代码，需要<span style="color:red">删除 build 标签</span>
+
+#### （2）非 controller 层，创建 maven 模块
+
+#### （3）controller 层，创建 springboot 项目模块
+
+> #### controller 层中 pom 文件的 bulid 标签如下
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+```
+
+#### （4）在父工程中声明子模块，同时指定打包方式
+
+> #### pom：父工程或聚合工程，该模块<span style="color:red">不写代码</span>，仅进行<span style="color:red">依赖管理</span>
+>
+> #### jar（<span style="color:red">默认</span>）：普通模块打包，springboot 项目基本都是 jar 包（内嵌 tomcat 运行）
+
+```xml
+<!-- 父模块需要继承 springboot 依赖-->
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.4.11</version>
+    <relativePath/> <!-- lookup parent from repository -->
+</parent>
+
+<!-- 声明需要聚合的子模块 -->
+<modules>
+    <module>accompany-common</module>
+    <module>accompany-pojo</module>
+    <module>accompany-service</module>
+</modules>
+
+<!-- 父模块的声明 -->
+<groupId>com.accompany</groupId>
+<artifactId>accompany-system</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+
+<!--父模块的打包方式为 pom（只做依赖管理，不写代码，默认为 jar）-->
+<packaging>pom</packaging>
+```
+
+#### 在每个子模块中添加对父模块的依赖
+
+```xml
+<!--声明父模块的依赖-->
+<parent>
+    <artifactId>accompany-system</artifactId>
+    <groupId>com.accompany</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+</parent>
+
+<!--
+    子模块的声明，用 <artifactId> 标签声明 maven 坐标即可，
+    无需指定 groupId（继承了父类，无需重复声明）
+-->
+<artifactId>accompany-service</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+
+```
+
+### 依赖管理
+
+#### （1）在父模块中声明项目需要的所有依赖并同一管理版本
+
+#### （2）子模块需要使用某个依赖时，需要使用 &lt;dependency&gt; 标签声明父类中引入的依赖，且无需指定版本号（父类中统一管理）
+
+#### （3）对于子模块中需要使用的<span style="color:red">特定依赖</span>，可以直接引入，<span style="color:red">并指定版本号</span>，无需交给父类管理
+
+```xml
+<!--依赖版本管理-->
+<properties>
+    <springboot-starter>3.4.11</springboot-starter>
+</properties>
+
+<!--
+    1. 依赖管理
+    2. 注意点
+        （1）这里只是依赖管理，子模块需要使用某个依赖时需要使用 <dependency> 标签声明，
+            且无需指定版本（父模块中统一管理）
+        （2）若子模块需要用到特定的依赖，可以直接指定版本，可以不用父类管理
+-->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${springboot-starter}</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+#### （4）<span style="color:red">controller 层</span> 所在的模块，<span style="color:red">可以依赖一下其他子模块</span>，然后再声明本模块需要的依赖
+
+```xml
+<!--声明对其他子模块的依赖-->
+<dependency>
+    <groupId>com.accompany</groupId>
+    <artifactId>accompany-common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+
+<dependency>
+    <groupId>com.accompany</groupId>
+    <artifactId>accompany-pojo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+
+<!--本模块所需要的依赖-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+
+......
 ```
