@@ -119,14 +119,14 @@ class Solution {
     }
 
     // 回溯逻辑
-    public void backtracking(int n,int k,int starIndex){
+    public void backtracking(int n,int k,int startIndex){
         // 终止条件
         if (path.size() == k){
             result.add(new ArrayList<>(path)); // 把路径加入结果集中
             return;
         }
         // 从 1 开始，这里取等
-        for (int i = starIndex; i <= n; i++) {
+        for (int i = startIndex; i <= n; i++) {
             path.add(i);
             // 递归搜索，从下一个位置开始（因为是组合，不能重复使用同一个数字）
             backtracking(n,k,i + 1);
