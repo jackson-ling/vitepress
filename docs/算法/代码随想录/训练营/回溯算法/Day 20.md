@@ -39,7 +39,8 @@ class Solution {
     LinkedList<Integer> path = new LinkedList<>();
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        Arrays.sort(candidates); // 从小到大排序，目的是计算与target比较
+        // 对数组排序，依次从小到大累加，将 sum 与 target 比较，方便剪枝
+        Arrays.sort(candidates);
         backtracking(candidates,target,0,0);
         return res;
     }
@@ -139,21 +140,13 @@ class Solution {
 >
 > #### （2）而 used[i - 1] == true，说明是进入下一层递归，取下一个数，所以是树枝上
 
-### 边界判断
-
-#### 问题：为什么使用 used[] 的写法中是 i > 0 判断，而不用 used[] 时是 i > startIndex？
-
-> #### （1）使用 used[] 的写法 是典型的回溯树结构中的树枝（路径）去重，<span style="color:red;font-weight:bold">判断的是前一个元素是否在当前递归路径中使用过</span>，这个判断必须有前一个元素存在，所以就要 i > 0（同时也防止了数组下标索引越界）
-
-> #### （2）不使用 used[] 的写法 判断的是当前递归层中是否已经使用过重复的数，所以用 i > startIndex 来判断<span style="color:red;font-weight:bold">当前层是否重复</span>
-
 #### 总结
 
 > #### 求排列（元素位置有关） ➜ 用 used[]
 >
 > #### 求子集/组合（元素位置无关） ➜ 用 i > startIndex
 
-### 题解（剪枝）
+### 题解（startIndex 去重）
 
 ```java
 class Solution {
@@ -179,7 +172,7 @@ class Solution {
             if (sum + candidates[i] > target) {
                 break;
             }
-            // 树层去重
+            // 树层去重，i > startIndex 是为了防止下标越界，确保 i - 1 >= 0
             if (i > startIndex && candidates[i - 1] == candidates[i]) {
                 continue;
             }
@@ -195,7 +188,7 @@ class Solution {
 }
 ```
 
-### 题解（标记数组）
+### 题解（标记数组去重）
 
 ```java
 class Solution {
@@ -206,7 +199,7 @@ class Solution {
 
   public List<List<Integer>> combinationSum2(int[] candidates, int target) {
     used = new boolean[candidates.length];
-    // 加标志数组，用来辅助判断同层节点是否已经遍历
+    // 加标记数组，用来辅助判断同层节点是否已经遍历
     Arrays.fill(used, false); // 初始化全部值为 false
     // 为了将重复的数字都放到一起，所以先进行排序
     Arrays.sort(candidates);
@@ -222,8 +215,14 @@ class Solution {
       if (sum + candidates[i] > target) {
         break;
       }
-      // 出现重复节点，同层的第一个节点已经被访问过，所以直接跳过
-      if (i > 0 && candidates[i] == candidates[i - 1] && !used[i - 1]) {
+      /*
+        （1） i > 0 是为了防止下标越界，确保 i - 1 >= 0
+        （2）若出现了两个一样的元素，used[i - 1] == false 说明第一个元素
+            在前一次递归中使用过，通过回溯操作才使得 used[i - 1] == false，
+            第一个元素递归是形成的组合已经包含了第二个元素在递归时形成的组合，
+            因为两个元素相同，且元素不能重复使用，则遇到第二个相同元素时需要去重
+      */
+      if (i > 0 && candidates[i] == candidates[i - 1] && used[i - 1] == false) {
         continue;
       }
       used[i] = true;

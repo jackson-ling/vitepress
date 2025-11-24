@@ -105,6 +105,8 @@ public void backtracking(参数) {
 > #### 2. 图中可以发现 n 相当于树的宽度，k 相当于树的深度
 >
 > #### 3. 图中每次搜索到了叶子节点，我们就找到了一个结果
+>
+> #### 4. <span style="color:red">startIndex</span> 的作用是<span style="color:red">防止</span>重复使用同一个数字导致出现<span style="color:red">重复的组合</span>，例如本轮选了 1，下一轮只能从 2，3，4 中选数字（体现在横向遍历的过程），1，2、2，1 是同一个组合（<span style="color:red">组合不强调顺序</span>）
 
 ### 题解一
 
@@ -271,7 +273,7 @@ class Solution {
 
 ### 思路分析
 
-> #### 区别于上面的组合问题，<span style="color:red;font-weight:bold">本题是在两个数组中组合</span>，然而上面的两题是针对一个数组（需要考虑是否重复选择的问题，需要设置 startIndex，本题不需要设置）
+> #### 区别于上面的组合问题，<span style="color:red;font-weight:bold">本题是在两个数组中组合</span>，然而<span style="color:red;font-weight:bold">上面两题</span>是针对<span style="color:red;font-weight:bold">一个数组</span>（需要考虑是否<span style="color:red;font-weight:bold">重复选择</span>的问题，需要设置 <span style="color:red;font-weight:bold">startIndex</span>，本题不需要设置）
 >
 > #### 本题用 <span style="color:red;font-weight:bold">num 来记录遍历到第几个元素</span>，方便拿到元素映射的字符串数组，然后通过遍历数组、递归的方式来实现字母组合
 

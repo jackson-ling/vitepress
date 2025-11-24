@@ -134,13 +134,15 @@ public class Solution {
     }
 
     public void subsetHelper(int[] nums, int startIndex) {
-        // 收获结果放在终止条件的上方，不会忽略最后一个元素
+        // 收获结果放在终止条件的上方，不会忽略最后一个元素，即先收集结果，再终止
+        // 进入一层递归，就收集结果，即实现了每个节点都要收集结果
         result.add(new ArrayList<>(path));
         // 如下的剪枝可以省略不写，没有影响
         if (startIndex >= nums.length) {
             return;
         }
         for (int i = startIndex; i < nums.length; i++) {
+            // 这里是每一次取得元素
             path.add(nums[i]);
             subsetHelper(nums, i + 1);
             // 回溯

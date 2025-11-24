@@ -777,16 +777,17 @@ outline: [2, 4]
 
 ##### （2）相关属性
 
-| 属性            | 说明                     | 取值          | 含义                                |
-| --------------- | ------------------------ | ------------- | ----------------------------------- |
-| display         | 模式                     | flex          | 使用 flex 布局                      |
-| flex-direction  | 设置主轴                 | row           | 主轴方向为 x 轴，水平向右。（默认） |
-| flex-direction  | 设置主轴                 | column        | 主轴方向为 y 轴，垂直向下。         |
-| justify-content | 子元素在主轴上的对齐方式 | flex-start    | 从头开始排列                        |
-| justify-content | 子元素在主轴上的对齐方式 | flex-end      | 从尾部开始排列                      |
-| justify-content | 子元素在主轴上的对齐方式 | center        | 在主轴居中对齐                      |
-| justify-content | 子元素在主轴上的对齐方式 | space-around  | 平均剩余空间                        |
-| justify-content | 子元素在主轴上的对齐方式 | space-between | 先两边贴边，再平均剩余空间          |
+| 属性            | 说明                       | 取值          | 含义                                |
+| --------------- | -------------------------- | ------------- | ----------------------------------- |
+| display         | 模式                       | flex          | 使用 flex 布局                      |
+| flex-direction  | 设置主轴                   | row           | 主轴方向为 x 轴，水平向右。（默认） |
+| flex-direction  | 设置主轴                   | column        | 主轴方向为 y 轴，垂直向下。         |
+| justify-content | 子元素在主轴上的对齐方式   | flex-start    | 从头开始排列                        |
+| justify-content | 子元素在主轴上的对齐方式   | flex-end      | 从尾部开始排列                      |
+| justify-content | 子元素在主轴上的对齐方式   | center        | 在主轴居中对齐                      |
+| justify-content | 子元素在主轴上的对齐方式   | space-around  | 平均剩余空间                        |
+| justify-content | 子元素在主轴上的对齐方式   | space-between | 先两边贴边，再平均剩余空间          |
+| align-items     | 子元素在交叉轴上的对齐方式 | center        | 在交叉轴居中对齐                    |
 
 > <h3>如果主轴设置为row，其实就是横向布局。 主轴设置为column，其实就是纵向布局。</h3>
 

@@ -125,21 +125,20 @@ export default defineConfig({
             {
                 text: '⭐算法', items:
                     [
-                        {text: '学习路线🔍', link: '/docs/测试界面.md'},
-                        {text: '算法集锦📝', link: '/docs/算法/算法集锦/算法集锦'},
-                        {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/历年真题/JavaB组国赛/0. 导论.md'},
+                        {text: '📝 算法集锦', link: '/docs/算法/算法集锦/算法集锦'},
                         {
                             text: '<img src="leetcode.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 灵神题单',
                             link: '/docs/测试界面.md'
                         },
+                        {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
                         {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
+                        {text: '🚀 算法总结', link: '/docs/测试界面.md'},
                         {
                             text: '代码随想录', items:
                                 [
                                     {text: '基本介绍', link: 'docs/算法/代码随想录/代码随想录介绍.md'},
                                     {text: '算法训练营', link: 'docs/算法/代码随想录/训练营/数组/Day 1.md'},
                                     {text: '题目汇总', link: 'docs/算法/代码随想录/题目汇总.md'},
-
                                 ]
                         },
                         {
@@ -154,11 +153,9 @@ export default defineConfig({
                                         text: '<img src="C语言.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> C语言版本',
                                         link: '/docs/测试界面.md'
                                     },
-
                                 ]
 
                         },
-
                     ]
             },
             {
@@ -639,27 +636,34 @@ export default defineConfig({
                                 ]
                         }
                     ],
-                'docs/算法/蓝桥杯/历年真题':
+                'docs/算法/蓝桥杯':
                     [
                         {
-                            text: '常用技巧',
+                            text: '常用归纳',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/历年真题/常用技巧')
+                                    ...setSidebarDefault('docs/算法/蓝桥杯/常用归纳')
+                                ]
+                        },
+                        {
+                            text: '真题分析',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/算法/蓝桥杯/真题分析')
                                 ]
                         },
                         {
                             text: 'Java B组省赛真题',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/历年真题/JavaB组省赛')
+                                    ...setSidebarDefault('docs/算法/蓝桥杯/JavaB组省赛')
                                 ]
                         },
                         {
                             text: 'Java B组国赛真题',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/历年真题/JavaB组国赛')
+                                    ...setSidebarDefault('docs/算法/蓝桥杯/JavaB组国赛')
                                 ]
                         }
                     ],

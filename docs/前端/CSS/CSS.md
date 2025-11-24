@@ -427,7 +427,7 @@ outline: [2, 3]
 
 ### absolute
 
-> - #### absolute ,通过 <span style = "color:red;font-weight:bold">top left right bottom</span> 指定元素在页面上的固定位置
+> - #### absolute，通过 <span style = "color:red;font-weight:bold">top left right bottom</span> 指定元素在页面上的固定位置
 > - #### 定位后元素会让出原来位置,其他元素可以占用
 
 ```html
