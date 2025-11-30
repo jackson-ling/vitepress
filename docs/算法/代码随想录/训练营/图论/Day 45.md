@@ -21,9 +21,13 @@ outline: [2, 3]
 
 > #### 孤岛是那些位于矩阵内部、所有单元格都<span style="color:red">不接触边缘</span>的岛屿
 >
-> #### 本题要求找到不靠边的陆地面积，那么我们只要从周边找到陆地然后通过 dfs 或者 bfs 将周边靠陆地且相邻的陆地都变成海洋，然后再去重新遍历地图 统计此时还剩下的陆地就可以了
+> #### 本题要求找到不靠边的陆地面积，那么我们只要从四周边界找到陆地，然后通过 dfs 或者 bfs 将靠近边界的陆地且相邻的陆地都变成海洋
+>
+> #### 最后遍历一遍地图，统计陆地的数量，即为孤岛的数量（<span style="color:red">从四周边界往中间搜索</span>）
+>
+> #### 本题不需要 visited 数组，前面需要 visited 数组是为了避免节点重复访问，本题关注的点是把靠近四周边界的陆地置为海洋，不使用该数组反而节省了空间
 
-### 题解
+### DFS 题解
 
 ```java
 import java.util.Scanner;
@@ -95,6 +99,100 @@ public class Main {
 }
 ```
 
+### BFS 题解
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+    public static int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    static int count = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] graph = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                graph[i][j] = scanner.nextInt();
+            }
+        }
+
+        // 左右两列往中间搜索，行在变化
+        for (int i = 0; i < n; i++) {
+            // 左边列
+            if (graph[i][0] == 1) {
+                bfs(graph, i, 0);
+            }
+            // 右边列
+            if (graph[i][m - 1] == 1) {
+                bfs(graph, i, m - 1);
+            }
+        }
+
+        // 上下两行往中间搜索，列在变化
+        for (int i = 0; i < m; i++) {
+            if (graph[0][i] == 1) {
+                bfs(graph, 0, i);
+            }
+            if (graph[n - 1][i] == 1) {
+                bfs(graph, n - 1, i);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (graph[i][j] == 1) {
+                    count += 1;
+                }
+            }
+        }
+
+        System.out.println(count);
+    }
+
+    public static void bfs(int[][] graph, int x, int y) {
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(x, y));
+        // 加入队列就标记
+        graph[x][y] = 0;
+
+        while (!queue.isEmpty()) {
+            int curX = queue.peek().first;
+            int curY = queue.poll().second;
+
+            for (int i = 0; i < dir.length; i++) {
+                int nextX = curX + dir[i][0];
+                int nextY = curY + dir[i][1];
+
+                // 检查越界
+                if (nextX < 0 || nextX >= graph.length || nextY < 0 || nextY >= graph[0].length) {
+                    continue;
+                }
+
+                if (graph[nextX][nextY] == 1) {
+                    queue.add(new Pair(nextX,nextY));
+                    graph[nextX][nextY] = 0;
+                }
+            }
+        }
+    }
+
+    static class Pair {
+        int first;
+        int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+}
+```
+
 ## 102.沉没孤岛
 
 和上一题差不多，尝试自己做做
@@ -111,7 +209,7 @@ public class Main {
 >
 > #### ⚠️ 注意点：<span style="color:red">先沉默孤岛，再把陆地标记为 1</span>，否则结果输出全为 0
 
-### 题解
+### DFS 题解
 
 ```java
 import java.util.Scanner;
@@ -170,7 +268,6 @@ public class Main {
         }
 
         for (int i = 0; i < n; i++) {
-
             for (int j = 0; j < m; j++) {
                 // 注意点：先沉默孤岛再把陆地标记为 1，否则结果输出全为 0
 
@@ -195,6 +292,111 @@ public class Main {
 }
 ```
 
+### BFS 题解
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+    public static int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] graph = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                graph[i][j] = scanner.nextInt();
+            }
+        }
+
+        // 左右两列往中间搜索，行在变化
+        for (int i = 0; i < n; i++) {
+            // 左边列
+            if (graph[i][0] == 1) {
+                bfs(graph, i, 0);
+            }
+            // 右边列
+            if (graph[i][m - 1] == 1) {
+                bfs(graph, i, m - 1);
+            }
+        }
+
+        // 上下两行往中间搜索，列在变化
+        for (int i = 0; i < m; i++) {
+            if (graph[0][i] == 1) {
+                bfs(graph, 0, i);
+            }
+            if (graph[n - 1][i] == 1) {
+                bfs(graph, n - 1, i);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                // 注意点：先沉默孤岛再把陆地标记为 1，否则结果输出全为 0
+
+                // 如果是孤岛，就标记为 0
+                if (graph[i][j] == 1) {
+                    graph[i][j] = 0;
+                }
+                // 如果不是孤岛，就标记为 1
+                if (graph[i][j] == 2) {
+                    graph[i][j] = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(graph[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void bfs(int[][] graph, int x, int y) {
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(x, y));
+        // 加入队列就标记
+        graph[x][y] = 2;
+
+        while (!queue.isEmpty()) {
+            int curX = queue.peek().first;
+            int curY = queue.poll().second;
+
+            for (int i = 0; i < dir.length; i++) {
+                int nextX = curX + dir[i][0];
+                int nextY = curY + dir[i][1];
+
+                // 检查越界
+                if (nextX < 0 || nextX >= graph.length || nextY < 0 || nextY >= graph[0].length) {
+                    continue;
+                }
+
+                if (graph[nextX][nextY] == 1) {
+                    queue.add(new Pair(nextX, nextY));
+                    graph[nextX][nextY] = 2;
+                }
+            }
+        }
+    }
+
+    static class Pair {
+        int first;
+        int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+}
+```
+
 ## 103.水流问题
 
 需要点优化思路，建议先自己读题，相处一个解题方法，有时间就自己写代码，没时间就直接看题解，优化方式 会让你 耳目一新。
@@ -211,7 +413,7 @@ public class Main {
 >
 > #### 水流条件：下一个节点的值 <span style="color: red;">>=</span> 当前节点的值
 
-### 题解
+### DFS 题解
 
 ```java
 import java.util.Scanner;
@@ -221,9 +423,6 @@ public class Main {
     private static final int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
     public static void dfs(int[][] grid, int x, int y, boolean[][] visited) {
-        if (visited[x][y]) {
-            return;
-        }
         visited[x][y] = true;
         for (int i = 0; i < 4; i++) {
             int nextX = x + dir[i][0];
@@ -233,7 +432,7 @@ public class Main {
                 continue;
             }
             // 从低到高反向遍历
-            if (grid[nextX][nextY] >= grid[x][y]) {
+            if (!visited[nextX][nextY] && grid[nextX][nextY] >= grid[x][y]) {
                 dfs(grid, nextX, nextY, visited);
             }
         }
@@ -275,10 +474,93 @@ public class Main {
                 }
             }
         }
-
     }
 }
+```
 
+### BFS 题解
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+    public static int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] graph = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                graph[i][j] = scanner.nextInt();
+            }
+        }
+
+        boolean[][] firstBorder = new boolean[n][m];
+        boolean[][] secondBorder = new boolean[n][m];
+
+        // 左右两条边
+        for (int i = 0; i < n; i++) {
+            bfs(graph, i, 0, firstBorder);       // 左边
+            bfs(graph, i, m - 1, secondBorder);  // 右边
+        }
+
+        // 上下两条边
+        for (int j = 0; j < m; j++) {
+            bfs(graph, 0, j, firstBorder);       // 上边
+            bfs(graph, n - 1, j, secondBorder);  // 下边
+        }
+
+        // 遍历输出交集
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (firstBorder[i][j] && secondBorder[i][j]) {
+                    System.out.println(i + " " + j);
+                }
+            }
+        }
+    }
+
+    public static void bfs(int[][] graph, int x, int y,boolean[][] visited) {
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(x, y));
+        // 加入队列就标记
+        visited[x][y] = true;
+
+        while (!queue.isEmpty()) {
+            int curX = queue.peek().first;
+            int curY = queue.poll().second;
+
+            for (int i = 0; i < dir.length; i++) {
+                int nextX = curX + dir[i][0];
+                int nextY = curY + dir[i][1];
+
+                // 检查越界
+                if (nextX < 0 || nextX >= graph.length || nextY < 0 || nextY >= graph[0].length) {
+                    continue;
+                }
+
+                if (!visited[nextX][nextY] && graph[nextX][nextY] >= graph[curX][curY]) {
+                    queue.add(new Pair(nextX, nextY));
+                    visited[nextX][nextY] = true;
+                }
+            }
+        }
+    }
+
+    static class Pair {
+        int first;
+        int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+}
 ```
 
 ## ⚠️ 104.建造最大岛屿
@@ -415,7 +697,8 @@ public class Main {
                         int curMark = grid[nextX][nextY];
                         /*
                          如果当前相邻的岛屿已经遍历过或者 HashMap 中不存在这个编号，
-                         说明当前遍历节点就不是岛屿，同时需要避免空指针异常（后续需要取值），则继续搜索
+                         说明当前遍历节点就不是岛屿，同时需要避免空指针异常（后续需要取值），
+                         则继续搜索
                         */
                         if (set.contains(curMark) || !getSize.containsKey(curMark)) {
                             continue;

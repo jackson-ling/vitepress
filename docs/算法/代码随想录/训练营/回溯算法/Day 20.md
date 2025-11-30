@@ -201,8 +201,8 @@ class Solution {
     used = new boolean[candidates.length];
     // 加标记数组，用来辅助判断同层节点是否已经遍历
     Arrays.fill(used, false); // 初始化全部值为 false
-    // 为了将重复的数字都放到一起，所以先进行排序
-    Arrays.sort(candidates);
+    // 排序得目的是为了将相同得元素挨在一起，方便去重，
+    // 因为去重是根据 used[i-  1] == false 来判断的
     backTracking(candidates, target, 0);
     return ans;
   }

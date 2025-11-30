@@ -131,6 +131,8 @@ public class Main {
 
 #### （2）注意点
 
+> #### <span style="color: red;">节点编号从 1 开始，数组大小初始为 n + 1 个大小，注意边界判断</span>
+>
 > #### dijkstra 算法可以同时求起点到所有节点的最短路径
 >
 > #### 权值不能为负数
@@ -210,7 +212,9 @@ public class Main {
 
 ### 打印路径
 
-#### 思路和 prim 算法类似，在更新最短路径的时候记录路径，最后输出即可
+> #### 思路和 prim 算法类似，在更新最短路径的时候记录路径，最后输出即可
+>
+> #### 注意点：不能写成 parent[cur] = j，在 for 循环中，有多个 j 满足要求，那么 parent[cur] 就会被反复覆盖，因为 cur 是一个固定值
 
 ```java
 import java.util.Arrays;
@@ -272,6 +276,9 @@ public class Main {
             for (int j = 1; j <= n; j++) {
                 if (!visited[j] && grid[cur][j] != Integer.MAX_VALUE && minDist[cur] + grid[cur][j] < minDist[j]) {
                     minDist[j] = minDist[cur] + grid[cur][j];
+                    // 这里通过 cur 节点找到了更短的路径
+                    // 即 path 数组记录的 j 节点的上一个节点是 cur
+                    // 举例（1）原先是 起点 --> j 节点（2）现在是 起点 --> cur 节点 --> j 节点
                     path[j] = cur;
                 }
             }
@@ -286,8 +293,94 @@ public class Main {
 
         // 输出最短情况
         for (int i = 1; i <= n; i++) {
+            // （1）原先是 起点 --> i 节点（2）现在是 起点 --> cur 节点 --> i 节点
             System.out.println(path[i] + " -> " + i);
         }
+    }
+}
+```
+
+### 封装 Dijkstra
+
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // n 个节点
+        int n = scanner.nextInt();
+        // n 条边
+        int m = scanner.nextInt();
+        // 节点编号从 1 开始
+        int[][] graph = new int[n + 1][n + 1];
+
+        // 初始化为最大值
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(graph[i], Integer.MAX_VALUE);
+        }
+
+        // m 条边
+        for (int i = 0; i < m; i++) {
+            int s = scanner.nextInt();
+            int t = scanner.nextInt();
+            int val = scanner.nextInt();
+            graph[s][t] = val;
+        }
+
+        // 定义起点和终点
+        int start = 1;
+        int end = n;
+
+        // 传入图、起点终点、节点个数
+        int res = dijkstra(graph, start, end, n);
+        System.out.println(res);
+    }
+
+    public static int dijkstra(int[][] graph, int start, int end, int n) {
+        // 表示从起点到所有点的最短距离，初始为最大值
+        int[] minDist = new int[n + 1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+
+        boolean[] visited = new boolean[n + 1];
+
+        // 起点到自身的距离为 0
+        minDist[start] = 0;
+
+        // Dijkstra
+
+        // n 个节点，执行 n 次
+        for (int i = 1; i <= n; i++) {
+            // 用于更新最小值
+            int minVal = Integer.MAX_VALUE;
+            // 用于更新节点
+            int cur = 1;
+
+            // 第一步：找到距离源点最近的节点
+            for (int j = 1; j <= n; j++) {
+                if (!visited[j] && minDist[j] < minVal) {
+                    minVal = minDist[j];
+                    cur = j;
+                }
+            }
+
+            // 第二步：设置为访问过
+            visited[cur] = true;
+
+            // 第三步：更新最短路径（通过当前节点是否会使得路径更短）
+            for (int j = 1; j <= n; j++) {
+                if (!visited[j] && graph[cur][j] != Integer.MAX_VALUE
+                        && minDist[cur] + graph[cur][j] < minDist[j]){
+                    minDist[j] = minDist[cur] + graph[cur][j];
+                }
+            }
+        }
+
+        if (minDist[end] == Integer.MAX_VALUE){
+            return -1;
+        }
+        return minDist[end];
     }
 }
 ```

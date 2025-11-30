@@ -128,7 +128,7 @@ export default defineConfig({
                         {text: '📝 算法集锦', link: '/docs/算法/算法集锦/算法集锦'},
                         {
                             text: '<img src="leetcode.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 灵神题单',
-                            link: '/docs/测试界面.md'
+                            link: 'docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
                         {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
                         {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
@@ -639,6 +639,8 @@ export default defineConfig({
                 'docs/算法/蓝桥杯':
                     [
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: '常用归纳',
                             items:
                                 [
@@ -646,6 +648,8 @@ export default defineConfig({
                                 ]
                         },
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: '真题分析',
                             items:
                                 [
@@ -653,6 +657,8 @@ export default defineConfig({
                                 ]
                         },
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: 'Java B组省赛真题',
                             items:
                                 [
@@ -660,6 +666,8 @@ export default defineConfig({
                                 ]
                         },
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: 'Java B组国赛真题',
                             items:
                                 [
@@ -670,10 +678,40 @@ export default defineConfig({
                 'docs/算法/左程云':
                     [
                         {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
                             text: '左程云算法',
                             items:
                                 [
                                     ...setSidebarDefault('docs/算法/左程云'),
+                                ]
+                        }
+                    ],
+                'docs/算法/灵神题单':
+                    [
+                        {
+
+                            text: '灵神题单',
+                            items:
+                                [
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: '编程入门题单',
+                                        items:
+                                            [
+                                                ...setSidebarDefault('docs/算法/灵神题单/编程入门题单'),
+                                            ]
+                                    },
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: '网格图',
+                                        items:
+                                            [
+                                                ...setSidebarDefault('docs/算法/灵神题单/网格图'),
+                                            ]
+                                    },
                                 ]
                         }
                     ],

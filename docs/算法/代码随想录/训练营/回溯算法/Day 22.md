@@ -19,9 +19,9 @@ outline: [2, 3]
 
 ### 思路分析
 
-#### （1）由于本题的题意是<span style="color:red">不能对数组进行排序</span>的，无法使用之前的去重逻辑
+#### （1）由于本题是<span style="color:red">不能对数组进行排序</span>的，排序后，递增子序列得结果也会变化，和原题相背，即无法使用之前的去重逻辑
 
-#### （2）因此在去重逻辑上有些变化，采用 hashSet 实现去重
+#### （2）本题采用 <span style="color:red">hashSet</span> 实现<span style="color:red">去重</span>，加入元素得同时也加入到 set 中，下一次需要添加元素时先检查 set 中是否存在该元素，进而判断是否重复
 
 #### 注意点
 
@@ -31,7 +31,7 @@ outline: [2, 3]
 
 <img src="https://file1.kamacoder.com/i/algo/20201124200229824.png"/>
 
-### 题解
+### 题解（hashset 去重）
 
 ```java
 class Solution {
@@ -72,8 +72,15 @@ class Solution {
             // 回溯
             path.remove(path.size() - 1);
             /*
-                每一层递归创建新的 hashset，记录本层递归使用过的元素
-                不需要进行回溯操作
+                hashset 记录的是本层递归使用过的元素（实现树层去重）
+                每一层递归都会重新定义 hashset，不需要进行回溯操作
+
+                used 数组记录的是 path 中用过哪些元素，只要 path 数组
+                变动，used 数组都需要做对应的标记
+
+                而 hashset 记录的是本层递归使用过的元素，和 path 数组
+                是没有关系的，即最后无需进行回溯操作，因为 path 数组是
+                和 used 数组相关
              */
         }
     }
@@ -92,7 +99,7 @@ class Solution {
 
 ### 思路分析
 
-#### 排列问题和组合问题不同的就是同一个元素<span style="color:red">可以重复</span>选择，因为<span style="color:red">涉及顺序问题</span>，这里使用 <span style="color:red">used[ ] 数组</span>记录元素在每一层递归是否被使用过
+#### 排列问题和组合问题不同的就是同一个元素<span style="color:red">可以重复</span>选择，因为<span style="color:red">涉及顺序问题</span>，这里使用 <span style="color:red">used[ ] 数组</span>标记已经选择的元素
 
 > #### <span style="color:red">本题</span>是给出的数组是<span style="color:red">没有重复元素</span>的，递归的深度就是数组元素的个数
 
@@ -131,7 +138,6 @@ class Solution {
             if (used[i]){
                 continue;
             }
-
             used[i] = true;
             path.add(nums[i]);
             // 递归

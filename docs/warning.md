@@ -14,6 +14,8 @@ outline: [2, 3]
 <p style="text-align:center;font-size:40px;font-weight:bold;padding-bottom:25px">编程学习：3 分学， 7 分练</p>
 :::
 
+<img src="./学习体系.png" style="width:1200px;margin:0 auto"/>
+
 ## 🎯 明确目标
 
 > #### ⚠️ 灵魂反问：<span style="color:red;font-weight:bold">想做的这件事当下对我有用吗？是我需要的吗？</span>
@@ -169,6 +171,6 @@ outline: [2, 3]
 >
 > #### 就算给你复现，第一种情况可能根本就无法复现项目，因为业务逻辑根本就没有搞清楚
 
-#### （2）<span style="color:red">做难且正确的事情</span>，难别人想达到你的程度才难，这才说明你<span style="color:red">不容易被替换</span>，能让你很快能速成的东西都不是什么能让你成长很多的东西
+#### （2）<span style="color:red">做难且正确的事情</span>，难到别人无法到达轻易到达的程度，这才说明你<span style="color:red">不容易被替换</span>，能让你很快能速成的东西都不是什么能让你成长很多的东西
 
 > #### 一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？
