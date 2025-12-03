@@ -39,7 +39,7 @@ class DisJoint {
 
     public DisJoint(int N) {
         father = new int[N];
-        // 初始时指向自己
+        // 初始时根节点为本身
         for (int i = 0; i < N; i++) {
             father[i] = i;
         }
@@ -85,7 +85,7 @@ class DisJoint {
 
 <img src="https://file1.kamacoder.com/i/algo/20230602103040.png"/>
 
-#### find 函数向上寻找根节点，father[u] 表述 u 的父节点，那么让 father[u] 直接获取 find 函数返回的根节点，这样就<span style="color: red;">让节点 u 的父节点变成根节点</span>
+#### find 函数向上寻找根节点，father[u] 表述 u 的父节点，那么让 father[u] 直接获取 <span style="color: red;">find</span> 函数返回的<span style="color: red;">根节点</span>，这样就<span style="color: red;">让节点 u 的父节点变成根节点</span>
 
 ```java
 ...
@@ -98,6 +98,10 @@ public int find(int n) {
     }
     // 递归查找
     // return find(father[n]);
+
+    // find(father[n]) 返回的是 n 的根节点，
+    // 直接赋值给 father[n]（n 的父节点），
+    // 让 n 的父节点变成根节点，实现了路径压缩
     return father[n] = find(father[n]);
 }
 

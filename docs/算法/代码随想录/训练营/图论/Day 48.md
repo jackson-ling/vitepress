@@ -34,7 +34,6 @@ public class Main {
         for (int i = 0; i < pointNUm; i++) {
             disJoint.join(scanner.nextInt(), scanner.nextInt());
         }
-
     }
 }
 

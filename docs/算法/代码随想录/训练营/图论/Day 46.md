@@ -121,7 +121,6 @@ public class Main {
         List<Integer> list = adjList.get(x);
         for (Integer val : list) {
             if (!visited[val]) {
-                visited[val] = true;
                 dfs(val, visited);
             }
         }
@@ -130,7 +129,8 @@ public class Main {
     public static void bfs(boolean[] visited, int key) {
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(key);
-        visited[key] = true; // 只要加入队列就标记为访问过
+        // 只要加入队列就标记为访问过
+        visited[key] = true;
         while (!queue.isEmpty()) {
             int curKey = queue.poll();
             List<Integer> list = adjList.get(curKey);
@@ -170,6 +170,7 @@ public class Main {
         for (int i = 1; i <= vertices_num; i++) {
             if (!visited[i]) {
                 System.out.println(-1);
+                // 这里要写 return，表示结束整个函数
                 return;
             }
         }
