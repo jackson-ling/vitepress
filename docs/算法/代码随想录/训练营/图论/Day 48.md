@@ -96,7 +96,7 @@ class DisJoint {
 
 > #### 本题从无向图转为了有向图，寻找冗余边的突破点就是<span style="color: red;">寻找入度为 2 的节点</span>
 >
-> #### 本题的本质是 ：有一个有向图，是由一颗有向树 + 一条有向边组成的 （所以此时这个图就不能称之为有向树），现在让我们找到那条边 把这条边删了，让这个图恢复为有向树
+> #### 本题的本质是 ：有一个有向图，由一颗有向树 + 一条冗余的有向边组成，需要找到那条冗余的边，把这条边删了，让这个图恢复为有向树
 
 #### 三大情况
 
@@ -110,7 +110,7 @@ class DisJoint {
 <br/>
 <img src="https://file1.kamacoder.com/i/algo/20240527151456.png" style="width:500px;margin:0 auto"/>
 
-> #### 节点 3 的入度为 2，但在删除边的时候，只能删 这条边（节点 1 -> 节点 3），如果删这条边（节点 4 -> 节点 3），那么删后本图也不是有向树了（因为找不到根节点）
+> #### 节点 3 的入度为 2，但在删除边的时候，只能删除由节点 1 -> 节点 3 的这条边，如果删除由节点 4 -> 节点 3 的这条边，此时就变成情况一了，成环了，删除边并不能达到恢复为有向树的目的
 
 #### （3）情况三： 如果没有入度为 2 的点，说明图中有环了（注意是有向环）
 
@@ -175,7 +175,6 @@ public class Main {
     }
 
     static class Node {
-        int id;
         int in;
         int out;
     }
@@ -216,22 +215,19 @@ public class Main {
                 if (edge.t == doubleIn) {
                     doubleInEdges.add(edge);
                 }
-                if (doubleInEdges.size() == 2) {
-                    break;
-                }
             }
 
             // 找到两条入度边后，优先处理后面那一条边
             Edge edge = doubleInEdges.get(1);
 
-            // 情况一：删除该边后仍然是有向树
+            // 情况一：存在入度为 2 的节点，删除该边后是有向树
             if (isTreeWithExclude(edges, nodeMap, edge)) {
                 result = edge;
-            }else { // 情况二：删除该边后，无法形成有向树，则删除前面那条边
+            }else { // 情况二：存在入度为 2 的节点，删除该边后，无法形成有向树，则删除前面那条边
                 result = doubleInEdges.get(0);
             }
         } else {
-            // 不存在入度为 2 的节点，解除环即可（用并查集找冗余的边）
+            // 情况三：不存在入度为 2 的节点，解除环即可（用并查集找冗余的边）
             result = getRemoveEdge(edges, nodeMap);
         }
         // 通过边找到链接的两个节点
@@ -252,6 +248,7 @@ public class Main {
             // 两个节点不在一个集合中，则加入并查集
             disjoint.join(edge.s,edge.t);
         }
+        // 如果不处理删除的边，并且其余边不会构成环（并查集判断），说明就是有向树
         return true;
     }
 
