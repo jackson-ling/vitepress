@@ -78,7 +78,7 @@ public class Main {
 
         List<Integer> result = new ArrayList<>();
 
-        // 拓扑排序（DFS版本）
+        // 拓扑排序（BFS版本）
         while (!queue.isEmpty()) {
             // 取出队头元素
             int cur = queue.poll();
