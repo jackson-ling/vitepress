@@ -314,7 +314,7 @@ class ListNode {
 
 ### 2. 找到环的出口
 
-**假设从头结点到环形入口节点 的节点数为 x。 环形入口节点到 fast 指针与 slow 指针相遇节点 节点数为 y。 从相遇节点 再到环形入口节点节点数为 z**
+**假设从头结点到环形入口节点的节点数为 x。 环形入口节点到 fast 指针与 slow 指针相遇节点 节点数为 y。 从相遇节点 再到环形入口节点节点数为 z**
 
 ![](https://file1.kamacoder.com/i/algo/20220925103433.png)
 
@@ -333,7 +333,7 @@ class ListNode {
 
 #### 结论如下
 
-<span style="color:red;font-weight:bold">从头结点出发一个指针，从相遇节点 也出发一个指针，这两个指针每次只走一个节点， 那么当这两个指针相遇的时候就是 环形入口的节点</span>
+<span style="color:red;font-weight:bold">从头结点出发一个指针，从相遇节点也出发一个指针，这两个指针每次只走一个节点， 那么当这两个指针相遇的时候就是环形入口的节点</span>
 
 ![](https://file1.kamacoder.com/i/algo/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II%EF%BC%88%E6%B1%82%E5%85%A5%E5%8F%A3%EF%BC%89.gif)
 
