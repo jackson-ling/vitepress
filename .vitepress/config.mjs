@@ -313,6 +313,10 @@ export default defineConfig({
                                         text: '<img src="springboot.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringBoot',
                                         link: "docs/后端/Springboot/1. SpringbootWeb入门.md"
                                     },
+                                    {
+                                        text: '📝 项目相关笔记',
+                                        link: "docs/后端/项目相关笔记/业务逻辑类/1. 权限相关.md"
+                                    }
                                 ]
                         },
                         {
@@ -1137,6 +1141,27 @@ export default defineConfig({
                                     ...setSidebarDefault("docs/后端/Springboot")
                                 ]
                         }
+                    ],
+                'docs/后端/项目相关笔记':
+                    [
+                        {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            text: "业务逻辑类",
+                            items:
+                                [
+                                    ...setSidebarDefault("docs/后端/项目相关笔记/业务逻辑类")
+                                ]
+                        },
+                        {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            text: "配置类",
+                            items:
+                                [
+                                    ...setSidebarDefault("docs/后端/项目相关笔记/配置类")
+                                ]
+                        },
                     ],
                 'docs/后端/Spring':
                     [
