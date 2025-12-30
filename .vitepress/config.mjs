@@ -1159,7 +1159,7 @@ export default defineConfig({
                             text: "配置类",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/项目相关笔记/配置类")
+                                    ...setSidebarDefault("docs/后端/项目相关笔记/工具配置类")
                                 ]
                         },
                     ],
