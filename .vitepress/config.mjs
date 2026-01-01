@@ -131,6 +131,7 @@ export default defineConfig({
                             link: 'docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
                         {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
+                        {text: '<img src="洛谷.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 洛谷', link: 'docs/算法/洛谷/导论.md'},
                         {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
                         {text: '🚀 算法总结', link: '/docs/测试界面.md'},
                         {
@@ -691,6 +692,31 @@ export default defineConfig({
                                 ]
                         }
                     ],
+                'docs/算法/洛谷':
+                    [
+                        {
+                            text: '导论',
+                            link: 'docs/算法/洛谷/导论.md'
+                        },
+                        {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            text: '蓝桥杯真题',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/算法/洛谷/蓝桥杯真题'),
+                                ]
+                        },
+                        {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            text: '洛谷题单',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/算法/洛谷/洛谷题单'),
+                                ]
+                        }
+                    ],
                 'docs/算法/灵神题单':
                     [
                         {
@@ -1156,7 +1182,7 @@ export default defineConfig({
                         {
                             collapsible: true,   // 允许折叠
                             collapsed: false,    // 一开始就展开
-                            text: "配置类",
+                            text: "工具配置类",
                             items:
                                 [
                                     ...setSidebarDefault("docs/后端/项目相关笔记/工具配置类")
