@@ -39,7 +39,7 @@ npm install element-plus@2.4.4 --save
 
 ```js
 import { createApp } from "vue";
-import App from "./App.vue";\
+import App from "./App.vue";
 
 //引入ElmentPlus
 import ElementPlus from "element-plus"; // [!code ++]
