@@ -627,16 +627,16 @@ public class Main {
             }
         }
 
-        // 定义二位boolean数组记录该位置是否被访问
+        // 定义二维 boolean 数组记录该位置是否被访问
         boolean[][] visited = new boolean[m][n];
 
-        // 初始化mark变量，从2开始（区别于0水，1岛屿）
+        // 初始化 mark 变量，从2开始（区别于0水，1岛屿）
         mark = 2;
 
-        // 定义一个HashMap，记录某片岛屿的标记号和面积
+        // 定义一个 HashMap，记录某片岛屿的标记号和面积
         HashMap<Integer, Integer> getSize = new HashMap<>();
 
-        // 定义一个HashSet，用来判断某一位置水四周是否存在不同标记编号的岛屿
+        // 定义一个 HashSet，用来判断某一位置水四周是否存在不同标记编号的岛屿
         HashSet<Integer> set = new HashSet<>();
 
         /*
