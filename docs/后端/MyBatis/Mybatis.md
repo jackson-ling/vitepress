@@ -416,7 +416,7 @@ public void testFindByUsernameAndPassword(){
 >
 > #### collection 标签：用于集合的封装，相关属性如下
 >
-> #### 1. <span style="color:red">column、property</span>（表示集合的名字）
+> #### 1. <span style="color:red">column、property</span> 表示将哪一列的数据需要封装到哪个属性中
 >
 > #### 2. <span style="color:red">ofType</span>（表示每一个集合对象的类型）
 
@@ -426,11 +426,15 @@ public void testFindByUsernameAndPassword(){
 
 #### （1）<span style="color:red">&lt;if&gt;</span> 标签：判断条件是否成立，如果<span style="color:red">条件为 true，则拼接 SQL</span>，具有 <span style="color:red">test 属性</span>，属性值为<span style="color:red">判断条件</span>
 
-#### （2）<span style="color:red">&lt;set&gt;</span> 标签：可以<span style="color:red">自动生成 set 关键字</span>，常配合 if 标签（用于条件的判断）使用，然后进行 SQL 语句的拼接，同时还可以<span style="color:red">自动去除更新字段后面多余的逗号</span>，具有<span style="color:red">parameterType 属性</span>，当指定 parameterType 后，在 SQL 语句中可以通过 #{属性名} 或 ${属性名} 的方式引用参数的属性（针对实体类或 Map），MyBatis 会根据类型信息找到对应的属性值，<span style="color:red">当然也可以不指定，MyBatis 也能通过反射自动推断参数类型</span>
+#### （2）<span style="color:red">&lt;set&gt;</span> 标签：可以<span style="color:red">自动生成 set 关键字</span>，常<span style="color:red">配合 if 标签</span>（用于条件的判断）使用，然后进行 SQL 语句的拼接，同时还可以<span style="color:red">自动去除更新字段后面多余的逗号</span>，具有<span style="color:red">parameterType 属性</span>，当指定 parameterType 后，在 SQL 语句中可以通过 #{属性名} 或 ${属性名} 的方式引用参数的属性（针对实体类或 Map），MyBatis 会根据类型信息找到对应的属性值，<span style="color:red">当然也可以不指定，MyBatis 也能通过反射自动推断参数类型</span>
 
 #### （3）<span style="color:red">&lt;where&gt;</span> 标签：根据查询条件，来生成 where 关键字，并会<span style="color:red">自动去除条件前面多余的 and 或 or</span>
 
-#### （4）<span style="color:red">&lt;foreach&gt;</span> 标签：该标签的作用是用来遍历循环集合，常见的属性如下
+#### （4）<span style="color:red">&lt;sql&gt;</span> 标签：用于定义 sql 片段语句，后续可以被复用，需要指明 <span style="color:red">id 属性</span>，作为该 sql 片段语句的唯一标识
+
+#### （5）<span style="color:red">&lt;include&gt;</span> 标签：通过 <span style="color:red">refid 属性</span>实现对 sql 片段语句的复用
+
+#### （6）<span style="color:red">&lt;foreach&gt;</span> 标签：该标签的作用是用来遍历集合，resultMap 中的某个属性是<span style="color:red">一对多</span>的联系，需要<span style="color:red">封装为集合</span>，常见的属性如下
 
 > #### collection：集合名称
 >
@@ -443,6 +447,28 @@ public void testFindByUsernameAndPassword(){
 > #### close：遍历结束后拼接的片段
 >
 > #### 上述的属性，是可选的，并不是所有的都是必须的。 可以自己根据实际需求，来指定对应的属性
+
+#### （7）<span style="color:red">&lt;association&gt;</span> 标签：resultMap 中的某个属性是<span style="color:red">多对一</span>或者<span style="color:red">一对一</span>的联系，该属性<span style="color:red">作为外键</span>查询数据并封装到属性中，实现<span style="color:red">嵌套查询</span>
+
+> #### property：返回结果需要封装到哪个属性中
+>
+> #### javaType：属性的类型
+>
+> #### column：外键字段的列名
+>
+> #### select：column 外键作为参数，传递给 select 指定的方法，实现嵌套查询
+>
+> #### ⚠️ 注意：select 指定的方法应为<span style="color:red">该方法的全限定名</span>，到 mapper 层<span style="color:red">双击方法</span>，右键<span style="color:red">复制引用</span>即可
+
+```xml
+<association property="region" javaType="Region" column="region_id" select="com.dkd.manage.mapper.RegionMapper.selectRegionById"/>
+```
+
+<br/>
+<img src="./assotiation 标签.png" style="width:700px;margin:0px auto;">
+<br/>
+
+#### 代码示例
 
 ```xml
 <!--定义Mapper映射文件的约束和基本结构-->
@@ -488,6 +514,7 @@ public void testFindByUsernameAndPassword(){
         </set>
         where id = #{id}
     </update>
+
 </mapper>
 ```
 
