@@ -80,8 +80,14 @@ aside: left
   <img src="./10.png">
 </div>
 
-## 8. 删除快捷键
+## 9. 删除快捷键
 
 > #### Del 键
 
 #### 效果：保持光标固定的情况下<span style="color:red;font-weight:bold">删除其后面的内容</span>
+
+## 10. 其他
+
+#### （1）ctrl + alt + insert：创建文件
+
+#### （2）alt + shift + insert：切换为列选择模式，按住 shift 配合鼠标点击可以选中多列的同一位置

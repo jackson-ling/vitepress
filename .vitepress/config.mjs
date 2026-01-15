@@ -86,7 +86,7 @@ export default defineConfig({
                                 ]
                         },
                         {text: '🔍常用网站', link: 'docs/笔记/常用网站.md'},
-                        {text: '🖊️随笔', link: '/docs/测试界面.md'},
+                        {text: '🖊️随笔', link: 'docs/笔记/随笔/随笔乱记.md'},
                         {
                             text: 'Markdown',
                             items:
