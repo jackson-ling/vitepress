@@ -131,7 +131,10 @@ export default defineConfig({
                             link: 'docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
                         {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
-                        {text: '<img src="洛谷.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 洛谷', link: 'docs/算法/洛谷/导论.md'},
+                        {
+                            text: '<img src="洛谷.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 洛谷',
+                            link: 'docs/算法/洛谷/导论.md'
+                        },
                         {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
                         {text: '🚀 算法总结', link: '/docs/测试界面.md'},
                         {
@@ -209,7 +212,11 @@ export default defineConfig({
                                     {
                                         text: '<img src="element-plus.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> ElementPlus',
                                         link: 'docs/前端/ElementPlus/elementplus.md'
-                                    }
+                                    },
+                                    {
+                                        text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信小程序',
+                                        link: 'docs/后端/微信小程序/1. HttpClient.md'
+                                    },
                                 ]
                         },
                     ]
@@ -347,14 +354,10 @@ export default defineConfig({
                             text: '其他',
                             items:
                                 [
-                                    {
-                                        text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信小程序',
-                                        link: 'docs/后端/微信小程序/1. HttpClient.md'
-                                    },
-                                    {
-                                        text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
-                                        link: '/docs/测试界面.md'
-                                    },
+                                    // {
+                                    //     text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
 
                                     {
                                         text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 设计模式',
@@ -448,8 +451,12 @@ export default defineConfig({
                             link: 'docs/AI/AI编程开发/AI编程开发.md'
                         },
                         {
+                            text: 'Ollama',
+                            link: 'docs/AI/Ollama/ollama.md'
+                        },
+                        {
                             text: 'SpringAI',
-                            link: '/docs/测试界面.md'
+                            link: 'docs/AI/SpringAI/springai.md'
                         },
                         {
                             text: 'LangChain4j',
