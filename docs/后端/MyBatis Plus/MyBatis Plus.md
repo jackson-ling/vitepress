@@ -204,6 +204,14 @@ user = User(id=5, username=Lucy, password=123, phone=18688990011, info={"age": 2
 
 :::
 
+### ⭐ mp 生效前提
+
+::: tip <span style="font-size: 18px;">Tip</span>
+
+#### 在 Mybatis 中，通过给 mapper 文件加上 mapper 注解使其生效，当 mapper 文件很多时，这种操作就过于繁琐，所以在 mp 中，在<span style="color:red">启动类</span>上加上 <span style="color:red">mapperscan 注解并指定 mapper 包</span>，即可使所有的 mapper 生效
+
+:::
+
 ## 常用注解
 
 ### 问题引入
