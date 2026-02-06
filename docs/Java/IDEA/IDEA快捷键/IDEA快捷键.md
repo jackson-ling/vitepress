@@ -119,3 +119,5 @@ aside: left
 #### （18）alt + F7：查看当前元素<span style="color:red;font-weight:bold">在所有文件中的引用</span>
 
 #### （19）ctrl + alt + v：快速生成变量类型和变量名
+
+#### （20）alt + 8：打开服务窗口

@@ -10,9 +10,11 @@ outline: [2, 3]
 
 ## ⭐ 安装包
 
-<h3>软件安装包 ：<a href="https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3" target="_blank">https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3</a></h3>
-<h3>VSCode官网下载地址：<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a></h3>
-<h3>mingw64官网下载地址：<a href="https://sourceforge.net/projects/mingw-w64/" target="_blank">https://sourceforge.net/projects/mingw-w64/</a></h3>
+> #### 软件安装包 ：<a href="https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3" target="_blank">https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3</a>
+>
+> #### VSCode官网下载地址：<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>
+>
+> #### mingw64官网下载地址：<a href="https://sourceforge.net/projects/mingw-w64/" target="_blank">https://sourceforge.net/projects/mingw-w64/</a>
 
 ## 安装教程
 
@@ -159,51 +161,6 @@ terminal font size
 
 > #### anl + 鼠标左键
 
-## setting.json 文件配置
-
-```json
-{
-  "editor.fontSize": 20,
-  "editor.mouseWheelZoom": true,
-  "workbench.iconTheme": "material-icon-theme",
-  "files.autoGuessEncoding": true,
-  "c-cpp-compile-run.run-in-external-terminal": true,
-  "editor.stickyScroll.enabled": false,
-  "editor.smoothScrolling": true,
-  "workbench.list.smoothScrolling": true,
-  "terminal.integrated.smoothScrolling": true,
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.wordWrap": "on",
-  "editor.acceptSuggestionOnEnter": "smart",
-  "editor.suggestSelection": "recentlyUsed",
-  "window.dialogStyle": "custom",
-  "debug.showBreakpointsInOverviewRuler": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": true,
-  "editor.lineHeight": 1.8,
-  "editor.tabSize": 4,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
-  },
-  "git.confirmSync": false,
-  "terminal.integrated.defaultProfile.windows": "Command Prompt",
-  "chat.commandCenter.enabled": false,
-  "workbench.colorTheme": "One Dark Pro",
-  "markdown-preview-enhanced.codeBlockTheme": "auto.css",
-  "markdown-preview-enhanced.previewTheme": "github-light.css",
-  "markdown-preview-enhanced.revealjsTheme": "none.css",
-  "explorer.compactFolders": false,
-  "editor.minimap.showSlider": "always",
-  "terminal.integrated.fontSize": 18,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
-}
-```
-
 ## 常用插件整理
 
 #### 主题类
@@ -241,6 +198,8 @@ terminal font size
 > #### Intellij IDEA Keybindings：IDEA 快捷键支持
 >
 > #### Competitive Programming Helper（cph）：提供算法测试用例
+>
+> #### Codex：GTP 编程助手插件（用GPT账号登录即可使用）
 
 #### 前端开发相关
 
@@ -269,3 +228,90 @@ terminal font size
 > #### Path Intellisense ：路径提示插件
 >
 > #### Image preview：链接图片时的图片预览插件
+
+## 界面美化
+
+### 光标跳转美化
+
+> #### 链接一：https://www.bilibili.com/video/BV1XtviBkEMr/
+>
+> #### 链接二：https://www.bilibili.com/video/BV1bVeLzbE5D/
+
+### 界面动画
+
+> #### https://www.bilibili.com/video/BV161pneGE7o/
+
+## setting.json 文件配置
+
+```json
+{
+  "editor.fontSize": 20,
+  "editor.mouseWheelZoom": true,
+  "files.autoGuessEncoding": true,
+  "c-cpp-compile-run.run-in-external-terminal": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.wordWrap": "on",
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.suggestSelection": "recentlyUsed",
+  "window.dialogStyle": "custom",
+  "debug.showBreakpointsInOverviewRuler": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.lineHeight": 1.8,
+  "editor.tabSize": 4,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "git.confirmSync": false,
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "chat.commandCenter.enabled": false,
+  "markdown-preview-enhanced.codeBlockTheme": "auto.css",
+  "markdown-preview-enhanced.previewTheme": "github-light.css",
+  "markdown-preview-enhanced.revealjsTheme": "none.css",
+  "explorer.compactFolders": false,
+  "editor.minimap.showSlider": "always",
+  "terminal.integrated.fontSize": 18,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [],
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "vscode_custom_css.imports": [
+    "file:///D:/vscode-neovide-cursor-main/neovide-cursor.js",
+    "file:///c:/Users/jackson/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
+  ],
+  "animations.CursorAnimation": true,
+  "animations.CursorAnimationOptions": {
+    "TrailLength": 8
+  },
+  "background.fullscreen": {
+    "images": ["file:///D:/资料整理/文档整理/IDEA背景壁纸/背景图片.png"],
+    "opacity": 0.65,
+    "size": "cover",
+    "position": "center",
+    "interval": 0,
+    "random": false
+  },
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.secondarySideBar.defaultVisibility": "visible",
+  "http.systemCertificatesNode": true,
+  "chatgpt.localeOverride": "zh-CN",
+  "prettier.bracketSameLine": true
+}
+```
