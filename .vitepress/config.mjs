@@ -371,11 +371,11 @@ export default defineConfig({
                                 [
                                     {
                                         text: '<img src="linux.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Linux',
-                                        link: 'docs/DevOps/Linux/1. 基本介绍.md'
+                                        link: '/docs/DevOps/Linux/1. 基本介绍.md'
                                     },
                                     {
                                         text: '<img src="docker.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Docker',
-                                        link: 'docs/DevOps/Docker/1. Docker安装.md'
+                                        link: '/docs/DevOps/Docker/1. Docker安装.md'
                                     },
                                     {
                                         text: '<img src="ngnix.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> Ngnix',
@@ -384,7 +384,7 @@ export default defineConfig({
 
                                     {
                                         text: '<img src="git.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Git',
-                                        link: '/docs/测试界面.md'
+                                        link: '/docs/后端/Git/Git.md'
                                     },
                                 ]
                         },
