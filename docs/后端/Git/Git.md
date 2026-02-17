@@ -35,7 +35,9 @@ git config --global core.editor "code --wait"
 ## 常用命令
 
 ```bash
-git clone 仓库地址 # 拉取仓库代码到本地
+git clone 仓库地址 # 拉取仓库代码到本地（默认拉取分支 main 分支）
+
+git clone -b 分支名 仓库地址 # 拉取仓库中指定分支的代码
 
 git init # 初始化仓库
 
@@ -123,7 +125,7 @@ git branch # 查看当前所处分支
 
 git branch 分支名 # 创建新分支
 
-git branch -b 分支名 # 创建并切换到新分支
+git checkout -b 分支名 # 创建并切换到新分支
 
 git checkout 分支名 # 切换分支
 
