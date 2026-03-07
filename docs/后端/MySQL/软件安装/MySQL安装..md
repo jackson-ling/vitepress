@@ -213,3 +213,7 @@ mysqld --initialize-insecure
 ```
 
 #### （4）执行 sql 脚本，重新恢复数据
+
+## 移动 MySQL 安装目录
+
+> #### https://blog.csdn.net/zhao854116434/article/details/125269012
