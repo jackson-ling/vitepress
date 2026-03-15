@@ -69,7 +69,7 @@ git log --all # 查看所有分支的提交
 
 git log --all --graph # 以图形化方式展示所有分支的提交历史
 
-git reset --hard 版本号 # 版本回退，通过 git status 查看版本号
+git reset --hard 版本号 # 版本回退，通过 git log 查看版本号
 ```
 
 ## ssh 配置
@@ -159,6 +159,8 @@ git push 仓库名 --delete 分支名 # 删除远程仓库的指定分支
 git status # 查看冲突文件
 
 git pull 仓库名 分支名 # 将远程仓库对应分支的最新内容拉下来后与当前本地分支直接合并
+
+git pull 仓库名 分支名 --allow-unrelated-histories # 允许不相关的历史
 ```
 
 #### 修改冲突文件示例
