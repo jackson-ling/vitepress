@@ -30,6 +30,10 @@ git config --global core.editor "'exe文件路径' --wait" # 配置 vscode 为�
 
 # 如果 vscode 添加了系统环境变量，则可以配置为如下指令，--wait 参数表示等待编辑完成
 git config --global core.editor "code --wait"
+
+git config --global credential.helper store # 保存本地凭证
+
+git credential-cache exit # 删除本地凭证
 ```
 
 ## 常用命令
