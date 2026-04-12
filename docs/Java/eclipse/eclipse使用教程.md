@@ -64,6 +64,8 @@ https://www.eclipse.org/downloads/packages/release
 
 #### （4）代码补全：alt + /
 
+#### （5）自动生成变量：Ctrl + L + 2（Ctrl + L 可看提示）
+
 #### （5）代码格式化：Ctrl + Shift + F
 
 #### （6）自动导包：Ctrl + Shift + M
@@ -73,6 +75,8 @@ https://www.eclipse.org/downloads/packages/release
 #### （8）多行注释：Ctrl + Shift + /
 
 #### （9）取消多行注释： Ctrl + Shift + \
+
+#### （10）查看所有快捷键：Ctrl + Shift + L
 
 ---
 
@@ -124,4 +128,4 @@ https://www.eclipse.org/downloads/packages/release
 
 #### （3）F7 跳出当前正在 debug 调试的方法
 
-#### （4）执行到下一个断点，如果没有断点，则程序执行完毕
+#### （4）F8 执行到下一个断点，如果没有断点，则程序执行完毕
