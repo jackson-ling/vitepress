@@ -1732,10 +1732,10 @@ private final VectorStore vectorStore;
 @Override
 public String chat(String question, String sessionId) {
     // 创建搜索请求，用于搜索相关文档
-    var searchRequest = SearchRequest.builder()
-            .query(question) // 设置查询条件
-            .topK(3) // 设置最多返回的文档数量
-            .build();
+    var searchRequest = SearchRequest.builder() // [!code hl]
+            .query(question) // 设置查询条件 // [!code hl]
+            .topK(3) // 设置最多返回的文档数量 // [!code hl]
+            .build(); // [!code hl]
 
     // 调用聊天客户端处理用户问题并获取响应内容
     var content = this.chatClient.prompt()
@@ -1743,7 +1743,7 @@ public String chat(String question, String sessionId) {
             .system(prompt -> prompt.param("now", DateUtil.now())) // 设置系统角色参数
             // 设置会话记忆参数
             .advisors(advisor -> advisor
-                    .advisors(new QuestionAnswerAdvisor(vectorStore, searchRequest)) // 设置RAG的Advisor
+                    .advisors(new QuestionAnswerAdvisor(vectorStore, searchRequest)) // 设置RAG的Advisor // [!code hl]
                     .param(AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY, sessionId))
             .user(question)
             .call()

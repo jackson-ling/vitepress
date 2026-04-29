@@ -215,7 +215,7 @@ export default defineConfig({
                                     },
                                     {
                                         text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信小程序',
-                                        link: 'docs/后端/微信小程序/1. HttpClient.md'
+                                        link: 'docs/前端/微信小程序/1. HttpClient.md'
                                     },
                                 ]
                         },
@@ -321,10 +321,6 @@ export default defineConfig({
                                         text: '<img src="springboot.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringBoot',
                                         link: "docs/后端/Springboot/1. SpringbootWeb入门.md"
                                     },
-                                    {
-                                        text: '📝 项目相关笔记',
-                                        link: "docs/后端/项目相关笔记/业务逻辑类/1. 权限相关.md"
-                                    }
                                 ]
                         },
                         {
@@ -358,11 +354,14 @@ export default defineConfig({
                                     //     text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
                                     //     link: '/docs/测试界面.md'
                                     // },
-
                                     {
                                         text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 设计模式',
-                                        link: '/docs/测试界面.md'
+                                        link: 'docs/后端/设计模式/工厂模式.md'
                                     },
+                                    {
+                                        text: '📝 项目相关笔记',
+                                        link: "docs/后端/项目相关笔记/业务逻辑类/1. 权限相关.md"
+                                    }
                                 ]
                         },
                         {
@@ -371,15 +370,15 @@ export default defineConfig({
                                 [
                                     {
                                         text: '<img src="linux.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Linux',
-                                        link: '/docs/DevOps/Linux/1. 基本介绍.md'
+                                        link: '/docs/后端/DevOps/Linux/1. 基本介绍.md'
                                     },
                                     {
                                         text: '<img src="docker.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Docker',
-                                        link: '/docs/DevOps/Docker/1. Docker安装.md'
+                                        link: '/docs/后端/DevOps/Docker/1. Docker安装.md'
                                     },
                                     {
                                         text: '<img src="ngnix.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> Ngnix',
-                                        link: '/docs/测试界面.md'
+                                        link: '/docs/后端/测试界面.md'
                                     },
 
                                     {
@@ -1053,13 +1052,13 @@ export default defineConfig({
                                 ]
                         }
                     ],
-                'docs/后端/微信小程序':
+                'docs/前端/微信小程序':
                     [
                         {
                             text: '微信小程序',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/后端/微信小程序')
+                                    ...setSidebarDefault('docs/前端/微信小程序')
                                 ]
                         }
                     ],
@@ -1175,6 +1174,18 @@ export default defineConfig({
                                 ]
                         }
                     ],
+                'docs/后端/设计模式':
+                    [
+                        {
+                            collapsible: true,   // 允许折叠
+                            collapsed: false,    // 一开始就展开
+                            text: '设计模式',
+                            items:
+                                [
+                                    ...setSidebarDefault('docs/后端/设计模式'),
+                                ]
+                        }
+                    ],
                 'docs/后端/项目相关笔记':
                     [
                         {
@@ -1206,23 +1217,23 @@ export default defineConfig({
                                 ]
                         }
                     ],
-                'docs/DevOps/Linux':
+                'docs/后端/DevOps/Linux':
                     [
                         {
                             text: 'Linux',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/DevOps/Linux')
+                                    ...setSidebarDefault('docs/后端/DevOps/Linux')
                                 ]
                         }
                     ],
-                'docs/DevOps/Docker':
+                'docs/后端/DevOps/Docker':
                     [
                         {
                             text: 'Docker',
                             items:
                                 [
-                                    ...setSidebarDefault("docs/DevOps/Docker")
+                                    ...setSidebarDefault("docs/后端/DevOps/Docker")
                                 ]
                         }
                     ],
