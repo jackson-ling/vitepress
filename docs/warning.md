@@ -9,9 +9,11 @@ outline: [2, 3]
 
 <br/>
 
-::: tip <span style="font-size: 20px;font-size:30px">👉 提醒 </span>
+::: tip <span style="font-size:30px;">👉 提醒 </span>
 
-<p style="text-align:center;font-size:40px;font-weight:bold;padding-bottom:25px">编程学习：3 分学， 7 分练</p>
+<br/>
+
+<p style="text-align:center;font-size:24px;font-weight:bold;padding-bottom:25px">编程学习 3 分学，7 分练，没有主观能动性，做任何事情都不可能成功，同时提高个人的不可替代性</p>
 :::
 
 <img src="./学习体系.png" style="width:1200px;margin:0 auto"/>
@@ -27,11 +29,8 @@ outline: [2, 3]
 > #### （1）结合自身，<span style="color:red;font-weight:bold">明确，核心，具体，可行</span>，不要不切实际，要有<span style="color:red;font-weight:bold">侧重点</span>
 >
 > > - <h4> 明确：明确自身缺陷，当下能力，<span style="color:red;font-weight:bold">真实需求</span>，可支配资源和时间，拒绝跟风，被外界带动而影响自身</h4>
-> >
 > > - <h4> 核心：<span style="color:red;font-weight:bold">目标必须聚焦</span> 1-2 个关键项，❌ <span style="color:red;font-weight:bold">拒绝贪心的什么都要</span>（想的很多，过于理想化，当下还是原地踏步，没有实际行动，空想浪费实践，带来无意义的焦虑，自我内耗）， 精力分散反而学得多而浅</h4>
-> >
 > > - <h4>具体：目标必须拆到能直接动手的步骤，❌ <span style="color:red;font-weight:bold">拒绝笼统的我要做</span>，需要有通过<span style="color:red;font-weight:bold">实践输出</span>的结果作为衡量</h4>
-> >
 > > - <h4>可行：<span style="color:red;font-weight:bold">降低预期</span>，目标必须小到一定能完成，❌ <span style="color:red;font-weight:bold">拒绝贪心的一步到位</span>，建立即时反馈</h4>
 >
 > #### （2）❌ <span style="color:red;font-weight:bold">目标不要定的太高</span>，这样容易给自身压力，然后心态崩溃

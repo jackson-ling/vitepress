@@ -4,11 +4,11 @@ aside: left
 outline: [2, 3]
 ---
 
-<h1 style="text-align: center;">AI 编程开发</h1>
+<h1 style="text-align: center;">认识 AI</h1>
 
 ---
 
-## 认识 AI
+## 什么是 AI
 
 ### 发展历程
 

@@ -4,17 +4,17 @@ aside: left
 outline: [2, 3]
 ---
 
-<h1 style="text-align: center; font-weight: bold;">vscode安装及配置</h1>
+<h1 style="text-align: center; font-weight: bold;">vscode 安装及配置 </h1>
 
 ---
 
 ## ⭐ 安装包
 
-> #### 软件安装包 ：<a href="https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3" target="_blank">https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3</a>
+> #### 软件安装包：<a href="https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3" target="_blank">https://pan.baidu.com/s/1Uq9xdDGIRQLgtodbfB1DUA?pwd=maw3</a>
 >
-> #### VSCode官网下载地址：<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>
+> #### VSCode 官网下载地址：<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>
 >
-> #### mingw64官网下载地址：<a href="https://sourceforge.net/projects/mingw-w64/" target="_blank">https://sourceforge.net/projects/mingw-w64/</a>
+> #### mingw64 官网下载地址：<a href="https://sourceforge.net/projects/mingw-w64/" target="_blank">https://sourceforge.net/projects/mingw-w64/</a>
 
 ## 安装教程
 
@@ -50,7 +50,7 @@ where gcc
 >
 > #### 设置文件夹折叠：齿轮 > 设置 > 搜索 "compact" 取消第一个勾选
 >
-> #### 设置编码自动保存：齿轮 > 设置 > 搜索 "Auto Save" ，选择为"afterDelay"
+> #### 设置编码自动保存：齿轮 > 设置 > 搜索 "Auto Save"，选择为 "afterDelay"
 
 #### 调整控制台字体大小
 
@@ -87,7 +87,7 @@ terminal font size
 
 <hr/>
 
-<h3>设置 C/C++ Compile Run，运行结果在<span style = "color:red;font-weight:bold">弹出的窗口</span>中显示</h3>
+<h3> 设置 C/C++ Compile Run，运行结果在 <span style = "color:red;font-weight:bold"> 弹出的窗口 </span> 中显示 </h3>
 <br>
 <div style="width: 500px; margin: 0 auto;">
   <img src="./vscode安装截图/4.png">
@@ -125,7 +125,7 @@ terminal font size
 
 #### 常规方法
 
-<h3>注意点：<span style = "color:red;font-weight:bold">项目路径不能有中文</span>，否则运行会报错</h3>
+<h3> 注意点：<span style = "color:red;font-weight:bold"> 项目路径不能有中文 </span>，否则运行会报错 </h3>
 
 <br>
 <div style="width: 500px; margin: 0 auto;">
@@ -163,45 +163,7 @@ terminal font size
 
 ## 常用插件整理
 
-#### 主题类
-
-> #### One Dark Pro：主题
->
-> #### One Monokai Theme：主题
->
-> #### Material Icon Theme：文件图标主题
-
-#### markdown
-
-> #### Markdown Preview Enhanced：支持文章预览
->
-> #### Markdown Emoji：narkdown 支持 emoji，例如：:smille: 语法将渲染为 😄
-
-#### 其他
-
-> #### Chinese（Simplified）（简体中文）：中文汉化包
->
-> #### Lingma-Alibaba Cloud AI Coding Assistant：通义灵码插件
->
-> #### Error Lens：错误提示，警告
->
-> #### CodeSnap：代码截图
->
-> #### Material Icon Theme：文件图标美化
->
-> #### backgroud：设置背景图片
->
-> #### VSCode Animations：界面动画插件
->
-> #### Custom CSS and JS Loader：动画光标配置辅助插件，配置方法见视频：https://www.bilibili.com/video/BV1XtviBkEMr
->
-> #### Intellij IDEA Keybindings：IDEA 快捷键支持
->
-> #### Competitive Programming Helper（cph）：提供算法测试用例
->
-> #### Codex：GTP 编程助手插件（用GPT账号登录即可使用）
-
-#### 前端开发相关
+### 前端开发
 
 > #### Chinese（Simplified） Language Pack：中文（简体）语言包
 >
@@ -225,9 +187,68 @@ terminal font size
 >
 > #### Auto Close Tag：自动闭合 HTML / XML 标签
 >
-> #### Path Intellisense ：路径提示插件
+> #### Path Intellisense：路径提示插件
 >
 > #### Image preview：链接图片时的图片预览插件
+
+### 主题类
+
+> #### One Dark Pro：主题
+>
+> #### One Monokai Theme：主题
+>
+> #### Material Icon Theme：文件图标主题
+
+### markdown
+
+> #### Markdown Preview Enhanced：支持文章预览
+>
+> #### Markdown Emoji：narkdown 支持 emoji，例如：:smille: 语法将渲染为 😄
+>
+> #### Markdown Auto Space：保存时自动在<span style="color:red;">数字</span>或者<span style="color:red;">英文字符</span>前后添加空格
+
+```json
+// 在 setting.json 文件中配置如下内容，表示 Markdown Auto Space 插件在保存时只对数字和英文字符在前后添加空格
+"markdownAutoSpace.formatOnSave": true,
+"markdownAutoSpace.formatOnDocument": false,
+"markdownAutoSpace.diagnostics.enable": true,
+
+"markdownAutoSpace.rules": {
+  "MAS001": true,
+  "MAS002": false,
+  "MAS003": false,
+  "MAS004": false,
+  "MAS005": false,
+  "MAS006": false,
+  "MAS007": false,
+  "MAS008": false,
+  "MAS009": false
+}
+```
+
+### 其他
+
+> #### Chinese（Simplified）（简体中文）：中文汉化包
+>
+> #### Lingma-Alibaba Cloud AI Coding Assistant：通义灵码插件
+>
+> #### Error Lens：错误提示，警告
+>
+> #### CodeSnap：代码截图
+>
+> #### Material Icon Theme：文件图标美化
+>
+> #### backgroud：设置背景图片
+>
+> #### VSCode Animations：界面动画插件
+>
+> #### Custom CSS and JS Loader：动画光标配置辅助插件，配置方法见视频：https://www.bilibili.com/video/BV1XtviBkEMr
+>
+> #### Intellij IDEA Keybindings：IDEA 快捷键支持
+>
+> #### Competitive Programming Helper（cph）：提供算法测试用例
+>
+> #### Codex：GTP 编程助手插件（用 GPT 账号登录即可使用）
 
 ## 界面美化
 

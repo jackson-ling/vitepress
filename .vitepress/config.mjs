@@ -355,12 +355,12 @@ export default defineConfig({
                                     //     link: '/docs/测试界面.md'
                                     // },
                                     {
-                                        text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 设计模式',
+                                        text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;">  设计模式',
                                         link: 'docs/后端/设计模式/工厂模式.md'
                                     },
                                     {
-                                        text: '📝 项目相关笔记',
-                                        link: "docs/后端/项目相关笔记/业务逻辑类/1. 权限相关.md"
+                                        text: '📝 项目笔记',
+                                        link: "docs/后端/项目笔记/解决方案/1. 权限认证.md"
                                     }
                                 ]
                         },
@@ -446,12 +446,12 @@ export default defineConfig({
                 items:
                     [
                         {
-                            text: 'AI 编程开发',
-                            link: 'docs/AI/AI编程开发/AI编程开发.md'
+                            text: '认识 AI',
+                            link: 'docs/AI/认识 AI/认识 AI.md'
                         },
                         {
-                            text: 'Ollama',
-                            link: 'docs/AI/Ollama/ollama.md'
+                            text: 'Claude Code',
+                            link: 'docs/AI/ClaudeCode/ClaudeCode.md'
                         },
                         {
                             text: 'SpringAI',
@@ -460,6 +460,10 @@ export default defineConfig({
                         {
                             text: 'LangChain4j',
                             link: '/docs/测试界面.md'
+                        },
+                        {
+                            text: 'Ollama',
+                            link: 'docs/AI/Ollama/ollama.md'
                         },
                         {
                             text: 'ROS2（AIC大赛）',
@@ -1186,24 +1190,24 @@ export default defineConfig({
                                 ]
                         }
                     ],
-                'docs/后端/项目相关笔记':
+                'docs/后端/项目笔记':
                     [
                         {
                             collapsible: true,   // 允许折叠
                             collapsed: false,    // 一开始就展开
-                            text: "业务逻辑类",
+                            text: "解决方案",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/项目相关笔记/业务逻辑类")
+                                    ...setSidebarDefault("docs/后端/项目笔记/解决方案")
                                 ]
                         },
                         {
                             collapsible: true,   // 允许折叠
                             collapsed: false,    // 一开始就展开
-                            text: "工具配置类",
+                            text: "工具与配置",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/项目相关笔记/工具配置类")
+                                    ...setSidebarDefault("docs/后端/项目笔记/工具与配置")
                                 ]
                         },
                     ],

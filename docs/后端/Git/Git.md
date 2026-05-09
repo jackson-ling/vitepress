@@ -78,7 +78,7 @@ git reset --hard 版本号 # 版本回退，通过 git log 查看版本号
 
 ## ssh 配置
 
-> #### 使用如下命令生成 ssh 密钥，之后在C盘用户中的 .ssh 文件夹中查看，添加到 Github 使其生效，之后采用 ssh 推动代码就不会出现网络问题
+> #### 使用如下命令生成 ssh 密钥，之后在 C 盘用户中的 .ssh 文件夹中查看，添加到 Github 使其生效，之后采用 ssh 推动代码就不会出现网络问题
 
 ```bash
 ssh-keygen -t rsa -C "填写你的邮箱" # 执行后一直回车即可，指导提示密钥生成完成，带有 pub 后缀的文件是公钥，另一个是私钥
@@ -137,7 +137,7 @@ git branch -d 分支名 # 删除本地分支
 
 git branch -m 旧分支名 新分支名 # 重命名分支
 
-git merge 分支名 # 合并分支（将指定分支的代码合并到当前分支）
+git merge 分支名 # 合并分支（merge 谁，就把谁的代码合并到当前所处分支）
 
 git branch -r # 查看远程仓库所分支
 
@@ -206,7 +206,7 @@ git stash drop @stash{记录号} # 删除指定贮藏记录
 ## 重置与变基
 
 ```bash
-git reset head 文件名 # 撤销本次提交和文件暂存状态
+git reset --soft head 文件名 # 撤销本次提交和文件暂存状态
 
 # head：当前的提交
 
@@ -261,7 +261,7 @@ git rebase -i --root # 对所有提交记录进行变基
 
 > #### 教程视频：https://www.bilibili.com/video/BV1na411v7gS
 
-## ignore文件参考
+## ignore 文件参考
 
 ```
 # ##########项目默认生成##########
