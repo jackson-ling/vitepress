@@ -102,12 +102,12 @@ export default defineConfig({
                             text: 'Vitepress',
                             items:
                                 [
-                                    {text: '📋准备工作', link: '/docs/测试界面.md'},
+                                    // {text: '📋准备工作', link: '/docs/测试界面.md'},
                                     {text: '💡建站教程', link: '/docs/测试界面.md'},
-                                    {
-                                        text: '<img src="建议.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 文档编写建议',
-                                        link: '/docs/测试界面.md'
-                                    },
+                                    // {
+                                    //     text: '<img src="建议.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 文档编写建议',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
                                     {
                                         text: '<img src="腾讯云.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 腾讯云部署',
                                         link: '/docs/笔记/vitepress教程/腾讯云部署/腾讯云部署.md'
@@ -447,7 +447,7 @@ export default defineConfig({
                     [
                         {
                             text: '认识 AI',
-                            link: 'docs/AI/认识 AI/认识 AI.md'
+                            link: 'docs/AI/认识AI/认识AI.md'
                         },
                         {
                             text: 'Claude Code',

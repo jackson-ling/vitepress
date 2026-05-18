@@ -44,19 +44,15 @@ claude -v
 
 > #### 变量名：ANTHROPIC_BASE_URL，变量值：https://api.aicodemirror.com/api/claudecode
 >
-> #### 变量名：ANTHROPIC_API_KEY，变量值：你的密钥
->
 > #### 变量名：ANTHROPIC_AUTH_TOKEN，变量值：你的密钥
 
 ```bash
 # 设置环境变量
 setx ANTHROPIC_BASE_URL "url" # 如果采用中转站，请使用其提供的 url
-setx ANTHROPIC_API_KEY "你的token"
 setx ANTHROPIC_AUTH_TOKEN "你的token"
 
 # 验证是否成功
 echo %ANTHROPIC_BASE_URL%
-echo %ANTHROPIC_API_KEY%
 echo %ANTHROPIC_AUTH_TOKEN%
 ```
 
@@ -176,3 +172,35 @@ ANTHROPIC_BASE_URL=https://dashscope.aliyuncs.com/apps/anthropic
 ANTHROPIC_AUTH_TOKEN=YOUR_DASHSCOPE_API_KEY  # 用百炼 API KEY 替换 YOUR_DASHSCOPE_API_KEY
 ANTHROPIC_MODEL=qwen3-coder-plus # 可按需替换为其他支持的模型
 ```
+
+## skill 整理
+
+> #### agent-brower：模拟浏览器行为进行网页自动化操作，适用于爬虫、表单提交或前端交互测试。
+>
+> #### superpowers：提供通用 AI 能力增强，如任务规划、工具调用，适用于复杂多步骤任务的智能代理。
+>
+> #### pdf processing：提取、解析或生成 PDF 文件内容，适用于文档审核、数据抽取或报告生成。
+>
+> #### tavily：集成实时网络搜索 API，获取最新信息或验证事实，适用于需外部知识支持的问答系统。
+>
+> #### fronted design：生成或优化前端界面代码（HTML/CSS/JS），适用于快速原型设计或 UI 组件开发。
+>
+> #### context7：管理和注入长对话或文档的上下文片段，适用于大模型记忆增强或复杂知识库检索。
+>
+> #### systematic debugging：按步骤分析错误日志并定位代码问题，适用于软件调试、故障排查。
+>
+> #### marketing skills：策划内容、优化 SEO 或生成营销文案，适用于广告投放、社交媒体运营。
+>
+> #### tmux：管理终端会话和窗口，适用于远程开发、多任务并行操作或保持长期运行的服务。
+>
+> #### skill creator：定义并生成新 skill 的元数据与逻辑，适用于扩展 AI Agent 的能力库。
+>
+> #### webapp testing：执行 Web 应用功能、性能或兼容性测试，适用于自动化测试流程或回归测试。
+>
+> #### DOCX：读取、编辑或生成 Microsoft Word 文档，适用于报告撰写、合同处理或格式转换。
+>
+> #### changelog maintenance：自动生成或更新版本变更日志，适用于软件项目发布管理或协作记录。
+>
+> #### gpt researcher：搜索并整合网络信息形成研究报告，适用于竞品分析、学术综述或市场调研。
+>
+> #### code refactoring：优化代码结构而不改变外部行为，适用于提升可读性、降低复杂度或技术债务清理。
