@@ -33,7 +33,9 @@
       "Bash(curl -s http://localhost:5173/)",
       "Bash(npm ls *)",
       "Bash(netstat -ano)",
-      "Bash(curl -s http://127.0.0.1:5173/)"
+      "Bash(curl -s http://127.0.0.1:5173/)",
+      "Bash(git show *)",
+      "Read(//tmp/**)"
     ]
   },
   "enabledPlugins": {

@@ -1,8 +1,8 @@
 // https://vitepress.dev/guide/custom-theme
 import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
-import './style.css'
-import confetti from './confetti.vue'
+import './styles/index.css'
+import confetti from './components/confetti.vue'
 
 /** @type {import('vitepress').Theme} */
 

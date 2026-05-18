@@ -12,7 +12,6 @@ export default defineConfig({
 
     head: [
         ['link', {rel: 'icon', href: "/标签logo.png"}],
-        ['script', {src: '/sidebar-highlight.js'}],
     ],
 
     title: "jackson凌の文档站", // 网站标签页的名称
@@ -37,11 +36,11 @@ export default defineConfig({
         nav: [
             {text: '🏠首页', link: '/'},
             /*            {
-                            text: '<img src="环境搭建.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> 环境搭建',
+                            text: '<img src="环境搭建.png" class="nav-icon nav-icon--3xl"> 环境搭建',
                             items:
                                 [
                                     {
-                                        text: '<img src="jetbrains.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> Jetbrains常见问题',
+                                        text: '<img src="jetbrains.png" class="nav-icon nav-icon--lg"> Jetbrains常见问题',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
@@ -49,23 +48,23 @@ export default defineConfig({
                                         items:
                                             [
                                                 {
-                                                    text: '<img src="vmware.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> vmware',
+                                                    text: '<img src="vmware.jpeg" class="nav-icon nav-icon--lg"> vmware',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="centos.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> CentOS7.6',
+                                                    text: '<img src="centos.png" class="nav-icon nav-icon--lg"> CentOS7.6',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="ubuntu.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> Ubuntu',
+                                                    text: '<img src="ubuntu.png" class="nav-icon nav-icon--lg"> Ubuntu',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="xshell.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> XShell',
+                                                    text: '<img src="xshell.png" class="nav-icon nav-icon--lg"> XShell',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="bt.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 宝塔面板',
+                                                    text: '<img src="bt.png" class="nav-icon nav-icon--lg"> 宝塔面板',
                                                     link: '/docs/测试界面.md'
                                                 },
                                             ]
@@ -82,7 +81,7 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="github.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> Github使用技巧',
+                                        text: '<img src="github.png" class="nav-icon nav-icon--3xl"> Github使用技巧',
                                         link: 'docs/笔记/Github使用指南.md'
                                     },
                                     {text: '⭐优质开源项目', link: '/docs/测试界面.md'},
@@ -95,7 +94,7 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="markdown.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> Markdown语法',
+                                        text: '<img src="markdown.png" class="nav-icon nav-icon--3xl"> Markdown语法',
                                         link: '/docs/测试界面.md'
                                     },
                                     {text: 'Markdown @ emoji', link: 'docs/笔记/markdown/markdown@emoji.md'},
@@ -108,15 +107,15 @@ export default defineConfig({
                                     {text: '📋准备工作', link: '/docs/测试界面.md'},
                                     {text: '💡建站教程', link: '/docs/测试界面.md'},
                                     {
-                                        text: '<img src="建议.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 文档编写建议',
+                                        text: '<img src="建议.png" class="nav-icon nav-icon--xs"> 文档编写建议',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="腾讯云.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 腾讯云部署',
+                                        text: '<img src="腾讯云.png" class="nav-icon nav-icon--xs"> 腾讯云部署',
                                         link: '/docs/笔记/vitepress教程/腾讯云部署/腾讯云部署.md'
                                     },
                                     {
-                                        text: '<img src="githubaction.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Github部署',
+                                        text: '<img src="githubaction.png" class="nav-icon nav-icon--xs"> Github部署',
                                         link: '/docs/测试界面.md'
                                     },
 
@@ -130,12 +129,12 @@ export default defineConfig({
                     [
                         {text: '📝 算法集锦', link: '/docs/算法/算法集锦/算法集锦'},
                         {
-                            text: '<img src="leetcode.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> 灵神题单',
+                            text: '<img src="leetcode.png" class="nav-icon nav-icon--xs"> 灵神题单',
                             link: 'docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
                         {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
                         {
-                            text: '<img src="洛谷.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 洛谷',
+                            text: '<img src="洛谷.png" class="nav-icon nav-icon--lg"> 洛谷',
                             link: 'docs/算法/洛谷/导论.md'
                         },
                         {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
@@ -153,11 +152,11 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="java深色.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> Java版本',
+                                        text: '<img src="java深色.png" class="nav-icon nav-icon--3xl"> Java版本',
                                         link: 'docs/算法/数据结构/Java/马踏棋盘算法.md'
                                     },
                                     {
-                                        text: '<img src="C语言.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> C语言版本',
+                                        text: '<img src="C语言.png" class="nav-icon nav-icon--lg"> C语言版本',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -173,11 +172,11 @@ export default defineConfig({
                             text: '环境搭建', items:
                                 [
                                     {
-                                        text: '<img src="vscode.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> vscode',
+                                        text: '<img src="vscode.png" class="nav-icon nav-icon--lg"> vscode',
                                         link: 'docs/前端/vsvode.md'
                                     },
                                     {
-                                        text: '<img src="nodejs.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> Nodejs',
+                                        text: '<img src="nodejs.png" class="nav-icon nav-icon--lg"> Nodejs',
                                         link: 'docs/前端/nodejs.md'
                                     },
                                 ]
@@ -187,19 +186,19 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="html.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;"> HTML',
+                                        text: '<img src="html.png" class="nav-icon nav-icon--md"> HTML',
                                         link: 'docs/前端/HTML/HTML.md'
                                     },
                                     {
-                                        text: '<img src="css.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;"> CSS',
+                                        text: '<img src="css.png" class="nav-icon nav-icon--md"> CSS',
                                         link: '/docs/前端/CSS/CSS.md'
                                     },
                                     {
-                                        text: '<img src="javascript.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> JavaScript',
+                                        text: '<img src="javascript.png" class="nav-icon nav-icon--sm"> JavaScript',
                                         link: 'docs/前端/JavaScript/JavaScript.md'
                                     },
                                     {
-                                        text: '<img src="typescript.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> TypeScript',
+                                        text: '<img src="typescript.png" class="nav-icon nav-icon--sm"> TypeScript',
                                         link: 'docs/前端/TypeScript/TypeScript.md'
                                     },
                                 ]
@@ -209,15 +208,15 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="vue.png" style="vertical-align: middle; width: 1.5em; height: 1.5em; display: inline-block;"> Vue',
+                                        text: '<img src="vue.png" class="nav-icon nav-icon--2xl"> Vue',
                                         link: 'docs/前端/vue/vue.md'
                                     },
                                     {
-                                        text: '<img src="element-plus.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> ElementPlus',
+                                        text: '<img src="element-plus.png" class="nav-icon nav-icon--lg"> ElementPlus',
                                         link: 'docs/前端/ElementPlus/elementplus.md'
                                     },
                                     {
-                                        text: '<img src="微信开发者工具.jpeg" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> 微信小程序',
+                                        text: '<img src="微信开发者工具.jpeg" class="nav-icon nav-icon--lg"> 微信小程序',
                                         link: 'docs/前端/微信小程序/1. HttpClient.md'
                                     },
                                 ]
@@ -225,7 +224,7 @@ export default defineConfig({
                     ]
             },
             {
-                text: '<img src="java.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> Java', // 作为导航栏标识
+                text: '<img src="java.png" class="nav-icon nav-icon--3xl"> Java', // 作为导航栏标识
                 items: // 传入 items 作为导航栏内容
                     [
                         // 传入第一个字典
@@ -234,11 +233,11 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="IDEA.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> IDEA',
+                                        text: '<img src="IDEA.png" class="nav-icon nav-icon--3xl"> IDEA',
                                         link: 'docs/Java/IDEA/IDEA文章/1.软件安装包.md',
                                     },
                                     {
-                                        text: '<img src="快捷键.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> IDEA快捷键',
+                                        text: '<img src="快捷键.png" class="nav-icon nav-icon--3xl"> IDEA快捷键',
                                         link: 'docs/Java/IDEA/IDEA快捷键/IDEA快捷键.md',
                                     },
                                     {
@@ -246,11 +245,11 @@ export default defineConfig({
                                         link: 'docs/Java/IDEA/IDEA模板/代码模板.md'
                                     },
                                     {
-                                        text: '<img src="eclipse.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> eclipse',
+                                        text: '<img src="eclipse.png" class="nav-icon nav-icon--3xl"> eclipse',
                                         link: 'docs/Java/eclipse/eclipse使用教程.md'
                                     },
                                     {
-                                        text: '<img src="maven.png" style="vertical-align: middle; width: 1.6em; height: 1.6em; display: inline-block;"> Maven',
+                                        text: '<img src="maven.png" class="nav-icon nav-icon--3xl"> Maven',
                                         link: 'docs/Java/Maven/maven.md',
                                     },
                                 ]
@@ -294,11 +293,11 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="mysql.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MySQL',
+                                        text: '<img src="mysql.png" class="nav-icon nav-icon--xs"> MySQL',
                                         link: 'docs/后端/MySQL/MySQL/基础篇/1. 基本介绍.md'
                                     },
                                     {
-                                        text: '<img src="redis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Redis',
+                                        text: '<img src="redis.png" class="nav-icon nav-icon--xs"> Redis',
                                         link: 'docs/后端/Redis/1. 基本介绍.md'
                                     },
 
@@ -309,19 +308,19 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="spring.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Spring',
+                                        text: '<img src="spring.png" class="nav-icon nav-icon--xs"> Spring',
                                         link: 'docs/后端/Spring/1. AOP.md'
                                     },
                                     // {
-                                    //     text: '<img src="springmvc.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringMVC',
+                                    //     text: '<img src="springmvc.png" class="nav-icon nav-icon--xs"> SpringMVC',
                                     //     link: '/docs/测试界面.md'
                                     // },
                                     {
-                                        text: '<img src="mybatis.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MyBatis',
+                                        text: '<img src="mybatis.png" class="nav-icon nav-icon--xs"> MyBatis',
                                         link: 'docs/后端/MyBatis/Mybatis.md'
                                     },
                                     {
-                                        text: '<img src="springboot.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringBoot',
+                                        text: '<img src="springboot.png" class="nav-icon nav-icon--xs"> SpringBoot',
                                         link: "docs/后端/Springboot/1. SpringbootWeb入门.md"
                                     },
                                 ]
@@ -331,19 +330,19 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="mybatisplus.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> MyBatis Plus',
+                                        text: '<img src="mybatisplus.png" class="nav-icon nav-icon--xs"> MyBatis Plus',
                                         link: 'docs/后端/MyBatis Plus/MyBatis Plus.md'
                                     },
                                     {
-                                        text: '<img src="springcloud.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> SpringCloud',
+                                        text: '<img src="springcloud.png" class="nav-icon nav-icon--xs"> SpringCloud',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="rabbitmq.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> RabbitMQ',
+                                        text: '<img src="rabbitmq.png" class="nav-icon nav-icon--xs"> RabbitMQ',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="elasticsearch.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Elasticsearch',
+                                        text: '<img src="elasticsearch.png" class="nav-icon nav-icon--xs"> Elasticsearch',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -354,11 +353,11 @@ export default defineConfig({
                             items:
                                 [
                                     // {
-                                    //     text: '<img src="javaweb.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Java Web',
+                                    //     text: '<img src="javaweb.png" class="nav-icon nav-icon--xs"> Java Web',
                                     //     link: '/docs/测试界面.md'
                                     // },
                                     {
-                                        text: '<img src="设计模式.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;">  设计模式',
+                                        text: '<img src="设计模式.png" class="nav-icon nav-icon--md">  设计模式',
                                         link: 'docs/后端/设计模式/工厂模式.md'
                                     },
                                     {
@@ -372,20 +371,20 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="linux.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Linux',
+                                        text: '<img src="linux.png" class="nav-icon nav-icon--xs"> Linux',
                                         link: '/docs/后端/DevOps/Linux/1. 基本介绍.md'
                                     },
                                     {
-                                        text: '<img src="docker.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Docker',
+                                        text: '<img src="docker.png" class="nav-icon nav-icon--xs"> Docker',
                                         link: '/docs/后端/DevOps/Docker/1. Docker安装.md'
                                     },
                                     {
-                                        text: '<img src="ngnix.png" style="vertical-align: middle; width: 1.1em; height: 1.1em; display: inline-block;"> Ngnix',
+                                        text: '<img src="ngnix.png" class="nav-icon nav-icon--sm"> Ngnix',
                                         link: '/docs/后端/测试界面.md'
                                     },
 
                                     {
-                                        text: '<img src="git.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Git',
+                                        text: '<img src="git.png" class="nav-icon nav-icon--xs"> Git',
                                         link: '/docs/后端/Git/Git.md'
                                     },
                                 ]
@@ -475,11 +474,11 @@ export default defineConfig({
                     ]
             },
             {
-                text: '<img src="python.png" style="vertical-align: middle; width: 1.4em; height: 1.4em; display: inline-block;">Python',
+                text: '<img src="python.png" class="nav-icon nav-icon--xl">Python',
                 items:
                     [
                         {
-                            text: '<img src="pycharm.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> Pycharm',
+                            text: '<img src="pycharm.png" class="nav-icon nav-icon--lg"> Pycharm',
                             link: 'docs/Python/PyCharm/文章/1.python解释器安装.md'
                         },
                         {text: '📝基础语法', link: '/docs/测试界面.md'},
@@ -487,15 +486,15 @@ export default defineConfig({
                             text: '📊数据分析', items:
                                 [
                                     {
-                                        text: '<img src="numpy.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;"> NumPy',
+                                        text: '<img src="numpy.png" class="nav-icon nav-icon--md"> NumPy',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="pandas.png" style="vertical-align: middle; width: 1.0em; height: 1.0em; display: inline-block;"> Pandas',
+                                        text: '<img src="pandas.png" class="nav-icon nav-icon--xs"> Pandas',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="matplotlib.png" style="vertical-align: middle; width: 1.2em; height: 1.2em; display: inline-block;"> Matplotlib',
+                                        text: '<img src="matplotlib.png" class="nav-icon nav-icon--md"> Matplotlib',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -530,7 +529,7 @@ export default defineConfig({
                             text: 'C/C++', items:
                                 [
                                     {
-                                        text: '<img src="clion.png" style="vertical-align: middle; width: 1.3em; height: 1.3em; display: inline-block;"> Clion',
+                                        text: '<img src="clion.png" class="nav-icon nav-icon--lg"> Clion',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -1404,7 +1403,7 @@ export default defineConfig({
                 {
                     icon:
                         {
-                            svg: '<svg t="1750513309725" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5442" width="128" height="128"><path d="M512 1024C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512z m259.1488-568.8832H480.4096a25.2928 25.2928 0 0 0-25.2928 25.2928l-0.0256 63.2064c0 13.952 11.3152 25.2928 25.2672 25.2928h177.024c13.9776 0 25.2928 11.3152 25.2928 25.2672v12.6464a75.8528 75.8528 0 0 1-75.8528 75.8528H366.592a25.2928 25.2928 0 0 1-25.2672-25.2928v-240.1792a75.8528 75.8528 0 0 1 75.8272-75.8528h353.9456a25.2928 25.2928 0 0 0 25.2672-25.2928l0.0768-63.2064a25.2928 25.2928 0 0 0-25.2672-25.2928H417.152a189.6192 189.6192 0 0 0-189.6192 189.6448v353.9456c0 13.9776 11.3152 25.2928 25.2928 25.2928h372.9408a170.6496 170.6496 0 0 0 170.6496-170.6496v-145.408a25.2928 25.2928 0 0 0-25.2928-25.2672z" fill="#C71D23" p-id="5443"></path></svg>'
+                            svg: '<svg t="1750513309725" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5442" width="128" height="128"><path d="M512 1024C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512z m259.1488-568.8832H480.4096a25.2928 25.2928 0 0 0-25.2928 25.2928l-0.0256 63.2064c0 13.952 11.3152 25.2928 25.2672 25.2928h177.024c13.9776 0 25.2928 11.3152 25.2928 25.2672v12.6464a75.8528 75.8528 0 0 1-75.8528 75.8528H366.592a25.2928 25.2928 0 0 1-25.2672-25.2928v-240.1792a75.8528 75.8528 0 0 1 75.8272-75.8528h353.9456a25.2928 25.2928 0 0 0 25.2672-25.2928l0.0768-63.2064a25.2928 25.2928 0 0 0-25.2672-25.2928H417.152a189.6192 189.6192 0 0 0-189.6192 189.6448v353.9456c0 13.9776 11.3152 25.2928 25.2928 25.2928h372.9408a170.6496 170.6496 0 0 0 170.6496-170.6496v-145.408a25.2928 25.2928 0 0 0-25.2928-25.2672z" fill="#C71D23" p-id="5443"></path></svg>'
                         },
                     link: 'https://gitee.com/jacksonling'
                 },

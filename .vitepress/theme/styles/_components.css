@@ -1,0 +1,304 @@
+/* ============================================================
+ *  Components — 阅读进度条、回到顶部按钮、图片预览
+ *
+ *  包含：
+ *    1. 阅读进度条（.site-progress）— 顶部固定，随滚动填充
+ *    2. 回到顶部按钮（.reading-tools）— 右下角固定，带进度环
+ *    3. 图片预览（.image-preview）— 全屏遮罩，支持缩放/拖拽
+ *    4. Vue <Transition> 动画类
+ *    5. 移动端响应式
+ *    6. prefers-reduced-motion 无障碍适配
+ *
+ *  对应 Vue 组件：SiteEnhancer.vue
+ * ============================================================ */
+
+/* ── Reading Progress Bar ────────────────────────────────────
+ *  固定在导航栏下方，宽度由 JS 动态设置（0% → 100%）
+ *  使用硬编码蓝色渐变而非 CSS 变量，因为进度条在亮暗主题下
+ *  始终显示为蓝色（与白色按钮背景配套），不随主题切换
+ * ──────────────────────────────────────────────────────────── */
+.site-progress {
+  position: fixed;
+  top: var(--vp-nav-height);
+  left: 0;
+  z-index: 29;
+  width: 100%;
+  height: 3px;
+  pointer-events: none;   /* 不拦截鼠标事件 */
+}
+
+.site-progress span {
+  display: block;
+  height: 100%;
+  border-radius: 0 999px 999px 0;   /* 右侧圆角 */
+  background: linear-gradient(90deg, #2563c4, #4a8fe6);
+  transition: width 0.12s linear;
+}
+
+/* ── Back-to-Top Button ──────────────────────────────────────
+ *  右下角固定按钮，包含：
+ *    - conic-gradient 进度环（由 --reading-progress CSS 变量控制）
+ *    - ::before 伪元素 — 磨砂玻璃内层
+ *    - ::after 伪元素  — 外层光晕
+ *
+ *  --reading-progress 由 SiteEnhancer.vue 动态计算并设置，
+ *  格式为角度值（如 180deg 表示滚动到 50%）
+ * ──────────────────────────────────────────────────────────── */
+.reading-tools {
+  position: fixed;
+  right: 26px;
+  bottom: 30px;
+  z-index: 60;
+  display: flex;
+  pointer-events: none;
+}
+
+.reading-tools__section {
+  display: none;
+}
+
+.reading-tools__button {
+  position: relative;
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  /* conic-gradient 进度环：品牌色填充到当前进度，其余为灰色 */
+  background:
+    conic-gradient(rgba(14, 165, 233, 0.55) var(--reading-progress), rgba(148, 163, 184, 0.16) 0deg);
+  color: #2563eb;
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(37, 99, 235, 0.12);
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    transform var(--site-transition-fast),
+    box-shadow var(--site-transition-fast),
+    filter var(--site-transition-fast);
+}
+
+/* 按钮内层 — 磨砂玻璃效果 */
+.reading-tools__button::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px) saturate(1.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+/* 按钮外层 — 径向渐变光晕 */
+.reading-tools__button::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12), transparent 70%);
+  opacity: 0.72;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.reading-tools__button:hover {
+  transform: translateY(-4px);
+  color: #0ea5e9;
+  filter: saturate(1.04);
+  box-shadow:
+    0 16px 38px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(14, 165, 233, 0.2);
+}
+
+.reading-tools__button svg {
+  position: relative;
+  z-index: 1;   /* SVG 浮于 ::before 磨砂层之上 */
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+/* Vue <Transition name="reading-tools"> 动画类 */
+.reading-tools-enter-active,
+.reading-tools-leave-active {
+  transition: opacity var(--site-transition-fast), transform var(--site-transition-fast);
+}
+
+.reading-tools-enter-from,
+.reading-tools-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ── Image Preview ───────────────────────────────────────────
+ *  全屏图片预览组件，功能：
+ *    - 点击遮罩关闭
+ *    - 滚轮缩放（0.5x ~ 5x）
+ *    - 拖拽平移（放大后）
+ *    - 键盘快捷键：+/- 缩放、0 重置、Esc 关闭
+ *
+ *  对应 SiteEnhancer.vue 中的 previewImage / previewScale 状态
+ * ──────────────────────────────────────────────────────────── */
+.image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px 24px;   /* 顶部留白给工具栏 */
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(10px);
+  cursor: zoom-out;   /* 点击遮罩关闭 */
+}
+
+.image-preview__img {
+  max-width: min(96vw, 1280px);
+  max-height: calc(100vh - 96px);
+  object-fit: contain;
+  border-radius: var(--site-radius);
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.34);
+  cursor: default;
+  transform-origin: center;
+  transition: transform var(--site-transition-fast);
+  user-select: none;
+  touch-action: none;   /* 禁止浏览器默认触摸行为（缩放、滑动） */
+}
+
+/* 工具栏 — 顶部居中，圆角胶囊形 */
+.image-preview__toolbar {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #fff;
+  transform: translateX(-50%);
+}
+
+.image-preview__toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background var(--site-transition-fast), transform var(--site-transition-fast);
+}
+
+.image-preview__toolbar button:hover {
+  background: rgba(37, 99, 235, 0.9);
+  transform: translateY(-1px);
+}
+
+.image-preview__toolbar svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* 缩放百分比显示 */
+.image-preview__toolbar span {
+  min-width: 48px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* 关闭按钮 — 右上角圆形 */
+.image-preview__close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.72);
+  color: #fff;
+  cursor: pointer;
+  transition: background var(--site-transition-fast), transform var(--site-transition-fast);
+}
+
+.image-preview__close:hover {
+  background: rgba(37, 99, 235, 0.9);
+  transform: translateY(-1px);
+}
+
+.image-preview__close svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Vue <Transition name="image-preview"> 动画类 */
+.image-preview-enter-active,
+.image-preview-leave-active {
+  transition: opacity var(--site-transition-fast);
+}
+
+.image-preview-enter-active .image-preview__img,
+.image-preview-leave-active .image-preview__img {
+  transition: transform var(--site-transition-fast);
+}
+
+.image-preview-enter-from,
+.image-preview-leave-to {
+  opacity: 0;
+}
+
+.image-preview-enter-from .image-preview__img,
+.image-preview-leave-to .image-preview__img {
+  transform: scale(0.96);
+}
+
+/* ── Components Mobile ─────────────────────────────────────── */
+@media (max-width: 959px) {
+  .reading-tools {
+    right: 16px;
+    bottom: 18px;
+  }
+
+  .reading-tools__button {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+/* ── Reduced Motion ──────────────────────────────────────────
+ *  无障碍：尊重用户的"减少动态效果"系统偏好
+ *  将所有过渡和动画时长设为接近 0，禁用首页光晕动画
+ * ──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .VPHome .VPHero .image-container,
+  .VPHome .VPHero .image-bg {
+    animation: none !important;
+  }
+}

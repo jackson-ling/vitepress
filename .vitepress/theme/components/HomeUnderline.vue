@@ -27,9 +27,9 @@ const {frontmatter: fm} = useData()
 <!-- 通过 fill 属性设置下划线的颜色为浅蓝色 -->
 <template>
   <span id="hero-text">
-    <span className="hero-text">{{ fm.hero?.text }}
+    <span class="hero-text">{{ fm.hero?.text }}
       <svg
-          className="hero-svg"
+          class="hero-svg"
           xmlns="http://www.w3.org/2000/svg"
           width="240"
           height="11"

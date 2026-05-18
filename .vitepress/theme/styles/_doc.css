@@ -1,0 +1,342 @@
+/* ============================================================
+ *  Doc — 文章排版、代码块、目录
+ *
+ *  包含：
+ *    1. 文章基础排版（标题、段落、链接、引用、图片、表格）
+ *    2. 右侧目录（.VPDocOutline）活跃章节指示器
+ *    3. 代码块样式（macOS 三圆点、行号、行内代码）
+ *    4. 自定义容器块（.custom-block）
+ *    5. 移动端响应式
+ * ============================================================ */
+
+/* ── Article Typography ────────────────────────────────────── */
+.vp-doc {
+  color: var(--vp-c-text-1);
+  font-size: 16.5px;
+  line-height: 1.86;
+  overflow-wrap: break-word;   /* 长单词/URL 自动换行 */
+}
+
+.vp-doc h1 {
+  margin-bottom: 28px;
+  font-size: 38px;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  text-wrap: balance;   /* 标题文字均匀换行，避免孤字 */
+}
+
+.vp-doc h2 {
+  margin: 44px 0 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--vp-c-divider);   /* h2 顶部分割线 */
+  font-size: 26px;
+  line-height: 1.36;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* 标题锚点 — 默认隐藏，hover 标题时显示 # 链接 */
+.vp-doc h2:hover a[href^="#"],
+.vp-doc h3:hover a[href^="#"] {
+  opacity: 1;
+}
+
+.vp-doc h2 a[href^="#"],
+.vp-doc h3 a[href^="#"] {
+  opacity: 0;
+  transition: opacity var(--site-transition-fast), color var(--site-transition-fast);
+  color: var(--vp-c-brand-2) !important;
+}
+
+/* 标题滚动定位 — 通过 URL hash 定位到标题时的发光提示动画 */
+.vp-doc h2[id]:target,
+.vp-doc h3[id]:target {
+  animation: section-highlight 1s ease-out;
+}
+
+@keyframes section-highlight {
+  0% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 30px var(--vp-c-brand-soft); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+.vp-doc h3 {
+  margin-top: 32px;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.vp-doc h4 {
+  margin-top: 26px;
+  font-size: 18px;
+}
+
+.vp-doc p {
+  margin: 16px 0;
+}
+
+.vp-doc p,
+.vp-doc li {
+  color: var(--vp-c-text-1);
+}
+
+/* 链接 — 动画下划线（::after 伪元素从左向右展开） */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--site-transition-fast);
+}
+
+.vp-doc a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  border-radius: 2px;
+  transition: width var(--site-transition-fast);
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+.vp-doc a:hover::after {
+  width: 100%;
+}
+
+/* 引用块 — 左侧品牌色边框 + 淡底 */
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-2);
+  border-radius: 0 var(--site-radius) var(--site-radius) 0;
+  background: var(--vp-c-brand-soft);
+  padding: 12px 16px;
+  color: var(--vp-c-text-2);
+}
+
+/* 图片 — 圆角、阴影、hover 上浮、点击放大光标 */
+.vp-doc img {
+  border-radius: var(--site-radius);
+  box-shadow: var(--site-shadow-sm);
+  cursor: zoom-in;
+  transition: box-shadow var(--site-transition-fast), transform var(--site-transition-fast);
+}
+
+/* 链接内的图片 — 使用普通指针（点击跳转而非放大） */
+.vp-doc a img {
+  cursor: pointer;
+}
+
+.vp-doc img:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--site-shadow);
+}
+
+/* 表格 — 圆角、斑马纹 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--site-radius);
+  font-size: 14.5px;
+  border-collapse: collapse;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc td {
+  padding: 10px 14px;
+}
+
+.vp-doc tr:nth-child(2n) {
+  background: var(--vp-c-bg-soft);
+}
+
+/* ── Table of Contents (Right Sidebar) ─────────────────────── */
+
+/* 活跃章节 — 左侧品牌色指示条 + 加粗 */
+.VPDocOutline .outline {
+  position: relative;
+}
+
+.VPDocOutline .outline-item.active > .outline-link {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+  padding-left: 8px;
+}
+
+/* 活跃指示条 — 品牌色渐变竖条 */
+.VPDocOutline .outline-item.active > .outline-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 14px;
+  background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand-1));
+  border-radius: 0 3px 3px 0;
+  box-shadow: 2px 0 6px var(--vp-c-brand-soft);
+}
+
+.VPDocOutline .outline-link {
+  position: relative;
+  transition: color var(--site-transition-fast), padding-left var(--site-transition-fast);
+}
+
+.VPDocOutline .outline-link:hover {
+  color: var(--vp-c-brand-2) !important;
+}
+
+/* 嵌套目录项 — 缩进字号更小 */
+.VPDocOutline .outline-item > .children .outline-link {
+  font-size: 13.5px;
+  padding-left: 4px;
+}
+
+.VPDocOutline .outline-item > .children .active > .outline-link {
+  padding-left: 12px;
+}
+
+.VPDocOutline .outline-item > .children .active > .outline-link::before {
+  left: 0;
+  height: 12px;
+}
+
+/* ── Code Blocks ───────────────────────────────────────────── */
+
+/* 代码块容器 — 圆角、边框、顶部留白给 macOS 三圆点 */
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-code-block-divider-color);
+  border-radius: var(--site-radius-lg);
+  background: var(--vp-code-block-bg);
+  box-shadow: var(--site-shadow-sm);
+  position: relative;
+  padding-top: 20px;
+}
+
+/* macOS 风格三圆点 — 使用 box-shadow 绘制三个彩色圆 */
+.vp-doc div[class*='language-']::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff5f56;   /* 红 */
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;   /* 黄、绿 */
+  z-index: 1;
+}
+
+/* 代码块文字色 — 亮色模式 */
+.vp-doc div[class*='language-'] pre,
+.vp-doc div[class*='language-'] code {
+  color: #1e293b;
+}
+
+/* 代码块文字色 — 暗色模式 */
+.dark .vp-doc div[class*='language-'] pre,
+.dark .vp-doc div[class*='language-'] code {
+  color: #e2e8f0;
+}
+
+/* Shiki 语法高亮色 — 亮色模式
+ * shiki-light / shiki-dark 是 VitePress Shiki 集成的 CSS 变量，
+ * 在 markdown 渲染时自动注入，确保亮暗主题下语法高亮色正确 */
+html:not(.dark) .vp-doc div[class*='language-'] span {
+  color: var(--shiki-light, #1e293b) !important;
+}
+
+.dark .vp-doc div[class*='language-'] span {
+  color: var(--shiki-dark, #e2e8f0) !important;
+}
+
+/* 行号 — 右侧分割线通过 ::after 伪元素实现 */
+.vp-doc .line-numbers-wrapper {
+  color: var(--vp-code-line-number-color);
+  padding-top: 38px;
+  border-right: none;
+}
+
+.vp-doc .line-numbers-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 38px;
+  right: 0;
+  border-right: 1px solid var(--vp-code-block-divider-color);
+  height: calc(100% - 58px);
+}
+
+.vp-doc div[class*='language-'].line-numbers-mode {
+  margin-bottom: 20px;
+}
+
+/* 复制按钮 — hover 时显示品牌色边框 */
+.vp-doc div[class*='language-'] > button.copy {
+  border: 1px solid var(--vp-code-block-divider-color);
+  border-radius: 7px;
+  transition: border-color var(--site-transition-fast), background-color var(--site-transition-fast);
+}
+
+.vp-doc div[class*='language-'] > button.copy:hover {
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-brand-soft);
+}
+
+/* 行内代码 — 品牌色边框 + 淡底
+ * 注意：border-color 使用硬编码 rgba 而非 --vp-c-brand-soft，
+ * 因为行内代码边框透明度（0.12/0.2）与 brand-soft（0.09/0.12）不同，
+ * 需要更高的可见度来区分行内代码与普通文字 */
+.vp-doc :not(pre) > code {
+  border: 1px solid rgba(52, 120, 217, 0.12);
+  border-radius: 5px;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  font-size: 0.9em;
+  padding: 2px 6px;
+  transition: border-color var(--site-transition-fast), background-color var(--site-transition-fast);
+}
+
+.dark .vp-doc :not(pre) > code {
+  border-color: rgba(52, 120, 217, 0.2);
+}
+
+/* ── Custom Blocks ───────────────────────────────────────────
+ *  VitePress 内置容器：tip / warning / danger / info / details
+ * ──────────────────────────────────────────────────────────── */
+.custom-block {
+  border-radius: var(--site-radius);
+  border: 1px solid var(--vp-c-divider);
+  transition: border-color var(--site-transition-fast);
+}
+
+.VPDocFooter {
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+/* ── Doc Mobile ────────────────────────────────────────────── */
+@media (max-width: 959px) {
+  .vp-doc {
+    font-size: 15.5px;
+    line-height: 1.8;
+  }
+
+  .vp-doc h1 {
+    font-size: 30px;
+  }
+
+  .vp-doc h2 {
+    font-size: 23px;
+  }
+}
