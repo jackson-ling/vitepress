@@ -1,0 +1,130 @@
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "知识文档站" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: 知识文档站
+          - generic [ref=e8]:
+            - button "搜索文档" [ref=e11] [cursor=pointer]:
+              - generic [ref=e14]: 搜索文档
+              - generic [ref=e15]:
+                - generic [ref=e16]: Ctrl
+                - generic [ref=e17]: K
+            - navigation "Main Navigation" [ref=e18]:
+              - generic [ref=e19]: Main Navigation
+              - link "🏠首页" [ref=e20] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e21]: 🏠首页
+              - button "📝笔记" [ref=e23] [cursor=pointer]:
+                - generic [ref=e25]: 📝笔记
+              - button "⭐算法" [ref=e28] [cursor=pointer]:
+                - generic [ref=e30]: ⭐算法
+              - button "前端" [ref=e33] [cursor=pointer]:
+                - generic [ref=e35]: 前端
+              - generic [ref=e37]:
+                - button "Java" [active] [ref=e38] [cursor=pointer]:
+                  - generic [ref=e40]:
+                    - img [ref=e41]
+                    - text: Java
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - paragraph [ref=e131]: 环境构建
+                    - link "IDEA" [ref=e133] [cursor=pointer]:
+                      - /url: /docs/Java/IDEA/IDEA%E6%96%87%E7%AB%A0/1.%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8C%85.html
+                      - generic [ref=e134]:
+                        - img [ref=e135]
+                        - text: IDEA
+                    - link "IDEA快捷键" [ref=e137] [cursor=pointer]:
+                      - /url: /docs/Java/IDEA/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE.html
+                      - generic [ref=e138]:
+                        - img [ref=e139]
+                        - text: IDEA快捷键
+                    - link "📝IDEA模板" [ref=e141] [cursor=pointer]:
+                      - /url: /docs/Java/IDEA/IDEA%E6%A8%A1%E6%9D%BF/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF.html
+                    - link "eclipse" [ref=e143] [cursor=pointer]:
+                      - /url: /docs/Java/eclipse/eclipse%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html
+                      - generic [ref=e144]:
+                        - img [ref=e145]
+                        - text: eclipse
+                    - link "Maven" [ref=e147] [cursor=pointer]:
+                      - /url: /docs/Java/Maven/maven.html
+                      - generic [ref=e148]:
+                        - img [ref=e149]
+                        - text: Maven
+                  - generic [ref=e150]:
+                    - paragraph [ref=e151]: 📝JavaSE
+                    - link "第一阶段" [ref=e153] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/1.%E6%A6%82%E8%BF%B0.html
+                    - link "第二阶段" [ref=e155] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/57.%E7%B1%BB%E5%8F%98%E9%87%8F.html
+                    - link "第三阶段" [ref=e157] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/98.%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html
+                    - link "Java8" [ref=e159] [cursor=pointer]:
+                      - /url: /docs/Java/Java8/1.%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D.html
+                    - link "单元测试" [ref=e161] [cursor=pointer]:
+                      - /url: /docs/Java/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html
+                  - generic [ref=e162]:
+                    - paragraph [ref=e163]: 💯章节练习题
+                    - link "第一阶段" [ref=e165] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AB%A0%E8%8A%82%E4%BD%9C%E4%B8%9A/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E5%8F%98%E9%87%8F/%E7%AC%AC%E4%B8%89%E7%AB%A0%E4%BD%9C%E4%B8%9A.html
+                    - link "第二阶段" [ref=e167] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AB%A0%E8%8A%82%E4%BD%9C%E4%B8%9A/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%EF%BC%9AIO%E6%B5%81/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E4%BD%9C%E4%B8%9A.html
+                    - link "第三阶段" [ref=e169] [cursor=pointer]:
+                      - /url: /docs/Java/%E7%AB%A0%E8%8A%82%E4%BD%9C%E4%B8%9A/%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E7%AB%A0%E4%BD%9C%E4%B8%9A.html
+              - button "🎯后端" [ref=e44] [cursor=pointer]:
+                - generic [ref=e46]: 🎯后端
+              - button "🚀项目" [ref=e49] [cursor=pointer]:
+                - generic [ref=e51]: 🚀项目
+              - button "🤖AI" [ref=e54] [cursor=pointer]:
+                - generic [ref=e56]: 🤖AI
+              - button "Python" [ref=e59] [cursor=pointer]:
+                - generic [ref=e61]:
+                  - img [ref=e62]
+                  - text: Python
+              - button "408" [ref=e65] [cursor=pointer]:
+                - generic [ref=e67]: "408"
+            - switch "Switch to dark theme" [ref=e70] [cursor=pointer]
+            - generic [ref=e75]:
+              - link "github" [ref=e76] [cursor=pointer]:
+                - /url: https://github.com/jackson-ling
+              - link [ref=e78] [cursor=pointer]:
+                - /url: https://gitee.com/jacksonling
+                - img [ref=e79]
+              - link [ref=e81] [cursor=pointer]:
+                - /url: https://blog.csdn.net/jackson0607?spm=1000.2115.3001.5343
+                - img [ref=e82]
+  - generic [ref=e85]:
+    - generic [ref=e88]:
+      - heading "博客のjackson凌 知识文档站" [level=1] [ref=e89]:
+        - generic [ref=e90]: 博客のjackson凌
+        - generic [ref=e91]: 知识文档站
+      - paragraph [ref=e92]: 构建 Java 后端核心知识体系
+      - generic [ref=e93]:
+        - link "Description(说明)" [ref=e95] [cursor=pointer]:
+          - /url: /docs/Description.html
+        - link "Contact(联系)" [ref=e97] [cursor=pointer]:
+          - /url: /docs/Contact.html
+        - link "❗⚠️Warning⚠️❗" [ref=e99] [cursor=pointer]:
+          - /url: /docs/warning.html
+    - generic [ref=e105]:
+      - article [ref=e108]:
+        - heading "TIP 1" [level=2] [ref=e109]
+        - paragraph [ref=e110]:
+          - strong [ref=e111]: 明确目标目的，逐步积累，循序渐进，切忌急于求成
+          - text: ⏳
+      - article [ref=e114]:
+        - heading "TIP 2" [level=2] [ref=e115]
+        - paragraph [ref=e116]:
+          - strong [ref=e117]: 少想多做，降低预期，重视基础，重复练习，构建体系
+          - text: 💪
+      - article [ref=e120]:
+        - heading "TIP 3" [level=2] [ref=e121]
+        - paragraph [ref=e122]:
+          - strong [ref=e123]: 保持独立思考，总结复盘，学会主动探索，敢于尝试
+          - text: 🚀️
+  - contentinfo [ref=e124]:
+    - paragraph [ref=e126]: Copyright © 2025 Jackson 凌 All Rights Reserved. | 粤ICP备2025441629号-1

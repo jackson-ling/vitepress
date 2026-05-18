@@ -1,0 +1,63 @@
+[     440ms] [ERROR] Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec. @ http://localhost:5173/Java/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/1.%E6%A6%82%E8%BF%B0.md?import&t=1779111835889:0
+[     454ms] [ERROR] Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec. @ http://localhost:5173/Java/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/1.%E6%A6%82%E8%BF%B0/index.md?import&t=1779111835889:0
+[     455ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
+[    7050ms] [WARNING] [Vue warn]: Failed to resolve component: HomeUnderline
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124
+[    7051ms] [WARNING] [Vue warn]: Failed to resolve component: FeatureCard
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124
+[    7052ms] [WARNING] [Vue warn]: Component is missing template or render function:  {__name: confetti, setup: , __hmrId: 7edc7c54, __file: D:/vitepress/.vitepress/theme/confetti.vue} 
+  at <Confetti> 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124
+[   40483ms] [WARNING] [Vue warn]: Failed to resolve component: HomeUnderline
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124
+[   40483ms] [WARNING] [Vue warn]: Failed to resolve component: FeatureCard
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124
+[   40484ms] [WARNING] [Vue warn]: Component is missing template or render function:  {__name: confetti, setup: , __hmrId: 7edc7c54, __file: D:/vitepress/.vitepress/theme/confetti.vue} 
+  at <Confetti> 
+  at <Index.md onVnodeMounted=fn<runCbs> onVnodeUpdated=fn<runCbs> onVnodeUnmounted=fn<runCbs> > 
+  at <VitePressContent> 
+  at <VPHomeContent key=0 > 
+  at <VPHome key=2 > 
+  at <VPContent> 
+  at <Layout> 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-GG4C57GV.js?v=a5c6e4e2:2124

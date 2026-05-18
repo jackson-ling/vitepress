@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills)",
+      "Bash(npx vitepress *)",
+      "Skill(frontend-design)",
+      "Bash(pnpm docs:dev)",
+      "WebFetch(domain:localhost)",
+      "Bash(xxd)",
+      "Bash(python *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173/docs/Description.html)",
+      "Bash(curl -s http://localhost:5199)",
+      "Bash(git checkout *)",
+      "Bash(xargs grep -l \"sidebar\\\\|Sidebar\")",
+      "Bash(curl -s http://localhost:5173)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_run_code_unsafe",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_wait_for",
+      "Bash(pkill -f \"vitepress\")",
+      "Bash(curl -s http://localhost:5180)",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(taskkill /F /IM chrome.exe)",
+      "Bash(node -e ' *)",
+      "Read(//c/Users/jackson/AppData/Local/ms-playwright//**)",
+      "Bash(tasklist)",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(npm ls *)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://127.0.0.1:5173/)"
+    ]
+  },
+  "enabledPlugins": {
+    "greptile@claude-plugins-official": true
+  }
+}

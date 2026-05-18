@@ -30,8 +30,6 @@ features:
 ---
 
 
-<confetti />  
-<HomeUnderline /> 
-<FeatureCard />
+<confetti />
 
 

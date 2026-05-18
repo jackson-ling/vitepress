@@ -10,7 +10,10 @@ export default defineConfig({
     // /* 特别注意：如果设置了base，需要先链接base（base的路径名称），再链接图片 */
     // head: [['link', {rel: 'icon', href: "/vitepress/标签logo.png"}]], // 网页标签页的图标
 
-    head: [['link', {rel: 'icon', href: "/标签logo.png"}]],
+    head: [
+        ['link', {rel: 'icon', href: "/标签logo.png"}],
+        ['script', {src: '/sidebar-highlight.js'}],
+    ],
 
     title: "jackson凌の文档站", // 网站标签页的名称
     description: "A VitePress Site",
