@@ -1,0 +1,411 @@
+- generic [ref=e2]:
+  - link "跳至主要內容" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - link "带我回家" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - text: 小林面试笔记
+      - navigation [ref=e9]:
+        - link "首页" [ref=e11] [cursor=pointer]:
+          - /url: /
+          - text: 首页
+        - link "大模型面试题" [ref=e13] [cursor=pointer]:
+          - /url: /ai/
+          - text: 大模型面试题
+        - link "Agent项目" [ref=e15] [cursor=pointer]:
+          - /url: https://www.xiaolincoding.com/project/aioncallagent.html
+          - text: Agent项目
+        - link "Agent训练营" [ref=e17] [cursor=pointer]:
+          - /url: https://www.xiaolincoding.com/other/llm_offer.html
+          - text: Agent训练营
+        - link "后端图解" [ref=e19] [cursor=pointer]:
+          - /url: https://xiaolincoding.com/
+          - text: 后端图解
+      - generic [ref=e20]:
+        - button "auto icon" [ref=e22] [cursor=pointer]:
+          - img "auto icon" [ref=e23]
+        - button "搜索文档" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]:
+            - img [ref=e28]
+            - generic [ref=e31]: 搜索文档
+          - generic [ref=e32]:
+            - generic [ref=e33]: Ctrl
+            - generic [ref=e34]: K
+    - complementary [ref=e37]:
+      - list [ref=e38]:
+        - listitem [ref=e39]:
+          - link "大模型面试题" [ref=e40] [cursor=pointer]:
+            - /url: /ai/
+            - text: 大模型面试题
+        - listitem [ref=e42]:
+          - button "01｜ Agent面试题" [ref=e44] [cursor=pointer]:
+            - generic [ref=e46]: 01｜ Agent面试题
+        - listitem [ref=e48]:
+          - button "02｜ RAG面试题" [ref=e50] [cursor=pointer]:
+            - generic [ref=e52]: 02｜ RAG面试题
+        - listitem [ref=e54]:
+          - button "03｜ LLM工具调用面试题" [ref=e56] [cursor=pointer]:
+            - generic [ref=e58]: 03｜ LLM工具调用面试题
+        - listitem [ref=e60]:
+          - generic [ref=e61]:
+            - button "04｜ 大模型工程面试题" [ref=e62] [cursor=pointer]:
+              - generic [ref=e64]: 04｜ 大模型工程面试题
+            - list [ref=e66]:
+              - listitem [ref=e67]:
+                - link "大模型工程面试题介绍" [ref=e68] [cursor=pointer]:
+                  - /url: /ai/llm/llm_info.html
+              - listitem [ref=e69]:
+                - link "1. 什么是大语言模型？和传统 NLP 模型有什么区别？" [ref=e70] [cursor=pointer]:
+                  - /url: /ai/llm/what_is_llm.html
+              - listitem [ref=e71]:
+                - link "2. 讲讲 Transformer 架构基本原理？Encoder 和 Decoder 是什么？" [ref=e72] [cursor=pointer]:
+                  - /url: /ai/llm/transformer_architecture.html
+              - listitem [ref=e73]:
+                - link "3. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？" [ref=e74] [cursor=pointer]:
+                  - /url: /ai/llm/mha_mqa_gqa_flash_attention.html
+              - listitem [ref=e75]:
+                - link "4. 大模型的位置编码是干什么用的？sin/cos、RoPE、ALiBi 有什么区别？" [ref=e76] [cursor=pointer]:
+                  - /url: /ai/llm/position_encoding.html
+              - listitem [ref=e77]:
+                - link "5. 什么是大模型项目的分词器？原理是什么？" [ref=e78] [cursor=pointer]:
+                  - /url: /ai/llm/tokenizer.html
+              - listitem [ref=e79]:
+                - link "6. 大模型是怎么训练出来的？" [ref=e80] [cursor=pointer]:
+                  - /url: /ai/llm/llm_training.html
+              - listitem [ref=e81]:
+                - link "7. 什么是 Scaling Law？大模型的「涌现能力」是怎么回事？" [ref=e82] [cursor=pointer]:
+                  - /url: /ai/llm/scaling_law_emergence.html
+              - listitem [ref=e83]:
+                - link "8. 大模型微调的方案有哪些？" [ref=e84] [cursor=pointer]:
+                  - /url: /ai/llm/finetuning.html
+              - listitem [ref=e85]:
+                - link "9. 请讲一下 LoRA 技术，除了减少参数量，它还有哪些优点？" [ref=e86] [cursor=pointer]:
+                  - /url: /ai/llm/lora.html
+              - listitem [ref=e87]:
+                - link "10. SFT 之后还有哪些 Post-Training？RLHF、DPO、GRPO、拒绝采样什么关系？" [ref=e88] [cursor=pointer]:
+                  - /url: /ai/llm/post_training.html
+              - listitem [ref=e89]:
+                - link "11. 大模型的 DPO 和 PPO 的区别是什么？" [ref=e90] [cursor=pointer]:
+                  - /url: /ai/llm/dpo_vs_ppo.html
+              - listitem [ref=e91]:
+                - link "12. 大模型生成文本时的解码策略有哪些？贪心、Beam Search、采样分别什么时候用？" [ref=e92] [cursor=pointer]:
+                  - /url: /ai/llm/decoding_strategies.html
+              - listitem [ref=e93]:
+                - link "13. 大模型的参数：温度值、Top-P、Top-K 分别是什么？各个场景下的最佳设置是什么？" [ref=e94] [cursor=pointer]:
+                  - /url: /ai/llm/temperature_top_p_top_k.html
+              - listitem [ref=e95]:
+                - link "14. KV Cache 是什么？Prompt Caching 的原理是什么？" [ref=e96] [cursor=pointer]:
+                  - /url: /ai/llm/kv_cache_prompt_caching.html
+              - listitem [ref=e97]:
+                - link "15. 大模型量化是什么？INT8/INT4/AWQ/GPTQ 怎么选？" [ref=e98] [cursor=pointer]:
+                  - /url: /ai/llm/quantization.html
+              - listitem [ref=e99]:
+                - link "16. 如何写好 Prompt？分享下 Prompt 工程实践经验？" [ref=e100] [cursor=pointer]:
+                  - /url: /ai/llm/prompt_engineering.html
+              - listitem [ref=e101]:
+                - link "17. 什么是 CoT？为啥效果好？它有什么缺点或局限性？" [ref=e102] [cursor=pointer]:
+                  - /url: /ai/llm/cot.html
+              - listitem [ref=e103]:
+                - link "18. 大模型为什么会出现幻觉？怎么缓解？" [ref=e104] [cursor=pointer]:
+                  - /url: /ai/llm/hallucination.html
+              - listitem [ref=e105]:
+                - link "19. MoE 混合专家模型是什么？DeepSeek V3、Qwen 为什么用 MoE？" [ref=e106] [cursor=pointer]:
+                  - /url: /ai/llm/moe.html
+              - listitem [ref=e107]:
+                - link "20. 大模型部署有哪些主流方案？vLLM、TGI、llama.cpp、SGLang 实际项目里怎么选？" [ref=e108] [cursor=pointer]:
+                  - /url: /ai/llm/deployment_frameworks.html
+              - listitem [ref=e109]:
+                - link "21. 大模型能力评测指标有哪些？" [ref=e110] [cursor=pointer]:
+                  - /url: /ai/llm/evaluation_metrics.html
+              - listitem [ref=e111]:
+                - link "22. 对比使用过哪些主流大模型？你们项目中最终选用了哪个模型？为什么？" [ref=e112] [cursor=pointer]:
+                  - /url: /ai/llm/model_selection.html
+        - listitem [ref=e113]:
+          - button "05｜ LangChain框架面试题" [ref=e115] [cursor=pointer]:
+            - generic [ref=e117]: 05｜ LangChain框架面试题
+    - main [ref=e119]:
+      - navigation [ref=e120]:
+        - list [ref=e121]:
+          - listitem [ref=e122]:
+            - link "首页" [ref=e123] [cursor=pointer]:
+              - /url: /
+              - text: 首页
+          - listitem [ref=e124]:
+            - text: /
+            - link "大模型面试题" [ref=e125] [cursor=pointer]:
+              - /url: /ai/
+              - text: 大模型面试题
+          - listitem [ref=e126]:
+            - text: /
+            - link "03｜ 大模型工程面试题" [ref=e127] [cursor=pointer]:
+              - /url: /ai/llm/
+              - text: 03｜ 大模型工程面试题
+          - listitem [ref=e128]:
+            - text: /
+            - link "2. 讲讲 Transformer 架构基本原理？Encoder 和 Decoder 是什么？":
+              - /url: /ai/llm/transformer_architecture.html
+      - generic [ref=e129]:
+        - heading "2. 讲讲 Transformer 架构基本原理？Encoder 和 Decoder 是什么？" [level=1] [ref=e130]
+        - generic [ref=e131]:
+          - generic [ref=e132]: 原创
+          - generic "作者🖊" [ref=e133] [cursor=pointer]:
+            - img "author icon" [ref=e134]
+            - link "公众号@小林面试笔记" [ref=e137]:
+              - /url: https://xiaolinnote.com
+            - text: 作者🖊
+          - generic "分类🌈" [ref=e138] [cursor=pointer]:
+            - img "category icon" [ref=e139]
+            - generic [ref=e141]: LLM
+            - text: 分类🌈
+          - generic "阅读时间⌛" [ref=e142] [cursor=pointer]:
+            - img "timer icon" [ref=e143]
+            - generic [ref=e145]: 大约 13 分钟
+            - text: 阅读时间⌛
+          - generic "字数🔠" [ref=e146] [cursor=pointer]:
+            - img "word icon" [ref=e147]
+            - generic [ref=e150]: 约 3927 字
+            - text: 字数🔠
+        - separator [ref=e151]
+      - complementary [ref=e153]:
+        - generic [ref=e154]: 此页内容
+        - list [ref=e156]:
+          - listitem [ref=e157]:
+            - link "💡 简要回答" [ref=e158] [cursor=pointer]:
+              - /url: "#💡-简要回答"
+          - listitem [ref=e159]:
+            - link "📝 详细解析" [ref=e160] [cursor=pointer]:
+              - /url: "#📝-详细解析"
+          - listitem [ref=e161]:
+            - list [ref=e162]:
+              - listitem [ref=e163]:
+                - link "Transformer 之前：RNN 的致命缺陷" [ref=e164] [cursor=pointer]:
+                  - /url: "#transformer-之前-rnn-的致命缺陷"
+              - listitem [ref=e165]:
+                - link "Self-Attention 的核心直觉" [ref=e166] [cursor=pointer]:
+                  - /url: "#self-attention-的核心直觉"
+              - listitem [ref=e167]:
+                - link "Q/K/V 是怎么从输入变换得到的" [ref=e168] [cursor=pointer]:
+                  - /url: "#q-k-v-是怎么从输入变换得到的"
+              - listitem [ref=e169]:
+                - link "为什么要除以 √d_k：缩放点积的数学直觉" [ref=e170] [cursor=pointer]:
+                  - /url: "#为什么要除以-√d-k-缩放点积的数学直觉"
+              - listitem [ref=e171]:
+                - link "Multi-Head Attention：多角度观察" [ref=e172] [cursor=pointer]:
+                  - /url: "#multi-head-attention-多角度观察"
+              - listitem [ref=e173]:
+                - link "位置编码：注入顺序信息" [ref=e174] [cursor=pointer]:
+                  - /url: "#位置编码-注入顺序信息"
+              - listitem [ref=e175]:
+                - link "前馈网络（FFN）的作用" [ref=e176] [cursor=pointer]:
+                  - /url: "#前馈网络-ffn-的作用"
+              - listitem [ref=e177]:
+                - link "Encoder-only、Decoder-only 和 Encoder-Decoder 三种架构" [ref=e178] [cursor=pointer]:
+                  - /url: "#encoder-only、decoder-only-和-encoder-decoder-三种架构"
+              - listitem [ref=e179]:
+                - link "为什么 Decoder-only 赢了" [ref=e180] [cursor=pointer]:
+                  - /url: "#为什么-decoder-only-赢了"
+          - listitem [ref=e181]:
+            - link "🎯 面试总结" [ref=e182] [cursor=pointer]:
+              - /url: "#🎯-面试总结"
+      - generic [ref=e184]:
+        - paragraph [ref=e185]: 👔面试官：来讲讲 Transformer 架构的基本原理？Encoder 和 Decoder 是什么？
+        - paragraph [ref=e186]: 🙋‍♂️我：Transformer 是 Google 提的一个新架构，核心是 Attention，效果比 RNN 好很多。Encoder 是编码器，Decoder 是解码器。
+        - paragraph [ref=e187]: 👔面试官：……「编码器」「解码器」是中文翻译，我问的是它们具体在做什么，不是字面意思。再说，Attention 凭什么比 RNN 好？RNN 到底有什么致命缺陷？
+        - paragraph [ref=e188]: 🙋‍♂️我：哦哦，应该是 RNN 太慢了，Attention 能并行计算？
+        - paragraph [ref=e189]: 👔面试官：方向对了一半。但你只说了「快」，没说「准」。RNN 还有一个更致命的问题，长距离信息会衰减，第 1 个词的信息传到第 800 个词基本就没了。Attention 怎么解决这个问题的，能讲清楚吗？
+        - paragraph [ref=e190]: 🙋‍♂️我：呃……Attention 让每个词都能看到所有其他词？
+        - paragraph [ref=e191]: 👔面试官：勉强能说出来。那再问一个：BERT 用的是 Encoder-only，GPT 用的是 Decoder-only。为什么现在主流大模型（GPT、Claude、Qwen）全部选择了 Decoder-only？这种架构选型背后的原因，你能讲清楚吗？
+        - paragraph [ref=e192]: 🙋‍♂️我：呃……
+        - paragraph [ref=e193]: 👔面试官：典型的「知道有但讲不清」。Decoder-only 赢的根本原因是「预测下一个 token」这个训练目标极其统一，所有 NLP 任务都能用它表达。这种「为什么 X 赢了 Y」的演进逻辑搞不清楚，去面试就是被怼。回去补一下。
+        - paragraph [ref=e194]: 这几个反问串起来其实就是一条主线，Transformer 这道题想听的不是「Attention is all you need」这种口号，而是 RNN 卡在哪两点、Attention 怎么把这两点都破了、三种架构变体打了一圈为什么是 Decoder-only 赢到现在。
+        - heading "💡 简要回答" [level=2] [ref=e195]:
+          - link "💡 简要回答" [ref=e196] [cursor=pointer]:
+            - /url: "#💡-简要回答"
+        - paragraph [ref=e197]: 我理解 Transformer 最核心的创新是 Self-Attention，让每个 token 都能直接和序列里任意其他位置建立联系，一次性并行计算，彻底解决了 RNN 顺序计算慢、长距离信息衰减的两个老问题。理解 Encoder 和 Decoder 的区别时我用这个角度：Encoder 是双向的，每个词能同时看前后文，适合做「理解」类任务；Decoder 是单向的，只能看前面的词，天然适合「生成」任务。至于为什么现代大模型（GPT、Claude、Qwen）都选 Decoder-only，核心原因是「预测下一个 token」这个训练目标极其统一、可以直接在海量无标注文本上做自监督学习，规模越大涌现出的能力越强。
+        - heading "📝 详细解析" [level=2] [ref=e198]:
+          - link "📝 详细解析" [ref=e199] [cursor=pointer]:
+            - /url: "#📝-详细解析"
+        - heading "Transformer 之前：RNN 的致命缺陷" [level=3] [ref=e200]:
+          - link "Transformer 之前：RNN 的致命缺陷" [ref=e201] [cursor=pointer]:
+            - /url: "#transformer-之前-rnn-的致命缺陷"
+        - paragraph [ref=e202]: 在 Transformer 出现之前，处理序列数据的主流方法是 RNN（循环神经网络）及其变体（LSTM、GRU）。RNN 的问题有两个，而且都是致命的。
+        - paragraph [ref=e203]:
+          - text: 第一个是
+          - strong [ref=e204]: 顺序计算，无法并行
+          - text: 。RNN 处理序列的方式是从左到右逐个处理每个词，第 N 步必须等第 N-1 步计算完才能开始，无法利用 GPU 的并行计算能力。这导致训练大型 RNN 极慢。
+        - paragraph [ref=e205]:
+          - text: 第二个是
+          - strong [ref=e206]: 长距离梯度消失
+          - text: 。当序列很长时（比如 1000 个词），RNN 理论上能记住早期的信息，但实践中梯度在反向传播时会指数级衰减，网络很难学习到「第 1 个词和第 800 个词之间的关系」。LSTM 通过门控机制有所缓解，但根本问题没解决。
+        - paragraph [ref=e207]: 2017 年 Google 在论文《Attention is All You Need》里提出了 Transformer，用一个全新的架构一举解决了这两个问题。
+        - figure [ref=e208]:
+          - img [ref=e209]
+        - heading "Self-Attention 的核心直觉" [level=3] [ref=e210]:
+          - link "Self-Attention 的核心直觉" [ref=e211] [cursor=pointer]:
+            - /url: "#self-attention-的核心直觉"
+        - paragraph [ref=e212]:
+          - text: Self-Attention（自注意力）的核心思路是：让序列中的每个 token 都能
+          - strong [ref=e213]: 直接关注
+          - text: 序列中任意其他位置的 token，计算出「我和其他位置的相关程度」，然后根据相关程度加权聚合其他位置的信息。
+        - paragraph [ref=e214]: 这里有三个关键向量：Q（Query，查询）代表「我想找什么」，K（Key，键）代表「我有什么标签」，V（Value，值）代表「我的实际内容」。
+        - paragraph [ref=e215]: 可以用图书馆检索来类比：你有一个搜索关键词（Q），图书馆里每本书都有标签（K）和内容（V）。注意力机制就是用你的关键词（Q）去匹配每本书的标签（K），计算出相似度分数，然后按照分数的权重把书的内容（V）加权求和，得到你的搜索结果。
+        - figure [ref=e216]:
+          - img
+        - heading "Q/K/V 是怎么从输入变换得到的" [level=3] [ref=e217]:
+          - link "Q/K/V 是怎么从输入变换得到的" [ref=e218] [cursor=pointer]:
+            - /url: "#q-k-v-是怎么从输入变换得到的"
+        - paragraph [ref=e219]:
+          - text: 很多人讲 Self-Attention 容易卡在「Q/K/V 是从哪儿冒出来的」这一步。其实 Q/K/V 不是模型「凭空生成」的，而是把输入 embedding 通过
+          - strong [ref=e220]: 三个独立的线性投影矩阵
+          - text: W_Q、W_K、W_V 算出来的：
+        - generic [ref=e221]:
+          - text: python
+          - button "复制代码" [ref=e222] [cursor=pointer]
+          - code [ref=e224]:
+            - generic [ref=e225]: "# 假设输入 X 是 (序列长度 N, embedding 维度 d_model)"
+            - generic [ref=e226]: "# W_Q, W_K, W_V 都是可训练参数矩阵，形状 (d_model, d_k)"
+            - generic [ref=e227]: "Q = X @ W_Q # 形状 (N, d_k)，每个 token 都有自己的 Query 向量"
+            - generic [ref=e228]: "K = X @ W_K # 形状 (N, d_k)，每个 token 都有自己的 Key 向量"
+            - generic [ref=e229]: "V = X @ W_V # 形状 (N, d_v)，每个 token 都有自己的 Value 向量"
+        - figure [ref=e237]:
+          - img
+        - paragraph [ref=e238]:
+          - text: 这一步就是面试里常被追问的「
+          - strong [ref=e239]: Q/K/V 是怎么得到的
+          - text: 」。理解的时候有几个关键点要抓住。
+        - paragraph [ref=e240]:
+          - text: 最关键的一点是 Q/K/V 都是
+          - strong [ref=e241]: 从同一个输入 X 算出来
+          - text: 的。也就是说，输入既要扮演「提问者」（Q），也要扮演「被查者」（K + V），这就是「
+          - strong [ref=e242]: 自
+          - text: 注意力」里那个「自」字的含义，区别于 Encoder-Decoder 架构里 Cross-Attention 那种「Q 来自一边、K/V 来自另一边」的形式。
+        - paragraph [ref=e243]:
+          - text: 然后 W_Q、W_K、W_V 是三个
+          - strong [ref=e244]: 独立学习
+          - text: 的矩阵。这是个容易被忽略的细节，但很重要。如果让 Q/K/V 都直接等于 X 不做变换，模型就没法学到「该从什么角度提问」「该用什么标签匹配」「该返回什么内容」这种细致的差异。三个独立投影让模型有 3 倍的自由度去学习这种角度上的差异，模型容量大幅提升。
+        - paragraph [ref=e245]: 还有一个工程细节是投影维度 d_k 通常等于 d_model / H（H 是头数）。比如 d_model=512、H=8 时，d_k=64。这样做的目的是让多头总参数量和单头版本基本一致，不增加额外的计算开销。
+        - paragraph [ref=e246]: 到这里，Q/K/V 三个向量就准备好了，可以代入注意力公式：
+        - generic [ref=e247]:
+          - button "复制代码" [ref=e248] [cursor=pointer]
+          - code [ref=e250]:
+            - generic [ref=e251]: Attention(Q, K, V) = softmax(Q · K^T / √d_k) · V
+        - heading "为什么要除以 √d_k：缩放点积的数学直觉" [level=3] [ref=e254]:
+          - link "为什么要除以 √d_k：缩放点积的数学直觉" [ref=e255] [cursor=pointer]:
+            - /url: "#为什么要除以-√d-k-缩放点积的数学直觉"
+        - paragraph [ref=e256]:
+          - text: 公式里的
+          - code [ref=e257]: /√d_k
+          - text: 这一步常被叫做
+          - strong [ref=e258]: Scaled Dot-Product Attention（缩放点积注意力）
+          - text: 。这个 √d_k 不是随便加的，背后有具体的数学动机。
+        - paragraph [ref=e259]: 直觉上的问题是这样的：当 d_k 很大时（比如 d_k=128），Q 和 K 都是 128 维的向量，它们的点积是 128 个数相加。假设 Q 和 K 的每一维都是均值 0、方差 1 的随机数，那么点积 Q·K 的方差就是 d_k=128，标准差是 √128 ≈ 11.3。
+        - paragraph [ref=e260]:
+          - text: 这意味着点积的数值会
+          - strong [ref=e261]: 散布在 -30 到 +30 这种很大的范围
+          - text: 。然后这些数过 softmax 会发生什么？softmax 对极端大的输入特别敏感，最大的那个数对应的概率会接近 1，其他数的概率会接近 0，
+          - strong [ref=e262]: 输出几乎变成 one-hot 分布
+          - text: 。
+        - figure [ref=e263]:
+          - img
+        - paragraph [ref=e264]:
+          - text: one-hot 分布的问题是
+          - strong [ref=e265]: 梯度消失
+          - text: 。softmax 的梯度公式里有
+          - code [ref=e266]: p · (1-p)
+          - text: 项，p 接近 0 或 1 时梯度都接近 0。整个 Attention 层的反向传播信号被压扁，模型训不起来。
+        - paragraph [ref=e267]: 除以 √d_k 之后，点积的方差被压回 1，softmax 输出分布合理，梯度能正常传播。
+        - paragraph [ref=e268]:
+          - text: 那能不能用其他方案替代 √d_k？
+          - strong [ref=e269]: 理论上可以，但 √d_k 是数学上最自然的选择
+          - text: 。
+        - paragraph [ref=e270]: 业界确实尝试过几种替代方案。一种是用 Layer Norm 来归一化，比如某些 Attention 变体（Pre-LN Transformer）会在 Attention 之前先把输入归一化到固定范围，这样后续的点积值天然就不会爆炸。但严格来说这是「在 Attention 之前做归一化」，不是真的替换 √d_k 本身。另一种是让模型自己学一个 scaling 参数，用一个可学习的标量代替 √d_k。实测效果和 √d_k 差不多，但增加了可学习参数，反而不如固定常数简洁。还有一种早期方案是直接限制 d_k 很小（比如 d_k=8），让点积自然不会爆炸，但这等于直接限制了模型的容量，不划算。
+        - paragraph [ref=e271]:
+          - text: 实践中所有主流 Transformer 实现（GPT、LLaMA、Qwen 等）都用 √d_k，没有改。这是一个被 8 年实践验证的「
+          - strong [ref=e272]: 简单且数学上合理
+          - text: 」的选择。
+        - paragraph [ref=e273]: 回到主线：除以 √d_k 之后，softmax 的输出就是稳定的注意力权重，再用这些权重对 V 做加权求和，就得到了 Self-Attention 的最终输出。整个过程对序列中所有位置的计算是可以并行的，完美解决了 RNN 的并行问题；而且每对位置之间都有直接连接（通过注意力分数），不存在长距离信息衰减的问题。
+        - heading "Multi-Head Attention：多角度观察" [level=3] [ref=e274]:
+          - link "Multi-Head Attention：多角度观察" [ref=e275] [cursor=pointer]:
+            - /url: "#multi-head-attention-多角度观察"
+        - paragraph [ref=e276]: 单组 Q/K/V 只能学习到一种「关联关系」，但语言中的关联是多维度的：「我」和「吃」是主谓关系，「苹果」和「吃」是宾动关系，「苹果」和前文的「苹果树」是指代关系，这些不同类型的关联需要不同的「注意力头」来捕捉。
+        - paragraph [ref=e277]: Multi-Head Attention 就是把 Q/K/V 投影到多个不同的子空间（比如 8 个或 32 个头），每组独立计算注意力，最后把所有头的输出拼接起来。每个头可以专注于捕捉不同类型的语言关联，整体上表达能力更强。
+        - figure [ref=e278]:
+          - img
+        - heading "位置编码：注入顺序信息" [level=3] [ref=e279]:
+          - link "位置编码：注入顺序信息" [ref=e280] [cursor=pointer]:
+            - /url: "#位置编码-注入顺序信息"
+        - paragraph [ref=e281]: Self-Attention 有一个天然的缺陷：它的计算是对称的，不考虑词的顺序。「我打你」和「你打我」对 Attention 来说可能得到一样的结果，因为它只看哪些词相关，不看谁在前谁在后。
+        - paragraph [ref=e282]: 所以需要显式地给每个 token 注入位置信息，这就是位置编码。具体的位置编码方案有 sin/cos、RoPE、ALiBi 等多种选择，每种各有不同的设计哲学和长上下文外推能力，是一个独立的研究方向。本节只需要知道 Transformer 是通过加上位置编码来让模型感知词序的就够了。
+        - heading "前馈网络（FFN）的作用" [level=3] [ref=e283]:
+          - link "前馈网络（FFN）的作用" [ref=e284] [cursor=pointer]:
+            - /url: "#前馈网络-ffn-的作用"
+        - paragraph [ref=e285]: 除了注意力层，每个 Transformer 块里还有一个前馈网络（Feed-Forward Network），结构是两层全连接加一个激活函数。
+        - paragraph [ref=e286]: FFN 对每个位置独立地做非线性变换，补充注意力层学不到的信息（注意力层本质上是线性加权，FFN 引入非线性）。研究表明 FFN 层储存了大量的「事实知识」，可以理解为模型的「记忆仓库」。
+        - figure [ref=e287]:
+          - img
+        - heading "Encoder-only、Decoder-only 和 Encoder-Decoder 三种架构" [level=3] [ref=e288]:
+          - link "Encoder-only、Decoder-only 和 Encoder-Decoder 三种架构" [ref=e289] [cursor=pointer]:
+            - /url: "#encoder-only、decoder-only-和-encoder-decoder-三种架构"
+        - paragraph [ref=e290]: 理解了 Attention 的基本机制，可以解释这三种架构的区别。
+        - list [ref=e291]:
+          - listitem [ref=e292]:
+            - paragraph [ref=e293]:
+              - strong [ref=e294]: Encoder-only（以 BERT 为代表）
+              - text: ：每个 token 可以双向关注序列中所有其他 token（没有遮蔽）。这种双向理解能力让 Encoder 非常擅长「理解任务」，比如文本分类、命名实体识别、语义相似度计算。预训练目标是 MLM（掩码语言模型），随机遮住一些词让模型预测。
+          - listitem [ref=e295]:
+            - paragraph [ref=e296]:
+              - strong [ref=e297]: Decoder-only（以 GPT/Claude/Qwen 为代表）
+              - text: ：使用因果掩码（Causal Mask），每个 token 只能关注它前面的 token，不能「提前看到」后面的内容。这种单向设计天然适合文本生成，预训练目标是「预测下一个 token」（CLM），目标统一而强大。现在几乎所有大语言模型都是这个架构。
+          - listitem [ref=e298]:
+            - paragraph [ref=e299]:
+              - strong [ref=e300]: Encoder-Decoder（以 T5、BART 为代表）
+              - text: ：Encoder 双向理解输入，Decoder 单向生成输出，Decoder 通过 Cross-Attention 读取 Encoder 的输出。这种架构适合「输入和输出是不同的文本」的任务，比如翻译、摘要、问答。但预训练目标相对复杂，超大规模训练不如 Decoder-only 简洁。
+        - figure [ref=e301]:
+          - img
+        - heading "为什么 Decoder-only 赢了" [level=3] [ref=e302]:
+          - link "为什么 Decoder-only 赢了" [ref=e303] [cursor=pointer]:
+            - /url: "#为什么-decoder-only-赢了"
+        - paragraph [ref=e304]: 现代通用生成式大模型为什么大多选择 Decoder-only 架构？这是面试里最容易被追问的点。
+        - paragraph [ref=e305]:
+          - text: 根本原因是「
+          - strong [ref=e306]: 预测下一个 token
+          - text: 」这个目标极其统一。所有类型的任务（问答、写作、推理、代码生成、翻译）都可以统一表达成「续写」这一件事，不需要区分「这是理解任务」还是「那是生成任务」，一套训练目标搞定一切。
+        - paragraph [ref=e307]: 更关键的是，这个目标可以直接在海量无标注文本上做自监督训练。互联网上的大量公开文本天然可以构造成训练样本，不需要像传统监督任务那样逐条人工标注。这一点是 BERT 那种 MLM 目标做不到的（MLM 也是无标注，但训练效率不如 CLM 适合 scale up）。
+        - paragraph [ref=e308]: 最厉害的是，随着模型规模增大，这个简单目标下涌现出的能力越来越强。模型从「会续写文本」开始，逐渐学会数学、推理、代码、跨语言迁移……这些能力都是「预测下一个 token」这个目标在足够大规模下自然涌现的。
+        - paragraph [ref=e309]: 所有这些特性加在一起，使得 Decoder-only 架构在大规模生成式预训练时代取得了压倒性的优势。Encoder-only 和 Encoder-Decoder 这两种架构并没有消失，它们在检索、分类、嵌入、翻译、摘要等场景仍然有价值；只是如果目标是做一个通用对话和生成模型，Decoder-only 更容易 scale up，也更符合「一个模型续写所有任务」的统一接口。
+        - figure [ref=e310]:
+          - img
+        - heading "🎯 面试总结" [level=2] [ref=e311]:
+          - link "🎯 面试总结" [ref=e312] [cursor=pointer]:
+            - /url: "#🎯-面试总结"
+        - paragraph [ref=e313]:
+          - text: 回到开头那段对话，问到 Transformer 架构，最重要的是先把
+          - strong [ref=e314]: RNN 的两个致命缺陷
+          - text: 讲清楚，因为这是 Transformer 出现的动机。RNN 顺序计算无法并行（训练慢）+ 长距离梯度消失（看不到远处），这两个问题在序列稍长就会致命。
+        - paragraph [ref=e315]: 接下来讲 Self-Attention 怎么解决的。每个 token 通过 Q、K、V 三个独立的线性投影变换得到查询、键、值向量，然后用 Q 去和所有 K 做点积算注意力分数，按分数加权聚合所有 V。这一段能讲到「Q/K/V 是从同一个 X 通过三个独立矩阵投影得到的」「除以 √d_k 是为了防止点积过大让 softmax 变 one-hot 导致梯度消失」这两个细节，就比一般候选人深刻一层了。
+        - paragraph [ref=e316]:
+          - text: 最关键的一句话是讲清
+          - strong [ref=e317]: 为什么 Decoder-only 赢了
+          - text: 。「预测下一个 token」这个目标极其统一，所有 NLP 任务都能用它表达；可以直接在海量无标注文本上做自监督训练；规模越大涌现的能力越强。这种「目标统一 + 数据规模 + 涌现」的组合让 Decoder-only 在大模型时代完胜。
+        - paragraph [ref=e318]: 如果还想再加分，可以提一句「FFN 层储存了大量事实知识，可以理解为模型的『记忆仓库』」这种从可解释性角度看 Transformer 的视角。能讲到这一层，面试官就知道你不是只在背架构图，是真的理解了 Transformer 的设计哲学。
+        - separator [ref=e319]
+        - paragraph [ref=e320]:
+          - text: 对了，大模型面试题会在「
+          - strong [ref=e321]: 公众号@小林面试笔记题
+          - text: 」持续更新，林友们赶紧关注起来，别错过最新干货哦！
+        - figure [ref=e322]:
+          - img
+      - navigation [ref=e324]:
+        - link "1. 什么是大语言模型？和传统 NLP 模型有什么区别？" [ref=e325] [cursor=pointer]:
+          - /url: /ai/llm/what_is_llm.html
+          - generic [ref=e326]: 上一页
+          - generic [ref=e328]: 1. 什么是大语言模型？和传统 NLP 模型有什么区别？
+        - link "3. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？" [ref=e329] [cursor=pointer]:
+          - /url: /ai/llm/mha_mqa_gqa_flash_attention.html
+          - generic [ref=e330]: 下一页
+          - generic [ref=e332]: 3. 多头注意力（MHA）有哪些局限？MQA、GQA、Flash Attention 怎么解决？
+    - contentinfo [ref=e336]:
+      - link "粤ICP备2025467464" [ref=e338] [cursor=pointer]:
+        - /url: https://beian.miit.gov.cn/
+      - generic [ref=e339]: Copyright © 2026 公众号@小林面试笔记

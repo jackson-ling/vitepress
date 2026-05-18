@@ -1,13 +1,85 @@
 <script setup>
+import { nextTick, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import SiteEnhancer from './components/SiteEnhancer.vue'
+import HomeExtras from './components/HomeExtras.vue'
 
 const { Layout } = DefaultTheme
+const router = useRouter()
 
+/* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
+function onBeforeRouteChange() {
+  const doc = document.querySelector('.VPDoc')
+  if (!doc) return
+  doc.classList.remove('route-enter')
+  doc.classList.add('route-leave')
+}
 
+function onAfterRouteChanged() {
+  nextTick(() => {
+    const doc = document.querySelector('.VPDoc')
+    if (!doc) return
+    doc.classList.remove('route-leave')
+    doc.classList.add('route-enter')
+    const cleanup = () => {
+      doc.classList.remove('route-enter')
+      doc.removeEventListener('animationend', cleanup)
+    }
+    doc.addEventListener('animationend', cleanup)
+    setTimeout(cleanup, 300)
+  })
+}
+
+onMounted(() => {
+  router.onBeforeRouteChange = onBeforeRouteChange
+  router.onAfterRouteChanged = onAfterRouteChanged
+})
+
+onUnmounted(() => {
+  router.onBeforeRouteChange = undefined
+  router.onAfterRouteChanged = undefined
+})
 </script>
 
 <template>
-  <Layout />
+  <Layout>
+    <template #home-hero-after>
+      <HomeExtras />
+    </template>
+  </Layout>
   <SiteEnhancer />
 </template>
+
+<style>
+/* ── custom-block 顶部留白优化 ─────────────────────────────
+ *  减小容器内边距 + 消除标题与首个内容元素之间的多余间距
+ *  用户习惯在 ::: 容器内使用 > #### 编写内容，
+ *  blockquote 和 h2/h3/h4 的默认 margin 会产生大量留白
+ * ──────────────────────────────────────────────────────────── */
+.custom-block {
+  padding-top: 6px !important;
+}
+.custom-block .custom-block-title {
+  margin: 0 !important;
+}
+.custom-block .custom-block-title + p,
+.custom-block .custom-block-title + blockquote {
+  margin-top: 4px !important;
+}
+.custom-block .custom-block-title + h2,
+.custom-block .custom-block-title + h3,
+.custom-block .custom-block-title + h4 {
+  margin-top: 4px !important;
+}
+/* 容器内 blockquote 顶部间距 — 减小 padding-top 消除与内容的留白 */
+.custom-block blockquote {
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+}
+.custom-block blockquote h2,
+.custom-block blockquote h3,
+.custom-block blockquote h4 {
+  margin-top: 2px !important;
+}
+</style>

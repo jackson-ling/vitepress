@@ -61,8 +61,10 @@ function getList(params, path1, pathname, isRoot = false) {
 }
 
 export const set_sidebar = (pathname) => {
+    // 去除前导 /，确保 path.join 正确拼接为项目内相对路径
+    const relPath = pathname.replace(/^\//, '')
     // 获取pathname的路径
-    const dirPath = path.join(DIR_PATH, pathname)
+    const dirPath = path.join(DIR_PATH, relPath)
     // 读取pathname下的所有文件或者文件夹
     const files = fs.readdirSync(dirPath)
     // 过滤掉白名单中的文件和文件夹

@@ -15,8 +15,8 @@
 .VPFooter {
   margin-top: 0 !important;
   padding: 20px 24px !important;
-  border-top: 1px solid var(--vp-c-divider) !important;
-  background: var(--vp-c-bg) !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.06) !important;
+  background: var(--vp-c-bg-alt) !important;
 }
 
 .VPFooter .container,
@@ -50,6 +50,46 @@
     justify-content: center;
     max-width: 1562px !important;
   }
+}
+
+/* ── Page Transition — 侧边栏文章切换动画 ──────────────────────
+ *  两阶段过渡（与 xiaolinnote 一致）：
+ *    1. 旧内容淡出上移（route-leave）
+ *    2. 新内容从下方淡入滑入（route-enter）
+ *  由 Layout.vue 中的路由钩子触发
+ *  prefers-reduced-motion 由 _components.css 全局适配
+ * ──────────────────────────────────────────────────────────── */
+
+/* 旧内容：淡出 + 向上滑出 */
+@keyframes doc-route-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* 新内容：从下方淡入滑入 */
+@keyframes doc-route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.VPDoc.route-leave {
+  animation: doc-route-leave 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.VPDoc.route-enter {
+  animation: doc-route-enter 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* ── Page Layout — 独立页面（描述页、联系页等） ─────────────── */

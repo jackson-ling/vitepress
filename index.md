@@ -11,25 +11,14 @@ hero:
     dark: /主页logo.png
   actions:
     - theme: brand
-      text: Description(说明)
-      link: /docs/Description.md
+      text: 网站介绍
+      link: /docs/Description
     - theme: alt
-      text: Contact(联系)
-      link: /docs/Contact.md
+      text: 联系我
+      link: /docs/Contact
     - theme: alt
-      text: ❗⚠️Warning⚠️❗
-      link: /docs/warning.md
+      text: 注意事项
+      link: /docs/warning
       
-features:
-  - title:  TIP 1 
-    details: <strong>明确目标目的，逐步积累，循序渐进，切忌急于求成</strong> ⏳
-  - title: TIP 2
-    details: <strong>少想多做，降低预期，重视基础，重复练习，构建体系</strong> 💪
-  - title: TIP 3
-    details: <strong>保持独立思考，总结复盘，学会主动探索，敢于尝试</strong> 🚀️
 ---
-
-
-<confetti />
-
 

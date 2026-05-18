@@ -40,7 +40,7 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="jetbrains.png" class="nav-icon nav-icon--lg"> Jetbrains常见问题',
+                                        text: '<img src="/jetbrains.png" class="nav-icon nav-icon--lg"> Jetbrains常见问题',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
@@ -48,23 +48,23 @@ export default defineConfig({
                                         items:
                                             [
                                                 {
-                                                    text: '<img src="vmware.jpeg" class="nav-icon nav-icon--lg"> vmware',
+                                                    text: '<img src="/vmware.jpeg" class="nav-icon nav-icon--lg"> vmware',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="centos.png" class="nav-icon nav-icon--lg"> CentOS7.6',
+                                                    text: '<img src="/centos.png" class="nav-icon nav-icon--lg"> CentOS7.6',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="ubuntu.png" class="nav-icon nav-icon--lg"> Ubuntu',
+                                                    text: '<img src="/ubuntu.png" class="nav-icon nav-icon--lg"> Ubuntu',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="xshell.png" class="nav-icon nav-icon--lg"> XShell',
+                                                    text: '<img src="/xshell.png" class="nav-icon nav-icon--lg"> XShell',
                                                     link: '/docs/测试界面.md'
                                                 },
                                                 {
-                                                    text: '<img src="bt.png" class="nav-icon nav-icon--lg"> 宝塔面板',
+                                                    text: '<img src="/bt.png" class="nav-icon nav-icon--lg"> 宝塔面板',
                                                     link: '/docs/测试界面.md'
                                                 },
                                             ]
@@ -81,23 +81,23 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="github.png" class="nav-icon nav-icon--3xl"> Github使用技巧',
-                                        link: 'docs/笔记/Github使用指南.md'
+                                        text: '<img src="/github.png" class="nav-icon nav-icon--3xl"> Github使用技巧',
+                                        link: '/docs/笔记/Github使用指南.md'
                                     },
                                     {text: '⭐优质开源项目', link: '/docs/测试界面.md'},
                                 ]
                         },
-                        {text: '🔍常用网站', link: 'docs/笔记/常用网站.md'},
-                        {text: '🖊️随笔', link: 'docs/笔记/随笔/随笔乱记.md'},
+                        {text: '🔍常用网站', link: '/docs/笔记/常用网站.md'},
+                        {text: '🖊️随笔', link: '/docs/笔记/随笔/随笔乱记.md'},
                         {
                             text: 'Markdown',
                             items:
                                 [
                                     {
-                                        text: '<img src="markdown.png" class="nav-icon nav-icon--3xl"> Markdown语法',
+                                        text: '<img src="/markdown.png" class="nav-icon nav-icon--3xl"> Markdown语法',
                                         link: '/docs/测试界面.md'
                                     },
-                                    {text: 'Markdown @ emoji', link: 'docs/笔记/markdown/markdown@emoji.md'},
+                                    {text: 'Markdown @ emoji', link: '/docs/笔记/markdown/markdown@emoji.md'},
                                 ]
                         },
                         {
@@ -115,7 +115,7 @@ export default defineConfig({
                                         link: '/docs/笔记/vitepress教程/腾讯云部署/腾讯云部署.md'
                                     },
                                     {
-                                        text: '<img src="githubaction.png" class="nav-icon nav-icon--xs"> Github部署',
+                                        text: '<img src="/githubaction.png" class="nav-icon nav-icon--xs"> Github部署',
                                         link: '/docs/测试界面.md'
                                     },
 
@@ -129,22 +129,22 @@ export default defineConfig({
                     [
                         {text: '📝 算法集锦', link: '/docs/算法/算法集锦/算法集锦'},
                         {
-                            text: '<img src="leetcode.png" class="nav-icon nav-icon--xs"> 灵神题单',
-                            link: 'docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
+                            text: '<img src="/leetcode.png" class="nav-icon nav-icon--xs"> 灵神题单',
+                            link: '/docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
-                        {text: '🎉 蓝桥杯', link: 'docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
+                        {text: '🎉 蓝桥杯', link: '/docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
                         {
                             text: '<img src="洛谷.png" class="nav-icon nav-icon--lg"> 洛谷',
-                            link: 'docs/算法/洛谷/导论.md'
+                            link: '/docs/算法/洛谷/导论.md'
                         },
-                        {text: '🎯 左程云 ', link: 'docs/算法/左程云/0. 导论.md'},
+                        {text: '🎯 左程云 ', link: '/docs/算法/左程云/0. 导论.md'},
                         {text: '🚀 算法总结', link: '/docs/测试界面.md'},
                         {
                             text: '代码随想录', items:
                                 [
-                                    {text: '基本介绍', link: 'docs/算法/代码随想录/代码随想录介绍.md'},
-                                    {text: '算法训练营', link: 'docs/算法/代码随想录/训练营/数组/Day 1.md'},
-                                    {text: '题目汇总', link: 'docs/算法/代码随想录/题目汇总.md'},
+                                    {text: '基本介绍', link: '/docs/算法/代码随想录/代码随想录介绍.md'},
+                                    {text: '算法训练营', link: '/docs/算法/代码随想录/训练营/数组/Day 1.md'},
+                                    {text: '题目汇总', link: '/docs/算法/代码随想录/题目汇总.md'},
                                 ]
                         },
                         {
@@ -152,11 +152,11 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="java深色.png" class="nav-icon nav-icon--3xl"> Java版本',
-                                        link: 'docs/算法/数据结构/Java/马踏棋盘算法.md'
+                                        text: '<img src="/java深色.png" class="nav-icon nav-icon--3xl"> Java版本',
+                                        link: '/docs/算法/数据结构/Java/马踏棋盘算法.md'
                                     },
                                     {
-                                        text: '<img src="C语言.png" class="nav-icon nav-icon--lg"> C语言版本',
+                                        text: '<img src="/C语言.png" class="nav-icon nav-icon--lg"> C语言版本',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -172,12 +172,12 @@ export default defineConfig({
                             text: '环境搭建', items:
                                 [
                                     {
-                                        text: '<img src="vscode.png" class="nav-icon nav-icon--lg"> vscode',
-                                        link: 'docs/前端/vsvode.md'
+                                        text: '<img src="/vscode.png" class="nav-icon nav-icon--lg"> vscode',
+                                        link: '/docs/前端/vsvode.md'
                                     },
                                     {
-                                        text: '<img src="nodejs.png" class="nav-icon nav-icon--lg"> Nodejs',
-                                        link: 'docs/前端/nodejs.md'
+                                        text: '<img src="/nodejs.png" class="nav-icon nav-icon--lg"> Nodejs',
+                                        link: '/docs/前端/nodejs.md'
                                     },
                                 ]
                         },
@@ -186,20 +186,20 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="html.png" class="nav-icon nav-icon--md"> HTML',
-                                        link: 'docs/前端/HTML/HTML.md'
+                                        text: '<img src="/html.png" class="nav-icon nav-icon--md"> HTML',
+                                        link: '/docs/前端/HTML/HTML.md'
                                     },
                                     {
-                                        text: '<img src="css.png" class="nav-icon nav-icon--md"> CSS',
+                                        text: '<img src="/css.png" class="nav-icon nav-icon--md"> CSS',
                                         link: '/docs/前端/CSS/CSS.md'
                                     },
                                     {
-                                        text: '<img src="javascript.png" class="nav-icon nav-icon--sm"> JavaScript',
-                                        link: 'docs/前端/JavaScript/JavaScript.md'
+                                        text: '<img src="/javascript.png" class="nav-icon nav-icon--sm"> JavaScript',
+                                        link: '/docs/前端/JavaScript/JavaScript.md'
                                     },
                                     {
-                                        text: '<img src="typescript.png" class="nav-icon nav-icon--sm"> TypeScript',
-                                        link: 'docs/前端/TypeScript/TypeScript.md'
+                                        text: '<img src="/typescript.png" class="nav-icon nav-icon--sm"> TypeScript',
+                                        link: '/docs/前端/TypeScript/TypeScript.md'
                                     },
                                 ]
                         },
@@ -208,23 +208,23 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="vue.png" class="nav-icon nav-icon--2xl"> Vue',
-                                        link: 'docs/前端/vue/vue.md'
+                                        text: '<img src="/vue.png" class="nav-icon nav-icon--2xl"> Vue',
+                                        link: '/docs/前端/vue/vue.md'
                                     },
                                     {
-                                        text: '<img src="element-plus.png" class="nav-icon nav-icon--lg"> ElementPlus',
-                                        link: 'docs/前端/ElementPlus/elementplus.md'
+                                        text: '<img src="/element-plus.png" class="nav-icon nav-icon--lg"> ElementPlus',
+                                        link: '/docs/前端/ElementPlus/elementplus.md'
                                     },
                                     {
                                         text: '<img src="微信开发者工具.jpeg" class="nav-icon nav-icon--lg"> 微信小程序',
-                                        link: 'docs/前端/微信小程序/1. HttpClient.md'
+                                        link: '/docs/前端/微信小程序/1. HttpClient.md'
                                     },
                                 ]
                         },
                     ]
             },
             {
-                text: '<img src="java.png" class="nav-icon nav-icon--3xl"> Java', // 作为导航栏标识
+                text: '<img src="/java.png" class="nav-icon nav-icon--3xl"> Java', // 作为导航栏标识
                 items: // 传入 items 作为导航栏内容
                     [
                         // 传入第一个字典
@@ -233,35 +233,35 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="IDEA.png" class="nav-icon nav-icon--3xl"> IDEA',
-                                        link: 'docs/Java/IDEA/IDEA文章/1.软件安装包.md',
+                                        text: '<img src="/IDEA.png" class="nav-icon nav-icon--3xl"> IDEA',
+                                        link: '/docs/Java/IDEA/IDEA文章/1.软件安装包.md',
                                     },
                                     {
                                         text: '<img src="快捷键.png" class="nav-icon nav-icon--3xl"> IDEA快捷键',
-                                        link: 'docs/Java/IDEA/IDEA快捷键/IDEA快捷键.md',
+                                        link: '/docs/Java/IDEA/IDEA快捷键/IDEA快捷键.md',
                                     },
                                     {
                                         text: '📝IDEA模板',
-                                        link: 'docs/Java/IDEA/IDEA模板/代码模板.md'
+                                        link: '/docs/Java/IDEA/IDEA模板/代码模板.md'
                                     },
                                     {
-                                        text: '<img src="eclipse.png" class="nav-icon nav-icon--3xl"> eclipse',
-                                        link: 'docs/Java/eclipse/eclipse使用教程.md'
+                                        text: '<img src="/eclipse.png" class="nav-icon nav-icon--3xl"> eclipse',
+                                        link: '/docs/Java/eclipse/eclipse使用教程.md'
                                     },
                                     {
-                                        text: '<img src="maven.png" class="nav-icon nav-icon--3xl"> Maven',
-                                        link: 'docs/Java/Maven/maven.md',
+                                        text: '<img src="/maven.png" class="nav-icon nav-icon--3xl"> Maven',
+                                        link: '/docs/Java/Maven/maven.md',
                                     },
                                 ]
                         },
                         {
                             text: '📝JavaSE',
                             items: [
-                                {text: '第一阶段', link: 'docs/Java/第一阶段/基本语法/1.概述.md'},
-                                {text: '第二阶段', link: 'docs/Java/第二阶段/面向对象高级/57.类变量.md'},
-                                {text: '第三阶段', link: 'docs/Java/第三阶段/网络编程/98.网络的基本概念.md'},
-                                {text: 'Java8', link: 'docs/Java/Java8/1. 基本介绍.md'},
-                                {text: '单元测试', link: 'docs/Java/单元测试/单元测试.md'},
+                                {text: '第一阶段', link: '/docs/Java/第一阶段/基本语法/1.概述.md'},
+                                {text: '第二阶段', link: '/docs/Java/第二阶段/面向对象高级/57.类变量.md'},
+                                {text: '第三阶段', link: '/docs/Java/第三阶段/网络编程/98.网络的基本概念.md'},
+                                {text: 'Java8', link: '/docs/Java/Java8/1. 基本介绍.md'},
+                                {text: '单元测试', link: '/docs/Java/单元测试/单元测试.md'},
                             ]
                         },
                         {
@@ -270,15 +270,15 @@ export default defineConfig({
                                 [
                                     {
                                         text: '第一阶段',
-                                        link: 'docs/Java/章节作业/第一阶段/第三章：变量/第三章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第三章：变量/第三章作业.md'
                                     },
                                     {
                                         text: '第二阶段',
-                                        link: 'docs/Java/章节作业/第二阶段/第十九章：IO流/第十九章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十九章：IO流/第十九章作业.md'
                                     },
                                     {
                                         text: '第三阶段',
-                                        link: 'docs/Java/章节作业/第三阶段/第二十一章：网络编程/第二十一章作业.md'
+                                        link: '/docs/Java/章节作业/第三阶段/第二十一章：网络编程/第二十一章作业.md'
                                     },
                                 ]
                         },
@@ -293,12 +293,12 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="mysql.png" class="nav-icon nav-icon--xs"> MySQL',
-                                        link: 'docs/后端/MySQL/MySQL/基础篇/1. 基本介绍.md'
+                                        text: '<img src="/mysql.png" class="nav-icon nav-icon--xs"> MySQL',
+                                        link: '/docs/后端/MySQL/MySQL/基础篇/1. 基本介绍.md'
                                     },
                                     {
-                                        text: '<img src="redis.png" class="nav-icon nav-icon--xs"> Redis',
-                                        link: 'docs/后端/Redis/1. 基本介绍.md'
+                                        text: '<img src="/redis.png" class="nav-icon nav-icon--xs"> Redis',
+                                        link: '/docs/后端/Redis/1. 基本介绍.md'
                                     },
 
                                 ]
@@ -308,20 +308,20 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="spring.png" class="nav-icon nav-icon--xs"> Spring',
-                                        link: 'docs/后端/Spring/1. AOP.md'
+                                        text: '<img src="/spring.png" class="nav-icon nav-icon--xs"> Spring',
+                                        link: '/docs/后端/Spring/1. AOP.md'
                                     },
                                     // {
-                                    //     text: '<img src="springmvc.png" class="nav-icon nav-icon--xs"> SpringMVC',
+                                    //     text: '<img src="/springmvc.png" class="nav-icon nav-icon--xs"> SpringMVC',
                                     //     link: '/docs/测试界面.md'
                                     // },
                                     {
-                                        text: '<img src="mybatis.png" class="nav-icon nav-icon--xs"> MyBatis',
-                                        link: 'docs/后端/MyBatis/Mybatis.md'
+                                        text: '<img src="/mybatis.png" class="nav-icon nav-icon--xs"> MyBatis',
+                                        link: '/docs/后端/MyBatis/Mybatis.md'
                                     },
                                     {
-                                        text: '<img src="springboot.png" class="nav-icon nav-icon--xs"> SpringBoot',
-                                        link: "docs/后端/Springboot/1. SpringbootWeb入门.md"
+                                        text: '<img src="/springboot.png" class="nav-icon nav-icon--xs"> SpringBoot',
+                                        link: "/docs/后端/Springboot/1. SpringbootWeb入门.md"
                                     },
                                 ]
                         },
@@ -330,19 +330,19 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="mybatisplus.png" class="nav-icon nav-icon--xs"> MyBatis Plus',
-                                        link: 'docs/后端/MyBatis Plus/MyBatis Plus.md'
+                                        text: '<img src="/mybatisplus.png" class="nav-icon nav-icon--xs"> MyBatis Plus',
+                                        link: '/docs/后端/MyBatis Plus/MyBatis Plus.md'
                                     },
                                     {
-                                        text: '<img src="springcloud.png" class="nav-icon nav-icon--xs"> SpringCloud',
+                                        text: '<img src="/springcloud.png" class="nav-icon nav-icon--xs"> SpringCloud',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="rabbitmq.png" class="nav-icon nav-icon--xs"> RabbitMQ',
+                                        text: '<img src="/rabbitmq.png" class="nav-icon nav-icon--xs"> RabbitMQ',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="elasticsearch.png" class="nav-icon nav-icon--xs"> Elasticsearch',
+                                        text: '<img src="/elasticsearch.png" class="nav-icon nav-icon--xs"> Elasticsearch',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -353,16 +353,16 @@ export default defineConfig({
                             items:
                                 [
                                     // {
-                                    //     text: '<img src="javaweb.png" class="nav-icon nav-icon--xs"> Java Web',
+                                    //     text: '<img src="/javaweb.png" class="nav-icon nav-icon--xs"> Java Web',
                                     //     link: '/docs/测试界面.md'
                                     // },
                                     {
                                         text: '<img src="设计模式.png" class="nav-icon nav-icon--md">  设计模式',
-                                        link: 'docs/后端/设计模式/工厂模式.md'
+                                        link: '/docs/后端/设计模式/工厂模式.md'
                                     },
                                     {
                                         text: '📝 项目笔记',
-                                        link: "docs/后端/项目笔记/解决方案/1. 权限认证.md"
+                                        link: "/docs/后端/项目笔记/解决方案/1. 权限认证.md"
                                     }
                                 ]
                         },
@@ -371,20 +371,20 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="linux.png" class="nav-icon nav-icon--xs"> Linux',
+                                        text: '<img src="/linux.png" class="nav-icon nav-icon--xs"> Linux',
                                         link: '/docs/后端/DevOps/Linux/1. 基本介绍.md'
                                     },
                                     {
-                                        text: '<img src="docker.png" class="nav-icon nav-icon--xs"> Docker',
+                                        text: '<img src="/docker.png" class="nav-icon nav-icon--xs"> Docker',
                                         link: '/docs/后端/DevOps/Docker/1. Docker安装.md'
                                     },
                                     {
-                                        text: '<img src="ngnix.png" class="nav-icon nav-icon--sm"> Ngnix',
+                                        text: '<img src="/ngnix.png" class="nav-icon nav-icon--sm"> Ngnix',
                                         link: '/docs/后端/测试界面.md'
                                     },
 
                                     {
-                                        text: '<img src="git.png" class="nav-icon nav-icon--xs"> Git',
+                                        text: '<img src="/git.png" class="nav-icon nav-icon--xs"> Git',
                                         link: '/docs/后端/Git/Git.md'
                                     },
                                 ]
@@ -401,15 +401,15 @@ export default defineConfig({
                                 [
                                     {
                                         text: '后端模块',
-                                        link: 'docs/项目/Tlias智能学习辅助系统/后端模块/1. 项目介绍.md'
+                                        link: '/docs/项目/Tlias智能学习辅助系统/后端模块/1. 项目介绍.md'
                                     },
                                     {
                                         text: '前端模块',
-                                        link: 'docs/项目/Tlias智能学习辅助系统/前端模块/1. 页面基本结构.md'
+                                        link: '/docs/项目/Tlias智能学习辅助系统/前端模块/1. 页面基本结构.md'
                                     },
                                     {
                                         text: '项目部署',
-                                        link: 'docs/项目/Tlias智能学习辅助系统/项目部署/Linux 部署/1. 前端部署.md'
+                                        link: '/docs/项目/Tlias智能学习辅助系统/项目部署/Linux 部署/1. 前端部署.md'
                                     }
                                 ]
                         },
@@ -419,11 +419,11 @@ export default defineConfig({
                                 [
                                     {
                                         text: '项目介绍',
-                                        link: 'docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
+                                        link: '/docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
                                     },
                                     {
                                         text: '后端模块',
-                                        link: 'docs/项目/苍穹外卖/后端模块/Day 2/1. 新增员工.md'
+                                        link: '/docs/项目/苍穹外卖/后端模块/Day 2/1. 新增员工.md'
                                     },
                                 ]
                         },
@@ -433,7 +433,7 @@ export default defineConfig({
                                 [
                                     {
                                         text: '项目介绍',
-                                        link: 'docs/项目/中州养老/项目介绍/Day1/1. 项目介绍.md'
+                                        link: '/docs/项目/中州养老/项目介绍/Day1/1. 项目介绍.md'
                                     },
                                     {
                                         text: '后端模块',
@@ -449,15 +449,15 @@ export default defineConfig({
                     [
                         {
                             text: '认识 AI',
-                            link: 'docs/AI/认识 AI/认识 AI.md'
+                            link: '/docs/AI/认识 AI/认识 AI.md'
                         },
                         {
                             text: 'Claude Code',
-                            link: 'docs/AI/ClaudeCode/ClaudeCode.md'
+                            link: '/docs/AI/ClaudeCode/ClaudeCode.md'
                         },
                         {
                             text: 'SpringAI',
-                            link: 'docs/AI/SpringAI/springai.md'
+                            link: '/docs/AI/SpringAI/springai.md'
                         },
                         {
                             text: 'LangChain4j',
@@ -465,41 +465,41 @@ export default defineConfig({
                         },
                         {
                             text: 'Ollama',
-                            link: 'docs/AI/Ollama/ollama.md'
+                            link: '/docs/AI/Ollama/ollama.md'
                         },
                         {
                             text: 'ROS2（AIC大赛）',
-                            link: 'docs/AI/ROS2/ros2.md'
+                            link: '/docs/AI/ROS2/ros2.md'
                         },
                     ]
             },
             {
-                text: '<img src="python.png" class="nav-icon nav-icon--xl">Python',
+                text: '<img src="/python.png" class="nav-icon nav-icon--xl">Python',
                 items:
                     [
                         {
-                            text: '<img src="pycharm.png" class="nav-icon nav-icon--lg"> Pycharm',
-                            link: 'docs/Python/PyCharm/文章/1.python解释器安装.md'
+                            text: '<img src="/pycharm.png" class="nav-icon nav-icon--lg"> Pycharm',
+                            link: '/docs/Python/PyCharm/文章/1.python解释器安装.md'
                         },
                         {text: '📝基础语法', link: '/docs/测试界面.md'},
                         {
                             text: '📊数据分析', items:
                                 [
                                     {
-                                        text: '<img src="numpy.png" class="nav-icon nav-icon--md"> NumPy',
+                                        text: '<img src="/numpy.png" class="nav-icon nav-icon--md"> NumPy',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="pandas.png" class="nav-icon nav-icon--xs"> Pandas',
+                                        text: '<img src="/pandas.png" class="nav-icon nav-icon--xs"> Pandas',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="matplotlib.png" class="nav-icon nav-icon--md"> Matplotlib',
+                                        text: '<img src="/matplotlib.png" class="nav-icon nav-icon--md"> Matplotlib',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
                         },
-                        {text: '🐍爬虫', link: 'docs/Python/爬虫/基本介绍.md'},
+                        {text: '🐍爬虫', link: '/docs/Python/爬虫/基本介绍.md'},
                         {text: '🤖网页自动化', link: '/docs/测试界面.md'},
                     ]
             },
@@ -529,7 +529,7 @@ export default defineConfig({
                             text: 'C/C++', items:
                                 [
                                     {
-                                        text: '<img src="clion.png" class="nav-icon nav-icon--lg"> Clion',
+                                        text: '<img src="/clion.png" class="nav-icon nav-icon--lg"> Clion',
                                         link: '/docs/测试界面.md'
                                     },
                                 ]
@@ -542,14 +542,14 @@ export default defineConfig({
         sidebar:
         // 会根据导航栏中链接的文章路由来匹配不同的侧边栏，根据侧边栏前的路由来显示该路由下的文章内容
             {
-                'docs/算法/代码随想录/训练营':
+                '/docs/算法/代码随想录/训练营':
                     [
                         {
                             text: '算法训练营',
                             items:
                                 [
                                     {text: '随想录刷题计划', link: '/docs/算法/代码随想录/随想录刷题计划.md'},
-                                    {text: '每日任务汇总', link: 'docs/算法/代码随想录/每日任务汇总.md'},
+                                    {text: '每日任务汇总', link: '/docs/算法/代码随想录/每日任务汇总.md'},
                                     // ...setSidebarDefault('/docs/算法/代码随想录/训练营'),
                                     {
                                         collapsible: true,   // 允许折叠
@@ -611,7 +611,7 @@ export default defineConfig({
                                         text: '回溯算法',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/代码随想录/训练营/回溯算法'),
+                                                ...setSidebarDefault('/docs/算法/代码随想录/训练营/回溯算法'),
                                             ]
                                     },
                                     {
@@ -620,7 +620,7 @@ export default defineConfig({
                                         text: '贪心算法',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/代码随想录/训练营/贪心算法'),
+                                                ...setSidebarDefault('/docs/算法/代码随想录/训练营/贪心算法'),
                                             ]
                                     },
                                     {
@@ -629,7 +629,7 @@ export default defineConfig({
                                         text: '动态规划',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/代码随想录/训练营/动态规划'),
+                                                ...setSidebarDefault('/docs/算法/代码随想录/训练营/动态规划'),
                                             ]
                                     },
                                     {
@@ -638,7 +638,7 @@ export default defineConfig({
                                         text: '单调栈',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/代码随想录/训练营/单调栈'),
+                                                ...setSidebarDefault('/docs/算法/代码随想录/训练营/单调栈'),
                                             ]
                                     },
                                     {
@@ -647,13 +647,13 @@ export default defineConfig({
                                         text: '图论',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/代码随想录/训练营/图论'),
+                                                ...setSidebarDefault('/docs/算法/代码随想录/训练营/图论'),
                                             ]
                                     },
                                 ]
                         }
                     ],
-                'docs/算法/蓝桥杯':
+                '/docs/算法/蓝桥杯':
                     [
                         {
                             collapsible: true,   // 允许折叠
@@ -661,7 +661,7 @@ export default defineConfig({
                             text: '常用归纳',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/常用归纳')
+                                    ...setSidebarDefault('/docs/算法/蓝桥杯/常用归纳')
                                 ]
                         },
                         {
@@ -670,7 +670,7 @@ export default defineConfig({
                             text: '真题分析',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/真题分析')
+                                    ...setSidebarDefault('/docs/算法/蓝桥杯/真题分析')
                                 ]
                         },
                         {
@@ -679,7 +679,7 @@ export default defineConfig({
                             text: 'Java B组省赛真题',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/JavaB组省赛')
+                                    ...setSidebarDefault('/docs/算法/蓝桥杯/JavaB组省赛')
                                 ]
                         },
                         {
@@ -688,11 +688,11 @@ export default defineConfig({
                             text: 'Java B组国赛真题',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/蓝桥杯/JavaB组国赛')
+                                    ...setSidebarDefault('/docs/算法/蓝桥杯/JavaB组国赛')
                                 ]
                         }
                     ],
-                'docs/算法/左程云':
+                '/docs/算法/左程云':
                     [
                         {
                             collapsible: true,   // 允许折叠
@@ -700,15 +700,15 @@ export default defineConfig({
                             text: '左程云算法',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/左程云'),
+                                    ...setSidebarDefault('/docs/算法/左程云'),
                                 ]
                         }
                     ],
-                'docs/算法/洛谷':
+                '/docs/算法/洛谷':
                     [
                         {
                             text: '导论',
-                            link: 'docs/算法/洛谷/导论.md'
+                            link: '/docs/算法/洛谷/导论.md'
                         },
                         {
                             collapsible: true,   // 允许折叠
@@ -716,7 +716,7 @@ export default defineConfig({
                             text: '蓝桥杯真题',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/洛谷/蓝桥杯真题'),
+                                    ...setSidebarDefault('/docs/算法/洛谷/蓝桥杯真题'),
                                 ]
                         },
                         {
@@ -725,11 +725,11 @@ export default defineConfig({
                             text: '洛谷题单',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/算法/洛谷/洛谷题单'),
+                                    ...setSidebarDefault('/docs/算法/洛谷/洛谷题单'),
                                 ]
                         }
                     ],
-                'docs/算法/灵神题单':
+                '/docs/算法/灵神题单':
                     [
                         {
 
@@ -742,7 +742,7 @@ export default defineConfig({
                                         text: '编程入门题单',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/灵神题单/编程入门题单'),
+                                                ...setSidebarDefault('/docs/算法/灵神题单/编程入门题单'),
                                             ]
                                     },
                                     {
@@ -751,7 +751,7 @@ export default defineConfig({
                                         text: '网格图',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/算法/灵神题单/网格图'),
+                                                ...setSidebarDefault('/docs/算法/灵神题单/网格图'),
                                             ]
                                     },
                                 ]
@@ -770,7 +770,7 @@ export default defineConfig({
                         }
                     ],
                 // JavaSE 三个阶段
-                'docs/Java/第一阶段':
+                '/docs/Java/第一阶段':
                     [
                         {
                             text: '第一阶段', items:
@@ -778,19 +778,19 @@ export default defineConfig({
                                     {
                                         collapsible: true,   // 允许折叠
                                         collapsed: false,    // 一开始就展开
-                                        text: '内容大纲', link: 'docs/Java/韩顺平Java课程大纲.md',
+                                        text: '内容大纲', link: '/docs/Java/韩顺平Java课程大纲.md',
                                     },
                                     {
                                         collapsible: true,   // 允许折叠
                                         collapsed: false,    // 一开始就展开
-                                        text: '学习方法', link: 'docs/Java/学习方法.md',
+                                        text: '学习方法', link: '/docs/Java/学习方法.md',
                                     },
                                     {
                                         collapsible: true,   // 允许折叠
                                         collapsed: false,    // 一开始就展开
                                         text: '基本语法', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第一阶段/基本语法'),
+                                                ...setSidebarDefault('/docs/Java/第一阶段/基本语法'),
                                             ]
                                     },
                                     {
@@ -798,7 +798,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '面向对象基础', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第一阶段/面向对象基础'),
+                                                ...setSidebarDefault('/docs/Java/第一阶段/面向对象基础'),
                                             ]
                                     },
                                     {
@@ -806,7 +806,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '面向对象中级', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第一阶段/面向对象中级'),
+                                                ...setSidebarDefault('/docs/Java/第一阶段/面向对象中级'),
                                             ]
                                     },
                                     {
@@ -814,13 +814,13 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '项目', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第一阶段/项目'),
+                                                ...setSidebarDefault('/docs/Java/第一阶段/项目'),
                                             ]
                                     },
                                 ]
                         }
                     ],
-                'docs/Java/第二阶段':
+                '/docs/Java/第二阶段':
                     [
                         {
                             text: '第二阶段', items:
@@ -830,18 +830,18 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '面向对象高级', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/面向对象高级"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/面向对象高级"),
                                             ]
                                     },
-                                    {text: '66.枚举', link: 'docs/Java/第二阶段/66.枚举.md'},
-                                    {text: '67.注解', link: 'docs/Java/第二阶段/67.注解.md'},
-                                    {text: '68.异常', link: 'docs/Java/第二阶段/68.异常.md'},
+                                    {text: '66.枚举', link: '/docs/Java/第二阶段/66.枚举.md'},
+                                    {text: '67.注解', link: '/docs/Java/第二阶段/67.注解.md'},
+                                    {text: '68.异常', link: '/docs/Java/第二阶段/68.异常.md'},
                                     {
                                         collapsible: true,   // 允许折叠
                                         collapsed: false,    // 一开始就展开
                                         text: '常用类', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/常用类"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/常用类"),
                                             ]
                                     },
                                     {
@@ -849,7 +849,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '集合', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/集合"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/集合"),
                                             ]
                                     },
                                     {
@@ -857,7 +857,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '线程', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/线程"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/线程"),
                                             ]
                                     },
                                     {
@@ -865,7 +865,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: 'IO流文件', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/IO流文件"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/IO流文件"),
                                             ]
                                     },
                                     {
@@ -873,14 +873,14 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '项目：坦克大战', items:
                                             [
-                                                ...setSidebarDefault("docs/Java/第二阶段/项目：坦克大战"),
+                                                ...setSidebarDefault("/docs/Java/第二阶段/项目：坦克大战"),
                                             ]
                                     },
                                 ]
                         }
 
                     ],
-                'docs/Java/第三阶段':
+                '/docs/Java/第三阶段':
                     [
                         {
                             text: '第三阶段', items:
@@ -890,7 +890,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '网络编程', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第三阶段/网络编程'),
+                                                ...setSidebarDefault('/docs/Java/第三阶段/网络编程'),
                                             ]
                                     },
                                     {
@@ -898,7 +898,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '反射', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第三阶段/反射'),
+                                                ...setSidebarDefault('/docs/Java/第三阶段/反射'),
                                             ]
                                     },
                                     {
@@ -906,7 +906,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: 'JDBC', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第三阶段/JDBC'),
+                                                ...setSidebarDefault('/docs/Java/第三阶段/JDBC'),
                                             ]
                                     },
                                     {
@@ -914,7 +914,7 @@ export default defineConfig({
                                         collapsed: false,    // 一开始就展开
                                         text: '正则表达式', items:
                                             [
-                                                ...setSidebarDefault('docs/Java/第三阶段/正则表达式'),
+                                                ...setSidebarDefault('/docs/Java/第三阶段/正则表达式'),
                                             ]
                                     },
                                     {
@@ -927,7 +927,7 @@ export default defineConfig({
                                                     collapsed: false,    // 一开始就展开
                                                     text: '多用户即时通讯系统', items:
                                                         [
-                                                            ...setSidebarDefault('docs/Java/第三阶段/项目/多用户即时通讯系统'),
+                                                            ...setSidebarDefault('/docs/Java/第三阶段/项目/多用户即时通讯系统'),
                                                         ]
                                                 },
                                                 {
@@ -935,7 +935,7 @@ export default defineConfig({
                                                     collapsed: false,    // 一开始就展开
                                                     text: '满汉楼', items:
                                                         [
-                                                            ...setSidebarDefault('docs/Java/第三阶段/项目/满汉楼'),
+                                                            ...setSidebarDefault('/docs/Java/第三阶段/项目/满汉楼'),
                                                         ]
                                                 }
                                             ]
@@ -945,19 +945,19 @@ export default defineConfig({
                     ],
 
                 // Java8
-                'docs/Java/Java8':
+                '/docs/Java/Java8':
                     [
                         {
                             text: 'Java8',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/Java/Java8'),
+                                    ...setSidebarDefault('/docs/Java/Java8'),
                                 ]
                         }
                     ],
 
                 // Java章节作业三个阶段
-                'docs/Java/章节作业/第一阶段':
+                '/docs/Java/章节作业/第一阶段':
                     [
                         {
                             text: '第一阶段',
@@ -965,32 +965,32 @@ export default defineConfig({
                                 [
                                     {
                                         text: '第三章: 变量',
-                                        link: 'docs/Java/章节作业/第一阶段/第三章：变量/第三章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第三章：变量/第三章作业.md'
                                     },
                                     {
                                         text: '第四章: 运算符',
-                                        link: 'docs/Java/章节作业/第一阶段/第四章：运算符/第四章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第四章：运算符/第四章作业.md'
                                     },
                                     {
                                         text: '第五章: 程序控制结构',
-                                        link: 'docs/Java/章节作业/第一阶段/第五章：程序控制结构/第五章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第五章：程序控制结构/第五章作业.md'
                                     },
                                     {
                                         text: '第六章: 数组',
-                                        link: 'docs/Java/章节作业/第一阶段/第六章：数组/第六章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第六章：数组/第六章作业.md'
                                     },
                                     {
                                         text: '第七章: 面向对象基础',
-                                        link: 'docs/Java/章节作业/第一阶段/第七章：面向对象基础/第七章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第七章：面向对象基础/第七章作业.md'
                                     },
                                     {
                                         text: '第八章: 面向对象中级',
-                                        link: 'docs/Java/章节作业/第一阶段/第八章：面向对象中级/第八章作业.md'
+                                        link: '/docs/Java/章节作业/第一阶段/第八章：面向对象中级/第八章作业.md'
                                     },
                                 ]
                         },
                     ],
-                'docs/Java/章节作业/第二阶段':
+                '/docs/Java/章节作业/第二阶段':
                     [
                         {
                             text: '第二阶段',
@@ -998,36 +998,36 @@ export default defineConfig({
                                 [
                                     {
                                         text: '第十章: 面向对象高级',
-                                        link: 'docs/Java/章节作业/第二阶段/第十章：面向对象高级/第十章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十章：面向对象高级/第十章作业.md'
                                     },
                                     {
                                         text: '第十二章: 异常',
-                                        link: 'docs/Java/章节作业/第二阶段/第十二章：异常/第十二章作业,.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十二章：异常/第十二章作业,.md'
                                     },
                                     {
                                         text: '第十三章: 常用类',
-                                        link: 'docs/Java/章节作业/第二阶段/第十三章：常用类/第十三章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十三章：常用类/第十三章作业.md'
                                     },
                                     {
                                         text: '第十四章: 集合',
-                                        link: 'docs/Java/章节作业/第二阶段/第十四章：集合/第十四章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十四章：集合/第十四章作业.md'
                                     },
                                     {
                                         text: '第十五章: 泛型',
-                                        link: 'docs/Java/章节作业/第二阶段/第十五章：泛型/第十五章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十五章：泛型/第十五章作业.md'
                                     },
                                     {
                                         text: '第十六章: 多线程',
-                                        link: 'docs/Java/章节作业/第二阶段/第十七章：多线程/第十七章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十七章：多线程/第十七章作业.md'
                                     },
                                     {
                                         text: '第十九章: IO流',
-                                        link: 'docs/Java/章节作业/第二阶段/第十九章：IO流/第十九章作业.md'
+                                        link: '/docs/Java/章节作业/第二阶段/第十九章：IO流/第十九章作业.md'
                                     }
                                 ]
                         },
                     ],
-                'docs/Java/章节作业/第三阶段':
+                '/docs/Java/章节作业/第三阶段':
                     [
                         {
                             text: '第三阶段',
@@ -1035,40 +1035,40 @@ export default defineConfig({
                                 [
                                     {
                                         text: '第二十一章: 网络编程',
-                                        link: 'docs/Java/章节作业/第三阶段/第二十一章：网络编程/第二十一章作业.md'
+                                        link: '/docs/Java/章节作业/第三阶段/第二十一章：网络编程/第二十一章作业.md'
                                     },
                                     {
                                         text: '第二十三章：反射',
-                                        link: 'docs/Java/章节作业/第三阶段/第二十三章：反射/第二十三章作业.md'
+                                        link: '/docs/Java/章节作业/第三阶段/第二十三章：反射/第二十三章作业.md'
                                     },
                                     {
                                         text: '第二十七章：正则表达式',
-                                        link: 'docs/Java/章节作业/第三阶段/第二十七章：正则表达式/第二十七章作业.md'
+                                        link: '/docs/Java/章节作业/第三阶段/第二十七章：正则表达式/第二十七章作业.md'
                                     },
                                 ]
                         }
                     ],
-                'docs/算法/数据结构/Java':
+                '/docs/算法/数据结构/Java':
                     [
                         {
                             text: 'Java数据结构',
                             items:
                                 [
-                                    ...setSidebarDefault("docs/算法/数据结构/Java"),
+                                    ...setSidebarDefault("/docs/算法/数据结构/Java"),
                                 ]
                         }
                     ],
-                'docs/前端/微信小程序':
+                '/docs/前端/微信小程序':
                     [
                         {
                             text: '微信小程序',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/前端/微信小程序')
+                                    ...setSidebarDefault('/docs/前端/微信小程序')
                                 ]
                         }
                     ],
-                'docs/后端/MySQL':
+                '/docs/后端/MySQL':
                     [
                         {
                             text: '软件安装',
@@ -1076,19 +1076,19 @@ export default defineConfig({
                                 [
                                     {
                                         text: 'MySQL 5.7',
-                                        link: 'docs/后端/MySQL/软件安装/MySQL安装..md',
+                                        link: '/docs/后端/MySQL/软件安装/MySQL安装..md',
                                     },
                                     {
                                         text: 'Navicat 16',
-                                        link: "docs/后端/MySQL/软件安装/Navicat安装.md",
+                                        link: "/docs/后端/MySQL/软件安装/Navicat安装.md",
                                     },
                                     {
                                         text: 'SQLyog',
-                                        link: 'docs/后端/MySQL/软件安装/SQLyog安装.md'
+                                        link: '/docs/后端/MySQL/软件安装/SQLyog安装.md'
                                     },
                                     {
                                         text: 'DataGrip',
-                                        link: 'docs/后端/MySQL/软件安装/DataGrip安装.md'
+                                        link: '/docs/后端/MySQL/软件安装/DataGrip安装.md'
                                     }
 
                                 ]
@@ -1103,7 +1103,7 @@ export default defineConfig({
                                         text: '基础篇',
                                         items:
                                             [
-                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/基础篇"),
+                                                ...setSidebarDefault("/docs/后端/MySQL/MySQL/基础篇"),
                                             ]
                                     },
                                     {
@@ -1112,7 +1112,7 @@ export default defineConfig({
                                         text: '进阶篇',
                                         items:
                                             [
-                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/进阶篇"),
+                                                ...setSidebarDefault("/docs/后端/MySQL/MySQL/进阶篇"),
                                             ]
                                     },
                                     {
@@ -1121,7 +1121,7 @@ export default defineConfig({
                                         text: '运维篇',
                                         items:
                                             [
-                                                ...setSidebarDefault("docs/后端/MySQL/MySQL/运维篇"),
+                                                ...setSidebarDefault("/docs/后端/MySQL/MySQL/运维篇"),
                                             ]
                                     },
 
@@ -1135,52 +1135,52 @@ export default defineConfig({
                                 [
                                     {
                                         text: '1. 多表查询练习（必做）',
-                                        link: "docs/后端/MySQL/MYSQL作业/1. 多表查询练习（必做）.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/1. 多表查询练习（必做）.md"
                                     },
                                     {
                                         text: '2. 作业一',
-                                        link: "docs/后端/MySQL/MYSQL作业/2. 作业一.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/2. 作业一.md"
                                     },
                                     {
                                         text: '3. 作业二',
-                                        link: "docs/后端/MySQL/MYSQL作业/3. 作业二.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/3. 作业二.md"
                                     },
                                     {
                                         text: '4. 作业三',
-                                        link: "docs/后端/MySQL/MYSQL作业/4. 作业三.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/4. 作业三.md"
                                     },
                                     {
                                         text: '5. 作业四',
-                                        link: "docs/后端/MySQL/MYSQL作业/5. 作业四.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/5. 作业四.md"
                                     },
                                     {
                                         text: '6. 作业五',
-                                        link: "docs/后端/MySQL/MYSQL作业/6. 作业五.md"
+                                        link: "/docs/后端/MySQL/MYSQL作业/6. 作业五.md"
                                     },
                                 ]
                         }
                     ],
-                'docs/后端/Redis':
+                '/docs/后端/Redis':
                     [
                         {
                             text: 'Redis',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/后端/Redis')
+                                    ...setSidebarDefault('/docs/后端/Redis')
                                 ]
                         }
                     ],
-                'docs/后端/Springboot':
+                '/docs/后端/Springboot':
                     [
                         {
                             text: "Springboot",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/Springboot")
+                                    ...setSidebarDefault("/docs/后端/Springboot")
                                 ]
                         }
                     ],
-                'docs/后端/设计模式':
+                '/docs/后端/设计模式':
                     [
                         {
                             collapsible: true,   // 允许折叠
@@ -1188,11 +1188,11 @@ export default defineConfig({
                             text: '设计模式',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/后端/设计模式'),
+                                    ...setSidebarDefault('/docs/后端/设计模式'),
                                 ]
                         }
                     ],
-                'docs/后端/项目笔记':
+                '/docs/后端/项目笔记':
                     [
                         {
                             collapsible: true,   // 允许折叠
@@ -1200,7 +1200,7 @@ export default defineConfig({
                             text: "解决方案",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/项目笔记/解决方案")
+                                    ...setSidebarDefault("/docs/后端/项目笔记/解决方案")
                                 ]
                         },
                         {
@@ -1209,71 +1209,71 @@ export default defineConfig({
                             text: "工具与配置",
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/项目笔记/工具与配置")
+                                    ...setSidebarDefault("/docs/后端/项目笔记/工具与配置")
                                 ]
                         },
                     ],
-                'docs/后端/Spring':
+                '/docs/后端/Spring':
                     [
                         {
                             text: 'Spring',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/后端/Spring')
+                                    ...setSidebarDefault('/docs/后端/Spring')
                                 ]
                         }
                     ],
-                'docs/后端/DevOps/Linux':
+                '/docs/后端/DevOps/Linux':
                     [
                         {
                             text: 'Linux',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/后端/DevOps/Linux')
+                                    ...setSidebarDefault('/docs/后端/DevOps/Linux')
                                 ]
                         }
                     ],
-                'docs/后端/DevOps/Docker':
+                '/docs/后端/DevOps/Docker':
                     [
                         {
                             text: 'Docker',
                             items:
                                 [
-                                    ...setSidebarDefault("docs/后端/DevOps/Docker")
+                                    ...setSidebarDefault("/docs/后端/DevOps/Docker")
                                 ]
                         }
                     ],
-                'docs/项目/Tlias智能学习辅助系统/后端模块':
+                '/docs/项目/Tlias智能学习辅助系统/后端模块':
                     [
                         {
                             text: 'Tlias项目-后端模块',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/Tlias智能学习辅助系统/后端模块')
+                                    ...setSidebarDefault('/docs/项目/Tlias智能学习辅助系统/后端模块')
                                 ]
                         }
                     ],
-                'docs/项目/Tlias智能学习辅助系统/前端模块':
+                '/docs/项目/Tlias智能学习辅助系统/前端模块':
                     [
                         {
                             text: 'Tlias项目-前端模块',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/Tlias智能学习辅助系统/前端模块')
+                                    ...setSidebarDefault('/docs/项目/Tlias智能学习辅助系统/前端模块')
                                 ]
                         }
                     ],
-                'docs/项目/Tlias智能学习辅助系统/项目部署':
+                '/docs/项目/Tlias智能学习辅助系统/项目部署':
                     [
                         {
                             text: 'Tlias项目部署',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/Tlias智能学习辅助系统/项目部署')
+                                    ...setSidebarDefault('/docs/项目/Tlias智能学习辅助系统/项目部署')
                                 ]
                         }
                     ],
-                'docs/项目/苍穹外卖/项目介绍':
+                '/docs/项目/苍穹外卖/项目介绍':
                     [
                         {
                             text: '苍穹外卖-项目介绍',
@@ -1281,60 +1281,60 @@ export default defineConfig({
                                 [
                                     {
                                         text: '初始化SQL脚本',
-                                        link: 'docs/项目/苍穹外卖/项目介绍/初始化SQL脚本.md'
+                                        link: '/docs/项目/苍穹外卖/项目介绍/初始化SQL脚本.md'
                                     },
                                     {
                                         text: '数据库设计文档',
-                                        link: 'docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
+                                        link: '/docs/项目/苍穹外卖/项目介绍/数据库设计文档.md'
                                     },
                                     {
                                         text: 'Day 1',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/项目/苍穹外卖/项目介绍/Day 1')
+                                                ...setSidebarDefault('/docs/项目/苍穹外卖/项目介绍/Day 1')
                                             ]
                                     }
 
                                 ]
                         }
                     ],
-                'docs/项目/苍穹外卖/后端模块':
+                '/docs/项目/苍穹外卖/后端模块':
                     [
                         {
                             text: '苍穹外卖-后端模块',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/苍穹外卖/后端模块')
+                                    ...setSidebarDefault('/docs/项目/苍穹外卖/后端模块')
                                 ]
                         }
                     ],
-                'docs/项目/苍穹外卖/前端模块':
+                '/docs/项目/苍穹外卖/前端模块':
                     [
                         {
                             text: '苍穹外卖-前端模块',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/苍穹外卖/前端模块')
+                                    ...setSidebarDefault('/docs/项目/苍穹外卖/前端模块')
                                 ]
                         }
                     ],
-                'docs/项目/中州养老/项目介绍':
+                '/docs/项目/中州养老/项目介绍':
                     [
                         {
                             text: '中州养老-项目介绍',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/中州养老/项目介绍')
+                                    ...setSidebarDefault('/docs/项目/中州养老/项目介绍')
                                 ]
                         }
                     ],
-                'docs/项目/中州养老/后端模块':
+                '/docs/项目/中州养老/后端模块':
                     [
                         {
                             text: '中州养老-后端模块',
                             items:
                                 [
-                                    ...setSidebarDefault('docs/项目/中州养老/后端模块')
+                                    ...setSidebarDefault('/docs/项目/中州养老/后端模块')
                                 ]
                         }
                     ],
@@ -1348,46 +1348,46 @@ export default defineConfig({
                                 ]
                         }
                     ],
-                'docs/Python/爬虫':
+                '/docs/Python/爬虫':
                     [
                         {
                             text: 'Python爬虫🐍',
                             items:
                                 [
-                                    {text: '基本介绍', link: 'docs/Python/爬虫/基本介绍.md'},
+                                    {text: '基本介绍', link: '/docs/Python/爬虫/基本介绍.md'},
                                     {
                                         text: 'Urllib',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/Python/爬虫/Urllib'),
+                                                ...setSidebarDefault('/docs/Python/爬虫/Urllib'),
                                             ]
                                     },
                                     {
                                         text: '解析',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/Python/爬虫/解析'),
+                                                ...setSidebarDefault('/docs/Python/爬虫/解析'),
                                             ]
                                     },
                                     {
                                         text: 'Selenium',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/Python/爬虫/Selenium'),
+                                                ...setSidebarDefault('/docs/Python/爬虫/Selenium'),
                                             ]
                                     },
                                     {
                                         text: 'requests',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/Python/爬虫/requests'),
+                                                ...setSidebarDefault('/docs/Python/爬虫/requests'),
                                             ]
                                     },
                                     {
                                         text: 'Scrapy',
                                         items:
                                             [
-                                                ...setSidebarDefault('docs/Python/爬虫/Scrapy'),
+                                                ...setSidebarDefault('/docs/Python/爬虫/Scrapy'),
                                             ]
                                     },
 

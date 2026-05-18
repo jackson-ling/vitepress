@@ -79,6 +79,21 @@
   --site-transition-slow: 0.38s ease;                      /* 慢速过渡（主题切换等） */
   --site-glow-brand: rgba(52, 120, 217, 0.16);             /* 品牌色辉光 */
 
+  /* Homepage — 首页 Hero 区域 */
+  --site-hero-grid-color: rgba(15, 23, 42, 0.035);
+  --site-hero-grid-size: 32px;
+
+  /* Tech cards — 技术模块卡片 */
+  --site-card-bg: rgba(255, 255, 255, 0.6);
+  --site-card-border: rgba(15, 23, 42, 0.06);
+  --site-card-radius: 16px;
+  --site-card-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+  --site-card-shadow-hover: 0 12px 40px rgba(15, 23, 42, 0.08);
+
+  /* Tech tags — 技术标签 */
+  --site-tag-bg: rgba(15, 23, 42, 0.03);
+  --site-tag-border: rgba(15, 23, 42, 0.08);
+
   /* Layout — 布局辅助变量（供 VitePress 内部计算使用） */
   --vp-layout-top-height: 0px;
   --vp-doc-top-height: 0px;

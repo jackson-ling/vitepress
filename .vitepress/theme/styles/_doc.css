@@ -118,6 +118,16 @@
   color: var(--vp-c-text-2);
 }
 
+/* 引用块内标题 — 减小顶部留白
+ *  调整 padding-y 控制上下内边距（默认 12px，含 h4 时缩小）
+ *  调整 h4 margin-top 控制标题与顶边的额外间距 */
+.vp-doc blockquote:has(> h4:first-child) {
+  padding: 8px 16px;   /* ← 调整这里：上下内边距 */
+}
+.vp-doc blockquote > h4:first-child {
+  margin-top: 0;       /* ← 调整这里：h4 与 blockquote 顶边的间距 */
+}
+
 /* 图片 — 圆角、阴影、hover 上浮、点击放大光标 */
 .vp-doc img {
   border-radius: var(--site-radius);
@@ -314,10 +324,12 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
 
 /* ── Custom Blocks ───────────────────────────────────────────
  *  VitePress 内置容器：tip / warning / danger / info / details
+ *  顶部留白优化规则在 Layout.vue <style> 中统一管理
  * ──────────────────────────────────────────────────────────── */
-.custom-block {
+.vp-doc .custom-block {
   border-radius: var(--site-radius);
   border: 1px solid var(--vp-c-divider);
+  padding: 6px 16px 8px !important;
   transition: border-color var(--site-transition-fast);
 }
 

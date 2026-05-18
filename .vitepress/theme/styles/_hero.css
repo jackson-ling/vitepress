@@ -1,13 +1,13 @@
 /* ============================================================
- *  Hero — 首页 Hero 区域
+ *  Hero — 首页 Hero 区域（全屏居中布局）
  *
- *  包含：
- *    1. 首页容器与 Hero 区域布局
- *    2. Hero 文字排版（标题、副标题、标语）
- *    3. 光晕动画系统（脉冲 + 变色 + 旋转环）
- *    4. Logo 悬浮动画
- *    5. 特性卡片（Feature）网格布局
- *    6. 移动端响应式
+ *  将 VitePress 默认的左右分栏 VPHero 改为全屏居中布局：
+ *    - 100vh 视口高度
+ *    - Logo 居中 + 文字居中
+ *    - 点阵网格背景
+ *    - 光晕呼吸 + 变色动画
+ *    - Logo 悬浮动画
+ *    - 移动端响应式
  *
  *  注意：!important 用于覆盖 VitePress 默认主题的内联样式，
  *        这是 VitePress 主题定制的常见做法，非滥用。
@@ -15,78 +15,123 @@
 
 /* ── Homepage Container ───────────────────────────────────── */
 .VPHome {
-  min-height: auto !important;
+  min-height: 100vh !important;
   background: var(--vp-c-bg);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hero 区域 — 顶部留白与导航栏拉开距离 */
+/* 点阵网格背景 — CSS 实现，类似 Vercel 风格 */
+.VPHome::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, black 15%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, black 15%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hero 区域 — 全屏居中 */
 .VPHome .VPHero {
-  padding-top: 128px !important;
-  padding-bottom: 32px !important;
-  overflow: visible;   /* 允许光晕超出容器边界 */
+  min-height: calc(100vh - var(--vp-nav-height, 64px)) !important;
+  padding-top: 60px !important;
+  padding-bottom: 40px !important;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .VPHome .VPHero .container {
-  max-width: 1060px;
+  max-width: 800px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  text-align: center;
+  gap: 0;
 }
 
-/* 有 Logo 图片时：文字占 52%，图片占 38%，留 10% 间隙 */
+/* 文字区域 — 全宽居中 */
 .VPHome .VPHero.has-image .main {
-  width: 52%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 700px;
+  order: 2;
+  text-align: center;
 }
 
+/* 图片区域 — 文字上方居中 */
 .VPHome .VPHero.has-image .image {
-  width: 38%;
-  max-width: 380px;
-  pointer-events: none;   /* Logo 区域不拦截点击事件 */
+  width: 100%;
+  max-width: 320px;
+  order: 1;
+  margin-bottom: 24px;
+  pointer-events: none;
 }
 
 /* ── Hero Text ────────────────────────────────────────────── */
 .VPHome .VPHero .name,
 .VPHome .VPHero .text {
-  line-height: 1.16;
-  letter-spacing: -0.02em;
-  text-wrap: balance;   /* CSS Text Wrap Level 4 — 标题文字均匀换行 */
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
+/* 第一行 — 博客名 */
 .VPHome .VPHero .name {
   display: inline-block;
-  font-size: clamp(38px, 5vw, 58px) !important;   /* 响应式字号：最小 38px，视口 5%，最大 58px */
-  animation: hero-fade-up 0.8s 0s ease-out both;
+  font-size: clamp(30px, 5vw, 52px) !important;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-fade-up 0.8s 0.15s ease-out both;
 }
 
+/* 第二行 — 站点描述，与第一行视觉平衡 */
 .VPHome .VPHero .text {
+  font-size: clamp(28px, 4.5vw, 48px) !important;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--vp-c-text-1);
-  font-size: clamp(32px, 4.2vw, 48px);
-  animation: hero-fade-up 0.8s 0s ease-out both;
+  line-height: 1.2;
+  animation: hero-fade-up 0.8s 0.25s ease-out both;
 }
 
+/* 副描述 */
 .VPHome .VPHero .tagline {
-  max-width: 600px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--vp-c-text-2);
-  font-size: 19px;
+  font-size: 23px;
   line-height: 1.7;
-  text-wrap: pretty;   /* CSS Text Wrap Level 4 — 避免末行孤字 */
-  animation: hero-fade-up 0.8s 0s ease-out both;
+  text-wrap: pretty;
+  margin-top: 14px;
+  animation: hero-fade-up 0.8s 0.35s ease-out both;
 }
 
+/* 按钮组 */
 .VPHome .VPHero .actions {
-  gap: 14px;
+  gap: 12px;
   align-items: center;
-  animation: hero-fade-up 0.8s 0s ease-out both;
+  justify-content: center;
+  margin-top: 6px;
+  animation: hero-fade-up 0.8s 0.5s ease-out both;
 }
 
 /* ── Keyframe Animations ──────────────────────────────────── */
 
-/* 通用入场动画 — 从下方 16px 淡入 */
+/* 通用入场动画 — 从下方 20px 淡入 */
 @keyframes hero-fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -94,224 +139,120 @@
   }
 }
 
-/* 光晕脉冲 — 缩放 + 透明度 + 模糊度周期性变化 */
+/* 光晕呼吸 — 缩放 + 透明度 + 模糊度周期性变化 */
 @keyframes halo-pulse {
   0%, 100% {
-    opacity: 0.68;
+    opacity: 0.55;
     transform: translate(-50%, -50%) scale(0.88);
-    filter: blur(30px) saturate(1.1);
+    filter: blur(30px) saturate(1.0);
   }
   50% {
-    opacity: 0.88;
-    transform: translate(-50%, -50%) scale(1.0);
-    filter: blur(36px) saturate(1.3);
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(1.02);
+    filter: blur(36px) saturate(1.1);
   }
 }
 
-/* 光晕变色 — 紫粉色叠加层的淡入淡出（::before 伪元素使用） */
+/* 光晕变色 — 紫粉色叠加层的淡入淡出 */
 @keyframes halo-color-fade {
   0%, 100% { opacity: 0; }
-  30% { opacity: 0.6; }
-  50% { opacity: 0.85; }
-  70% { opacity: 0.5; }
+  30% { opacity: 0.35; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.3; }
 }
 
 /* Logo 悬浮 — 轻微上下浮动 */
 @keyframes logo-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* 光晕旋转环 — 四色边框循环旋转（::after 伪元素使用）
- * 四种颜色：蓝(59,130,246) / 青(6,182,212) / 天蓝(14,165,233) / 紫(139,92,246) / 粉(236,72,153)
- * 0% 与 100% 相同以确保循环无缝衔接 */
-@keyframes halo-ring-rotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-    border-top-color: rgba(59, 130, 246, 0.35);
-    border-right-color: rgba(6, 182, 212, 0.2);
-    border-bottom-color: rgba(14, 165, 233, 0.22);
-    border-left-color: rgba(139, 92, 246, 0.15);
-  }
-  25% {
-    border-top-color: rgba(6, 182, 212, 0.4);
-    border-right-color: rgba(139, 92, 246, 0.3);
-    border-bottom-color: rgba(59, 130, 246, 0.25);
-    border-left-color: rgba(236, 72, 153, 0.2);
-  }
-  50% {
-    border-top-color: rgba(139, 92, 246, 0.35);
-    border-right-color: rgba(236, 72, 153, 0.25);
-    border-bottom-color: rgba(6, 182, 212, 0.3);
-    border-left-color: rgba(59, 130, 246, 0.2);
-  }
-  75% {
-    border-top-color: rgba(236, 72, 153, 0.3);
-    border-right-color: rgba(59, 130, 246, 0.2);
-    border-bottom-color: rgba(139, 92, 246, 0.28);
-    border-left-color: rgba(6, 182, 212, 0.25);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-    border-top-color: rgba(59, 130, 246, 0.35);
-    border-right-color: rgba(6, 182, 212, 0.2);
-    border-bottom-color: rgba(14, 165, 233, 0.22);
-    border-left-color: rgba(139, 92, 246, 0.15);
-  }
+  50% { transform: translateY(-5px); }
 }
 
 /* ── Logo & Halo ───────────────────────────────────────────── */
 
-/* Logo 容器 — 居中定位，作为光晕的参照物 */
+/* Logo 容器 */
 .VPHome .VPHero .image-container {
   display: flex;
-  width: 320px;
-  height: 320px;
+  width: 240px;
+  height: 240px;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   animation: hero-fade-up 0.8s 0s ease-out both;
 }
 
-/* 光晕主体 — 绝对定位居中，使用 _tokens.css 中的品牌色径向渐变 */
+/* 光晕主体 — 呼吸脉冲 */
 .VPHome .VPHero .image-bg {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
   z-index: 0 !important;
-  width: 330px !important;
-  height: 330px !important;
+  width: 280px !important;
+  height: 280px !important;
   border-radius: 999px;
   background-image: var(--vp-home-hero-image-background-image) !important;
   transform: translate(-50%, -50%) scale(0.82);
   transform-origin: center;
-  animation: halo-pulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: halo-pulse 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* 光晕变色叠加层 — 紫粉色渐变，通过 opacity 动画实现呼吸效果 */
+/* 光晕变色叠加层 — 紫粉色渐变呼吸 */
 .VPHome .VPHero .image-bg::before {
   content: "";
   position: absolute;
-  inset: -10%;   /* 比光晕大 10%，避免边缘裁切 */
+  inset: -15%;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 65% 30%, rgba(139, 92, 246, 0.65) 0%, transparent 50%),
-    radial-gradient(circle at 35% 75%, rgba(236, 72, 153, 0.5) 0%, transparent 55%),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
-  filter: blur(40px);
+    radial-gradient(circle at 65% 30%, rgba(139, 92, 246, 0.35) 0%, transparent 50%),
+    radial-gradient(circle at 35% 75%, rgba(236, 72, 153, 0.25) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+  filter: blur(50px);
   opacity: 0;
-  animation: halo-color-fade 8s ease-in-out infinite;
+  animation: halo-color-fade 9s ease-in-out infinite;
   pointer-events: none;
 }
 
-/* 光晕旋转环 — mask 裁切为环形，旋转时四色边框交替变化 */
-.VPHome .VPHero .image-bg::after {
-  content: "";
-  position: absolute;
-  inset: -4%;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  border-top-color: rgba(59, 130, 246, 0.25);
-  border-right-color: rgba(6, 182, 212, 0.15);
-  border-bottom-color: rgba(14, 165, 233, 0.18);
-  border-left-color: rgba(139, 92, 246, 0.12);
-  transform-origin: center;
-  animation: halo-ring-rotate 8s linear infinite;
-  /* mask 裁切：中间 82% 透明，83%-95% 显示环，96% 以外透明 */
-  mask: radial-gradient(circle, transparent 82%, black 83%, black 95%, transparent 96%);
-  -webkit-mask: radial-gradient(circle, transparent 82%, black 83%, black 95%, transparent 96%);
-  pointer-events: none;
-}
-
-/* Logo 图片 — 相对定位浮于光晕之上，hover 时微放大 + 增加饱和度 */
+/* Logo 图片 — 悬浮动画 */
 .VPHome .VPHero .image-src {
   position: relative !important;
   top: auto !important;
   left: auto !important;
   z-index: 1;
-  max-width: 315px;
+  max-width: 235px;
   margin: 0 auto;
   display: block;
+  border-radius: 20px;
   animation: logo-float 3.5s ease-in-out infinite;
   transition: scale var(--site-transition), filter var(--site-transition);
-  will-change: transform;   /* 提示浏览器提前创建合成层 */
+  will-change: transform;
 }
 
 .VPHome .VPHero .image:hover .image-src {
-  scale: 1.02;
-  filter: saturate(1.05);
+  scale: 1.03;
+  filter: saturate(1.08);
 }
 
-/* ── Features ──────────────────────────────────────────────── */
+/* ── Features — 隐藏默认 Feature 区域（由 HomeExtras 替代） ── */
 .VPHome .VPFeatures {
-  padding-top: 24px !important;
-  padding-bottom: 40px !important;
-  animation: hero-fade-up 0.8s 0s ease-out both;
+  display: none !important;
 }
 
-.VPHome .VPFeatures .container {
-  max-width: 1060px;
-}
-
-.VPHome .VPFeatures .items {
-  gap: 20px !important;
-}
-
-/* 覆盖 VitePress 默认的特性卡片 hover 上浮效果 */
-.VPHome .VPFeatures .items .item,
-.VPHome .VPFeatures .items .item:hover {
-  transform: none !important;
-}
-
-.VPFeature {
-  min-height: 148px !important;
-  margin: 0 !important;
-  border: 1px solid var(--site-panel-border) !important;
-  border-radius: var(--site-radius-lg) !important;
-  background: var(--vp-c-bg) !important;
-  box-shadow: var(--site-shadow-sm) !important;
-  transition: border-color var(--site-transition), box-shadow var(--site-transition);
-}
-
-.VPFeature .icon {
-  color: var(--vp-c-brand-1);
-}
-
-.VPFeature .title {
-  color: var(--vp-c-text-1);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.VPFeature .details {
-  color: var(--vp-c-text-2);
-  font-size: 15px;
-  line-height: 1.78;
-}
-
-/* 特性卡片 — 桌面端三列等宽网格 */
-@media (min-width: 960px) {
-  .VPHome .VPFeatures .items {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    align-items: stretch;
-  }
-
-  .VPHome .VPFeatures .items .item {
-    width: auto !important;
-    max-width: none !important;
-  }
+/* ── 去除 VPHome 底部多余间距 ──────────────────────────────── */
+.VPHome {
+  margin-bottom: 0 !important;
 }
 
 /* ── Hero Mobile ──────────────────────────────────────────── */
 @media (max-width: 959px) {
   .VPHome .VPHero {
-    padding-top: 96px !important;
+    padding-top: 40px !important;
     padding-bottom: 24px !important;
+    min-height: auto !important;
   }
 
-  /* 移动端：文字与图片各占 100%，垂直堆叠 */
+  .VPHome .VPHero .container {
+    gap: 0;
+  }
+
   .VPHome .VPHero.has-image .main,
   .VPHome .VPHero.has-image .image {
     width: 100%;
@@ -324,34 +265,41 @@
   }
 
   .VPHome .VPHero .tagline {
-    max-width: 620px;
-    margin-right: auto;
-    margin-left: auto;
+    max-width: 480px;
     font-size: 15px;
-    line-height: 1.66;
+    line-height: 1.65;
   }
 
   .VPHome .VPHero .image-container {
-    width: 240px;
-    height: 240px;
-    margin: 8px auto 0;
+    width: 180px;
+    height: 180px;
   }
 
   .VPHome .VPHero .image-bg {
-    width: 250px !important;
-    height: 250px !important;
+    width: 200px !important;
+    height: 200px !important;
   }
 
   .VPHome .VPHero .image-src {
-    max-width: 240px;
+    max-width: 175px;
+  }
+}
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .VPHome,
+  .VPHome .VPHero .image-container,
+  .VPHome .VPHero .image-bg,
+  .VPHome .VPHero .image-src,
+  .VPHome .VPHero .name,
+  .VPHome .VPHero .text,
+  .VPHome .VPHero .tagline,
+  .VPHome .VPHero .actions {
+    animation: none !important;
   }
 
-  .VPHome .VPFeatures {
-    padding-bottom: 28px !important;
-  }
-
-  .VPFeature {
-    min-height: auto !important;
-    padding: 18px 20px !important;
+  .VPHome .VPHero .image-bg::before {
+    animation: none !important;
+    opacity: 0.4;
   }
 }
