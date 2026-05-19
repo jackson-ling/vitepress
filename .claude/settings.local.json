@@ -84,7 +84,12 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:vitepress.dev)",
       "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_context7_context7__query-docs"
+      "mcp__plugin_context7_context7__query-docs",
+      "WebFetch(domain:www.trae.ai)",
+      "Bash(curl -s \"http://localhost:5174/docs/Description\")",
+      "Bash(curl -s http://localhost:5175)",
+      "Bash(rm -rf \"C:/Users/jackson/Desktop/vitepress/.vitepress/dist\")",
+      "Bash(curl -s http://localhost:5176)"
     ]
   },
   "enabledPlugins": {

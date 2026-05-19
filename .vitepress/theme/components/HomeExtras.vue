@@ -59,6 +59,38 @@ const categories = [
   },
 ]
 
+/* ── 友情链接数据 ─────────────────────────────────────────── */
+const friendLinks = [
+  {
+    name: 'Irai',
+    desc: '技术探索者，记录学习与生活',
+    icon: '🌐',
+    color: '#0d9488',
+    link: 'http://iraionly.cn/',
+  },
+  {
+    name: '代码随想录',
+    desc: '程序员卡尔的算法与编程教程',
+    icon: '📘',
+    color: '#2563eb',
+    link: 'https://programmercarl.com',
+  },
+  {
+    name: 'VitePress',
+    desc: 'Vue & Vite 驱动的静态站点生成器',
+    icon: '⚡',
+    color: '#eab308',
+    link: 'https://vitepress.dev',
+  },
+  {
+    name: 'LeetCode',
+    desc: '全球领先的在线编程练习平台',
+    icon: '🎯',
+    color: '#ea580c',
+    link: 'https://leetcode.cn',
+  },
+]
+
 /* ── 圆形 3D 立体轮播 ─────────────────────────────────────── */
 const CAROUSEL_RADIUS = 420   // ← 卡片间距：值越大卡片越分散，越小越紧凑
 const ANGLE_STEP = 360 / categories.length  // 72° per card（自动计算，卡片数量变化时会联动）
@@ -335,6 +367,43 @@ function onIconError(e) {
         </div>
       </div>
     </section>
+
+    <!-- ── 友情链接 ─────────────────────────────────────── -->
+    <section class="friends-section">
+      <div class="section-header anim-item">
+        <h2 class="section-title">友情链接</h2>
+        <p class="section-sub">Friendly Links</p>
+      </div>
+      <div class="friends-grid">
+        <a
+          v-for="friend in friendLinks"
+          :key="friend.name"
+          :href="friend.link"
+          target="_blank"
+          rel="noopener"
+          class="friend-card anim-item"
+        >
+          <!-- 顶部渐变装饰条 -->
+          <div class="friend-card__bar" :style="{ background: `linear-gradient(90deg, ${friend.color}, ${friend.color}88)` }"></div>
+          <!-- 头像区域 -->
+          <div class="friend-card__avatar" :style="{ background: `${friend.color}15`, color: friend.color }">
+            <span>{{ friend.icon }}</span>
+          </div>
+          <!-- 信息区域 -->
+          <div class="friend-card__info">
+            <h3 class="friend-card__name">{{ friend.name }}</h3>
+            <p class="friend-card__desc">{{ friend.desc }}</p>
+          </div>
+          <!-- 底部链接提示 -->
+          <div class="friend-card__footer">
+            <span class="friend-card__link-text" :style="{ color: friend.color }">访问主页</span>
+            <svg class="friend-card__arrow" :style="{ stroke: friend.color }" width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -454,6 +523,133 @@ function onIconError(e) {
   color: var(--vp-c-text-2);
   margin: 0;
   font-weight: 500;
+}
+
+/* ── 友情链接 ────────────────────────────────────────────── */
+.friends-section {
+  margin-bottom: 52px;
+}
+
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.friend-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 20px;
+  border-radius: var(--site-card-radius);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.friend-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.14);
+}
+
+/* 顶部渐变装饰条 */
+.friend-card__bar {
+  width: 100%;
+  height: 4px;
+  border-radius: var(--site-card-radius) var(--site-card-radius) 0 0;
+  transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.friend-card:hover .friend-card__bar {
+  height: 6px;
+}
+
+/* 头像 */
+.friend-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 14px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+}
+
+.friend-card:hover .friend-card__avatar {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* 信息区域 */
+.friend-card__info {
+  text-align: center;
+  flex: 1;
+  width: 100%;
+}
+
+.friend-card__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.friend-card__desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--vp-c-text-3);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 底部链接提示 */
+.friend-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--site-card-border);
+  width: 100%;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.friend-card:hover .friend-card__footer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.friend-card__link-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.friend-card__arrow {
+  transition: transform 0.25s ease;
+}
+
+.friend-card:hover .friend-card__arrow {
+  transform: translateX(2px);
 }
 
 /* ── 技术栈区域 ──────────────────────────────────────────── */
@@ -751,6 +947,33 @@ function onIconError(e) {
     gap: 14px;
   }
 
+  .friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .friend-card {
+    padding: 0 16px 16px;
+  }
+
+  .friend-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 24px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+
+  .friend-card__name {
+    font-size: 14px;
+  }
+
+  .friend-card__footer {
+    opacity: 1;
+    transform: none;
+  }
+
   .tip-card {
     padding: 16px 18px;
   }
@@ -919,5 +1142,20 @@ function onIconError(e) {
 
 .dark .carousel-arrow:hover {
   border-color: rgba(104, 116, 163, 0.15);
+}
+
+/* 友情链接 — 暗色模式 */
+.dark .friend-card {
+  background: rgba(31, 31, 35, 0.65);
+  border-color: rgba(161, 161, 170, 0.06);
+}
+
+.dark .friend-card:hover {
+  border-color: rgba(161, 161, 170, 0.12);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+.dark .friend-card__footer {
+  border-top-color: rgba(161, 161, 170, 0.06);
 }
 </style>

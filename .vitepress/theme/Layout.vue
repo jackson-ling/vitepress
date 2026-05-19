@@ -4,6 +4,7 @@ import { useData, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import SiteEnhancer from './components/SiteEnhancer.vue'
 import HomeExtras from './components/HomeExtras.vue'
+import WelcomeOverlay from './components/WelcomeOverlay.vue'
 
 const { Layout } = DefaultTheme
 const { isDark } = useData()
@@ -43,6 +44,21 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     }
   )
 })
+
+/* ── 欢迎遮罩关闭后首页内容入场动画 ──────────────────────── */
+function onWelcomeDismissed() {
+  nextTick(() => {
+    const home = document.querySelector('.VPHome')
+    if (!home) return
+    home.classList.add('welcome-content-enter')
+    const cleanup = () => {
+      home.classList.remove('welcome-content-enter')
+      home.removeEventListener('animationend', cleanup)
+    }
+    home.addEventListener('animationend', cleanup)
+    setTimeout(cleanup, 1200)
+  })
+}
 
 /* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
 function onBeforeRouteChange() {
@@ -85,6 +101,7 @@ onUnmounted(() => {
     </template>
   </Layout>
   <SiteEnhancer />
+  <WelcomeOverlay blog-name="Jackson 凌" @dismiss="onWelcomeDismissed" />
 </template>
 
 <style>
@@ -117,6 +134,24 @@ onUnmounted(() => {
 .custom-block blockquote h3,
 .custom-block blockquote h4 {
   margin-top: 2px !important;
+}
+
+/* ── 欢迎遮罩关闭后首页内容入场动画 ─────────────────────────
+ *  从下方滑入 + 透明度渐显，模拟 trae.ai 风格的沉浸式入场
+ * ──────────────────────────────────────────────────────────── */
+@keyframes welcome-content-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.VPHome.welcome-content-enter {
+  animation: welcome-content-slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ── View Transition — 主题切换动画 ──────────────────────────── */
