@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: doc
 ---
 
 <h2><center>常用emoji</center></h2>

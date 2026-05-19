@@ -89,7 +89,13 @@
       "Bash(curl -s \"http://localhost:5174/docs/Description\")",
       "Bash(curl -s http://localhost:5175)",
       "Bash(rm -rf \"C:/Users/jackson/Desktop/vitepress/.vitepress/dist\")",
-      "Bash(curl -s http://localhost:5176)"
+      "Bash(curl -s http://localhost:5176)",
+      "Bash(xargs grep -l \"layout.*home\\\\|hero:\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174)",
+      "Bash(pkill -f vitepress)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5175)",
+      "Bash(pkill -f \"node.*5174\")",
+      "Bash(pkill -f \"node.*5175\")"
     ]
   },
   "enabledPlugins": {

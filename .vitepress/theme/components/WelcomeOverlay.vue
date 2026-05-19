@@ -105,13 +105,14 @@ onUnmounted(() => {
   >
     <!-- 背景装饰 -->
     <div class="welcome-bg" aria-hidden="true">
-      <div class="welcome-bg__grid"></div>
-      <div class="welcome-bg__orb welcome-bg__orb--1"></div>
-      <div class="welcome-bg__orb welcome-bg__orb--2"></div>
-      <div class="welcome-bg__orb welcome-bg__orb--3"></div>
-      <div class="welcome-bg__particles">
-        <span v-for="i in 30" :key="i" class="welcome-bg__particle" :style="`--i:${i}`"></span>
-      </div>
+      <div class="welcome-bg__noise"></div>
+
+      <div class="welcome-bg__cross welcome-bg__cross--tl"></div>
+      <div class="welcome-bg__cross welcome-bg__cross--tr"></div>
+      <div class="welcome-bg__cross welcome-bg__cross--bl"></div>
+      <div class="welcome-bg__cross welcome-bg__cross--br"></div>
+      <div class="welcome-bg__line welcome-bg__line--h"></div>
+      <div class="welcome-bg__line welcome-bg__line--v"></div>
     </div>
 
     <!-- 内容 -->
@@ -149,7 +150,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, #0f1b3d 0%, #1a2d6b 50%, #12204e 100%);
+  background: #0d1321;
   animation: overlay-in 0.5s ease-out both;
 }
 
@@ -164,9 +165,9 @@ onUnmounted(() => {
 }
 
 @keyframes overlay-exit {
-  0% { opacity: 1; transform: scale(1); }
+  0% { opacity: 1; }
   30% { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.04); }
+  100% { opacity: 0; }
 }
 
 /* ── 背景层 ──────────────────────────────────────────────── */
@@ -177,12 +178,29 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-/* 点阵网格 */
+/* 噪点纹理 — 增加质感，避免纯色死板 */
+.welcome-bg__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  pointer-events: none;
+  animation: noise-in 0.8s 0.2s ease-out both;
+}
+
+@keyframes noise-in {
+  from { opacity: 0; }
+  to { opacity: 0.04; }
+}
+
+/* 点阵网格 — 克制，仅作微妙装饰 */
 .welcome-bg__grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(165, 180, 252, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(165, 180, 252, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
   opacity: 0;
@@ -191,99 +209,7 @@ onUnmounted(() => {
 
 @keyframes grid-in {
   from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* 光斑 */
-.welcome-bg__orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0;
-  animation: orb-in 1.4s 0.2s ease-out forwards;
-}
-
-@keyframes orb-in {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.welcome-bg__orb--1 {
-  top: -10%;
-  right: -5%;
-  width: 380px;
-  height: 380px;
-  background: rgba(99, 102, 241, 0.15);
-}
-
-.welcome-bg__orb--2 {
-  bottom: -12%;
-  left: -8%;
-  width: 420px;
-  height: 420px;
-  background: rgba(79, 70, 229, 0.12);
-}
-
-.welcome-bg__orb--3 {
-  bottom: 10%;
-  right: 20%;
-  width: 300px;
-  height: 300px;
-  background: rgba(129, 140, 248, 0.1);
-  animation-delay: 0.4s;
-}
-
-/* ── 漂浮粒子 ────────────────────────────────────────────── */
-.welcome-bg__particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.welcome-bg__particle {
-  position: absolute;
-  width: calc(2px + var(--i) * 0.3px);
-  height: calc(2px + var(--i) * 0.3px);
-  background: rgba(165, 180, 252, 0.4);
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgba(165, 180, 252, 0.2);
-  opacity: 0;
-  animation: particle-float 12s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -0.4s);
-  left: calc(var(--i) * 3.3% + 1%);
-  top: calc(var(--i) * 3.2% + 2%);
-}
-
-.welcome-bg__particle:nth-child(3n) {
-  background: rgba(139, 92, 246, 0.35);
-  animation-duration: 15s;
-}
-
-.welcome-bg__particle:nth-child(5n) {
-  background: rgba(129, 140, 248, 0.3);
-  animation-duration: 18s;
-  width: calc(1.5px + var(--i) * 0.2px);
-  height: calc(1.5px + var(--i) * 0.2px);
-}
-
-@keyframes particle-float {
-  0% {
-    opacity: 0;
-    transform: translateY(0) translateX(0);
-  }
-  15% {
-    opacity: 0.7;
-  }
-  50% {
-    transform: translateY(calc(-30px - var(--i) * 5px)) translateX(calc(15px - var(--i) * 1.5px));
-  }
-  85% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(calc(-60px - var(--i) * 8px)) translateX(calc(-10px + var(--i) * 1px));
-  }
+  to { opacity: 0.6; }
 }
 
 /* ── 内容区 ──────────────────────────────────────────────── */
@@ -431,9 +357,8 @@ onUnmounted(() => {
   .welcome-content__desc,
   .welcome-content__btn,
   .welcome-content__hint,
-  .welcome-bg__orb,
-  .welcome-bg__grid,
-  .welcome-bg__particle {
+  .welcome-bg__noise,
+  .welcome-bg__grid {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -466,21 +391,6 @@ onUnmounted(() => {
 
   .welcome-content__desc {
     font-size: 14px;
-  }
-
-  .welcome-bg__orb--1 {
-    width: 240px;
-    height: 240px;
-  }
-
-  .welcome-bg__orb--2 {
-    width: 280px;
-    height: 280px;
-  }
-
-  .welcome-bg__orb--3 {
-    width: 200px;
-    height: 200px;
   }
 }
 </style>

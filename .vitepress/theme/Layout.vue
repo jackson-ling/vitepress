@@ -45,13 +45,15 @@ if (typeof document !== 'undefined' && !localStorage.getItem('welcome-overlay-sh
   document.body.classList.add('welcome-blocking')
 }
 
-provide('toggle-overlay', () => {
+function toggleOverlay() {
   if (overlayState.show) {
     overlayState.close()
   } else {
     overlayState.open()
   }
-})
+}
+
+provide('toggle-overlay', toggleOverlay)
 
 /* ── 主题切换动画（View Transition API + 圆形裁剪） ────────── */
 const enableTransitions = () =>
@@ -166,6 +168,14 @@ onUnmounted(() => {
 
 <template>
   <Layout>
+    <template #home-hero-actions-after>
+      <div class="hero-overlay-toggle-wrap">
+        <button class="hero-overlay-toggle" @click="toggleOverlay()" title="进入欢迎页">
+          <span class="hero-overlay-toggle__shimmer"></span>
+          <span class="hero-overlay-toggle__text">进入欢迎页</span>
+        </button>
+      </div>
+    </template>
     <template #home-hero-after>
       <HomeExtras />
     </template>
@@ -238,5 +248,137 @@ body.welcome-blocking .VPHome {
 
 .VPSwitchAppearance .check .icon {
   top: -2px;
+}
+
+/* ── 欢迎页按钮 — 流光 + 边框脉冲光晕 ─────────────────────── */
+.hero-overlay-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  animation: hero-fade-up 0.8s 0.65s ease-out both;
+}
+
+.hero-overlay-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 440px;
+  max-width: 100%;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  color: var(--vp-button-alt-text);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(168, 130, 255, 0.06), rgba(99, 102, 241, 0.04));
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 20px;
+  padding: 0 24px;
+  line-height: 42px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.4s, transform 0.25s;
+  animation: border-pulse 3s ease-in-out infinite;
+}
+
+/* 流光扫过效果 — 柔和的微光，宽渐变 + 低透明度 */
+.hero-overlay-toggle__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(99, 102, 241, 0.04) 38%,
+    rgba(168, 130, 255, 0.06) 50%,
+    rgba(99, 102, 241, 0.04) 62%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: shimmer-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  50%, 100% { transform: translateX(100%); }
+}
+
+/* 边框脉冲光晕 — 柔和呼吸，范围更大、强度更低 */
+@keyframes border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px -4px rgba(99, 102, 241, 0.08);
+  }
+}
+
+.hero-overlay-toggle:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--vp-button-alt-hover-text);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 130, 255, 0.1), rgba(99, 102, 241, 0.08));
+  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
+  animation: none;
+}
+
+.hero-overlay-toggle:hover .hero-overlay-toggle__shimmer {
+  animation: shimmer-sweep 4s ease-in-out infinite;
+}
+
+.hero-overlay-toggle:active {
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--vp-button-alt-active-text);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 130, 255, 0.12), rgba(99, 102, 241, 0.1));
+  transition: color 0.1s, border-color 0.1s, background 0.1s;
+  transform: scale(0.98);
+}
+
+.hero-overlay-toggle__text {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .hero-overlay-toggle {
+  animation-name: border-pulse-dark;
+  border-color: rgba(168, 130, 255, 0.12);
+  background: linear-gradient(135deg, rgba(168, 130, 255, 0.04), rgba(196, 167, 255, 0.05), rgba(168, 130, 255, 0.04));
+}
+
+.dark .hero-overlay-toggle:hover {
+  border-color: rgba(168, 130, 255, 0.2);
+  background: linear-gradient(135deg, rgba(168, 130, 255, 0.08), rgba(196, 167, 255, 0.09), rgba(168, 130, 255, 0.08));
+}
+
+@keyframes border-pulse-dark {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(168, 130, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px -4px rgba(168, 130, 255, 0.08);
+  }
+}
+
+.dark .hero-overlay-toggle__shimmer {
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(168, 130, 255, 0.03) 38%,
+    rgba(196, 167, 255, 0.05) 50%,
+    rgba(168, 130, 255, 0.03) 62%,
+    transparent 80%
+  );
+}
+
+@media (max-width: 959px) {
+  .hero-overlay-toggle-wrap {
+    margin-top: 24px;
+  }
+  .hero-overlay-toggle {
+    width: 340px;
+    padding: 0 18px;
+    line-height: 38px;
+    font-size: 13px;
+  }
 }
 </style>

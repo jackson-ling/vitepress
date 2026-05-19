@@ -272,15 +272,6 @@ function onIconError(e) {
 
 <template>
   <div class="home-extras">
-    <!-- ── 遮罩开关按钮 ──────────────────────────────────── -->
-    <button class="overlay-toggle-btn" @click="toggleOverlay()" title="打开欢迎页">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9S16.97 3 12 3zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" fill="currentColor" opacity="0.4"/>
-        <path d="M12 7v5l3.5 3.5 1.42-1.42L13.5 11.25V7h-1.5z" fill="currentColor"/>
-      </svg>
-      <span>欢迎页</span>
-    </button>
-
     <!-- ── TIP 标语区域 ──────────────────────────────────── -->
     <section class="tips-section">
       <div class="tips-grid">
@@ -425,43 +416,6 @@ function onIconError(e) {
   margin: 0 auto;
   padding: 24px 24px 80px;
   position: relative;
-}
-
-/* ── 遮罩开关按钮 ───────────────────────────────────────── */
-.overlay-toggle-btn {
-  position: absolute;
-  top: 0;
-  right: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--site-card-border);
-  background: var(--site-card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--vp-c-text-3);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 2;
-}
-
-.overlay-toggle-btn:hover {
-  color: var(--vp-c-brand-1);
-  border-color: rgba(99, 102, 241, 0.25);
-  background: rgba(99, 102, 241, 0.06);
-  transform: translateY(-1px);
-}
-
-.overlay-toggle-btn:active {
-  transform: scale(0.97);
-}
-
-.overlay-toggle-btn svg {
-  flex-shrink: 0;
 }
 
 /* ── 入场动画 ───────────────────────────────────────────── */
@@ -1107,12 +1061,6 @@ function onIconError(e) {
   .section-title {
     font-size: 22px;
   }
-
-  .overlay-toggle-btn {
-    right: 16px;
-    padding: 6px 10px;
-    font-size: 11px;
-  }
 }
 
 /* ── Reduced Motion ─────────────────────────────────────── */
@@ -1200,12 +1148,6 @@ function onIconError(e) {
 
 .dark .carousel-arrow:hover {
   border-color: rgba(104, 116, 163, 0.15);
-}
-
-/* 遮罩开关按钮 — 暗色模式 */
-.dark .overlay-toggle-btn:hover {
-  border-color: rgba(168, 130, 255, 0.2);
-  background: rgba(168, 130, 255, 0.06);
 }
 
 /* 友情链接 — 暗色模式 */
