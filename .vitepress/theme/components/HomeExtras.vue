@@ -3,9 +3,9 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 /* ── TIP 标语数据 ─────────────────────────────────────────── */
 const tips = [
-  { icon: '⏳', title: 'TIP 1', text: '明确目标目的，逐步积累，循序渐进，切忌急于求成' },
-  { icon: '💪', title: 'TIP 2', text: '少想多做，降低预期，重视基础，重复练习，构建体系' },
-  { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，学会主动探索，敢于尝试' },
+  { icon: '⏳', title: 'TIP 1', text: '明确目标目的，逐步积累，循序渐进，切忌急于求成', color: '#3478d9' },
+  { icon: '💪', title: 'TIP 2', text: '少想多做，降低预期，重视基础，重复练习，构建体系', color: '#8b5cf6' },
+  { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，学会主动探索，敢于尝试', color: '#f59e0b' },
 ]
 
 /* ── 技术模块数据 ─────────────────────────────────────────── */
@@ -240,11 +240,16 @@ function onIconError(e) {
     <!-- ── TIP 标语区域 ──────────────────────────────────── -->
     <section class="tips-section">
       <div class="tips-grid">
-        <div v-for="(tip, i) in tips" :key="i" class="tip-card anim-item">
-          <span class="tip-icon">{{ tip.icon }}</span>
-          <div class="tip-body">
-            <h3 class="tip-title">{{ tip.title }}</h3>
-            <p class="tip-text">{{ tip.text }}</p>
+        <div v-for="(tip, i) in tips" :key="i" class="tip-card-wrapper anim-item">
+          <div class="tip-glow" :style="{ background: `radial-gradient(circle, ${tip.color}30, transparent 70%)` }"></div>
+          <div class="tip-card">
+            <div class="tip-icon-plate" :style="{ background: `${tip.color}18`, boxShadow: `0 0 20px ${tip.color}20` }">
+              <span class="tip-icon">{{ tip.icon }}</span>
+            </div>
+            <div class="tip-body">
+              <h3 class="tip-title" :style="{ color: tip.color }">{{ tip.title }}</h3>
+              <p class="tip-text">{{ tip.text }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -359,38 +364,91 @@ function onIconError(e) {
 .tips-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 18px;
+}
+
+.tip-card-wrapper {
+  position: relative;
+  border-radius: var(--site-card-radius);
+  cursor: default;
+}
+
+.tip-glow {
+  position: absolute;
+  inset: -12px;
+  border-radius: inherit;
+  opacity: 0.5;
+  filter: blur(24px);
+  z-index: 0;
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.tip-card-wrapper:hover .tip-glow {
+  opacity: 0.85;
+  transform: scale(1.08);
 }
 
 .tip-card {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px 20px;
+  gap: 14px;
+  padding: 20px 22px;
   border-radius: var(--site-card-radius);
-  border: 1px solid var(--site-card-border);
-  background: var(--site-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.tip-card-wrapper:hover .tip-card {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+}
+
+.tip-icon-plate {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
+}
+
+.tip-card-wrapper:hover .tip-icon-plate {
+  transform: scale(1.1);
 }
 
 .tip-icon {
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
+}
+
+.tip-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .tip-title {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--vp-c-brand-1);
-  margin: 0 0 5px;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  margin: 0 0 6px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .tip-text {
   font-size: 13.5px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--vp-c-text-2);
   margin: 0;
   font-weight: 500;
@@ -567,8 +625,8 @@ function onIconError(e) {
   gap: 5px;
   padding: 10px 4px 10px;
   border-radius: 10px;
-  border: 1px solid rgba(15, 23, 42, 0.04);
-  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--site-card-border);
+  background: var(--site-card-bg);
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
@@ -679,11 +737,26 @@ function onIconError(e) {
 
   .tips-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 14px;
   }
 
   .tip-card {
-    padding: 14px 16px;
+    padding: 16px 18px;
+  }
+
+  .tip-icon-plate {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .tip-icon {
+    font-size: 20px;
+  }
+
+  .tip-glow {
+    inset: -8px;
+    filter: blur(18px);
   }
 
   .carousel-scene {
@@ -758,6 +831,18 @@ function onIconError(e) {
     transform: none !important;
   }
 
+  .tip-glow {
+    transition: none !important;
+  }
+
+  .tip-card {
+    transition: none !important;
+  }
+
+  .tip-icon-plate {
+    transition: none !important;
+  }
+
   .carousel-track {
     transition: none !important;
   }
@@ -784,5 +869,26 @@ function onIconError(e) {
   .logo-accent {
     transition: none !important;
   }
+}
+</style>
+
+<style>
+/* ── Dark mode — 玻璃拟态暗色适配 ────────────────────────── */
+.dark .tip-card {
+  background: rgba(24, 24, 40, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .tip-card-wrapper:hover .tip-card {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.dark .tip-glow {
+  opacity: 0.3;
+}
+
+.dark .tip-card-wrapper:hover .tip-glow {
+  opacity: 0.6;
 }
 </style>

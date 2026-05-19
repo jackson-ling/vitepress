@@ -85,14 +85,8 @@ const previewImageStyle = computed(() => ({
   cursor: previewScale.value > 1 ? (dragging.value ? 'grabbing' : 'grab') : 'default',
 }))
 
-/** 检测当前页面是否为首页 */
-function updatePageType() {
-  isHome.value = Boolean(document.querySelector('.VPHome'))
-}
-
 /** 更新阅读进度与工具栏显隐状态 */
 function updateReadingState() {
-  updatePageType()
   const scrollTop = window.scrollY || document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - window.innerHeight
   progress.value = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0
@@ -249,6 +243,7 @@ function handleKeydown(event) {
 /* ── 生命周期 ──────────────────────────────────────────────── */
 
 onMounted(() => {
+  isHome.value = Boolean(document.querySelector('.VPHome'))
   nextTick(updateReadingState)
   nextTick(highlightActiveSidebar)
   window.addEventListener('scroll', requestUpdate, { passive: true })
@@ -257,11 +252,12 @@ onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
 })
 
-// 路由切换时重新计算状态与高亮
+// 路由切换时重新计算页面类型、状态与高亮
 watch(
   () => route.path,
   () => {
     closeImagePreview()
+    isHome.value = Boolean(document.querySelector('.VPHome'))
     nextTick(updateReadingState)
     nextTick(highlightActiveSidebar)
   }

@@ -101,7 +101,7 @@
 
 /* ── Dark Theme Overrides ──────────────────────────────────── */
 .dark {
-  /* Brand — 暗色模式下提高亮度以保证对比度 */
+  /* Brand — 提高亮度保证暗色背景对比度 */
   --vp-c-brand-1: #5a9be6;
   --vp-c-brand-2: #3478d9;
   --vp-c-brand-3: #8bb8f0;
@@ -152,4 +152,18 @@
   --site-shadow-md: 0 16px 48px rgba(0, 0, 0, 0.35);
   --site-shadow-hover: 0 20px 56px rgba(0, 0, 0, 0.4);
   --site-glow-brand: rgba(52, 120, 217, 0.2);
+
+  /* Cards */
+  --site-card-bg: rgba(30, 41, 59, 0.6);
+  --site-card-border: rgba(148, 163, 184, 0.08);
+  --site-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  --site-card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.25);
+
+  /* Tags */
+  --site-tag-bg: rgba(148, 163, 184, 0.06);
+  --site-tag-border: rgba(148, 163, 184, 0.1);
+
+  /* Hero grid */
+  --site-hero-grid-color: rgba(148, 163, 184, 0.04);
 }
+

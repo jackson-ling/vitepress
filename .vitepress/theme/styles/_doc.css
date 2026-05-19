@@ -255,12 +255,6 @@
   color: #1e293b;
 }
 
-/* 代码块文字色 — 暗色模式 */
-.dark .vp-doc div[class*='language-'] pre,
-.dark .vp-doc div[class*='language-'] code {
-  color: #e2e8f0;
-}
-
 /* Shiki 语法高亮色 — 亮色模式
  * shiki-light / shiki-dark 是 VitePress Shiki 集成的 CSS 变量，
  * 在 markdown 渲染时自动注入，确保亮暗主题下语法高亮色正确 */
@@ -268,6 +262,13 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
   color: var(--shiki-light, #1e293b) !important;
 }
 
+/* 代码块文字色 — 暗色模式 */
+.dark .vp-doc div[class*='language-'] pre,
+.dark .vp-doc div[class*='language-'] code {
+  color: #e2e8f0;
+}
+
+/* Shiki 语法高亮色 — 暗色模式 */
 .dark .vp-doc div[class*='language-'] span {
   color: var(--shiki-dark, #e2e8f0) !important;
 }
