@@ -14,8 +14,8 @@ const intersections = (arr1, arr2) => arr1.filter(item => !arr2.includes(item))
 
 // 自然排序函数，按照文件名中的数字进行排序
 const naturalSort = (a, b) => {
-    const aNum = parseInt(a.match(/\d+/), 10)
-    const bNum = parseInt(b.match(/\d+/), 10)
+    const aNum = parseInt(a.match(/\d+/)?.[0] ?? '0', 10)
+    const bNum = parseInt(b.match(/\d+/)?.[0] ?? '0', 10)
     return aNum - bNum
 }
 

@@ -53,10 +53,6 @@
   pointer-events: none;
 }
 
-.reading-tools__section {
-  display: none;
-}
-
 .reading-tools__button {
   position: relative;
   display: inline-flex;

@@ -15,7 +15,7 @@
 .VPFooter {
   margin-top: 0 !important;
   padding: 20px 24px !important;
-  border-top: 1px solid rgba(15, 23, 42, 0.06) !important;
+  border-top: 1px solid var(--site-panel-border) !important;
   background: var(--vp-c-bg-alt) !important;
 }
 

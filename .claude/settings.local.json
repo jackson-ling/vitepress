@@ -72,7 +72,10 @@
       "Bash(xargs grep -l \"transition\\\\|Transition\")",
       "Bash(npx vue-tsc *)",
       "Bash(taskkill //F //IM msedge.exe)",
-      "mcp__plugin_playwright_playwright__browser_resize"
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "Bash(npx which *)",
+      "Bash(./node_modules/.bin/vitepress build *)",
+      "Bash(git stash *)"
     ]
   },
   "enabledPlugins": {

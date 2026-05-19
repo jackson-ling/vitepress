@@ -1,6 +1,5 @@
-import {defineConfig} from 'vitepress' // 默认主题
-import {set_sidebar as setSidebarDefault} from './gen_sidebar.js'; // 导入带有排序的侧边栏函数
-import {set_sidebar as setSidebarNoSequence} from './gen_sidebar_nosequence.js'; // 导入没有排序的侧边栏函数
+import {defineConfig} from 'vitepress'
+import {set_sidebar as setSidebarDefault} from './gen_sidebar.js'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

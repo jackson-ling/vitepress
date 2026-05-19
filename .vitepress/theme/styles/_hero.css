@@ -26,8 +26,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(circle, var(--site-hero-grid-color) 1px, transparent 1px);
+  background-size: var(--site-hero-grid-size) var(--site-hero-grid-size);
   mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, black 15%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, black 15%, transparent 70%);
   pointer-events: none;
