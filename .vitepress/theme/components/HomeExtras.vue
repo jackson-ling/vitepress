@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 /* ── TIP 标语数据 ─────────────────────────────────────────── */
 const tips = [
@@ -8,7 +8,7 @@ const tips = [
   { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，学会主动探索，敢于尝试' },
 ]
 
-/* ── 技术模块数据（分类展示） ─────────────────────────────── */
+/* ── 技术模块数据 ─────────────────────────────────────────── */
 const categories = [
   {
     name: '后端基础',
@@ -59,13 +59,70 @@ const categories = [
   },
 ]
 
-/* ── 滚动入场 + 聚焦效果 ──────────────────────────────────── */
+/* ── 圆形 3D 立体轮播 ─────────────────────────────────────── */
+const CAROUSEL_RADIUS = 280
+const ANGLE_STEP = 360 / categories.length  // 72° per card
+const FOCUS_PUSH_Z = 50
+
+const focusedIndex = ref(0)
+const animIn = ref(true)
+const isHovering = ref(false)
+const dragMoved = ref(false)
+
+const trackAngle = ref(0)
+
+const carouselItems = computed(() => {
+  return categories.map((_, i) => {
+    const angle = i * ANGLE_STEP
+    const isFocused = i === focusedIndex.value
+    const dist = Math.abs(i - focusedIndex.value)
+    const minDist = Math.min(dist, categories.length - dist)
+
+    const opacity = minDist === 0 ? 1 : minDist === 1 ? 0.7 : 0.35
+    const brightness = minDist === 0 ? 1 : minDist === 1 ? 0.85 : 0.6
+
+    return {
+      style: {
+        transform: `rotateY(${angle}deg) translateZ(${CAROUSEL_RADIUS}px)${isFocused ? ` translateZ(${FOCUS_PUSH_Z}px)` : ''}`,
+        opacity: String(opacity),
+        filter: `brightness(${brightness})`,
+      },
+      focused: isFocused,
+    }
+  })
+})
+
+function switchTo(idx) {
+  const len = categories.length
+  const newIdx = ((idx % len) + len) % len
+  const diff = newIdx - focusedIndex.value
+  const normalizedDiff = ((diff + len / 2) % len + len) % len - len / 2
+  trackAngle.value += -normalizedDiff * ANGLE_STEP
+  focusedIndex.value = newIdx
+}
+
+function onCardClick(idx) {
+  if (dragMoved.value) return
+  switchTo(idx)
+}
+
+function goPrev() {
+  trackAngle.value += ANGLE_STEP
+  focusedIndex.value = (focusedIndex.value - 1 + categories.length) % categories.length
+}
+
+function goNext() {
+  trackAngle.value -= ANGLE_STEP
+  focusedIndex.value = (focusedIndex.value + 1) % categories.length
+}
+
+/* ── 事件监听 ─────────────────────────────────────────────── */
 let entranceObserver = null
-let scrollHandler = null
-let rafId = null
+let wheelHandler = null
+let cleanupDrag = null
 
 onMounted(() => {
-  /* 入场动画（触发一次后取消观察） */
+  /* 入场动画 */
   entranceObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -83,50 +140,93 @@ onMounted(() => {
     entranceObserver.observe(el)
   })
 
-  /* 聚焦效果 — 离视口中心最近的块聚焦 */
-  const wrappers = document.querySelectorAll('.home-extras .category-wrapper')
-  let lastFocused = null
+  setTimeout(() => { animIn.value = false }, 520)
 
-  scrollHandler = () => {
-    if (rafId) return
-    rafId = requestAnimationFrame(() => {
-      rafId = null
-      let closest = null
+  /* 滚轮 — 仅鼠标悬停在轮播区域时响应 */
+  wheelHandler = (e) => {
+    if (!isHovering.value) return
+    e.preventDefault()
+    if (e.deltaY > 15) {
+      goNext()
+    } else if (e.deltaY < -15) {
+      goPrev()
+    }
+  }
+  window.addEventListener('wheel', wheelHandler, { passive: false })
 
-      const scrollBottom = window.innerHeight + window.scrollY
-      const pageHeight = document.documentElement.scrollHeight
-      if (scrollBottom >= pageHeight - 40 && wrappers.length > 0) {
-        closest = wrappers[wrappers.length - 1]
-      } else {
-        const centerY = window.innerHeight / 2
-        let minDist = Infinity
-        wrappers.forEach((w) => {
-          const rect = w.getBoundingClientRect()
-          const dist = Math.abs(rect.top + rect.height / 2 - centerY)
-          if (dist < minDist) {
-            minDist = dist
-            closest = w
-          }
-        })
-      }
+  /* 拖拽（鼠标 + 触摸） */
+  const scene = document.querySelector('.home-extras .carousel-scene')
+  if (!scene) return
 
-      if (closest !== lastFocused) {
-        if (lastFocused) lastFocused.classList.remove('is-focused')
-        if (closest) closest.classList.add('is-focused')
-        lastFocused = closest
-      }
-    })
+  let startX = 0
+  let dragging = false
+
+  function onMouseDown(e) {
+    if (e.button !== 0) return
+    e.preventDefault()
+    startX = e.clientX
+    dragging = true
+    dragMoved.value = false
+    document.body.style.userSelect = 'none'
   }
 
-  window.addEventListener('scroll', scrollHandler, { passive: true })
-  // 初始触发一次
-  scrollHandler()
+  function onMouseMove(e) {
+    if (!dragging) return
+    e.preventDefault()
+    if (Math.abs(e.clientX - startX) > 5) dragMoved.value = true
+  }
+
+  function onMouseUp(e) {
+    if (!dragging) return
+    dragging = false
+    document.body.style.userSelect = ''
+    const dx = startX - e.clientX
+    if (Math.abs(dx) < 20) return
+    if (dx > 0) goNext()
+    else goPrev()
+  }
+
+  function onTouchStart(e) {
+    startX = e.touches[0].clientX
+    dragging = true
+    dragMoved.value = false
+  }
+
+  function onTouchMove(e) {
+    if (!dragging) return
+    if (Math.abs(e.touches[0].clientX - startX) > 5) dragMoved.value = true
+  }
+
+  function onTouchEnd(e) {
+    if (!dragging) return
+    dragging = false
+    const dx = startX - e.changedTouches[0].clientX
+    if (Math.abs(dx) < 20) return
+    if (dx > 0) goNext()
+    else goPrev()
+  }
+
+  scene.addEventListener('mousedown', onMouseDown)
+  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mouseup', onMouseUp)
+  scene.addEventListener('touchstart', onTouchStart, { passive: true })
+  scene.addEventListener('touchmove', onTouchMove, { passive: true })
+  scene.addEventListener('touchend', onTouchEnd, { passive: true })
+
+  cleanupDrag = () => {
+    scene.removeEventListener('mousedown', onMouseDown)
+    window.removeEventListener('mousemove', onMouseMove)
+    window.removeEventListener('mouseup', onMouseUp)
+    scene.removeEventListener('touchstart', onTouchStart)
+    scene.removeEventListener('touchmove', onTouchMove)
+    scene.removeEventListener('touchend', onTouchEnd)
+  }
 })
 
 onUnmounted(() => {
   if (entranceObserver) entranceObserver.disconnect()
-  if (scrollHandler) window.removeEventListener('scroll', scrollHandler)
-  if (rafId) cancelAnimationFrame(rafId)
+  if (wheelHandler) window.removeEventListener('wheel', wheelHandler)
+  if (cleanupDrag) cleanupDrag()
 })
 
 function onIconError(e) {
@@ -150,54 +250,81 @@ function onIconError(e) {
       </div>
     </section>
 
-    <!-- ── 技术栈分类展示 ────────────────────────────────── -->
+    <!-- ── 技术栈分类展示（圆形 3D 轮播） ────────────────── -->
     <section class="tech-section">
       <div class="section-header anim-item">
         <h2 class="section-title">技术栈</h2>
         <p class="section-sub">Technologies I work with</p>
       </div>
 
-      <div class="category-list">
-        <div
-          v-for="cat in categories"
-          :key="cat.name"
-          class="category-wrapper anim-item"
+      <div
+        class="carousel-scene"
+        @mouseenter="isHovering = true"
+        @mouseleave="isHovering = false"
+      >
+        <!-- 左右箭头 -->
+        <button
+          class="carousel-arrow carousel-arrow--prev"
+          @click="goPrev"
         >
-        <div class="category-block">
-          <div class="category-header">
-            <span class="category-dot" :style="{ background: cat.items[0]?.color || '#3478d9' }"></span>
-            <span class="category-name">{{ cat.name }}</span>
-            <span class="category-desc">{{ cat.desc }}</span>
-          </div>
-          <div class="category-grid">
-            <a
-              v-for="tech in cat.items"
-              :key="tech.name"
-              :href="tech.link"
-              target="_blank"
-              rel="noopener"
-              class="tech-logo-card"
-            >
-              <div class="logo-icon-wrap">
-                <img
-                  v-if="tech.icon"
-                  :src="tech.icon"
-                  :alt="tech.name"
-                  class="logo-icon"
-                  @error="onIconError"
-                />
-                <span v-if="tech.icon" class="logo-fallback" style="display:none">
-                  {{ tech.name[0] }}
-                </span>
-                <span v-else class="logo-fallback" :style="{ background: tech.color + '10', color: tech.color }">
-                  {{ tech.name[0] }}
-                </span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button
+          class="carousel-arrow carousel-arrow--next"
+          @click="goNext"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div
+          class="carousel-track"
+          :style="{ transform: `rotateY(${trackAngle}deg)` }"
+        >
+          <div
+            v-for="(cat, i) in categories"
+            :key="cat.name"
+            class="carousel-card anim-item"
+            :class="{ 'is-focused': carouselItems[i].focused }"
+            :style="animIn ? { opacity: '0' } : carouselItems[i].style"
+            @click="onCardClick(i)"
+          >
+            <div class="category-block">
+              <div class="category-header">
+                <span class="category-dot" :style="{ background: cat.items[0]?.color || '#3478d9' }"></span>
+                <span class="category-name">{{ cat.name }}</span>
+                <span class="category-desc">{{ cat.desc }}</span>
               </div>
-              <span class="logo-name">{{ tech.name }}</span>
-              <span class="logo-accent" :style="{ background: tech.color }"></span>
-            </a>
+              <div class="category-grid">
+                <a
+                  v-for="tech in cat.items"
+                  :key="tech.name"
+                  :href="tech.link"
+                  target="_blank"
+                  rel="noopener"
+                  class="tech-logo-card"
+                  @click.stop
+                >
+                  <div class="logo-icon-wrap">
+                    <img
+                      v-if="tech.icon"
+                      :src="tech.icon"
+                      :alt="tech.name"
+                      class="logo-icon"
+                      @error="onIconError"
+                    />
+                    <span v-if="tech.icon" class="logo-fallback" style="display:none">
+                      {{ tech.name[0] }}
+                    </span>
+                    <span v-else class="logo-fallback" :style="{ background: tech.color + '10', color: tech.color }">
+                      {{ tech.name[0] }}
+                    </span>
+                  </div>
+                  <span class="logo-name">{{ tech.name }}</span>
+                  <span class="logo-accent" :style="{ background: tech.color }"></span>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
@@ -272,7 +399,7 @@ function onIconError(e) {
 /* ── 技术栈区域 ──────────────────────────────────────────── */
 .section-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .section-title {
@@ -291,47 +418,114 @@ function onIconError(e) {
   font-weight: 500;
 }
 
-/* ── 分类块 ──────────────────────────────────────────────── */
-.category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
-
-/* 外层 wrapper */
-.category-wrapper {
-  border-radius: var(--site-card-radius);
-  padding: 0;
+/* ── 圆形 3D 轮播场景 ────────────────────────────────────── */
+.carousel-scene {
+  width: 100%;
+  height: 380px;
   position: relative;
+  perspective: 1200px;
+  overflow: visible;
+  cursor: grab;
+  margin-top: 120px;
 }
 
-/* 内层卡片 — 聚焦时仅放大 */
+.carousel-scene:active {
+  cursor: grabbing;
+}
+
+.carousel-track {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -120px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── 左右箭头 ───────────────────────────────────────────── */
+.carousel-arrow {
+  position: absolute;
+  top: 160px !important;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--site-card-border);
+  background: var(--site-card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  background: var(--vp-c-brand-soft);
+  border-color: rgba(52, 120, 217, 0.2);
+  color: var(--vp-c-brand-1);
+}
+
+.carousel-arrow--prev {
+  left: 8px;
+}
+
+.carousel-arrow--next {
+  right: 8px;
+}
+
+/* ── 轮播卡片 ───────────────────────────────────────────── */
+.carousel-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.55s ease,
+              filter 0.55s ease;
+}
+
+.carousel-card.is-focused {
+  cursor: default;
+}
+
+.carousel-card.is-focused .category-block {
+  box-shadow: 0 20px 60px rgba(52, 120, 217, 0.25),
+              0 8px 32px rgba(15, 23, 42, 0.15);
+  border-color: rgba(52, 120, 217, 0.3);
+}
+
+.carousel-card:not(.is-focused):hover .category-block {
+  box-shadow: 0 12px 40px rgba(52, 120, 217, 0.15);
+  border-color: rgba(52, 120, 217, 0.12);
+}
+
+/* 内层卡片 */
 .category-block {
   border-radius: var(--site-card-radius);
   border: 1px solid var(--site-card-border);
   background: var(--site-card-bg);
-  padding: 28px;
+  padding: 16px;
   box-shadow: var(--site-card-shadow);
   position: relative;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.45s ease;
-}
-
-.category-wrapper.is-focused .category-block {
-  transform: scale(1.06);
-  box-shadow: 0 8px 32px rgba(52, 120, 217, 0.15), 0 4px 16px rgba(15, 23, 42, 0.08);
-}
-
-.category-wrapper:hover .category-block {
-  box-shadow: var(--site-card-shadow-hover);
+  transition: box-shadow 0.45s ease, border-color 0.45s ease;
 }
 
 .category-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  padding-bottom: 13px;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--site-card-border);
 }
 
@@ -343,14 +537,14 @@ function onIconError(e) {
 }
 
 .category-name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--vp-c-text-1);
   letter-spacing: -0.01em;
 }
 
 .category-desc {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--vp-c-text-3);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -360,8 +554,8 @@ function onIconError(e) {
 /* ── Logo 网格 ───────────────────────────────────────────── */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 8px;
 }
 
 .tech-logo-card {
@@ -370,9 +564,9 @@ function onIconError(e) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 18px 8px 14px;
-  border-radius: 12px;
+  gap: 5px;
+  padding: 10px 4px 10px;
+  border-radius: 10px;
   border: 1px solid rgba(15, 23, 42, 0.04);
   background: rgba(255, 255, 255, 0.45);
   text-decoration: none;
@@ -383,11 +577,10 @@ function onIconError(e) {
 }
 
 .tech-logo-card:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-2px) scale(1.02);
   border-color: rgba(52, 120, 217, 0.15);
 }
 
-/* 底部品牌色高亮条 */
 .logo-accent {
   position: absolute;
   bottom: 0;
@@ -403,7 +596,6 @@ function onIconError(e) {
   width: 55%;
 }
 
-/* 渐变边框 */
 .tech-logo-card::before {
   content: '';
   position: absolute;
@@ -424,10 +616,9 @@ function onIconError(e) {
   opacity: 1;
 }
 
-/* 图标 */
 .logo-icon-wrap {
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,10 +626,10 @@ function onIconError(e) {
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  border-radius: 9px;
+  border-radius: 7px;
   transition: transform 0.25s ease;
 }
 
@@ -447,13 +638,13 @@ function onIconError(e) {
 }
 
 .logo-fallback {
-  width: 40px;
-  height: 40px;
-  border-radius: 9px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--vp-c-text-2);
   background: var(--vp-c-bg-soft);
@@ -465,7 +656,7 @@ function onIconError(e) {
 }
 
 .logo-name {
-  font-size: 11.5px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--vp-c-text-2);
   text-align: center;
@@ -495,37 +686,63 @@ function onIconError(e) {
     padding: 14px 16px;
   }
 
-  .category-block {
-    padding: 20px 18px;
+  .carousel-scene {
+    height: 320px;
+    perspective: 900px;
+    margin-top: 90px;
   }
 
-  .category-list {
-    gap: 56px;
+  .carousel-track {
+    width: 200px;
+    margin-left: -100px;
+  }
+
+  .carousel-arrow {
+    width: 34px;
+    height: 34px;
+    top: 130px;
+  }
+
+  .carousel-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .carousel-arrow--prev {
+    left: 4px;
+  }
+
+  .carousel-arrow--next {
+    right: 4px;
+  }
+
+  .category-block {
+    padding: 12px 10px;
   }
 
   .category-grid {
-    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 6px;
   }
 
   .tech-logo-card {
-    padding: 14px 6px 12px;
+    padding: 8px 4px 8px;
   }
 
   .logo-icon-wrap {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
   }
 
   .logo-icon {
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
   }
 
   .logo-fallback {
-    width: 32px;
-    height: 32px;
-    font-size: 15px;
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
   }
 
   .section-title {
@@ -541,11 +758,24 @@ function onIconError(e) {
     transform: none !important;
   }
 
-  .category-wrapper,
-  .category-block {
-    animation: none !important;
+  .carousel-track {
     transition: none !important;
+  }
+
+  .carousel-card {
+    transition: none !important;
+    position: relative !important;
     transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .carousel-arrow {
+    transition: none !important;
+  }
+
+  .category-block {
+    transition: none !important;
   }
 
   .tech-logo-card,

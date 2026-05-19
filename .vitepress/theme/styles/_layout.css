@@ -84,11 +84,21 @@
   }
 }
 
-.VPDoc.route-leave {
+/* 动画应用在 .content（文章内容包装器）而非 .VPDoc 或 .container。
+ *
+ * DOM 结构：.VPDoc > .container > [.aside > .aside-container] + [.content > .content-container]
+ *   .aside 和 .content 是 .container 的直接子元素（兄弟关系）。
+ *   .aside-container 使用 position: fixed，需要相对视口定位。
+ *
+ * 问题：.VPDoc 或 .container 上的 transform 会创建新的 containing block，
+ *   导致 .aside-container 的 fixed 定位相对于该祖先而非视口，动画结束后产生跳动。
+ *
+ * 方案：仅对 .content 应用动画，.aside 不受影响，.aside-container 保持视口 fixed 定位。 */
+.VPDoc.route-leave .content {
   animation: doc-route-leave 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.VPDoc.route-enter {
+.VPDoc.route-enter .content {
   animation: doc-route-enter 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -116,6 +126,19 @@
   border-right: 1px solid var(--vp-c-divider);
   backdrop-filter: blur(14px) saturate(1.4);
   padding-bottom: 32px !important;
+}
+
+/* 桌面端覆盖 scoped 样式的 transition ——
+ *  VPSidebar.vue 的基础样式设置了 opacity: 0 + transform: translateX(-100%)
+ *  以及 transition: opacity 0.5s, transform 0.25s ease。
+ *  桌面端媒体查询只覆盖了 opacity 和 transform，但没有覆盖 transition，
+ *  导致侧边栏在页面切换时有一个 0.5s 的淡入动画，与 VPDoc route-enter 动画冲突。
+ *  backdrop-filter 在半透明状态下渲染异常，造成视觉上的"顶部边距"跳动。
+ *  此处强制 transition: none，让桌面端侧边栏立即出现。 */
+@media (min-width: 960px) {
+  .VPSidebar {
+    transition: none !important;
+  }
 }
 
 .VPSidebarNav {

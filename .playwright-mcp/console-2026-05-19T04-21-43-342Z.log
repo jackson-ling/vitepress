@@ -1,0 +1,12 @@
+[     357ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
+[  539304ms] [WARNING] [Vue warn]: Unhandled error during execution of unmounted hook 
+  at <Layout> 
+  at <VitePressApp> @ http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:2224
+[  539304ms] ReferenceError: sidebarLock is not defined
+    at http://localhost:5173/.vitepress/theme/Layout.vue?t=1779165039738:47:3
+    at http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:5291:40
+    at callWithErrorHandling (http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:2372:19)
+    at callWithAsyncErrorHandling (http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:2379:17)
+    at hook.__weh.hook.__weh (http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:5271:19)
+    at flushPostFlushCbs (http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:2557:28)
+    at flushJobs (http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:2599:5)

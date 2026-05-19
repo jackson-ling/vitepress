@@ -1,0 +1,5 @@
+[     348ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/.vitepress/cache/deps/chunk-XY26LBYQ.js?v=40ce7743:0
+[     349ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/.vitepress/cache/deps/vitepress___@vueuse_core.js?v=efcfa564:0
+[     349ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/shared.js?v=40ce7743:0
+[     350ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/@siteData:0
+[     350ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/.vitepress/theme/components/SiteEnhancer.vue?t=1779160061469:0

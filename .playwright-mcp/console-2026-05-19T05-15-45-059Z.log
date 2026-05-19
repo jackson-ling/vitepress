@@ -1,0 +1,2 @@
+[     577ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
+[    1841ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://file1.kamacoder.com/i/algo/20200808200338924.png:0

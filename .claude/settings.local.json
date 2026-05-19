@@ -64,7 +64,15 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/docs/warning.html)",
       "Bash(pnpm dev *)",
       "Bash(npx vite *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Skill(superpowers:brainstorming)",
+      "Bash(xargs grep -l \"VPSidebar\")",
+      "Bash(xargs grep -l \"transition\\\\|Transition\\\\|transform\")",
+      "Bash(xargs grep -l \"transition\\\\|Transition\")",
+      "Bash(npx vue-tsc *)",
+      "Bash(taskkill //F //IM msedge.exe)",
+      "mcp__plugin_playwright_playwright__browser_resize"
     ]
   },
   "enabledPlugins": {
