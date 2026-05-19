@@ -139,26 +139,27 @@
   }
 }
 
-/* 光晕呼吸 — 缩放 + 透明度 + 模糊度周期性变化 */
+/* 光晕呼吸 — 缩放 + 透明度 + 饱和度周期性变化 */
 @keyframes halo-pulse {
   0%, 100% {
-    opacity: 0.55;
+    opacity: 0.5;
     transform: translate(-50%, -50%) scale(0.88);
-    filter: blur(30px) saturate(1.0);
+    filter: blur(28px) saturate(0.9);
   }
   50% {
-    opacity: 0.75;
-    transform: translate(-50%, -50%) scale(1.02);
-    filter: blur(36px) saturate(1.1);
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.05);
+    filter: blur(38px) saturate(1.4);
   }
 }
 
 /* 光晕变色 — 紫粉色叠加层的淡入淡出 */
 @keyframes halo-color-fade {
   0%, 100% { opacity: 0; }
-  30% { opacity: 0.35; }
-  50% { opacity: 0.5; }
-  70% { opacity: 0.3; }
+  20% { opacity: 0.4; }
+  40% { opacity: 0.7; }
+  60% { opacity: 0.5; }
+  80% { opacity: 0.2; }
 }
 
 /* Logo 悬浮 — 轻微上下浮动 */
@@ -195,19 +196,20 @@
   animation: halo-pulse 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* 光晕变色叠加层 — 紫粉色渐变呼吸 */
+/* 光晕变色叠加层 — 紫粉蓝渐变呼吸 */
 .VPHome .VPHero .image-bg::before {
   content: "";
   position: absolute;
-  inset: -15%;
+  inset: -20%;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 65% 30%, rgba(139, 92, 246, 0.35) 0%, transparent 50%),
-    radial-gradient(circle at 35% 75%, rgba(236, 72, 153, 0.25) 0%, transparent 55%),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
-  filter: blur(50px);
+    radial-gradient(circle at 70% 25%, rgba(139, 92, 246, 0.5) 0%, transparent 45%),
+    radial-gradient(circle at 30% 70%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.25) 0%, transparent 50%);
+  filter: blur(45px);
   opacity: 0;
-  animation: halo-color-fade 9s ease-in-out infinite;
+  animation: halo-color-fade 7s ease-in-out infinite;
   pointer-events: none;
 }
 

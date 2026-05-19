@@ -1,0 +1,412 @@
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "知识文档站" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: 知识文档站
+          - generic [ref=e8]:
+            - button "搜索文档" [ref=e11] [cursor=pointer]:
+              - generic [ref=e14]: 搜索文档
+              - generic [ref=e15]:
+                - generic [ref=e16]: Ctrl
+                - generic [ref=e17]: K
+            - navigation "Main Navigation" [ref=e18]:
+              - generic [ref=e19]: Main Navigation
+              - link "🏠首页" [ref=e20] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e21]: 🏠首页
+              - button "📝笔记" [ref=e23] [cursor=pointer]:
+                - generic [ref=e25]: 📝笔记
+              - button "⭐算法" [ref=e28] [cursor=pointer]:
+                - generic [ref=e30]: ⭐算法
+              - button "前端" [ref=e33] [cursor=pointer]:
+                - generic [ref=e35]: 前端
+              - button "Java" [ref=e38] [cursor=pointer]:
+                - generic [ref=e40]:
+                  - img [ref=e41]
+                  - text: Java
+              - button "🎯后端" [ref=e44] [cursor=pointer]:
+                - generic [ref=e46]: 🎯后端
+              - button "🚀项目" [ref=e49] [cursor=pointer]:
+                - generic [ref=e51]: 🚀项目
+              - button "🤖AI" [ref=e54] [cursor=pointer]:
+                - generic [ref=e56]: 🤖AI
+              - button "Python" [ref=e59] [cursor=pointer]:
+                - generic [ref=e61]:
+                  - img [ref=e62]
+                  - text: Python
+              - button "408" [ref=e65] [cursor=pointer]:
+                - generic [ref=e67]: "408"
+            - button "extra navigation" [ref=e70] [cursor=pointer]
+  - button "文章目录" [ref=e75] [cursor=pointer]: 文章目录
+  - generic [ref=e81]:
+    - main [ref=e82]:
+      - generic [ref=e84]:
+        - heading "一些学习忠告❗❗❗" [level=1] [ref=e85]
+        - separator [ref=e86]
+        - generic [ref=e87]:
+          - paragraph [ref=e88]: 👉 提醒
+          - paragraph [ref=e89]: 编程学习 3 分学，7 分练，没有主观能动性，做任何事情都不可能成功，同时提高个人的不可替代性
+        - img [ref=e90]
+        - heading "🎯 明确目标 Permalink to \"🎯 明确目标\"" [level=2] [ref=e91]:
+          - text: 🎯 明确目标
+          - link "Permalink to \"🎯 明确目标\"" [ref=e92] [cursor=pointer]:
+            - /url: "#🎯-明确目标"
+            - text: "#"
+        - blockquote [ref=e93]:
+          - heading "⚠️ 灵魂反问：想做的这件事当下对我有用吗？是我需要的吗？ Permalink to \"⚠️ 灵魂反问：<span style=\"color:red;font-weight:bold\">想做的这件事当下对我有用吗？是我需要的吗？</span>\"" [level=4] [ref=e94]:
+            - text: ⚠️ 灵魂反问：想做的这件事当下对我有用吗？是我需要的吗？
+            - link "Permalink to \"⚠️ 灵魂反问：<span style=\"color:red;font-weight:bold\">想做的这件事当下对我有用吗？是我需要的吗？</span>\"" [ref=e95] [cursor=pointer]:
+              - /url: "#⚠️-灵魂反问-想做的这件事当下对我有用吗-是我需要的吗"
+              - text: "#"
+        - heading "目标是行动的导向标，有了目标，才有努力的方向 Permalink to \"目标是行动的导向标，有了目标，才有努力的方向\"" [level=4] [ref=e96]:
+          - text: 目标是行动的导向标，有了目标，才有努力的方向
+          - link "Permalink to \"目标是行动的导向标，有了目标，才有努力的方向\"" [ref=e97] [cursor=pointer]:
+            - /url: "#目标是行动的导向标-有了目标-才有努力的方向"
+            - text: "#"
+        - heading "目标有如下要求 Permalink to \"目标有如下要求\"" [level=4] [ref=e98]:
+          - text: 目标有如下要求
+          - link "Permalink to \"目标有如下要求\"" [ref=e99] [cursor=pointer]:
+            - /url: "#目标有如下要求"
+            - text: "#"
+        - blockquote [ref=e100]:
+          - heading "（1）结合自身，明确，核心，具体，可行，不要不切实际，要有侧重点 Permalink to \"（1）结合自身，<span style=\"color:red;font-weight:bold\">明确，核心，具体，可行</span>，不要不切实际，要有<span style=\"color:red;font-weight:bold\">侧重点</span>\"" [level=4] [ref=e101]:
+            - text: （1）结合自身，明确，核心，具体，可行，不要不切实际，要有侧重点
+            - link "Permalink to \"（1）结合自身，<span style=\"color:red;font-weight:bold\">明确，核心，具体，可行</span>，不要不切实际，要有<span style=\"color:red;font-weight:bold\">侧重点</span>\"" [ref=e102] [cursor=pointer]:
+              - /url: "#_1-结合自身-明确-核心-具体-可行-不要不切实际-要有侧重点"
+              - text: "#"
+          - blockquote [ref=e103]:
+            - list [ref=e104]:
+              - listitem [ref=e105]:
+                - heading "明确：明确自身缺陷，当下能力，真实需求，可支配资源和时间，拒绝跟风，被外界带动而影响自身" [level=4] [ref=e106]
+              - listitem [ref=e107]:
+                - heading "核心：目标必须聚焦 1-2 个关键项，❌ 拒绝贪心的什么都要（想的很多，过于理想化，当下还是原地踏步，没有实际行动，空想浪费实践，带来无意义的焦虑，自我内耗）， 精力分散反而学得多而浅" [level=4] [ref=e108]
+              - listitem [ref=e109]:
+                - heading "具体：目标必须拆到能直接动手的步骤，❌ 拒绝笼统的我要做，需要有通过实践输出的结果作为衡量" [level=4] [ref=e110]
+              - listitem [ref=e111]:
+                - heading "可行：降低预期，目标必须小到一定能完成，❌ 拒绝贪心的一步到位，建立即时反馈" [level=4] [ref=e112]
+          - heading "（2）❌ 目标不要定的太高，这样容易给自身压力，然后心态崩溃 Permalink to \"（2）❌ <span style=\"color:red;font-weight:bold\">目标不要定的太高</span>，这样容易给自身压力，然后心态崩溃\"" [level=4] [ref=e113]:
+            - text: （2）❌ 目标不要定的太高，这样容易给自身压力，然后心态崩溃
+            - link "Permalink to \"（2）❌ <span style=\"color:red;font-weight:bold\">目标不要定的太高</span>，这样容易给自身压力，然后心态崩溃\"" [ref=e114] [cursor=pointer]:
+              - /url: "#_2-❌-目标不要定的太高-这样容易给自身压力-然后心态崩溃"
+              - text: "#"
+          - heading "（3）目标应该是核心的，❌ 不要贪多，导致精力分散，竹篮打水一场空 Permalink to \"（3）目标应该是核心的，❌ <span style=\"color:red;font-weight:bold\">不要贪多，导致精力分散</span>，竹篮打水一场空\"" [level=4] [ref=e115]:
+            - text: （3）目标应该是核心的，❌ 不要贪多，导致精力分散，竹篮打水一场空
+            - link "Permalink to \"（3）目标应该是核心的，❌ <span style=\"color:red;font-weight:bold\">不要贪多，导致精力分散</span>，竹篮打水一场空\"" [ref=e116] [cursor=pointer]:
+              - /url: "#_3-目标应该是核心的-❌-不要贪多-导致精力分散-竹篮打水一场空"
+              - text: "#"
+        - heading "常见问题 Permalink to \"常见问题\"" [level=4] [ref=e117]:
+          - text: 常见问题
+          - link "Permalink to \"常见问题\"" [ref=e118] [cursor=pointer]:
+            - /url: "#常见问题"
+            - text: "#"
+        - blockquote [ref=e119]:
+          - heading "整天很忙，但是不知道在忙什么 Permalink to \"整天很忙，但是不知道在忙什么\"" [level=4] [ref=e120]:
+            - text: 整天很忙，但是不知道在忙什么
+            - link "Permalink to \"整天很忙，但是不知道在忙什么\"" [ref=e121] [cursor=pointer]:
+              - /url: "#整天很忙-但是不知道在忙什么"
+              - text: "#"
+          - heading "很努力学习，但是感觉很空虚，不知道学了能干什么 Permalink to \"很努力学习，但是感觉很空虚，不知道学了能干什么\"" [level=4] [ref=e122]:
+            - text: 很努力学习，但是感觉很空虚，不知道学了能干什么
+            - link "Permalink to \"很努力学习，但是感觉很空虚，不知道学了能干什么\"" [ref=e123] [cursor=pointer]:
+              - /url: "#很努力学习-但是感觉很空虚-不知道学了能干什么"
+              - text: "#"
+        - separator [ref=e124]
+        - heading "📢 动手实践 Permalink to \"📢 动手实践\"" [level=2] [ref=e125]:
+          - text: 📢 动手实践
+          - link "Permalink to \"📢 动手实践\"" [ref=e126] [cursor=pointer]:
+            - /url: "#📢-动手实践"
+            - text: "#"
+        - heading "学习的两个核心：输入、输出 Permalink to \"学习的两个核心：输入、<span style=\"font-size:25px;color:red;font-weight:bold\">输出</span>\"" [level=4] [ref=e127]:
+          - text: 学习的两个核心：输入、输出
+          - link "Permalink to \"学习的两个核心：输入、<span style=\"font-size:25px;color:red;font-weight:bold\">输出</span>\"" [ref=e128] [cursor=pointer]:
+            - /url: "#学习的两个核心-输入、输出"
+            - text: "#"
+        - heading "❌ 只输入，不输出，永远都学不会 ❗❗❗ Permalink to \"❌ 只输入，不输出，永远都学不会 ❗❗❗\"" [level=4] [ref=e129]:
+          - text: ❌ 只输入，不输出，永远都学不会 ❗❗❗
+          - link "Permalink to \"❌ 只输入，不输出，永远都学不会 ❗❗❗\"" [ref=e130] [cursor=pointer]:
+            - /url: "#❌-只输入-不输出-永远都学不会-❗❗❗"
+            - text: "#"
+        - generic [ref=e131]:
+          - paragraph [ref=e132]: 提醒 👇
+          - heading "拒绝被动学习，主动学习，主动思考，内化理解，不要被牵着走" [level=2] [ref=e133]
+        - heading "实践有如下要求 Permalink to \"实践有如下要求\"" [level=4] [ref=e134]:
+          - text: 实践有如下要求
+          - link "Permalink to \"实践有如下要求\"" [ref=e135] [cursor=pointer]:
+            - /url: "#实践有如下要求"
+            - text: "#"
+        - blockquote [ref=e136]:
+          - heading "（1）基础 永远是 核心，打下扎实的基础是学习新知识的前提 Permalink to \"（1）<span style=\"font-size:25px;color:red;font-weight:bold\">基础 </span> 永远是 <span style=\"font-size:25px;color:red;font-weight:bold\"> 核心</span>，打下扎实的基础是学习新知识的前提\"" [level=4] [ref=e137]:
+            - text: （1）基础 永远是 核心，打下扎实的基础是学习新知识的前提
+            - link "Permalink to \"（1）<span style=\"font-size:25px;color:red;font-weight:bold\">基础 </span> 永远是 <span style=\"font-size:25px;color:red;font-weight:bold\"> 核心</span>，打下扎实的基础是学习新知识的前提\"" [ref=e138] [cursor=pointer]:
+              - /url: "#_1-基础-永远是-核心-打下扎实的基础是学习新知识的前提"
+              - text: "#"
+          - heading "（2）❌拒绝装懂、得过且过，想赶进度，能够完整的复述过程，理解了，才算是会了 Permalink to \"（2）❌<span style=\"color:red;font-weight:bold\">拒绝装懂、得过且过，想赶进度</span>，能够完整的复述过程，理解了，才算是会了\"" [level=4] [ref=e139]:
+            - text: （2）❌拒绝装懂、得过且过，想赶进度，能够完整的复述过程，理解了，才算是会了
+            - link "Permalink to \"（2）❌<span style=\"color:red;font-weight:bold\">拒绝装懂、得过且过，想赶进度</span>，能够完整的复述过程，理解了，才算是会了\"" [ref=e140] [cursor=pointer]:
+              - /url: "#_2-❌拒绝装懂、得过且过-想赶进度-能够完整的复述过程-理解了-才算是会了"
+              - text: "#"
+          - heading "（3）不断重复，大量练习，提高熟练度 Permalink to \"（3）<span style=\"color:red;font-weight:bold\">不断重复，大量练习</span>，提高熟练度\"" [level=4] [ref=e141]:
+            - text: （3）不断重复，大量练习，提高熟练度
+            - link "Permalink to \"（3）<span style=\"color:red;font-weight:bold\">不断重复，大量练习</span>，提高熟练度\"" [ref=e142] [cursor=pointer]:
+              - /url: "#_3-不断重复-大量练习-提高熟练度"
+              - text: "#"
+          - heading "（4）动脑思考，知识需要内化、理解（听懂 ≠ 学会），变成自己的东西，建立知识体系 Permalink to \"（4）<span style=\"color:red;font-weight:bold\">动脑思考</span>，知识需要<span style=\"color:red;font-weight:bold\">内化、理解</span>（<span style=\"color:blue;font-weight:bold\">听懂 ≠ 学会</span>），变成自己的东西，<span style=\"color:red;font-weight:bold\">建立知识体系</span>\"" [level=4] [ref=e143]:
+            - text: （4）动脑思考，知识需要内化、理解（听懂 ≠ 学会），变成自己的东西，建立知识体系
+            - link "Permalink to \"（4）<span style=\"color:red;font-weight:bold\">动脑思考</span>，知识需要<span style=\"color:red;font-weight:bold\">内化、理解</span>（<span style=\"color:blue;font-weight:bold\">听懂 ≠ 学会</span>），变成自己的东西，<span style=\"color:red;font-weight:bold\">建立知识体系</span>\"" [ref=e144] [cursor=pointer]:
+              - /url: "#_4-动脑思考-知识需要内化、理解-听懂-学会-变成自己的东西-建立知识体系"
+              - text: "#"
+          - heading "（5）把目标拆解为实践的可视化结果作为衡量标准，建立及时的反馈和成就感，更专注于当下，而非产生懂了、往后学，赶进度的错误主观思想 Permalink to \"（5）把目标拆解为<span style=\"color:blue;font-weight:bold\">实践的可视化结果</span>作为衡量标准，<span style=\"color:red;font-weight:bold\">建立及时的反馈和成就感</span>，更专注于当下，而非产生懂了、往后学，赶进度的错误主观思想\"" [level=4] [ref=e145]:
+            - text: （5）把目标拆解为实践的可视化结果作为衡量标准，建立及时的反馈和成就感，更专注于当下，而非产生懂了、往后学，赶进度的错误主观思想
+            - link "Permalink to \"（5）把目标拆解为<span style=\"color:blue;font-weight:bold\">实践的可视化结果</span>作为衡量标准，<span style=\"color:red;font-weight:bold\">建立及时的反馈和成就感</span>，更专注于当下，而非产生懂了、往后学，赶进度的错误主观思想\"" [ref=e146] [cursor=pointer]:
+              - /url: "#_5-把目标拆解为实践的可视化结果作为衡量标准-建立及时的反馈和成就感-更专注于当下-而非产生懂了、往后学-赶进度的错误主观思想"
+              - text: "#"
+          - heading "（6）定期复习，遗忘是常态，这不应该成为焦虑的起点...... Permalink to \"（6）<span style=\"color:red;font-weight:bold\">定期复习</span>，遗忘是常态，这不应该成为焦虑的起点......\"" [level=4] [ref=e147]:
+            - text: （6）定期复习，遗忘是常态，这不应该成为焦虑的起点......
+            - link "Permalink to \"（6）<span style=\"color:red;font-weight:bold\">定期复习</span>，遗忘是常态，这不应该成为焦虑的起点......\"" [ref=e148] [cursor=pointer]:
+              - /url: "#_6-定期复习-遗忘是常态-这不应该成为焦虑的起点"
+              - text: "#"
+          - heading "（7）⭐ 学习需要有侧重点，而非平均用力，把力都用在刀刃上 Permalink to \"（7）⭐ 学习需要<span style=\"color:red\">有侧重点</span>，而非平均用力，把力都用在刀刃上\"" [level=4] [ref=e149]:
+            - text: （7）⭐ 学习需要有侧重点，而非平均用力，把力都用在刀刃上
+            - link "Permalink to \"（7）⭐ 学习需要<span style=\"color:red\">有侧重点</span>，而非平均用力，把力都用在刀刃上\"" [ref=e150] [cursor=pointer]:
+              - /url: "#_7-⭐-学习需要有侧重点-而非平均用力-把力都用在刀刃上"
+              - text: "#"
+        - heading "常见问题 Permalink to \"常见问题\"" [level=4] [ref=e151]:
+          - text: 常见问题
+          - link "Permalink to \"常见问题\"" [ref=e152] [cursor=pointer]:
+            - /url: "#常见问题-1"
+            - text: "#"
+        - blockquote [ref=e153]:
+          - heading "学习的时候会，能理解，但是合上书或者关闭视频，回想学过的东西，大脑一片空，啥也不知道 Permalink to \"学习的时候会，能理解，但是合上书或者关闭视频，回想学过的东西，大脑一片空，啥也不知道\"" [level=4] [ref=e154]:
+            - text: 学习的时候会，能理解，但是合上书或者关闭视频，回想学过的东西，大脑一片空，啥也不知道
+            - link "Permalink to \"学习的时候会，能理解，但是合上书或者关闭视频，回想学过的东西，大脑一片空，啥也不知道\"" [ref=e155] [cursor=pointer]:
+              - /url: "#学习的时候会-能理解-但是合上书或者关闭视频-回想学过的东西-大脑一片空-啥也不知道"
+              - text: "#"
+          - heading "很喜欢看视频学习，看的越多越有动力，但是从来不练习，出现看着很眼熟，但是动手就啥也不会 Permalink to \"很喜欢看视频学习，看的越多越有动力，但是从来不练习，出现看着很眼熟，但是动手就啥也不会\"" [level=4] [ref=e156]:
+            - text: 很喜欢看视频学习，看的越多越有动力，但是从来不练习，出现看着很眼熟，但是动手就啥也不会
+            - link "Permalink to \"很喜欢看视频学习，看的越多越有动力，但是从来不练习，出现看着很眼熟，但是动手就啥也不会\"" [ref=e157] [cursor=pointer]:
+              - /url: "#很喜欢看视频学习-看的越多越有动力-但是从来不练习-出现看着很眼熟-但是动手就啥也不会"
+              - text: "#"
+          - heading "学的很多，总想着快点学完，但是心里没底 Permalink to \"学的很多，总想着快点学完，但是心里没底\"" [level=4] [ref=e158]:
+            - text: 学的很多，总想着快点学完，但是心里没底
+            - link "Permalink to \"学的很多，总想着快点学完，但是心里没底\"" [ref=e159] [cursor=pointer]:
+              - /url: "#学的很多-总想着快点学完-但是心里没底"
+              - text: "#"
+          - heading "学的越多，会的越少，有恐惧、焦虑的心理 Permalink to \"学的越多，会的越少，有恐惧、焦虑的心理\"" [level=4] [ref=e160]:
+            - text: 学的越多，会的越少，有恐惧、焦虑的心理
+            - link "Permalink to \"学的越多，会的越少，有恐惧、焦虑的心理\"" [ref=e161] [cursor=pointer]:
+              - /url: "#学的越多-会的越少-有恐惧、焦虑的心理"
+              - text: "#"
+        - separator [ref=e162]
+        - heading "💪 调整心态 Permalink to \"💪 调整心态\"" [level=2] [ref=e163]:
+          - text: 💪 调整心态
+          - link "Permalink to \"💪 调整心态\"" [ref=e164] [cursor=pointer]:
+            - /url: "#💪-调整心态"
+            - text: "#"
+        - heading "🔔 态度决定一切，细节决定成败，良好的心态是引领正确行动的基础 Permalink to \"🔔 <span style=\"color:red;font-weight:bold\">态度决定一切，细节决定成败</span>，良好的心态是引领正确行动的基础\"" [level=4] [ref=e165]:
+          - text: 🔔 态度决定一切，细节决定成败，良好的心态是引领正确行动的基础
+          - link "Permalink to \"🔔 <span style=\"color:red;font-weight:bold\">态度决定一切，细节决定成败</span>，良好的心态是引领正确行动的基础\"" [ref=e166] [cursor=pointer]:
+            - /url: "#🔔-态度决定一切-细节决定成败-良好的心态是引领正确行动的基础"
+            - text: "#"
+        - blockquote [ref=e167]:
+          - heading "⏳ 成功需要时间，需要耐心，慢即快，❌不要急于求成，赶进度 Permalink to \"⏳ 成功需要时间，需要耐心，慢即快，❌<span style=\"color:red;font-weight:bold\">不要急于求成，赶进度</span>\"" [level=4] [ref=e168]:
+            - text: ⏳ 成功需要时间，需要耐心，慢即快，❌不要急于求成，赶进度
+            - link "Permalink to \"⏳ 成功需要时间，需要耐心，慢即快，❌<span style=\"color:red;font-weight:bold\">不要急于求成，赶进度</span>\"" [ref=e169] [cursor=pointer]:
+              - /url: "#⏳-成功需要时间-需要耐心-慢即快-❌不要急于求成-赶进度"
+              - text: "#"
+          - heading "⚠️精力有限，专注一个目标并为之努力 Permalink to \"⚠️<span style=\"color:red;font-weight:bold\">精力有限，专注一个目标并为之努力</span>\"" [level=4] [ref=e170]:
+            - text: ⚠️精力有限，专注一个目标并为之努力
+            - link "Permalink to \"⚠️<span style=\"color:red;font-weight:bold\">精力有限，专注一个目标并为之努力</span>\"" [ref=e171] [cursor=pointer]:
+              - /url: "#⚠️精力有限-专注一个目标并为之努力"
+              - text: "#"
+        - generic [ref=e172]:
+          - paragraph [ref=e173]: 👉 提醒
+          - paragraph [ref=e174]:
+            - text: 拒绝畏难情绪，专注一件事，尽力把他做好，不要遇到困难就逃避，感觉自己不适合，接着换一件事继续做，陷入新手保护期的舒适圈中
+            - text: 如此往复，无法真的深耕某一个领域，都是浅薄只谈，最后结局只会一事无成，永远都无法成功
+        - heading "心态上有如下注意点 Permalink to \"心态上有如下注意点\"" [level=4] [ref=e175]:
+          - text: 心态上有如下注意点
+          - link "Permalink to \"心态上有如下注意点\"" [ref=e176] [cursor=pointer]:
+            - /url: "#心态上有如下注意点"
+            - text: "#"
+        - heading "（1）目标不是完成多少量，应该是我学到了什么？我学会了没有？我真的掌握了吗？ Permalink to \"（1）目标不是完成多少量，应该是<span style=\"color:red;font-weight:bold\">我学到了什么？我学会了没有？我真的掌握了吗？</span>\"" [level=4] [ref=e177]:
+          - text: （1）目标不是完成多少量，应该是我学到了什么？我学会了没有？我真的掌握了吗？
+          - link "Permalink to \"（1）目标不是完成多少量，应该是<span style=\"color:red;font-weight:bold\">我学到了什么？我学会了没有？我真的掌握了吗？</span>\"" [ref=e178] [cursor=pointer]:
+            - /url: "#_1-目标不是完成多少量-应该是我学到了什么-我学会了没有-我真的掌握了吗"
+            - text: "#"
+        - heading "（2）不要过于焦虑，想的很多，规划的很多，过于贪心，计划赶不上变化，专注当下，把它做好❗❗❗ Permalink to \"（2）不要过于焦虑，想的很多，规划的很多，过于贪心，<span style=\"color:red;font-weight:bold\">计划赶不上变化，专注当下，把它做好</span>❗❗❗\"" [level=4] [ref=e179]:
+          - text: （2）不要过于焦虑，想的很多，规划的很多，过于贪心，计划赶不上变化，专注当下，把它做好❗❗❗
+          - link "Permalink to \"（2）不要过于焦虑，想的很多，规划的很多，过于贪心，<span style=\"color:red;font-weight:bold\">计划赶不上变化，专注当下，把它做好</span>❗❗❗\"" [ref=e180] [cursor=pointer]:
+            - /url: "#_2-不要过于焦虑-想的很多-规划的很多-过于贪心-计划赶不上变化-专注当下-把它做好❗❗❗"
+            - text: "#"
+        - heading "（3）遗忘是常态，定期复习，这不应该成为焦虑的起点...... Permalink to \"（3）遗忘是常态，<span style=\"color:red;font-weight:bold\">定期复习</span>，这不应该成为焦虑的起点......\"" [level=4] [ref=e181]:
+          - text: （3）遗忘是常态，定期复习，这不应该成为焦虑的起点......
+          - link "Permalink to \"（3）遗忘是常态，<span style=\"color:red;font-weight:bold\">定期复习</span>，这不应该成为焦虑的起点......\"" [ref=e182] [cursor=pointer]:
+            - /url: "#_3-遗忘是常态-定期复习-这不应该成为焦虑的起点"
+            - text: "#"
+        - heading "（4）❌不要为了做而做，具象化目标，需要达到什么效果？ Permalink to \"（4）❌<span style=\"color:red;font-weight:bold\">不要为了做而做</span>，具象化目标，需要达到什么效果？\"" [level=4] [ref=e183]:
+          - text: （4）❌不要为了做而做，具象化目标，需要达到什么效果？
+          - link "Permalink to \"（4）❌<span style=\"color:red;font-weight:bold\">不要为了做而做</span>，具象化目标，需要达到什么效果？\"" [ref=e184] [cursor=pointer]:
+            - /url: "#_4-❌不要为了做而做-具象化目标-需要达到什么效果"
+            - text: "#"
+        - heading "（5）认真对待每个知识点，理解内化，不要得过且过，结果不会陪你演戏 Permalink to \"（5）认真对待每个知识点，理解内化，不要得过且过，<span style=\"color:red;font-weight:bold\">结果不会陪你演戏</span>\"" [level=4] [ref=e185]:
+          - text: （5）认真对待每个知识点，理解内化，不要得过且过，结果不会陪你演戏
+          - link "Permalink to \"（5）认真对待每个知识点，理解内化，不要得过且过，<span style=\"color:red;font-weight:bold\">结果不会陪你演戏</span>\"" [ref=e186] [cursor=pointer]:
+            - /url: "#_5-认真对待每个知识点-理解内化-不要得过且过-结果不会陪你演戏"
+            - text: "#"
+        - heading "（6）❌拒绝被动学习，多多思考，而不是一直输入，发挥主观能动性 Permalink to \"（6）❌<span style=\"color:red;font-weight:bold\">拒绝被动学习</span>，多多思考，而不是一直输入，<span style=\"color:red;font-weight:bold\">发挥主观能动性</span>\"" [level=4] [ref=e187]:
+          - text: （6）❌拒绝被动学习，多多思考，而不是一直输入，发挥主观能动性
+          - link "Permalink to \"（6）❌<span style=\"color:red;font-weight:bold\">拒绝被动学习</span>，多多思考，而不是一直输入，<span style=\"color:red;font-weight:bold\">发挥主观能动性</span>\"" [ref=e188] [cursor=pointer]:
+            - /url: "#_6-❌拒绝被动学习-多多思考-而不是一直输入-发挥主观能动性"
+            - text: "#"
+        - heading "常见问题 Permalink to \"常见问题\"" [level=4] [ref=e189]:
+          - text: 常见问题
+          - link "Permalink to \"常见问题\"" [ref=e190] [cursor=pointer]:
+            - /url: "#常见问题-2"
+            - text: "#"
+        - blockquote [ref=e191]:
+          - heading "喜欢看很多视频学习，潜意识以为看完就学会了，一直处于赶进度的状态，无法自拔，但是学的越多会的越少，内心恐惧，陷入焦虑，开始规划，容易想的很多，目标不明确，死循环 Permalink to \"喜欢看很多视频学习，潜意识以为看完就学会了，一直处于赶进度的状态，无法自拔，但是学的越多会的越少，内心恐惧，陷入焦虑，开始规划，容易想的很多，目标不明确，死循环\"" [level=4] [ref=e192]:
+            - text: 喜欢看很多视频学习，潜意识以为看完就学会了，一直处于赶进度的状态，无法自拔，但是学的越多会的越少，内心恐惧，陷入焦虑，开始规划，容易想的很多，目标不明确，死循环
+            - link "Permalink to \"喜欢看很多视频学习，潜意识以为看完就学会了，一直处于赶进度的状态，无法自拔，但是学的越多会的越少，内心恐惧，陷入焦虑，开始规划，容易想的很多，目标不明确，死循环\"" [ref=e193] [cursor=pointer]:
+              - /url: "#喜欢看很多视频学习-潜意识以为看完就学会了-一直处于赶进度的状态-无法自拔-但是学的越多会的越少-内心恐惧-陷入焦虑-开始规划-容易想的很多-目标不明确-死循环"
+              - text: "#"
+          - heading "急着学习后面的内容，焦虑让自己的压力倍增，感觉时间不够，匆匆忙忙，对于某个内容可能并不是完全理解，但是会想没事，放一放，后面再回头看，实际上根本不会看，也没时间看 Permalink to \"急着学习后面的内容，焦虑让自己的压力倍增，感觉时间不够，匆匆忙忙，对于某个内容可能并不是完全理解，但是会想没事，放一放，后面再回头看，实际上根本不会看，也没时间看\"" [level=4] [ref=e194]:
+            - text: 急着学习后面的内容，焦虑让自己的压力倍增，感觉时间不够，匆匆忙忙，对于某个内容可能并不是完全理解，但是会想没事，放一放，后面再回头看，实际上根本不会看，也没时间看
+            - link "Permalink to \"急着学习后面的内容，焦虑让自己的压力倍增，感觉时间不够，匆匆忙忙，对于某个内容可能并不是完全理解，但是会想没事，放一放，后面再回头看，实际上根本不会看，也没时间看\"" [ref=e195] [cursor=pointer]:
+              - /url: "#急着学习后面的内容-焦虑让自己的压力倍增-感觉时间不够-匆匆忙忙-对于某个内容可能并不是完全理解-但是会想没事-放一放-后面再回头看-实际上根本不会看-也没时间看"
+              - text: "#"
+        - separator [ref=e196]
+        - heading "⚠️ 老韩的肺腑之言 Permalink to \"⚠️ 老韩的肺腑之言\"" [level=2] [ref=e197]:
+          - text: ⚠️ 老韩的肺腑之言
+          - link "Permalink to \"⚠️ 老韩的肺腑之言\"" [ref=e198] [cursor=pointer]:
+            - /url: "#⚠️-老韩的肺腑之言"
+            - text: "#"
+        - heading "1. 计算机基础很重要，很重要，不要追求时髦的技术，否则会陷入迷茫 Permalink to \"1. <span style = \"color:red;font-weight:bold\">计算机基础很重要</span>，很重要，不要追求时髦的技术，否则会陷入迷茫\"" [level=4] [ref=e199]:
+          - text: 1. 计算机基础很重要，很重要，不要追求时髦的技术，否则会陷入迷茫
+          - link "Permalink to \"1. <span style = \"color:red;font-weight:bold\">计算机基础很重要</span>，很重要，不要追求时髦的技术，否则会陷入迷茫\"" [ref=e200] [cursor=pointer]:
+            - /url: "#_1-计算机基础很重要-很重要-不要追求时髦的技术-否则会陷入迷茫"
+            - text: "#"
+        - heading "2. 选择适合自己的语言，不纠结，不同语言适用场景不同，不同语言逻辑语法大同小异，触类旁通，推荐学 JAVA，简单上手并好就业一些 Permalink to \"2. 选择适合自己的语言，不纠结，不同语言适用场景不同，不同语言逻辑语法大同小异，触类旁通，推荐学 JAVA，简单上手并好就业一些\"" [level=4] [ref=e201]:
+          - text: 2. 选择适合自己的语言，不纠结，不同语言适用场景不同，不同语言逻辑语法大同小异，触类旁通，推荐学 JAVA，简单上手并好就业一些
+          - link "Permalink to \"2. 选择适合自己的语言，不纠结，不同语言适用场景不同，不同语言逻辑语法大同小异，触类旁通，推荐学 JAVA，简单上手并好就业一些\"" [ref=e202] [cursor=pointer]:
+            - /url: "#_2-选择适合自己的语言-不纠结-不同语言适用场景不同-不同语言逻辑语法大同小异-触类旁通-推荐学-java-简单上手并好就业一些"
+            - text: "#"
+        - blockquote [ref=e203]:
+          - heading "问题：学的越多，心里越没底，感觉会的很少，很焦虑，迷茫 Permalink to \"<span style = \"color:blue;font-weight:bold\">问题：学的越多，心里越没底，感觉会的很少，很焦虑，迷茫</span>\"" [level=4] [ref=e204]:
+            - text: 问题：学的越多，心里越没底，感觉会的很少，很焦虑，迷茫
+            - link "Permalink to \"<span style = \"color:blue;font-weight:bold\">问题：学的越多，心里越没底，感觉会的很少，很焦虑，迷茫</span>\"" [ref=e205] [cursor=pointer]:
+              - /url: "#问题-学的越多-心里越没底-感觉会的很少-很焦虑-迷茫"
+              - text: "#"
+          - heading "3. 动手写代码非常重要，光看不练白搭，内化理解，计算机是在做的过程中学会的 Permalink to \"3. 动手写代码非常重要，<span style = \"color:red;font-weight:bold\">光看不练白搭，内化理解</span>，计算机是在做的过程中学会的\"" [level=4] [ref=e206]:
+            - text: 3. 动手写代码非常重要，光看不练白搭，内化理解，计算机是在做的过程中学会的
+            - link "Permalink to \"3. 动手写代码非常重要，<span style = \"color:red;font-weight:bold\">光看不练白搭，内化理解</span>，计算机是在做的过程中学会的\"" [ref=e207] [cursor=pointer]:
+              - /url: "#_3-动手写代码非常重要-光看不练白搭-内化理解-计算机是在做的过程中学会的"
+              - text: "#"
+          - heading "4. 听懂 ≠ 会做，会应用才是真的懂了，缺少大量练习，缺少深度思考 Permalink to \"4. <span style = \"color:red;font-weight:bold\">听懂 ≠ 会做</span>，会应用才是真的懂了，<span style = \"color:red;font-weight:bold\">缺少大量练习，缺少深度思考</span>\"" [level=4] [ref=e208]:
+            - text: 4. 听懂 ≠ 会做，会应用才是真的懂了，缺少大量练习，缺少深度思考
+            - link "Permalink to \"4. <span style = \"color:red;font-weight:bold\">听懂 ≠ 会做</span>，会应用才是真的懂了，<span style = \"color:red;font-weight:bold\">缺少大量练习，缺少深度思考</span>\"" [ref=e209] [cursor=pointer]:
+              - /url: "#_4-听懂-会做-会应用才是真的懂了-缺少大量练习-缺少深度思考"
+              - text: "#"
+        - blockquote [ref=e210]:
+          - heading "问题：合上书，关了视频啥也不知道，回想学了什么却浑然不知 Permalink to \"<span style = \"color:blue;font-weight:bold\">问题：合上书，关了视频啥也不知道，回想学了什么却浑然不知</span>\"" [level=4] [ref=e211]:
+            - text: 问题：合上书，关了视频啥也不知道，回想学了什么却浑然不知
+            - link "Permalink to \"<span style = \"color:blue;font-weight:bold\">问题：合上书，关了视频啥也不知道，回想学了什么却浑然不知</span>\"" [ref=e212] [cursor=pointer]:
+              - /url: "#问题-合上书-关了视频啥也不知道-回想学了什么却浑然不知"
+              - text: "#"
+          - heading "5. 学习要有笔记、思维导图或代码记录，有自己的想法积累或总结（内化理解，编程自己的东西），长期以往就会把精华学进脑内，就会知道怎么解决问题或者知道解决问题需要用哪段代码，最后就有了自己的学习方法 Permalink to \"5. 学习要有笔记、思维导图或代码记录，<span style = \"color:red;font-weight:bold\">有自己的想法积累或总结（内化理解，编程自己的东西）</span>，长期以往就会把精华学进脑内，就会知道怎么解决问题或者知道解决问题需要用哪段代码，最后就有了自己的学习方法\"" [level=4] [ref=e213]:
+            - text: 5. 学习要有笔记、思维导图或代码记录，有自己的想法积累或总结（内化理解，编程自己的东西），长期以往就会把精华学进脑内，就会知道怎么解决问题或者知道解决问题需要用哪段代码，最后就有了自己的学习方法
+            - link "Permalink to \"5. 学习要有笔记、思维导图或代码记录，<span style = \"color:red;font-weight:bold\">有自己的想法积累或总结（内化理解，编程自己的东西）</span>，长期以往就会把精华学进脑内，就会知道怎么解决问题或者知道解决问题需要用哪段代码，最后就有了自己的学习方法\"" [ref=e214] [cursor=pointer]:
+              - /url: "#_5-学习要有笔记、思维导图或代码记录-有自己的想法积累或总结-内化理解-编程自己的东西-长期以往就会把精华学进脑内-就会知道怎么解决问题或者知道解决问题需要用哪段代码-最后就有了自己的学习方法"
+              - text: "#"
+        - heading "6. 不要全部死记硬背，不变的语法，结构等需要背下来，其他功能性的内容知道在哪或者怎么找到解决办法就行了，实在理解不了就硬背然后实践中理解 Permalink to \"6. 不要全部死记硬背，不变的语法，结构等需要背下来，其他功能性的内容知道在哪或者怎么找到解决办法就行了，实在理解不了就硬背然后实践中理解\"" [level=4] [ref=e215]:
+          - text: 6. 不要全部死记硬背，不变的语法，结构等需要背下来，其他功能性的内容知道在哪或者怎么找到解决办法就行了，实在理解不了就硬背然后实践中理解
+          - link "Permalink to \"6. 不要全部死记硬背，不变的语法，结构等需要背下来，其他功能性的内容知道在哪或者怎么找到解决办法就行了，实在理解不了就硬背然后实践中理解\"" [ref=e216] [cursor=pointer]:
+            - /url: "#_6-不要全部死记硬背-不变的语法-结构等需要背下来-其他功能性的内容知道在哪或者怎么找到解决办法就行了-实在理解不了就硬背然后实践中理解"
+            - text: "#"
+        - heading "7. 报错一定不要逃避，这是提高自己能力的重要方法，排除错误才会提升能力也会避免犯错 Permalink to \"7. <span style = \"color:red;font-weight:bold\">报错一定不要逃避</span>，这是<span style = \"color:red;font-weight:bold\">提高</span>自己<span style = \"color:red;font-weight:bold\">能力</span>的<span style = \"color:red;font-weight:bold\">重要方法</span>，排除错误才会提升能力也会避免犯错\"" [level=4] [ref=e217]:
+          - text: 7. 报错一定不要逃避，这是提高自己能力的重要方法，排除错误才会提升能力也会避免犯错
+          - link "Permalink to \"7. <span style = \"color:red;font-weight:bold\">报错一定不要逃避</span>，这是<span style = \"color:red;font-weight:bold\">提高</span>自己<span style = \"color:red;font-weight:bold\">能力</span>的<span style = \"color:red;font-weight:bold\">重要方法</span>，排除错误才会提升能力也会避免犯错\"" [ref=e218] [cursor=pointer]:
+            - /url: "#_7-报错一定不要逃避-这是提高自己能力的重要方法-排除错误才会提升能力也会避免犯错"
+            - text: "#"
+        - heading "8. 不要闭门造车，敢于交流分享，交流分享技术很重要，不要让自己成为井底之蛙，很多问题别人也许有特别好的解决办法，不怕嘲笑，都是过来人，越战越勇！ Permalink to \"8. <span style = \"color:red;font-weight:bold\">不要闭门造车，敢于交流分享</span>，交流分享技术很重要，不要让自己成为井底之蛙，很多问题别人也许有特别好的解决办法，不怕嘲笑，都是过来人，越战越勇！\"" [level=4] [ref=e219]:
+          - text: 8. 不要闭门造车，敢于交流分享，交流分享技术很重要，不要让自己成为井底之蛙，很多问题别人也许有特别好的解决办法，不怕嘲笑，都是过来人，越战越勇！
+          - link "Permalink to \"8. <span style = \"color:red;font-weight:bold\">不要闭门造车，敢于交流分享</span>，交流分享技术很重要，不要让自己成为井底之蛙，很多问题别人也许有特别好的解决办法，不怕嘲笑，都是过来人，越战越勇！\"" [ref=e220] [cursor=pointer]:
+            - /url: "#_8-不要闭门造车-敢于交流分享-交流分享技术很重要-不要让自己成为井底之蛙-很多问题别人也许有特别好的解决办法-不怕嘲笑-都是过来人-越战越勇"
+            - text: "#"
+        - heading "9. 跟风新技术，什么都学，没有明确目标，瞎忙活，学习技术要建立体系，定好学习目标和方向，要有精通的技术和竞争力，用有限的时间做高效的事 Permalink to \"9. 跟风新技术，<span style = \"color:red;font-weight:bold\">什么都学，没有明确目标，瞎忙活，学习技术要建立体系，定好学习目标和方向</span>，要有精通的技术和竞争力，用有限的时间做高效的事\"" [level=4] [ref=e221]:
+          - text: 9. 跟风新技术，什么都学，没有明确目标，瞎忙活，学习技术要建立体系，定好学习目标和方向，要有精通的技术和竞争力，用有限的时间做高效的事
+          - link "Permalink to \"9. 跟风新技术，<span style = \"color:red;font-weight:bold\">什么都学，没有明确目标，瞎忙活，学习技术要建立体系，定好学习目标和方向</span>，要有精通的技术和竞争力，用有限的时间做高效的事\"" [ref=e222] [cursor=pointer]:
+            - /url: "#_9-跟风新技术-什么都学-没有明确目标-瞎忙活-学习技术要建立体系-定好学习目标和方向-要有精通的技术和竞争力-用有限的时间做高效的事"
+            - text: "#"
+        - heading "10. 别让收藏夹吃灰，别让磁盘充满也不学习，资源在精不在多，同上，规划好学习目标 Permalink to \"10. <span style = \"color:red;font-weight:bold\">别让收藏夹吃灰</span>，别让磁盘充满也不学习，<span style = \"color:red;font-weight:bold\">资源在精不在多</span>，同上，规划好学习目标\"" [level=4] [ref=e223]:
+          - text: 10. 别让收藏夹吃灰，别让磁盘充满也不学习，资源在精不在多，同上，规划好学习目标
+          - link "Permalink to \"10. <span style = \"color:red;font-weight:bold\">别让收藏夹吃灰</span>，别让磁盘充满也不学习，<span style = \"color:red;font-weight:bold\">资源在精不在多</span>，同上，规划好学习目标\"" [ref=e224] [cursor=pointer]:
+            - /url: "#_10-别让收藏夹吃灰-别让磁盘充满也不学习-资源在精不在多-同上-规划好学习目标"
+            - text: "#"
+        - heading "11. 学编程同性别无关，职场中女生有劣势，做好职业规划 Permalink to \"11. <span style = \"color:red;font-weight:bold\">学编程同性别无关</span>，职场中女生有劣势，做好职业规划\"" [level=4] [ref=e225]:
+          - text: 11. 学编程同性别无关，职场中女生有劣势，做好职业规划
+          - link "Permalink to \"11. <span style = \"color:red;font-weight:bold\">学编程同性别无关</span>，职场中女生有劣势，做好职业规划\"" [ref=e226] [cursor=pointer]:
+            - /url: "#_11-学编程同性别无关-职场中女生有劣势-做好职业规划"
+            - text: "#"
+        - heading "12. 学编程和专业无关，技术和业务逻辑分离，都重要 Permalink to \"12. <span style = \"color:red;font-weight:bold\">学编程和专业无关</span>，技术和业务逻辑分离，都重要\"" [level=4] [ref=e227]:
+          - text: 12. 学编程和专业无关，技术和业务逻辑分离，都重要
+          - link "Permalink to \"12. <span style = \"color:red;font-weight:bold\">学编程和专业无关</span>，技术和业务逻辑分离，都重要\"" [ref=e228] [cursor=pointer]:
+            - /url: "#_12-学编程和专业无关-技术和业务逻辑分离-都重要"
+            - text: "#"
+        - heading "13. 数学不好不是学不好编程的借口，绝大多数程序员不需要用到高深的数学知识，除非是算法、大数据等方向 Permalink to \"13. <span style = \"color:red;font-weight:bold\">数学不好不是学不好编程的借口</span>，绝大多数程序员不需要用到高深的数学知识，除非是算法、大数据等方向\"" [level=4] [ref=e229]:
+          - text: 13. 数学不好不是学不好编程的借口，绝大多数程序员不需要用到高深的数学知识，除非是算法、大数据等方向
+          - link "Permalink to \"13. <span style = \"color:red;font-weight:bold\">数学不好不是学不好编程的借口</span>，绝大多数程序员不需要用到高深的数学知识，除非是算法、大数据等方向\"" [ref=e230] [cursor=pointer]:
+            - /url: "#_13-数学不好不是学不好编程的借口-绝大多数程序员不需要用到高深的数学知识-除非是算法、大数据等方向"
+            - text: "#"
+        - generic [ref=e231]:
+          - paragraph [ref=e232]: 总结 👇
+          - heading "🚀调整心态（明确目标，坚持下去）重视基础（大量练习，多写多练），知识内化，建立体系（总结提炼），及时复习（堆熟练度）🚀" [level=4] [ref=e233]
+        - heading "⭐ 编程学习感悟 Permalink to \"⭐ 编程学习感悟\"" [level=2] [ref=e234]:
+          - text: ⭐ 编程学习感悟
+          - link "Permalink to \"⭐ 编程学习感悟\"" [ref=e235] [cursor=pointer]:
+            - /url: "#⭐-编程学习感悟"
+            - text: "#"
+        - heading "（1）什么时候你越觉得业务逻辑比代码重要，才说明你能力在提升 Permalink to \"（1）什么时候你越觉得<span style=\"color:red\">业务逻辑</span>比代码重要，才说明你能力在提升\"" [level=4] [ref=e236]:
+          - text: （1）什么时候你越觉得业务逻辑比代码重要，才说明你能力在提升
+          - link "Permalink to \"（1）什么时候你越觉得<span style=\"color:red\">业务逻辑</span>比代码重要，才说明你能力在提升\"" [ref=e237] [cursor=pointer]:
+            - /url: "#_1-什么时候你越觉得业务逻辑比代码重要-才说明你能力在提升"
+            - text: "#"
+        - blockquote [ref=e238]:
+          - heading "假设是 6 个单位时间。你都是花 1 个小时单位时间听完了知识点 Permalink to \"假设是 6 个单位时间。你都是花 1 个小时单位时间听完了知识点\"" [level=4] [ref=e239]:
+            - text: 假设是 6 个单位时间。你都是花 1 个小时单位时间听完了知识点
+            - link "Permalink to \"假设是 6 个单位时间。你都是花 1 个小时单位时间听完了知识点\"" [ref=e240] [cursor=pointer]:
+              - /url: "#假设是-6-个单位时间。你都是花-1-个小时单位时间听完了知识点"
+              - text: "#"
+          - heading "第一个：你花 2 个单位时间做了小案例。再花 3 个单位时间做了项目 Permalink to \"第一个：你花 2 个单位时间做了小案例。再花 3 个单位时间做了项目\"" [level=4] [ref=e241]:
+            - text: 第一个：你花 2 个单位时间做了小案例。再花 3 个单位时间做了项目
+            - link "Permalink to \"第一个：你花 2 个单位时间做了小案例。再花 3 个单位时间做了项目\"" [ref=e242] [cursor=pointer]:
+              - /url: "#第一个-你花-2-个单位时间做了小案例。再花-3-个单位时间做了项目"
+              - text: "#"
+          - heading "第二个：你直接进去项目摸索，你觉得 5 个单位时间你可以重复多少次这个项目？ Permalink to \"第二个：你直接进去项目摸索，你觉得 5 个单位时间你可以重复多少次这个项目？\"" [level=4] [ref=e243]:
+            - text: 第二个：你直接进去项目摸索，你觉得 5 个单位时间你可以重复多少次这个项目？
+            - link "Permalink to \"第二个：你直接进去项目摸索，你觉得 5 个单位时间你可以重复多少次这个项目？\"" [ref=e244] [cursor=pointer]:
+              - /url: "#第二个-你直接进去项目摸索-你觉得-5-个单位时间你可以重复多少次这个项目"
+              - text: "#"
+          - heading "就算给你复现，第一种情况可能根本就无法复现项目，因为业务逻辑根本就没有搞清楚 Permalink to \"就算给你复现，第一种情况可能根本就无法复现项目，因为业务逻辑根本就没有搞清楚\"" [level=4] [ref=e245]:
+            - text: 就算给你复现，第一种情况可能根本就无法复现项目，因为业务逻辑根本就没有搞清楚
+            - link "Permalink to \"就算给你复现，第一种情况可能根本就无法复现项目，因为业务逻辑根本就没有搞清楚\"" [ref=e246] [cursor=pointer]:
+              - /url: "#就算给你复现-第一种情况可能根本就无法复现项目-因为业务逻辑根本就没有搞清楚"
+              - text: "#"
+        - heading "（2）做难且正确的事情，难到别人无法到达轻易到达的程度，这才说明你不容易被替换，能让你很快能速成的东西都不是什么能让你成长很多的东西 Permalink to \"（2）<span style=\"color:red\">做难且正确的事情</span>，难到别人无法到达轻易到达的程度，这才说明你<span style=\"color:red\">不容易被替换</span>，能让你很快能速成的东西都不是什么能让你成长很多的东西\"" [level=4] [ref=e247]:
+          - text: （2）做难且正确的事情，难到别人无法到达轻易到达的程度，这才说明你不容易被替换，能让你很快能速成的东西都不是什么能让你成长很多的东西
+          - link "Permalink to \"（2）<span style=\"color:red\">做难且正确的事情</span>，难到别人无法到达轻易到达的程度，这才说明你<span style=\"color:red\">不容易被替换</span>，能让你很快能速成的东西都不是什么能让你成长很多的东西\"" [ref=e248] [cursor=pointer]:
+            - /url: "#_2-做难且正确的事情-难到别人无法到达轻易到达的程度-这才说明你不容易被替换-能让你很快能速成的东西都不是什么能让你成长很多的东西"
+            - text: "#"
+        - blockquote [ref=e249]:
+          - heading "一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？ Permalink to \"一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？\"" [level=4] [ref=e250]:
+            - text: 一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？
+            - link "Permalink to \"一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？\"" [ref=e251] [cursor=pointer]:
+              - /url: "#一件事很容易能做到-那很多人都能做到了-当机会来临时-那凭什么是你呢"
+              - text: "#"
+    - contentinfo [ref=e252]
+  - contentinfo [ref=e253]:
+    - paragraph [ref=e255]: Copyright © 2025 Jackson 凌 All Rights Reserved. | 粤ICP备2025441629号-1

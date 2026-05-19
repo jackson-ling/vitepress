@@ -61,7 +61,10 @@
       "Bash(npx playwright *)",
       "Bash(curl -s http://localhost:5173/warning.html)",
       "Bash(npm install *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/docs/warning.html)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/docs/warning.html)",
+      "Bash(pnpm dev *)",
+      "Bash(npx vite *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
     ]
   },
   "enabledPlugins": {

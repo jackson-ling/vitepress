@@ -208,7 +208,7 @@ function onIconError(e) {
 .home-extras {
   max-width: 900px;
   margin: 0 auto;
-  padding: 24px 24px 60px;
+  padding: 24px 24px 80px;
 }
 
 /* ── 入场动画 ───────────────────────────────────────────── */
@@ -295,7 +295,7 @@ function onIconError(e) {
 .category-list {
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 80px;
 }
 
 /* 外层 wrapper */
@@ -313,11 +313,13 @@ function onIconError(e) {
   padding: 28px;
   box-shadow: var(--site-card-shadow);
   position: relative;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s ease;
 }
 
 .category-wrapper.is-focused .category-block {
   transform: scale(1.06);
+  box-shadow: 0 8px 32px rgba(52, 120, 217, 0.15), 0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
 .category-wrapper:hover .category-block {
@@ -481,7 +483,7 @@ function onIconError(e) {
 /* ── 响应式 ─────────────────────────────────────────────── */
 @media (max-width: 959px) {
   .home-extras {
-    padding: 12px 16px 64px;
+    padding: 12px 16px 56px;
   }
 
   .tips-grid {
@@ -498,7 +500,7 @@ function onIconError(e) {
   }
 
   .category-list {
-    gap: 40px;
+    gap: 56px;
   }
 
   .category-grid {

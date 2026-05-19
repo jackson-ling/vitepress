@@ -1,0 +1,303 @@
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "知识文档站" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: 知识文档站
+          - generic [ref=e8]:
+            - button "搜索文档" [ref=e11] [cursor=pointer]:
+              - generic [ref=e14]: 搜索文档
+              - generic [ref=e15]:
+                - generic [ref=e16]: Ctrl
+                - generic [ref=e17]: K
+            - navigation "Main Navigation" [ref=e18]:
+              - generic [ref=e19]: Main Navigation
+              - link "🏠首页" [ref=e20] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e21]: 🏠首页
+              - button "📝笔记" [ref=e23] [cursor=pointer]:
+                - generic [ref=e25]: 📝笔记
+              - button "⭐算法" [ref=e28] [cursor=pointer]:
+                - generic [ref=e30]: ⭐算法
+              - button "前端" [ref=e33] [cursor=pointer]:
+                - generic [ref=e35]: 前端
+              - button "Java" [ref=e38] [cursor=pointer]:
+                - generic [ref=e40]:
+                  - img [ref=e41]
+                  - text: Java
+              - button "🎯后端" [ref=e44] [cursor=pointer]:
+                - generic [ref=e46]: 🎯后端
+              - button "🚀项目" [ref=e49] [cursor=pointer]:
+                - generic [ref=e51]: 🚀项目
+              - button "🤖AI" [ref=e54] [cursor=pointer]:
+                - generic [ref=e56]: 🤖AI
+              - button "Python" [ref=e59] [cursor=pointer]:
+                - generic [ref=e61]:
+                  - img [ref=e62]
+                  - text: Python
+              - button "408" [ref=e65] [cursor=pointer]:
+                - generic [ref=e67]: "408"
+            - button "extra navigation" [ref=e70] [cursor=pointer]
+  - button "文章目录" [ref=e75] [cursor=pointer]: 文章目录
+  - complementary [ref=e77]:
+    - navigation "Sidebar Navigation" [ref=e79]:
+      - generic [ref=e80]: Sidebar Navigation
+      - generic [ref=e82]:
+        - button "软件安装" [ref=e83]:
+          - heading "软件安装" [level=2] [ref=e85]
+        - generic [ref=e86]:
+          - link "MySQL 5.7" [ref=e90] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/MySQL%E5%AE%89%E8%A3%85..html
+            - paragraph [ref=e91]: MySQL 5.7
+          - link "Navicat 16" [ref=e95] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/Navicat%E5%AE%89%E8%A3%85.html
+            - paragraph [ref=e96]: Navicat 16
+          - link "SQLyog" [ref=e100] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/SQLyog%E5%AE%89%E8%A3%85.html
+            - paragraph [ref=e101]: SQLyog
+          - link "DataGrip" [ref=e105] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/DataGrip%E5%AE%89%E8%A3%85.html
+            - paragraph [ref=e106]: DataGrip
+      - generic [ref=e108]:
+        - button "MySQL" [ref=e109]:
+          - heading "MySQL" [level=2] [ref=e111]
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - button "基础篇 toggle section" [ref=e114] [cursor=pointer]:
+              - heading "基础篇" [level=3] [ref=e116]
+              - button "toggle section" [ref=e117]
+            - generic [ref=e119]:
+              - link "1. 基本介绍" [ref=e123] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/1.%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D.html
+                - paragraph [ref=e124]: 1. 基本介绍
+              - link "2. 基本操作" [ref=e128] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/2.%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html
+                - paragraph [ref=e129]: 2. 基本操作
+              - link "3. 数据类型" [ref=e133] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/3.%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html
+                - paragraph [ref=e134]: 3. 数据类型
+              - link "4. 表操作" [ref=e138] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/4.%20%E8%A1%A8%E6%93%8D%E4%BD%9C.html
+                - paragraph [ref=e139]: 4. 表操作
+              - link "5. CRUD" [ref=e143] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/5.%20CRUD.html
+                - paragraph [ref=e144]: 5. CRUD
+              - link "6. 函数" [ref=e148] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/6.%20%E5%87%BD%E6%95%B0.html
+                - paragraph [ref=e149]: 6. 函数
+              - link "7. 约束" [ref=e153] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/7.%20%E7%BA%A6%E6%9D%9F.html
+                - paragraph [ref=e154]: 7. 约束
+              - link "8. 多表查询" [ref=e158] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/8.%20%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2.html
+                - paragraph [ref=e159]: 8. 多表查询
+              - link "9. 事务（重点）" [ref=e163] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/9.%20%E4%BA%8B%E5%8A%A1%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89.html
+                - paragraph [ref=e164]: 9. 事务（重点）
+          - generic [ref=e165]:
+            - button "进阶篇 toggle section" [ref=e166] [cursor=pointer]:
+              - heading "进阶篇" [level=3] [ref=e168]
+              - button "toggle section" [ref=e169]
+            - generic [ref=e171]:
+              - link "1. 存储引擎" [ref=e175] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/1.%20%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.html
+                - paragraph [ref=e176]: 1. 存储引擎
+              - link "2. 索引" [ref=e180] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/2.%20%E7%B4%A2%E5%BC%95.html
+                - paragraph [ref=e181]: 2. 索引
+              - link "3. SQL优化" [ref=e185] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/3.%20SQL%E4%BC%98%E5%8C%96.html
+                - paragraph [ref=e186]: 3. SQL优化
+              - link "4. 视图" [ref=e190] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/4.%20%E8%A7%86%E5%9B%BE.html
+                - paragraph [ref=e191]: 4. 视图
+              - link "5. 存储过程" [ref=e195] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/5.%20%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B.html
+                - paragraph [ref=e196]: 5. 存储过程
+              - link "6. 触发器" [ref=e200] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/6.%20%E8%A7%A6%E5%8F%91%E5%99%A8.html
+                - paragraph [ref=e201]: 6. 触发器
+              - link "7. 锁" [ref=e205] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/7.%20%E9%94%81.html
+                - paragraph [ref=e206]: 7. 锁
+              - link "8. InnoDB引擎" [ref=e210] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/8.%20InnoDB%E5%BC%95%E6%93%8E.html
+                - paragraph [ref=e211]: 8. InnoDB引擎
+              - link "9. MySQL管理" [ref=e215] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%9B%E9%98%B6%E7%AF%87/9.%20MySQL%E7%AE%A1%E7%90%86.html
+                - paragraph [ref=e216]: 9. MySQL管理
+          - generic [ref=e217]:
+            - button "运维篇 toggle section" [ref=e218] [cursor=pointer]:
+              - heading "运维篇" [level=3] [ref=e220]
+              - button "toggle section" [ref=e221]
+            - generic [ref=e223]:
+              - link "1. 日志" [ref=e227] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%90%E7%BB%B4%E7%AF%87/1.%20%E6%97%A5%E5%BF%97.html
+                - paragraph [ref=e228]: 1. 日志
+              - link "2. 主从复制" [ref=e232] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%90%E7%BB%B4%E7%AF%87/2.%20%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.html
+                - paragraph [ref=e233]: 2. 主从复制
+              - link "3. 分库分表" [ref=e237] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%90%E7%BB%B4%E7%AF%87/3.%20%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8.html
+                - paragraph [ref=e238]: 3. 分库分表
+              - link "4. 读写分离" [ref=e242] [cursor=pointer]:
+                - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E8%BF%90%E7%BB%B4%E7%AF%87/4.%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB.html
+                - paragraph [ref=e243]: 4. 读写分离
+      - generic [ref=e245]:
+        - button "MySQL作业 toggle section" [ref=e246] [cursor=pointer]:
+          - heading "MySQL作业" [level=2] [ref=e248]
+          - button "toggle section" [ref=e249]
+        - generic [ref=e251]:
+          - link "1. 多表查询练习（必做）" [ref=e255] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/1.%20%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%EF%BC%88%E5%BF%85%E5%81%9A%EF%BC%89.html
+            - paragraph [ref=e256]: 1. 多表查询练习（必做）
+          - link "2. 作业一" [ref=e260] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/2.%20%E4%BD%9C%E4%B8%9A%E4%B8%80.html
+            - paragraph [ref=e261]: 2. 作业一
+          - link "3. 作业二" [ref=e265] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/3.%20%E4%BD%9C%E4%B8%9A%E4%BA%8C.html
+            - paragraph [ref=e266]: 3. 作业二
+          - link "4. 作业三" [ref=e270] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/4.%20%E4%BD%9C%E4%B8%9A%E4%B8%89.html
+            - paragraph [ref=e271]: 4. 作业三
+          - link "5. 作业四" [ref=e275] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/5.%20%E4%BD%9C%E4%B8%9A%E5%9B%9B.html
+            - paragraph [ref=e276]: 5. 作业四
+          - link "6. 作业五" [ref=e280] [cursor=pointer]:
+            - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MYSQL%E4%BD%9C%E4%B8%9A/6.%20%E4%BD%9C%E4%B8%9A%E4%BA%94.html
+            - paragraph [ref=e281]: 6. 作业五
+  - generic [ref=e286]:
+    - main [ref=e287]:
+      - generic [ref=e289]:
+        - heading "MySQL基本介绍" [level=1] [ref=e290]
+        - separator [ref=e291]
+        - heading "基本介绍 Permalink to \"基本介绍\"" [level=2] [ref=e292]:
+          - text: 基本介绍
+          - link "Permalink to \"基本介绍\"" [ref=e293] [cursor=pointer]:
+            - /url: "#基本介绍"
+            - text: "#"
+        - blockquote [ref=e294]:
+          - heading "MySQL 是一款广泛使用的开源关系型数据库管理系统（RDBMS），由瑞典 MySQL AB 公司最初开发，后被 Sun 公司收购，最终随 Sun 被 Oracle 公司收购并持续维护。它以开源免费、高性能、易扩展和跨平台等特点，成为互联网行业、中小型企业及个人开发者的首选数据库之一 Permalink to \"MySQL 是一款广泛使用的开源<span style = \"color:red;font-weight:bold\">关系型数据库</span>管理系统（<span style = \"color:red;font-weight:bold\">RDBMS</span>），由瑞典 MySQL AB 公司最初开发，后被 Sun 公司收购，最终随 Sun 被 Oracle 公司收购并持续维护。它以<span style = \"color:red;font-weight:bold\">开源免费、高性能、易扩展和跨平台</span>等特点，成为互联网行业、中小型企业及个人开发者的首选数据库之一\"" [level=4] [ref=e295]:
+            - text: MySQL 是一款广泛使用的开源关系型数据库管理系统（RDBMS），由瑞典 MySQL AB 公司最初开发，后被 Sun 公司收购，最终随 Sun 被 Oracle 公司收购并持续维护。它以开源免费、高性能、易扩展和跨平台等特点，成为互联网行业、中小型企业及个人开发者的首选数据库之一
+            - link "Permalink to \"MySQL 是一款广泛使用的开源<span style = \"color:red;font-weight:bold\">关系型数据库</span>管理系统（<span style = \"color:red;font-weight:bold\">RDBMS</span>），由瑞典 MySQL AB 公司最初开发，后被 Sun 公司收购，最终随 Sun 被 Oracle 公司收购并持续维护。它以<span style = \"color:red;font-weight:bold\">开源免费、高性能、易扩展和跨平台</span>等特点，成为互联网行业、中小型企业及个人开发者的首选数据库之一\"" [ref=e296] [cursor=pointer]:
+              - /url: "#mysql-是一款广泛使用的开源关系型数据库管理系统-rdbms-由瑞典-mysql-ab-公司最初开发-后被-sun-公司收购-最终随-sun-被-oracle-公司收购并持续维护。它以开源免费、高性能、易扩展和跨平台等特点-成为互联网行业、中小型企业及个人开发者的首选数据库之一"
+              - text: "#"
+        - heading "关系结构 Permalink to \"关系结构\"" [level=2] [ref=e297]:
+          - text: 关系结构
+          - link "Permalink to \"关系结构\"" [ref=e298] [cursor=pointer]:
+            - /url: "#关系结构"
+            - text: "#"
+        - img [ref=e299]
+        - paragraph [ref=e300]:
+          - img "alt text" [ref=e301]
+        - heading "数据存储方式 Permalink to \"数据存储方式\"" [level=2] [ref=e302]:
+          - text: 数据存储方式
+          - link "Permalink to \"数据存储方式\"" [ref=e303] [cursor=pointer]:
+            - /url: "#数据存储方式"
+            - text: "#"
+        - paragraph [ref=e304]:
+          - img "alt text" [ref=e305]
+        - blockquote [ref=e306]:
+          - heading "基本元素：行（row），列（column） Permalink to \"基本元素：行（row），列（column）\"" [level=4] [ref=e307]:
+            - text: 基本元素：行（row），列（column）
+            - link "Permalink to \"基本元素：行（row），列（column）\"" [ref=e308] [cursor=pointer]:
+              - /url: "#基本元素-行-row-列-column"
+              - text: "#"
+          - heading "表的一行称之为一条记录，在Java中，一行记录往往使用对象表示 Permalink to \"表的<span style = \"color:red;font-weight:bold\">一行</span>称之为<span style = \"color:red;font-weight:bold\">一条记录</span>，在<span style = \"color:red;font-weight:bold\">Java</span>中，<span style = \"color:red;font-weight:bold\">一行记录</span>往往使用<span style = \"color:red;font-weight:bold\">对象表示</span>\"" [level=4] [ref=e309]:
+            - text: 表的一行称之为一条记录，在Java中，一行记录往往使用对象表示
+            - link "Permalink to \"表的<span style = \"color:red;font-weight:bold\">一行</span>称之为<span style = \"color:red;font-weight:bold\">一条记录</span>，在<span style = \"color:red;font-weight:bold\">Java</span>中，<span style = \"color:red;font-weight:bold\">一行记录</span>往往使用<span style = \"color:red;font-weight:bold\">对象表示</span>\"" [ref=e310] [cursor=pointer]:
+              - /url: "#表的一行称之为一条记录-在java中-一行记录往往使用对象表示"
+              - text: "#"
+        - heading "SQL 语句分类 Permalink to \"SQL 语句分类\"" [level=2] [ref=e311]:
+          - text: SQL 语句分类
+          - link "Permalink to \"SQL 语句分类\"" [ref=e312] [cursor=pointer]:
+            - /url: "#sql-语句分类"
+            - text: "#"
+        - paragraph [ref=e313]:
+          - img "alt text" [ref=e314]
+        - blockquote [ref=e315]:
+          - heading "DDL：定义语句，D 代表 define Permalink to \"DDL：定义语句，**D 代表 <span style = \"color:red;font-weight:bold\">define</span>**\"" [level=4] [ref=e316]:
+            - text: DDL：定义语句，
+            - strong [ref=e317]: D 代表 define
+            - link "Permalink to \"DDL：定义语句，**D 代表 <span style = \"color:red;font-weight:bold\">define</span>**\"" [ref=e318] [cursor=pointer]:
+              - /url: "#ddl-定义语句-d-代表-define"
+              - text: "#"
+          - heading "DML：操作语句（增删改），M 代表 modifiy Permalink to \"DML：操作语句（增删改），**M 代表 <span style = \"color:red;font-weight:bold\">modifiy</span>**\"" [level=4] [ref=e319]:
+            - text: DML：操作语句（增删改），
+            - strong [ref=e320]: M 代表 modifiy
+            - link "Permalink to \"DML：操作语句（增删改），**M 代表 <span style = \"color:red;font-weight:bold\">modifiy</span>**\"" [ref=e321] [cursor=pointer]:
+              - /url: "#dml-操作语句-增删改-m-代表-modifiy"
+              - text: "#"
+          - heading "DQL：查询语句，Q 代表 query Permalink to \"DQL：查询语句，**Q 代表 <span style = \"color:red;font-weight:bold\">query</span>**\"" [level=4] [ref=e322]:
+            - text: DQL：查询语句，
+            - strong [ref=e323]: Q 代表 query
+            - link "Permalink to \"DQL：查询语句，**Q 代表 <span style = \"color:red;font-weight:bold\">query</span>**\"" [ref=e324] [cursor=pointer]:
+              - /url: "#dql-查询语句-q-代表-query"
+              - text: "#"
+          - heading "DCL：控制语句，C 代表 control Permalink to \"DCL：控制语句，**C 代表 <span style = \"color:red;font-weight:bold\">control</span>**\"" [level=4] [ref=e325]:
+            - text: DCL：控制语句，
+            - strong [ref=e326]: C 代表 control
+            - link "Permalink to \"DCL：控制语句，**C 代表 <span style = \"color:red;font-weight:bold\">control</span>**\"" [ref=e327] [cursor=pointer]:
+              - /url: "#dcl-控制语句-c-代表-control"
+              - text: "#"
+        - heading "数据模型 Permalink to \"数据模型\"" [level=2] [ref=e328]:
+          - text: 数据模型
+          - link "Permalink to \"数据模型\"" [ref=e329] [cursor=pointer]:
+            - /url: "#数据模型"
+            - text: "#"
+        - heading "关系型数据库 Permalink to \"关系型数据库\"" [level=3] [ref=e330]:
+          - text: 关系型数据库
+          - link "Permalink to \"关系型数据库\"" [ref=e331] [cursor=pointer]:
+            - /url: "#关系型数据库"
+            - text: "#"
+        - heading "（1）基本概念 Permalink to \"（1）基本概念\"" [level=4] [ref=e332]:
+          - text: （1）基本概念
+          - link "Permalink to \"（1）基本概念\"" [ref=e333] [cursor=pointer]:
+            - /url: "#_1-基本概念"
+            - text: "#"
+        - blockquote [ref=e334]:
+          - heading "建立在关系模型基础上，由多张相互连接的二维表组成的数据库 Permalink to \"建立在<span style = \"color:red;font-weight:bold\">关系</span>模型基础上，由多张相互连接的<span style = \"color:red;font-weight:bold\">二维表</span>组成的数据库\"" [level=4] [ref=e335]:
+            - text: 建立在关系模型基础上，由多张相互连接的二维表组成的数据库
+            - link "Permalink to \"建立在<span style = \"color:red;font-weight:bold\">关系</span>模型基础上，由多张相互连接的<span style = \"color:red;font-weight:bold\">二维表</span>组成的数据库\"" [ref=e336] [cursor=pointer]:
+              - /url: "#建立在关系模型基础上-由多张相互连接的二维表组成的数据库"
+              - text: "#"
+          - heading "不是基于二维表存储数据的数据库，就是非关系型数据库 Permalink to \"不是基于二维表存储数据的数据库，就是非关系型数据库\"" [level=4] [ref=e337]:
+            - text: 不是基于二维表存储数据的数据库，就是非关系型数据库
+            - link "Permalink to \"不是基于二维表存储数据的数据库，就是非关系型数据库\"" [ref=e338] [cursor=pointer]:
+              - /url: "#不是基于二维表存储数据的数据库-就是非关系型数据库"
+              - text: "#"
+        - heading "（2）二维表 Permalink to \"（2）二维表\"" [level=4] [ref=e339]:
+          - text: （2）二维表
+          - link "Permalink to \"（2）二维表\"" [ref=e340] [cursor=pointer]:
+            - /url: "#_2-二维表"
+            - text: "#"
+        - blockquote [ref=e341]:
+          - heading "所谓二维表，指的是由行和列组成的表，如下图（就类似于 Excel 表格数据，有表头、有列、有行，还可以通过一列关联另外一个表格中的某一列数据）。我们之前提到的 MySQL、Oracle、DB2、SQLServer 这些都是属于关系型数据库，里面都是基于二维表存储数据的。简单说，基于二维表存储数据的数据库就称为关系型数据库 Permalink to \"所谓二维表，指的是由行和列组成的表，如下图（就类似于 Excel 表格数据，有表头、有列、有行，还可以通过一列关联另外一个表格中的某一列数据）。我们之前提到的 MySQL、Oracle、DB2、SQLServer 这些都是属于关系型数据库，里面都是基于二维表存储数据的。简单说，<span style = \"color:red;font-weight:bold\">基于二维表存储数据的数据库就称为关系型数据库</span>\"" [level=4] [ref=e342]:
+            - text: 所谓二维表，指的是由行和列组成的表，如下图（就类似于 Excel 表格数据，有表头、有列、有行，还可以通过一列关联另外一个表格中的某一列数据）。我们之前提到的 MySQL、Oracle、DB2、SQLServer 这些都是属于关系型数据库，里面都是基于二维表存储数据的。简单说，基于二维表存储数据的数据库就称为关系型数据库
+            - link "Permalink to \"所谓二维表，指的是由行和列组成的表，如下图（就类似于 Excel 表格数据，有表头、有列、有行，还可以通过一列关联另外一个表格中的某一列数据）。我们之前提到的 MySQL、Oracle、DB2、SQLServer 这些都是属于关系型数据库，里面都是基于二维表存储数据的。简单说，<span style = \"color:red;font-weight:bold\">基于二维表存储数据的数据库就称为关系型数据库</span>\"" [ref=e343] [cursor=pointer]:
+              - /url: "#所谓二维表-指的是由行和列组成的表-如下图-就类似于-excel-表格数据-有表头、有列、有行-还可以通过一列关联另外一个表格中的某一列数据-。我们之前提到的-mysql、oracle、db2、sqlserver-这些都是属于关系型数据库-里面都是基于二维表存储数据的。简单说-基于二维表存储数据的数据库就称为关系型数据库"
+              - text: "#"
+        - paragraph [ref=e344]:
+          - img "alt text" [ref=e345]
+        - heading "数据模型 Permalink to \"数据模型\"" [level=3] [ref=e346]:
+          - text: 数据模型
+          - link "Permalink to \"数据模型\"" [ref=e347] [cursor=pointer]:
+            - /url: "#数据模型-1"
+            - text: "#"
+        - paragraph [ref=e348]:
+          - img "alt text" [ref=e349]
+    - contentinfo [ref=e350]:
+      - navigation "Pager" [ref=e351]:
+        - generic [ref=e352]: Pager
+        - link "上一页 DataGrip" [ref=e354] [cursor=pointer]:
+          - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/DataGrip%E5%AE%89%E8%A3%85.html
+          - generic [ref=e355]: 上一页
+          - generic [ref=e356]: DataGrip
+        - link "下一页 2. 基本操作" [ref=e358] [cursor=pointer]:
+          - /url: /docs/%E5%90%8E%E7%AB%AF/MySQL/MySQL/%E5%9F%BA%E7%A1%80%E7%AF%87/2.%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html
+          - generic [ref=e359]: 下一页
+          - generic [ref=e360]: 2. 基本操作
