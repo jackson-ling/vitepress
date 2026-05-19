@@ -262,15 +262,15 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
   color: var(--shiki-light, #1e293b) !important;
 }
 
-/* 代码块文字色 — 暗色模式 */
+/* 代码块文字色 — 暗色模式（One Dark Pro） */
 .dark .vp-doc div[class*='language-'] pre,
 .dark .vp-doc div[class*='language-'] code {
-  color: #e2e8f0;
+  color: #abb2bf;
 }
 
 /* Shiki 语法高亮色 — 暗色模式 */
 .dark .vp-doc div[class*='language-'] span {
-  color: var(--shiki-dark, #e2e8f0) !important;
+  color: var(--shiki-dark, #abb2bf) !important;
 }
 
 /* 行号 — 右侧分割线通过 ::after 伪元素实现 */
@@ -320,7 +320,35 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
 }
 
 .dark .vp-doc :not(pre) > code {
-  border-color: rgba(52, 120, 217, 0.2);
+  border-color: rgba(104, 116, 163, 0.15);
+  color: #8b95c2;
+  background: rgba(104, 116, 163, 0.08);
+}
+
+/* 引用块 — 暗色适配 */
+.dark .vp-doc blockquote {
+  border-left-color: #6874a3;
+  background: rgba(104, 116, 163, 0.05);
+  color: var(--vp-c-text-2);
+}
+
+/* 表格 — 暗色适配 */
+.dark .vp-doc th {
+  background: rgba(31, 31, 35, 0.8);
+}
+
+.dark .vp-doc tr:nth-child(2n) {
+  background: rgba(31, 31, 35, 0.4);
+}
+
+/* 图片 — 暗色适配（细微边框） */
+.dark .vp-doc img {
+  box-shadow: 0 0 0 1px rgba(161, 161, 170, 0.08), var(--site-shadow-sm);
+}
+
+/* 链接下划线 — 暗色适配 */
+.dark .vp-doc a::after {
+  background: #6874a3;
 }
 
 /* ── Custom Blocks ───────────────────────────────────────────

@@ -281,6 +281,34 @@
   }
 }
 
+/* ── Dark Mode — 阅读进度条 ────────────────────────────────── */
+.dark .site-progress span {
+  background: #6874a3;
+}
+
+/* ── Dark Mode — 回到顶部按钮 ──────────────────────────────── */
+.dark .reading-tools__button {
+  background:
+    conic-gradient(rgba(104, 116, 163, 0.5) var(--reading-progress), rgba(82, 82, 91, 0.2) 0deg);
+  color: #8b95c2;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(104, 116, 163, 0.12);
+}
+
+.dark .reading-tools__button::before {
+  background: rgba(24, 24, 27, 0.9);
+  border-color: rgba(104, 116, 163, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.dark .reading-tools__button::after {
+  display: none;
+}
+
+.dark .reading-tools__button:hover {
+  color: #a5aed6;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(104, 116, 163, 0.18);
+}
+
 /* ── Reduced Motion ──────────────────────────────────────────
  *  无障碍：尊重用户的"减少动态效果"系统偏好
  *  将所有过渡和动画时长设为接近 0，禁用首页光晕动画

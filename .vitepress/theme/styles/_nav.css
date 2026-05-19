@@ -121,3 +121,18 @@
 .VPHero .actions .VPButton:hover {
   transform: translateY(-2px);
 }
+
+/* ── Dark Mode — 导航栏底部光带 ────────────────────────────── */
+.dark .VPNav::after {
+  background: linear-gradient(90deg, transparent, rgba(104, 116, 163, 0.1), transparent);
+}
+
+/* ── Dark Mode — 品牌按钮 ──────────────────────────────────── */
+.dark .VPButton.brand {
+  background: #6874a3 !important;
+  box-shadow: var(--site-shadow-sm), 0 0 0 1px rgba(104, 116, 163, 0.2) !important;
+}
+
+.dark .VPButton.brand:hover {
+  background: #7a86b5 !important;
+}

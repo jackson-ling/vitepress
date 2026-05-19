@@ -202,14 +202,29 @@
   font-weight: 600 !important;
 }
 
-/* 暗色模式高亮 — 提高背景透明度 */
+/* 暗色模式高亮 — 暖灰 + 石板蓝 */
 .dark .VPSidebar .VPSidebarItem.sidebar-active-highlight > .item > .link {
-  background: rgba(90, 155, 230, 0.15) !important;
+  background: rgba(104, 116, 163, 0.1) !important;
   border-left-color: var(--vp-c-brand-1);
 }
 
 .dark .VPSidebar .VPSidebarItem.sidebar-active-highlight > .item > .link > .text {
-  color: var(--vp-c-brand-3) !important;
+  color: var(--vp-c-brand-2) !important;
+}
+
+/* 暗色模式 — 侧边栏边框 */
+.dark .VPSidebar {
+  border-right-color: rgba(161, 161, 170, 0.06);
+}
+
+/* 暗色模式 — 文件夹组竖线 */
+.dark .group:has([role='button']) .VPSidebarItem.level-0 .items {
+  border-left-color: rgba(161, 161, 170, 0.06);
+}
+
+/* 暗色模式 — 页脚 */
+.dark .VPFooter {
+  border-top-color: rgba(161, 161, 170, 0.06) !important;
 }
 
 /* ── Sidebar Folder / Document Icons ──────────────────────────

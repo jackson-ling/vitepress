@@ -60,7 +60,7 @@ const categories = [
 ]
 
 /* ── 圆形 3D 立体轮播 ─────────────────────────────────────── */
-const CAROUSEL_RADIUS = 280
+const CAROUSEL_RADIUS = 420
 const ANGLE_STEP = 360 / categories.length  // 72° per card
 const FOCUS_PUSH_Z = 50
 
@@ -293,6 +293,8 @@ function onIconError(e) {
             :style="animIn ? { opacity: '0' } : carouselItems[i].style"
             @click="onCardClick(i)"
           >
+            <!-- 非聚焦卡片的点击拦截层 -->
+            <div v-if="!carouselItems[i].focused" class="card-click-overlay" @click.stop="onCardClick(i)"></div>
             <div class="category-block">
               <div class="category-header">
                 <span class="category-dot" :style="{ background: cat.items[0]?.color || '#3478d9' }"></span>
@@ -338,7 +340,7 @@ function onIconError(e) {
 
 <style scoped>
 .home-extras {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px 24px 80px;
 }
@@ -457,7 +459,7 @@ function onIconError(e) {
 /* ── 技术栈区域 ──────────────────────────────────────────── */
 .section-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .section-title {
@@ -481,10 +483,10 @@ function onIconError(e) {
   width: 100%;
   height: 380px;
   position: relative;
-  perspective: 1200px;
+  perspective: 2800px;
   overflow: visible;
   cursor: grab;
-  margin-top: 120px;
+  margin-top: 80px;
 }
 
 .carousel-scene:active {
@@ -492,12 +494,12 @@ function onIconError(e) {
 }
 
 .carousel-track {
-  width: 240px;
+  width: 320px;
   height: 100%;
   position: absolute;
   left: 50%;
   top: 0;
-  margin-left: -120px;
+  margin-left: -160px;
   transform-style: preserve-3d;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -554,6 +556,15 @@ function onIconError(e) {
 
 .carousel-card.is-focused {
   cursor: default;
+}
+
+/* 非聚焦卡片的点击拦截层 */
+.card-click-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  cursor: pointer;
+  border-radius: var(--site-card-radius);
 }
 
 .carousel-card.is-focused .category-block {
@@ -761,13 +772,13 @@ function onIconError(e) {
 
   .carousel-scene {
     height: 320px;
-    perspective: 900px;
+    perspective: 2000px;
     margin-top: 90px;
   }
 
   .carousel-track {
-    width: 200px;
-    margin-left: -100px;
+    width: 280px;
+    margin-left: -140px;
   }
 
   .carousel-arrow {
@@ -873,22 +884,40 @@ function onIconError(e) {
 </style>
 
 <style>
-/* ── Dark mode — 玻璃拟态暗色适配 ────────────────────────── */
+/* ── Dark mode — Warm Editorial Dark 适配 ─────────────────── */
 .dark .tip-card {
-  background: rgba(24, 24, 40, 0.5);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(31, 31, 35, 0.65);
+  border-color: rgba(161, 161, 170, 0.06);
 }
 
 .dark .tip-card-wrapper:hover .tip-card {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(161, 161, 170, 0.12);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
 .dark .tip-glow {
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .dark .tip-card-wrapper:hover .tip-glow {
-  opacity: 0.6;
+  opacity: 0.5;
+}
+
+.dark .carousel-card.is-focused .category-block {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-color: rgba(104, 116, 163, 0.15);
+}
+
+.dark .carousel-card:not(.is-focused):hover .category-block {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(104, 116, 163, 0.1);
+}
+
+.dark .tech-logo-card:hover {
+  border-color: rgba(104, 116, 163, 0.12);
+}
+
+.dark .carousel-arrow:hover {
+  border-color: rgba(104, 116, 163, 0.15);
 }
 </style>

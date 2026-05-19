@@ -1443,8 +1443,11 @@ export default defineConfig({
     // markdown 配置
     markdown:
         {
-            // 代码块主题风格（建议不设置，使用默认的在黑白亮色中都很明显）
-            // theme: 'github-light',
+            // 代码块双主题：亮色 github-light，暗色 one-dark-pro
+            theme: {
+                light: 'github-light',
+                dark: 'one-dark-pro',
+            },
 
             // 代码块显示行数
             lineNumbers: true,

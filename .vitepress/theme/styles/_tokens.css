@@ -15,6 +15,14 @@
  *    .dark   为暗色模式覆写值（由 VitePress 的 dark 类名控制）
  * ============================================================ */
 
+/* ── Animatable Custom Properties ───────────────────────────
+ *  注册关键色值为 <color> 类型，使 CSS transition 能在主题切换时
+ *  自动插值（CSS 自定义属性默认不可动画）
+ * ──────────────────────────────────────────────────────────── */
+@property --vp-c-bg              { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --vp-c-text-1          { syntax: '<color>'; inherits: true; initial-value: #111827; }
+@property --vp-c-brand-1         { syntax: '<color>'; inherits: true; initial-value: #2563c4; }
+
 /* ── Light Theme ──────────────────────────────────────────── */
 :root {
   /* Brand palette — 品牌色阶梯（蓝），用于链接、按钮、高亮等 */
@@ -99,71 +107,74 @@
   --vp-doc-top-height: 0px;
 }
 
-/* ── Dark Theme Overrides ──────────────────────────────────── */
+/* ── Dark Theme — Warm Editorial Dark ────────────────────────
+ *  灵感：GitHub Dark / Bear.app / iA Writer Dark
+ *  中性暖灰基底，无蓝色色调，无渐变无 glow
+ * ──────────────────────────────────────────────────────────── */
 .dark {
-  /* Brand — 提高亮度保证暗色背景对比度 */
-  --vp-c-brand-1: #5a9be6;
-  --vp-c-brand-2: #3478d9;
-  --vp-c-brand-3: #8bb8f0;
-  --vp-c-brand-soft: rgba(52, 120, 217, 0.12);
+  /* Brand — 石板蓝，沉稳不刺眼 */
+  --vp-c-brand-1: #6874a3;
+  --vp-c-brand-2: #8b95c2;
+  --vp-c-brand-3: #5a6491;
+  --vp-c-brand-soft: rgba(104, 116, 163, 0.1);
 
-  /* Surfaces — 深海军蓝，非纯黑（减少视觉疲劳） */
-  --vp-c-bg: #0f172a;
-  --vp-c-bg-alt: #111827;
-  --vp-c-bg-soft: #1e293b;
+  /* Surfaces — 中性暖灰，三层深度 */
+  --vp-c-bg: #18181b;
+  --vp-c-bg-alt: #1f1f23;
+  --vp-c-bg-soft: #27272a;
 
-  /* Text */
-  --vp-c-text-1: #f1f5f9;
-  --vp-c-text-2: #94a3b8;
-  --vp-c-text-3: #64748b;
+  /* Text — 高对比度 */
+  --vp-c-text-1: #ceced6;
+  --vp-c-text-2: #a1a1aa;
+  --vp-c-text-3: #71717a;
 
-  /* Borders & gutters */
-  --vp-c-divider: rgba(148, 163, 184, 0.1);
-  --vp-c-gutter: rgba(148, 163, 184, 0.08);
+  /* Borders & gutters — 极淡暖灰 */
+  --vp-c-divider: rgba(161, 161, 170, 0.08);
+  --vp-c-gutter: rgba(161, 161, 170, 0.06);
 
-  /* Nav / Sidebar — 半透明深色 */
-  --vp-nav-bg-color: rgba(15, 23, 42, 0.82);
-  --vp-sidebar-bg-color: rgba(17, 24, 39, 0.82);
+  /* Nav / Sidebar — 高不透明度减少穿透 */
+  --vp-nav-bg-color: rgba(24, 24, 27, 0.92);
+  --vp-sidebar-bg-color: rgba(31, 31, 35, 0.92);
 
-  /* Code blocks */
-  --vp-code-block-bg: #1e293b;
-  --vp-code-tab-bg: #2d3748;
-  --vp-code-block-divider-color: rgba(148, 163, 184, 0.1);
-  --vp-code-lang-color: #94a3b8;
-  --vp-code-line-number-color: #475569;
-  --vp-code-line-number-active-color: #e2e8f0;
-  --vp-code-line-highlight-color: rgba(96, 165, 250, 0.08);
+  /* Code blocks — One Dark Pro 基底色 */
+  --vp-code-block-bg: #282c34;
+  --vp-code-tab-bg: #2c313a;
+  --vp-code-block-divider-color: rgba(161, 161, 170, 0.08);
+  --vp-code-lang-color: #71717a;
+  --vp-code-line-number-color: #52525b;
+  --vp-code-line-number-active-color: #ceced6;
+  --vp-code-line-highlight-color: rgba(104, 116, 163, 0.06);
 
-  /* Hero — 暗色模式渐变（起始色更亮） */
-  --vp-home-hero-name-background: linear-gradient(135deg, #e8eef8 0%, #5a9be6 55%, #4a8fe6 100%);
+  /* Hero — 暗色模式渐变 */
+  --vp-home-hero-name-background: linear-gradient(135deg, #ceced6 0%, #6874a3 100%);
 
-  /* Hero — 暗色模式光晕更明亮 */
+  /* Hero — 暗色模式光晕（柔和、低饱和） */
   --vp-home-hero-image-background-image:
-    radial-gradient(circle at 30% 20%, rgba(90, 155, 230, 0.7) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(52, 120, 217, 0.6) 0%, transparent 55%),
-    radial-gradient(circle at 50% 50%, rgba(74, 143, 230, 0.5) 0%, transparent 70%);
-  --vp-home-hero-image-filter: blur(44px) saturate(1.5);
+    radial-gradient(circle at 30% 20%, rgba(104, 116, 163, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(139, 149, 194, 0.4) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(90, 100, 145, 0.3) 0%, transparent 70%);
+  --vp-home-hero-image-filter: blur(40px) saturate(1.2);
 
-  /* Custom tokens — 暗色模式阴影更重，面板更深 */
-  --site-panel-bg: rgba(30, 41, 59, 0.72);
-  --site-panel-border: rgba(148, 163, 184, 0.1);
-  --site-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --site-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
-  --site-shadow-md: 0 16px 48px rgba(0, 0, 0, 0.35);
-  --site-shadow-hover: 0 20px 56px rgba(0, 0, 0, 0.4);
-  --site-glow-brand: rgba(52, 120, 217, 0.2);
+  /* Custom tokens — 暗色模式阴影加深 */
+  --site-panel-bg: rgba(31, 31, 35, 0.8);
+  --site-panel-border: rgba(161, 161, 170, 0.08);
+  --site-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --site-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  --site-shadow-md: 0 16px 48px rgba(0, 0, 0, 0.4);
+  --site-shadow-hover: 0 20px 56px rgba(0, 0, 0, 0.45);
+  --site-glow-brand: rgba(104, 116, 163, 0.15);
 
   /* Cards */
-  --site-card-bg: rgba(30, 41, 59, 0.6);
-  --site-card-border: rgba(148, 163, 184, 0.08);
-  --site-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  --site-card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.25);
+  --site-card-bg: rgba(39, 39, 42, 0.6);
+  --site-card-border: rgba(161, 161, 170, 0.06);
+  --site-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --site-card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.3);
 
   /* Tags */
-  --site-tag-bg: rgba(148, 163, 184, 0.06);
-  --site-tag-border: rgba(148, 163, 184, 0.1);
+  --site-tag-bg: rgba(161, 161, 170, 0.05);
+  --site-tag-border: rgba(161, 161, 170, 0.08);
 
   /* Hero grid */
-  --site-hero-grid-color: rgba(148, 163, 184, 0.04);
+  --site-hero-grid-color: rgba(161, 161, 170, 0.03);
 }
 

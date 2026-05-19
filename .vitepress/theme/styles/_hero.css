@@ -305,3 +305,13 @@
     opacity: 0.4;
   }
 }
+
+/* ── Dark Mode — Hero 网格增强 ─────────────────────────────── */
+.dark .VPHome::before {
+  background-image: radial-gradient(circle, rgba(161, 161, 170, 0.04) 1px, transparent 1px);
+}
+
+/* ── Dark Mode — 光晕叠加层柔和化 ─────────────────────────── */
+.dark .VPHome .VPHero .image-bg::before {
+  opacity: 0.3;
+}

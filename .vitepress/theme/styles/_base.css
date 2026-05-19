@@ -8,6 +8,10 @@
 /* 锚点滚动偏移 — 点击目录链接时，标题不被导航栏遮挡 */
 html {
   scroll-padding-top: calc(var(--vp-nav-height) + 16px);
+  transition:
+    --vp-c-bg 0.35s ease,
+    --vp-c-text-1 0.35s ease,
+    --vp-c-brand-1 0.35s ease;
 }
 
 body {
@@ -51,3 +55,4 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(15, 23, 42, 0.2);
 }
+
