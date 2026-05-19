@@ -37,7 +37,7 @@
 /* Hero 区域 — 全屏居中 */
 .VPHome .VPHero {
   min-height: calc(100vh - var(--vp-nav-height, 64px)) !important;
-  padding-top: 60px !important;
+  padding-top: 120px !important;
   padding-bottom: 40px !important;
   overflow: visible;
   display: flex;
@@ -246,7 +246,7 @@
 /* ── Hero Mobile ──────────────────────────────────────────── */
 @media (max-width: 959px) {
   .VPHome .VPHero {
-    padding-top: 40px !important;
+    padding-top: 80px !important;
     padding-bottom: 24px !important;
     min-height: auto !important;
   }

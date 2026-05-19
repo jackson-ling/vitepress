@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, onMounted, onUnmounted, provide } from 'vue'
+import { ref, reactive, nextTick, onMounted, onUnmounted, provide } from 'vue'
 import { useData, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import SiteEnhancer from './components/SiteEnhancer.vue'
@@ -9,6 +9,49 @@ import WelcomeOverlay from './components/WelcomeOverlay.vue'
 const { Layout } = DefaultTheme
 const { isDark } = useData()
 const router = useRouter()
+
+/* ── 欢迎遮罩共享状态（组件销毁后仍保留） ─────────────────── */
+const overlayState = reactive({
+  show: false,
+  exiting: false,
+  hasShownOnce: false,
+  firstDismissDone: false,
+  _autoTimer: null,
+  open() {
+    if (this.show) return
+    // 清除待触发的自动展示定时器，防止冲突
+    if (this._autoTimer) {
+      clearTimeout(this._autoTimer)
+      this._autoTimer = null
+    }
+    this.hasShownOnce = true
+    this.exiting = false
+    this.show = true
+  },
+  close() {
+    if (!this.show || this.exiting) return
+    this.exiting = true
+    setTimeout(() => {
+      this.show = false
+      this.exiting = false
+    }, 900)
+  },
+})
+
+provide('overlayState', overlayState)
+
+// 首次访问时给 body 加标记，用 CSS 隐藏首页内容
+if (typeof document !== 'undefined' && !localStorage.getItem('welcome-overlay-shown')) {
+  document.body.classList.add('welcome-blocking')
+}
+
+provide('toggle-overlay', () => {
+  if (overlayState.show) {
+    overlayState.close()
+  } else {
+    overlayState.open()
+  }
+})
 
 /* ── 主题切换动画（View Transition API + 圆形裁剪） ────────── */
 const enableTransitions = () =>
@@ -47,17 +90,19 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 /* ── 欢迎遮罩关闭后首页内容入场动画 ──────────────────────── */
 function onWelcomeDismissed() {
-  nextTick(() => {
+  document.body.classList.remove('welcome-blocking')
+
+  if (overlayState.firstDismissDone) {
+    // 后续通过按钮关闭遮罩 — 直接展示
     const home = document.querySelector('.VPHome')
-    if (!home) return
-    home.classList.add('welcome-content-enter')
-    const cleanup = () => {
-      home.classList.remove('welcome-content-enter')
-      home.removeEventListener('animationend', cleanup)
+    if (home) {
+      home.style.visibility = ''
+      home.style.opacity = ''
     }
-    home.addEventListener('animationend', cleanup)
-    setTimeout(cleanup, 1200)
-  })
+    return
+  }
+
+  overlayState.firstDismissDone = true
 }
 
 /* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
@@ -83,14 +128,39 @@ function onAfterRouteChanged() {
   })
 }
 
+/* ── 全局图片懒加载 ──────────────────────────────────────────── */
+function applyLazyLoading(root) {
+  root.querySelectorAll('img:not([loading])').forEach(img => {
+    img.setAttribute('loading', 'lazy')
+  })
+}
+
+let observer
+
 onMounted(() => {
   router.onBeforeRouteChange = onBeforeRouteChange
   router.onAfterRouteChanged = onAfterRouteChanged
+
+  applyLazyLoading(document.body)
+  observer = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      for (const node of m.addedNodes) {
+        if (node.nodeType !== 1) continue
+        if (node.tagName === 'IMG') {
+          if (!node.getAttribute('loading')) node.setAttribute('loading', 'lazy')
+        } else if (node.querySelectorAll) {
+          applyLazyLoading(node)
+        }
+      }
+    }
+  })
+  observer.observe(document.body, { childList: true, subtree: true })
 })
 
 onUnmounted(() => {
   router.onBeforeRouteChange = undefined
   router.onAfterRouteChanged = undefined
+  observer?.disconnect()
 })
 </script>
 
@@ -101,7 +171,10 @@ onUnmounted(() => {
     </template>
   </Layout>
   <SiteEnhancer />
-  <WelcomeOverlay blog-name="Jackson 凌" @dismiss="onWelcomeDismissed" />
+  <WelcomeOverlay
+    blog-name="Jackson 凌"
+    @dismiss="onWelcomeDismissed"
+  />
 </template>
 
 <style>
@@ -136,22 +209,10 @@ onUnmounted(() => {
   margin-top: 2px !important;
 }
 
-/* ── 欢迎遮罩关闭后首页内容入场动画 ─────────────────────────
- *  从下方滑入 + 透明度渐显，模拟 trae.ai 风格的沉浸式入场
- * ──────────────────────────────────────────────────────────── */
-@keyframes welcome-content-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.VPHome.welcome-content-enter {
-  animation: welcome-content-slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* ── 首次访问：遮罩遮挡期间隐藏首页内容 ──────────────────── */
+body.welcome-blocking .VPHome {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* ── View Transition — 主题切换动画 ──────────────────────────── */

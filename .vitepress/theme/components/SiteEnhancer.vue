@@ -90,8 +90,8 @@ function updateReadingState() {
   const scrollTop = window.scrollY || document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - window.innerHeight
   progress.value = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0
-  // 滚动超过 360px 且非首页时显示工具栏
-  showTools.value = !isHome.value && scrollTop > 360
+  // 滚动超过 360px 时显示回顶按钮（首页也显示）
+  showTools.value = scrollTop > 360
   ticking = false
 }
 

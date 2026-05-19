@@ -2,10 +2,13 @@
  * WelcomeOverlay — 首页欢迎遮罩
  *
  * 首次访问首页时展示全屏欢迎卡片，
- * 点击按钮后卡片向上滑出消失，首页内容从下方渐入
+ * 支持外部控制显示/隐藏（toggle 按钮）
+ *
+ * 使用 inject('overlayState') 获取共享状态，
+ * 状态在组件销毁后仍保留（v-if 场景）
 -->
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { inject, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vitepress'
 
 const props = defineProps({
@@ -18,90 +21,121 @@ const props = defineProps({
 const emit = defineEmits(['dismiss'])
 
 const route = useRoute()
-const show = ref(false)
-const exiting = ref(false)
-let enterTimer = null
+const state = inject('overlayState')
+
+// 当遮罩关闭时触发 dismiss 事件
+watch(() => state.show, (val) => {
+  if (!val) emit('dismiss')
+})
+
+// 锁定滚动（纯事件阻止，不改 CSS overflow）
+let savedScrollY = 0
+let scrollHandler = null
+
+function lockScroll() {
+  savedScrollY = window.scrollY
+  scrollHandler = (e) => {
+    window.scrollTo(0, savedScrollY)
+    e.preventDefault()
+  }
+  window.addEventListener('scroll', scrollHandler, { passive: false })
+}
+
+function unlockScroll() {
+  if (scrollHandler) {
+    window.removeEventListener('scroll', scrollHandler)
+    scrollHandler = null
+  }
+  window.scrollTo(0, savedScrollY)
+}
+
+watch(() => state.show, (val) => {
+  if (val) lockScroll()
+  else unlockScroll()
+})
 
 function isHomePage() {
   const path = route.path
   return path === '/' || path === '/index.html' || path.endsWith('/index')
 }
 
-function shouldShow() {
+function shouldAutoShow() {
   if (!isHomePage()) return false
-  // 使用 localStorage + 日期标记，每天首次访问展示一次
-  const key = 'welcome-overlay-date'
-  const today = new Date().toISOString().slice(0, 10)
-  const last = localStorage.getItem(key)
-  return last !== today
+  if (state.hasShownOnce) return false
+  return !localStorage.getItem('welcome-overlay-shown')
+}
+
+function markAsShown() {
+  localStorage.setItem('welcome-overlay-shown', '1')
+}
+
+function handleEnter() {
+  markAsShown()
+  state.close()
+}
+
+function handleKeydown(e) {
+  if (e.key === 'Enter' && state.show) {
+    handleEnter()
+  }
 }
 
 onMounted(() => {
-  if (!shouldShow()) return
-  // 等待页面完全渲染后再展示遮罩
-  enterTimer = setTimeout(() => {
-    show.value = true
+  document.addEventListener('keydown', handleKeydown)
+
+  if (!shouldAutoShow()) return
+  state.hasShownOnce = true
+  state._autoTimer = setTimeout(() => {
+    state._autoTimer = null
+    state.show = true
   }, 300)
 })
 
 onUnmounted(() => {
-  if (enterTimer) clearTimeout(enterTimer)
+  document.removeEventListener('keydown', handleKeydown)
+  if (state.show) unlockScroll()
 })
-
-function handleEnter() {
-  const key = 'welcome-overlay-date'
-  const today = new Date().toISOString().slice(0, 10)
-  localStorage.setItem(key, today)
-  exiting.value = true
-
-  setTimeout(() => {
-    show.value = false
-    exiting.value = false
-    emit('dismiss')
-  }, 800)
-}
 </script>
 
 <template>
   <div
-    v-if="show"
+    v-if="state.show"
     class="welcome-overlay"
-    :class="{ 'is-exiting': exiting }"
+    :class="{ 'is-exiting': state.exiting }"
   >
-    <!-- 背景粒子装饰 -->
-    <div class="welcome-particles">
-      <span v-for="i in 20" :key="i" class="particle" :style="{
-        '--delay': `${(i * 0.7) % 5}s`,
-        '--x': `${(i * 17) % 100}%`,
-        '--y': `${(i * 23) % 100}%`,
-        '--size': `${(i % 3) + 2}px`,
-        '--duration': `${(i % 5) + 6}s`,
-      }"></span>
+    <!-- 背景装饰 -->
+    <div class="welcome-bg" aria-hidden="true">
+      <div class="welcome-bg__grid"></div>
+      <div class="welcome-bg__orb welcome-bg__orb--1"></div>
+      <div class="welcome-bg__orb welcome-bg__orb--2"></div>
+      <div class="welcome-bg__orb welcome-bg__orb--3"></div>
+      <div class="welcome-bg__particles">
+        <span v-for="i in 30" :key="i" class="welcome-bg__particle" :style="`--i:${i}`"></span>
+      </div>
     </div>
 
-    <!-- 欢迎卡片 -->
-    <div class="welcome-card">
-      <div class="welcome-card__glow"></div>
+    <!-- 内容 -->
+    <div class="welcome-content">
+      <div class="welcome-content__tag">BLOG</div>
 
-      <div class="welcome-card__content">
-        <div class="welcome-card__badge">WELCOME</div>
-        <h1 class="welcome-card__title">
-          欢迎进入
-          <span class="welcome-card__name">{{ blogName }}</span>
-          的博客
-        </h1>
-        <p class="welcome-card__subtitle">
-          探索技术世界，记录成长足迹
-        </p>
-        <button class="welcome-card__btn" @click="handleEnter">
-          <span>开始探索</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
+      <h1 class="welcome-content__title">{{ blogName }}</h1>
 
-      <div class="welcome-card__deco"></div>
+      <p class="welcome-content__subtitle">探索技术世界，记录成长足迹</p>
+
+      <div class="welcome-content__divider"></div>
+
+      <p class="welcome-content__desc">
+        Java 后端开发 / 微服务架构 / AI 应用
+      </p>
+
+      <button class="welcome-content__btn" @click="handleEnter">
+        进入博客
+      </button>
+
+      <p class="welcome-content__hint">
+        <span class="welcome-content__hint-key">Enter</span>
+        <span>按键进入</span>
+      </p>
     </div>
   </div>
 </template>
@@ -115,9 +149,7 @@ function handleEnter() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(28px) saturate(0.8);
-  -webkit-backdrop-filter: blur(28px) saturate(0.8);
+  background: linear-gradient(160deg, #0f1b3d 0%, #1a2d6b 50%, #12204e 100%);
   animation: overlay-in 0.5s ease-out both;
 }
 
@@ -126,242 +158,286 @@ function handleEnter() {
   to { opacity: 1; }
 }
 
-/* ── 退出动画 — 整体向上滑出 ─────────────────────────────── */
+/* ── 退出动画 ────────────────────────────────────────────── */
 .welcome-overlay.is-exiting {
-  animation: overlay-exit 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: overlay-exit 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes overlay-exit {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-100vh);
-  }
+  0% { opacity: 1; transform: scale(1); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.04); }
 }
 
-/* ── 背景粒子 ────────────────────────────────────────────── */
-.welcome-particles {
+/* ── 背景层 ──────────────────────────────────────────────── */
+.welcome-bg {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
 
-.particle {
+/* 点阵网格 */
+.welcome-bg__grid {
   position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  height: var(--size);
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(165, 180, 252, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
+  opacity: 0;
+  animation: grid-in 1.5s 0.3s ease-out forwards;
+}
+
+@keyframes grid-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 光斑 */
+.welcome-bg__orb {
+  position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  animation: particle-float var(--duration) var(--delay) ease-in-out infinite;
+  filter: blur(80px);
+  opacity: 0;
+  animation: orb-in 1.4s 0.2s ease-out forwards;
+}
+
+@keyframes orb-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.welcome-bg__orb--1 {
+  top: -10%;
+  right: -5%;
+  width: 380px;
+  height: 380px;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.welcome-bg__orb--2 {
+  bottom: -12%;
+  left: -8%;
+  width: 420px;
+  height: 420px;
+  background: rgba(79, 70, 229, 0.12);
+}
+
+.welcome-bg__orb--3 {
+  bottom: 10%;
+  right: 20%;
+  width: 300px;
+  height: 300px;
+  background: rgba(129, 140, 248, 0.1);
+  animation-delay: 0.4s;
+}
+
+/* ── 漂浮粒子 ────────────────────────────────────────────── */
+.welcome-bg__particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.welcome-bg__particle {
+  position: absolute;
+  width: calc(2px + var(--i) * 0.3px);
+  height: calc(2px + var(--i) * 0.3px);
+  background: rgba(165, 180, 252, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(165, 180, 252, 0.2);
+  opacity: 0;
+  animation: particle-float 12s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.4s);
+  left: calc(var(--i) * 3.3% + 1%);
+  top: calc(var(--i) * 3.2% + 2%);
+}
+
+.welcome-bg__particle:nth-child(3n) {
+  background: rgba(139, 92, 246, 0.35);
+  animation-duration: 15s;
+}
+
+.welcome-bg__particle:nth-child(5n) {
+  background: rgba(129, 140, 248, 0.3);
+  animation-duration: 18s;
+  width: calc(1.5px + var(--i) * 0.2px);
+  height: calc(1.5px + var(--i) * 0.2px);
 }
 
 @keyframes particle-float {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.2;
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
   }
-  25% {
-    transform: translate(20px, -30px);
-    opacity: 0.6;
+  15% {
+    opacity: 0.7;
   }
   50% {
-    transform: translate(-15px, -60px);
-    opacity: 0.3;
+    transform: translateY(calc(-30px - var(--i) * 5px)) translateX(calc(15px - var(--i) * 1.5px));
   }
-  75% {
-    transform: translate(25px, -40px);
+  85% {
     opacity: 0.5;
   }
-}
-
-/* ── 欢迎卡片 ────────────────────────────────────────────── */
-.welcome-card {
-  position: relative;
-  max-width: 520px;
-  width: 90%;
-  padding: 56px 48px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(40px) saturate(1.2);
-  -webkit-backdrop-filter: blur(40px) saturate(1.2);
-  overflow: hidden;
-  animation: card-enter 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.is-exiting .welcome-card {
-  animation: card-exit 0.6s cubic-bezier(0.4, 0, 1, 1) forwards;
-}
-
-@keyframes card-enter {
-  from {
+  100% {
     opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(calc(-60px - var(--i) * 8px)) translateX(calc(-10px + var(--i) * 1px));
   }
 }
 
-@keyframes card-exit {
-  to {
-    opacity: 0;
-    transform: translateY(-60px) scale(0.96);
-  }
-}
-
-/* 光晕背景 */
-.welcome-card__glow {
-  position: absolute;
-  top: -40%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(5, 150, 105, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 70% 60%, rgba(245, 158, 11, 0.15) 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(13, 148, 136, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  animation: glow-drift 8s ease-in-out infinite alternate;
-}
-
-@keyframes glow-drift {
-  from { transform: translate(0, 0) rotate(0deg); }
-  to { transform: translate(3%, -3%) rotate(2deg); }
-}
-
-/* 内容区 */
-.welcome-card__content {
+/* ── 内容区 ──────────────────────────────────────────────── */
+.welcome-content {
   position: relative;
   z-index: 1;
   text-align: center;
+  padding: 24px;
+  animation: content-enter 0.7s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* 徽章 */
-.welcome-card__badge {
+.is-exiting .welcome-content {
+  animation: content-exit 0.6s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes content-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes content-exit {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+/* ── 标签 ────────────────────────────────────────────────── */
+.welcome-content__tag {
   display: inline-block;
-  padding: 6px 16px;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-family: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(148, 163, 184, 0.8);
+  letter-spacing: 0.2em;
+  padding: 6px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
   margin-bottom: 28px;
-  animation: fade-up 0.6s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* 标题 */
-.welcome-card__title {
-  font-size: clamp(24px, 5vw, 34px);
+/* ── 博客名 ──────────────────────────────────────────────── */
+.welcome-content__title {
+  font-size: clamp(42px, 7vw, 56px);
   font-weight: 800;
-  color: #ffffff;
-  line-height: 1.4;
-  margin: 0 0 16px;
+  color: #f1f5f9;
+  line-height: 1.15;
+  margin: 0 0 18px;
   letter-spacing: -0.02em;
-  animation: fade-up 0.7s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up 0.6s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── 副标题 ──────────────────────────────────────────────── */
+.welcome-content__subtitle {
+  font-size: 20px;
+  color: rgba(203, 213, 225, 0.9);
+  margin: 0 0 28px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  animation: fade-up 0.5s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── 分割线 ──────────────────────────────────────────────── */
+.welcome-content__divider {
+  width: 64px;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.25);
+  margin: 0 auto 24px;
+  animation: fade-up 0.5s 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── 描述 ────────────────────────────────────────────────── */
+.welcome-content__desc {
+  font-size: 16px;
+  color: rgba(148, 163, 184, 0.8);
+  line-height: 1.6;
+  margin: 0 0 40px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  animation: fade-up 0.5s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.welcome-card__name {
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* 副标题 */
-.welcome-card__subtitle {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0 0 36px;
-  font-weight: 500;
-  animation: fade-up 0.7s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* 按钮 */
-.welcome-card__btn {
+/* ── 按钮 ────────────────────────────────────────────────── */
+.welcome-content__btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 32px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #059669, #0d9488);
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
+  padding: 13px 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  letter-spacing: 0.02em;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease;
-  animation: fade-up 0.7s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  animation: fade-up 0.5s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.welcome-card__btn:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 12px 40px rgba(5, 150, 105, 0.3);
+.welcome-content__btn:hover {
+  border-color: rgba(148, 163, 184, 0.45);
+  background: rgba(148, 163, 184, 0.06);
+  box-shadow: 0 0 20px rgba(148, 163, 184, 0.08);
 }
 
-.welcome-card__btn:active {
-  transform: translateY(0) scale(0.98);
+.welcome-content__btn:active {
+  background: rgba(148, 163, 184, 0.1);
+  transform: scale(0.98);
 }
 
-.welcome-card__btn svg {
-  transition: transform 0.25s ease;
+/* ── 底部提示 ────────────────────────────────────────────── */
+.welcome-content__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 12px;
+  color: rgba(100, 116, 139, 0.7);
+  animation: fade-up 0.5s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.welcome-card__btn:hover svg {
-  transform: translateX(3px);
-}
-
-/* 底部装饰线 */
-.welcome-card__deco {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.3), rgba(245, 158, 11, 0.25), transparent);
-  border-radius: 2px;
+.welcome-content__hint-key {
+  font-family: 'JetBrains Mono', 'Cascadia Code', monospace;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.06);
+  color: rgba(148, 163, 184, 0.7);
+  letter-spacing: 0.04em;
 }
 
 /* ── Reduced Motion ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .welcome-overlay,
-  .welcome-card,
-  .welcome-card__badge,
-  .welcome-card__title,
-  .welcome-card__subtitle,
-  .welcome-card__btn {
+  .welcome-content,
+  .welcome-content__tag,
+  .welcome-content__title,
+  .welcome-content__subtitle,
+  .welcome-content__divider,
+  .welcome-content__desc,
+  .welcome-content__btn,
+  .welcome-content__hint,
+  .welcome-bg__orb,
+  .welcome-bg__grid,
+  .welcome-bg__particle {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
-
-  .particle { display: none; }
 
   .welcome-overlay.is-exiting {
     animation: none !important;
@@ -369,21 +445,42 @@ function handleEnter() {
     transition: opacity 0.3s;
   }
 
-  .is-exiting .welcome-card {
+  .is-exiting .welcome-content {
     animation: none !important;
   }
 }
 
 /* ── 移动端 ──────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .welcome-card {
-    padding: 40px 28px;
-    border-radius: 20px;
+  .welcome-content {
+    padding: 16px;
   }
 
-  .welcome-card__badge { margin-bottom: 20px; }
-  .welcome-card__title { margin-bottom: 12px; }
-  .welcome-card__subtitle { margin-bottom: 28px; font-size: 14px; }
-  .welcome-card__btn { padding: 12px 28px; font-size: 14px; }
+  .welcome-content__title {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .welcome-content__subtitle {
+    font-size: 17px;
+  }
+
+  .welcome-content__desc {
+    font-size: 14px;
+  }
+
+  .welcome-bg__orb--1 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .welcome-bg__orb--2 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .welcome-bg__orb--3 {
+    width: 200px;
+    height: 200px;
+  }
 }
 </style>
