@@ -75,7 +75,16 @@
       "mcp__plugin_playwright_playwright__browser_resize",
       "Bash(npx which *)",
       "Bash(./node_modules/.bin/vitepress build *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "WebSearch",
+      "WebFetch(domain:pagefind.app)",
+      "Bash(curl -s http://localhost:5185/)",
+      "Bash(curl -s http://localhost:5185/@fs/C:/Users/jackson/Desktop/vitepress/node_modules/vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174/)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:vitepress.dev)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs"
     ]
   },
   "enabledPlugins": {

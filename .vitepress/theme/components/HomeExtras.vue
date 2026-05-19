@@ -60,9 +60,9 @@ const categories = [
 ]
 
 /* ── 圆形 3D 立体轮播 ─────────────────────────────────────── */
-const CAROUSEL_RADIUS = 420
-const ANGLE_STEP = 360 / categories.length  // 72° per card
-const FOCUS_PUSH_Z = 50
+const CAROUSEL_RADIUS = 420   // ← 卡片间距：值越大卡片越分散，越小越紧凑
+const ANGLE_STEP = 360 / categories.length  // 72° per card（自动计算，卡片数量变化时会联动）
+const FOCUS_PUSH_Z = 50       // ← 聚焦卡片向前突出的距离，影响立体感
 
 const focusedIndex = ref(0)
 const animIn = ref(true)
@@ -483,7 +483,7 @@ function onIconError(e) {
   width: 100%;
   height: 380px;
   position: relative;
-  perspective: 2800px;
+  perspective: 4200px;  /* ← 倾斜程度：值越小倾斜越夸张，越大越平 */
   overflow: visible;
   cursor: grab;
   margin-top: 80px;
@@ -772,7 +772,7 @@ function onIconError(e) {
 
   .carousel-scene {
     height: 320px;
-    perspective: 2000px;
+    perspective: 3200px;  /* ← 移动端倾斜程度 */
     margin-top: 90px;
   }
 

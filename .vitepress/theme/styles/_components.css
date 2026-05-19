@@ -282,31 +282,43 @@
 }
 
 /* ── Dark Mode — 阅读进度条 ────────────────────────────────── */
+.dark .site-progress {
+  height: 4px;
+}
+
 .dark .site-progress span {
-  background: #6874a3;
+  background: linear-gradient(90deg, #818cf8, #a78bfa, #c084fc);
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.4);
 }
 
 /* ── Dark Mode — 回到顶部按钮 ──────────────────────────────── */
 .dark .reading-tools__button {
   background:
-    conic-gradient(rgba(104, 116, 163, 0.5) var(--reading-progress), rgba(82, 82, 91, 0.2) 0deg);
-  color: #8b95c2;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(104, 116, 163, 0.12);
+    conic-gradient(rgba(129, 140, 248, 0.7) var(--reading-progress), rgba(82, 82, 91, 0.25) 0deg);
+  color: #a5b4fc;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(129, 140, 248, 0.2),
+    0 0 20px rgba(129, 140, 248, 0.1);
 }
 
 .dark .reading-tools__button::before {
-  background: rgba(24, 24, 27, 0.9);
-  border-color: rgba(104, 116, 163, 0.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: rgba(24, 24, 27, 0.85);
+  border-color: rgba(129, 140, 248, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .dark .reading-tools__button::after {
-  display: none;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.15), transparent 70%);
+  opacity: 0.6;
 }
 
 .dark .reading-tools__button:hover {
-  color: #a5aed6;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(104, 116, 163, 0.18);
+  color: #c7d2fe;
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(129, 140, 248, 0.3),
+    0 0 28px rgba(129, 140, 248, 0.18);
 }
 
 /* ── Reduced Motion ──────────────────────────────────────────

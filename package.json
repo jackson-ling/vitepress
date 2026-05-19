@@ -2,6 +2,7 @@
   "devDependencies": {
     "@types/dom-view-transitions": "^1.0.6",
     "@vitejs/plugin-vue": "^2.1.0",
+    "markdown-it-container": "^4.0.0",
     "playwright": "^1.60.0",
     "vitepress": "^1.6.3",
     "vue": "^3.5.17"

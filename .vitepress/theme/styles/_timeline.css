@@ -1,0 +1,218 @@
+/* ============================================================
+ *  Timeline — :::timeline 自定义容器样式
+ *
+ *  在 Markdown 中使用：
+ *    :::timeline
+ *    **日期 · 标题**
+ *    内容描述...
+ *    :::
+ *
+ *  结构：竖线 + 圆点 + 日期标签 + 内容卡片
+ *  动画：IntersectionObserver 触发入场（JS 在 SiteEnhancer.vue）
+ * ============================================================ */
+
+/* ── 容器 ──────────────────────────────────────────────────── */
+.site-timeline {
+  position: relative;
+  padding-left: 36px;
+  margin: 24px 0 32px;
+}
+
+/* 竖线 */
+.site-timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--vp-c-brand-1), rgba(52, 120, 217, 0.3));
+  border-radius: 1px;
+}
+
+/* 遮罩第一项上方的竖线（圆点从第一个日期开始） */
+.site-timeline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 8px;
+  background: var(--vp-c-bg);
+  z-index: 1;
+}
+
+/* ── 日期标签 — 粗体段落 ──────────────────────────────────── */
+.site-timeline p:has(> strong:first-child:last-child) {
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  margin: 28px 0 10px;
+  padding: 0;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* 首个日期无顶部间距 */
+.site-timeline > p:has(> strong:first-child:last-child):first-child {
+  margin-top: 0;
+}
+
+/* 圆点标记 */
+.site-timeline p:has(> strong:first-child:last-child)::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 4px var(--vp-c-bg), 0 0 0 5px rgba(52, 120, 217, 0.2);
+  z-index: 2;
+  transition: transform var(--site-transition-fast), box-shadow var(--site-transition-fast);
+}
+
+/* 圆点 hover 脉冲 */
+.site-timeline p:has(> strong:first-child:last-child):hover::before {
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 0 0 4px var(--vp-c-bg), 0 0 0 6px rgba(52, 120, 217, 0.3);
+}
+
+/* ── 内容卡片 ──────────────────────────────────────────────── */
+.site-timeline p:not(:has(> strong:first-child:last-child)) {
+  background: var(--site-card-bg);
+  border: 1px solid var(--site-card-border);
+  border-radius: var(--site-card-radius);
+  padding: 14px 18px;
+  margin: 0 0 8px;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--vp-c-text-2);
+  box-shadow: var(--site-card-shadow);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  transition:
+    transform var(--site-transition),
+    box-shadow var(--site-transition),
+    border-color var(--site-transition);
+}
+
+/* 入场动画初始状态 */
+.site-timeline p:not(:has(> strong:first-child:last-child)) {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* 入场动画可见状态（由 IntersectionObserver 添加） */
+.site-timeline p:not(:has(> strong:first-child:last-child)).is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 卡片 hover */
+.site-timeline p:not(:has(> strong:first-child:last-child)):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--site-card-shadow-hover);
+  border-color: rgba(52, 120, 217, 0.12);
+}
+
+/* 卡片内链接 */
+.site-timeline p:not(:has(> strong:first-child:last-child)) a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--site-transition-fast);
+}
+
+.site-timeline p:not(:has(> strong:first-child:last-child)) a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+}
+
+/* ── Dark Mode ─────────────────────────────────────────────── */
+.dark .site-timeline::after {
+  background: var(--vp-c-bg);
+}
+
+.dark .site-timeline::before {
+  background: linear-gradient(180deg, var(--vp-c-brand-1), rgba(104, 116, 163, 0.2));
+}
+
+.dark .site-timeline p:has(> strong:first-child:last-child) {
+  color: var(--vp-c-brand-2);
+}
+
+.dark .site-timeline p:has(> strong:first-child:last-child)::before {
+  background: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 4px var(--vp-c-bg), 0 0 0 5px rgba(104, 116, 163, 0.2);
+}
+
+.dark .site-timeline p:not(:has(> strong:first-child:last-child)):hover {
+  border-color: rgba(104, 116, 163, 0.15);
+}
+
+/* ── 移动端 ───────────────────────────────────────────────── */
+@media (max-width: 959px) {
+  .site-timeline {
+    padding-left: 28px;
+  }
+
+  .site-timeline::before {
+    left: 4px;
+  }
+
+  .site-timeline::after {
+    width: 28px;
+  }
+
+  .site-timeline p:has(> strong:first-child:last-child) {
+    font-size: 15px;
+    margin: 22px 0 8px;
+  }
+
+  .site-timeline p:has(> strong:first-child:last-child)::before {
+    left: -28px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .site-timeline p:not(:has(> strong:first-child:last-child)) {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+}
+
+/* ── Reduced Motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .site-timeline p:not(:has(> strong:first-child:last-child)) {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .site-timeline p:has(> strong:first-child:last-child)::before {
+    transition: none !important;
+  }
+}
+
+/* ── About Page — "关于我" 页面布局 ────────────────────────── */
+.about-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.about-page h2 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.about-page h2:first-child {
+  margin-top: 0;
+}

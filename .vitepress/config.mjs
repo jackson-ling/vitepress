@@ -1,5 +1,8 @@
 import {defineConfig} from 'vitepress'
 import {set_sidebar as setSidebarDefault} from './gen_sidebar.js'
+import {createRequire} from 'module'
+
+const require = createRequire(import.meta.url)
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -1459,6 +1462,17 @@ export default defineConfig({
                 dangerLabel: '危险',
                 infoLabel: '信息',
                 detailsLabel: '详细信息'
+            },
+
+            // 注册 :::timeline 自定义容器
+            config: (md) => {
+                md.use(require('markdown-it-container'), 'timeline', {
+                    render(tokens, idx) {
+                        return tokens[idx].nesting === 1
+                            ? '<div class="site-timeline">\n'
+                            : '</div>\n'
+                    }
+                })
             },
         },
 })

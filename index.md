@@ -14,7 +14,7 @@ hero:
       text: 网站介绍
       link: /docs/Description
     - theme: alt
-      text: 联系我
+      text: 关于我
       link: /docs/Contact
     - theme: alt
       text: 注意事项

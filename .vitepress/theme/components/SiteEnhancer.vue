@@ -120,7 +120,7 @@ function getPreviewTarget(target) {
     return null
   }
 
-  const image = target.closest('.vp-doc img, .vp-doc image')
+  const image = target.closest('.vp-doc img, .vp-doc image, .VPPage img, .VPPage image')
   if (!image || image.closest('a')) {
     return null
   }
@@ -240,13 +240,70 @@ function handleKeydown(event) {
   }
 }
 
+/* ── 时间线入场动画 ────────────────────────────────────────── */
+let timelineObserver = null
+let timelineDomObserver = null
+
+function observeTimelineItems() {
+  const items = document.querySelectorAll('.site-timeline p:not(:has(strong))')
+  if (!items.length) return
+
+  if (!timelineObserver) {
+    timelineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            timelineObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.05 }
+    )
+  }
+
+  items.forEach((el, i) => {
+    if (!el.classList.contains('is-visible')) {
+      el.style.transitionDelay = `${i * 80}ms`
+      timelineObserver.observe(el)
+    }
+  })
+}
+
+/** 监听 DOM 变化，确保 VitePress 重渲染后时间线卡片仍能正确显示 */
+function setupTimelineDomObserver() {
+  if (timelineDomObserver) return
+  timelineDomObserver = new MutationObserver(() => {
+    nextTick(observeTimelineItems)
+  })
+  timelineDomObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+}
+
+let timelineScrollTicking = false
+
+/** 滚动时兜底检查，防止 IntersectionObserver 漏掉的卡片 */
+function requestTimelineScrollCheck() {
+  if (timelineScrollTicking) return
+  timelineScrollTicking = true
+  requestAnimationFrame(() => {
+    observeTimelineItems()
+    timelineScrollTicking = false
+  })
+}
+
 /* ── 生命周期 ──────────────────────────────────────────────── */
 
 onMounted(() => {
   isHome.value = Boolean(document.querySelector('.VPHome'))
   nextTick(updateReadingState)
   nextTick(highlightActiveSidebar)
+  setTimeout(observeTimelineItems, 100)
+  setupTimelineDomObserver()
   window.addEventListener('scroll', requestUpdate, { passive: true })
+  window.addEventListener('scroll', requestTimelineScrollCheck, { passive: true })
   window.addEventListener('resize', requestUpdate)
   window.addEventListener('click', openImagePreview)
   window.addEventListener('keydown', handleKeydown)
@@ -260,14 +317,24 @@ watch(
     isHome.value = Boolean(document.querySelector('.VPHome'))
     nextTick(updateReadingState)
     nextTick(highlightActiveSidebar)
+    setTimeout(observeTimelineItems, 100)
   }
 )
 
 onUnmounted(() => {
   window.removeEventListener('scroll', requestUpdate)
+  window.removeEventListener('scroll', requestTimelineScrollCheck)
   window.removeEventListener('resize', requestUpdate)
   window.removeEventListener('click', openImagePreview)
   window.removeEventListener('keydown', handleKeydown)
+  if (timelineObserver) {
+    timelineObserver.disconnect()
+    timelineObserver = null
+  }
+  if (timelineDomObserver) {
+    timelineDomObserver.disconnect()
+    timelineDomObserver = null
+  }
 })
 </script>
 

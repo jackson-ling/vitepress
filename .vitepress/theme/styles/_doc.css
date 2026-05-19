@@ -351,6 +351,20 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
   background: #6874a3;
 }
 
+/* ── 暗色模式 — 覆盖内联 color:red / color:blue ─────────────
+ *  markdown 中大量使用 style="color:red" 和 style="color:blue"，
+ *  暗色模式下红色太刺眼、蓝色几乎不可见，此处用属性选择器统一覆盖。
+ * ──────────────────────────────────────────────────────────── */
+.dark .vp-doc [style*="color:red"],
+.dark .vp-doc [style*="color: red"] {
+  color: #f87171 !important;   /* ← 暗色模式红色：柔和珊瑚红，改这里换红色，推荐 #fb7185（玫红）#ef4444（正红）#fca5a5（浅红） */
+}
+
+.dark .vp-doc [style*="color:blue"],
+.dark .vp-doc [style*="color: blue"] {
+  color: #60a5fa !important;   /* ← 暗色模式蓝色：亮天蓝，改这里换蓝色，推荐 #93c5fd（浅蓝）#818cf8（靛蓝）#38bdf8（天蓝） */
+}
+
 /* ── Custom Blocks ───────────────────────────────────────────
  *  VitePress 内置容器：tip / warning / danger / info / details
  *  顶部留白优化规则在 Layout.vue <style> 中统一管理
