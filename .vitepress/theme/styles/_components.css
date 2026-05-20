@@ -12,10 +12,9 @@
  *  对应 Vue 组件：SiteEnhancer.vue
  * ============================================================ */
 
-/* ── Reading Progress Bar ────────────────────────────────────
- *  固定在导航栏下方，宽度由 JS 动态设置（0% → 100%）
- *  使用硬编码蓝色渐变而非 CSS 变量，因为进度条在亮暗主题下
- *  始终显示为蓝色（与白色按钮背景配套），不随主题切换
+/* ── Reading Progress Bar — 阅读进度条 ───────────────────────
+ *  固定在导航栏下方，宽度由 SiteEnhancer.vue 动态设置
+ *  改这里换进度条颜色（亮色模式蓝色渐变，暗色模式紫色渐变）
  * ──────────────────────────────────────────────────────────── */
 .site-progress {
   position: fixed;
@@ -23,26 +22,21 @@
   left: 0;
   z-index: 29;
   width: 100%;
-  height: 3px;
-  pointer-events: none;   /* 不拦截鼠标事件 */
+  height: 3px;           /* 改这里换进度条粗细 */
+  pointer-events: none;
 }
 
 .site-progress span {
   display: block;
   height: 100%;
-  border-radius: 0 999px 999px 0;   /* 右侧圆角 */
-  background: linear-gradient(90deg, #2563c4, #4a8fe6);
-  transition: width 0.12s linear;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, #2563c4, #4a8fe6); /* 改这里换亮色模式进度条颜色 */
+  transition: width 0.12s linear;   /* 改 0.12s 控制进度条跟随滚动的灵敏度 */
 }
 
-/* ── Back-to-Top Button ──────────────────────────────────────
- *  右下角固定按钮，包含：
- *    - conic-gradient 进度环（由 --reading-progress CSS 变量控制）
- *    - ::before 伪元素 — 磨砂玻璃内层
- *    - ::after 伪元素  — 外层光晕
- *
- *  --reading-progress 由 SiteEnhancer.vue 动态计算并设置，
- *  格式为角度值（如 180deg 表示滚动到 50%）
+/* ── Back-to-Top Button — 回到顶部按钮 ──────────────────────
+ *  右下角固定按钮，--reading-progress 由 SiteEnhancer.vue 动态设置
+ *  改这里换按钮大小、颜色、进度环样式
  * ──────────────────────────────────────────────────────────── */
 .reading-tools {
   position: fixed;
@@ -130,14 +124,8 @@
   transform: translateY(8px);
 }
 
-/* ── Image Preview ───────────────────────────────────────────
- *  全屏图片预览组件，功能：
- *    - 点击遮罩关闭
- *    - 滚轮缩放（0.5x ~ 5x）
- *    - 拖拽平移（放大后）
- *    - 键盘快捷键：+/- 缩放、0 重置、Esc 关闭
- *
- *  对应 SiteEnhancer.vue 中的 previewImage / previewScale 状态
+/* ── Image Preview — 图片预览组件 ───────────────────────────
+ *  全屏遮罩 + 缩放/拖拽，改这里换遮罩透明度、圆角、工具栏样式
  * ──────────────────────────────────────────────────────────── */
 .image-preview {
   position: fixed;

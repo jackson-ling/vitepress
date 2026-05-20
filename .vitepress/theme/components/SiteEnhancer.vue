@@ -1,19 +1,22 @@
 <!--
  * SiteEnhancer — 站点增强组件
  *
- * 功能清单：
- *   1. 阅读进度条（顶部蓝色进度条）
- *   2. 回到顶部按钮（右下角，带 conic-gradient 进度环）
- *   3. 侧边栏当前文章高亮（MutationObserver 风格的路径匹配）
- *   4. 图片预览（点击放大、滚轮缩放、拖拽平移、键盘快捷键）
+ * 功能：阅读进度条、回到顶部按钮、侧边栏高亮、图片预览、时间线动画
+ * 样式：_components.css（进度条、按钮、图片预览）、_layout.css（侧边栏高亮）
  *
- * 使用方式：在 Layout.vue 中作为子组件挂载，无需手动注册
- * 依赖样式：_components.css（进度条、按钮、图片预览样式）
- *          _layout.css（sidebar-active-highlight 高亮样式）
+ * 改这里：
+ *   - 回顶按钮显示阈值 → SCROLL_SHOW_THRESHOLD（当前 360px）
+ *   - 时间线动画延迟   → TIMELINE_OBSERVE_DELAY / TIMELINE_STAGGER_DELAY
+ *   - 图片缩放范围     → clampScale() 中的 0.5 ~ 5
 -->
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vitepress'
+
+/* ── 常量 ─────────────────────────────────────────────────── */
+const SCROLL_SHOW_THRESHOLD = 360   // 滚动超过此距离时显示回顶按钮（px）
+const TIMELINE_OBSERVE_DELAY = 100  // 时间线初始观察延迟（ms）
+const TIMELINE_STAGGER_DELAY = 80   // 时间线卡片入场错开延迟（ms/张）
 
 /* ── 响应式状态 ───────────────────────────────────────────── */
 const progress = ref(0)        // 阅读进度百分比（0-100）
@@ -25,12 +28,14 @@ const previewX = ref(0)        // 图片平移 X 偏移量
 const previewY = ref(0)        // 图片平移 Y 偏移量
 const route = useRoute()
 
-/* ── 侧边栏高亮 ──────────────────────────────────────────────
- *  原理：比对当前 URL 路径与侧边栏所有链接的 href，
- *  匹配到的 .VPSidebarItem 添加 sidebar-active-highlight 类，
- *  该类的样式定义在 _layout.css 中
- * ──────────────────────────────────────────────────────────── */
+/* ── 侧边栏高亮（路径匹配 → 添加 sidebar-active-highlight 类） */
 const HIGHLIGHT_CLASS = 'sidebar-active-highlight'
+
+/** 判断当前是否为首页（基于路由路径，与 WelcomeOverlay 保持一致） */
+function isHomePage() {
+  const path = route.path
+  return path === '/' || path === '/index.html' || path.endsWith('/index')
+}
 
 /** 标准化路径：解码 URL、去除 query/hash、去除 index.html/.md 后缀 */
 function normalizePath(path) {
@@ -66,10 +71,7 @@ function highlightActiveSidebar() {
   }
 }
 
-/* ── 滚动状态（requestAnimationFrame 节流） ───────────────────
- *  ticking 标志位确保每帧最多执行一次 updateReadingState，
- *  避免高频 scroll 事件导致性能问题
- * ──────────────────────────────────────────────────────────── */
+/* ── 滚动状态（rAF 节流，每帧最多执行一次） ──────────────── */
 let ticking = false
 
 /* ── 图片预览拖拽状态 ──────────────────────────────────────── */
@@ -90,8 +92,8 @@ function updateReadingState() {
   const scrollTop = window.scrollY || document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - window.innerHeight
   progress.value = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0
-  // 滚动超过 360px 时显示回顶按钮（首页也显示）
-  showTools.value = scrollTop > 360
+  // 滚动超过阈值时显示回顶按钮（首页也显示）
+  showTools.value = scrollTop > SCROLL_SHOW_THRESHOLD
   ticking = false
 }
 
@@ -110,11 +112,7 @@ function scrollToTop() {
 
 /* ── 图片预览逻辑 ──────────────────────────────────────────── */
 
-/**
- * 判断点击目标是否为可预览的文档图片
- * 排除：<a> 包裹的图片（应跳转链接而非预览）
- * 返回：{ src, alt } 或 null
- */
+/** 判断点击目标是否为可预览的文档图片（排除 <a> 包裹的图片） */
 function getPreviewTarget(target) {
   if (!(target instanceof Element)) {
     return null
@@ -161,7 +159,7 @@ function resetImagePreview() {
   dragging.value = false
 }
 
-/** 限制缩放范围在 0.5x ~ 5x */
+/** 限制缩放范围在 0.5x ~ 5x（改这里换缩放边界） */
 function clampScale(scale) {
   return Math.min(5, Math.max(0.5, Number(scale.toFixed(2))))
 }
@@ -240,7 +238,7 @@ function handleKeydown(event) {
   }
 }
 
-/* ── 时间线入场动画 ────────────────────────────────────────── */
+/* ── 时间线入场动画（IntersectionObserver 触发） ──────────── */
 let timelineObserver = null
 let timelineDomObserver = null
 
@@ -264,7 +262,7 @@ function observeTimelineItems() {
 
   items.forEach((el, i) => {
     if (!el.classList.contains('is-visible')) {
-      el.style.transitionDelay = `${i * 80}ms`
+      el.style.transitionDelay = `${i * TIMELINE_STAGGER_DELAY}ms`
       timelineObserver.observe(el)
     }
   })
@@ -297,10 +295,10 @@ function requestTimelineScrollCheck() {
 /* ── 生命周期 ──────────────────────────────────────────────── */
 
 onMounted(() => {
-  isHome.value = Boolean(document.querySelector('.VPHome'))
+  isHome.value = isHomePage()
   nextTick(updateReadingState)
   nextTick(highlightActiveSidebar)
-  setTimeout(observeTimelineItems, 100)
+  setTimeout(observeTimelineItems, TIMELINE_OBSERVE_DELAY)
   setupTimelineDomObserver()
   window.addEventListener('scroll', requestUpdate, { passive: true })
   window.addEventListener('scroll', requestTimelineScrollCheck, { passive: true })
@@ -314,10 +312,10 @@ watch(
   () => route.path,
   () => {
     closeImagePreview()
-    isHome.value = Boolean(document.querySelector('.VPHome'))
+    isHome.value = isHomePage()
     nextTick(updateReadingState)
     nextTick(highlightActiveSidebar)
-    setTimeout(observeTimelineItems, 100)
+    setTimeout(observeTimelineItems, TIMELINE_OBSERVE_DELAY)
   }
 )
 

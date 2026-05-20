@@ -1,23 +1,14 @@
 /**
  * config.mjs — VitePress 站点配置
  *
- * 文件结构：
- *   1. head     — HTML <head> 标签注入（favicon、欢迎遮罩脚本、初始背景色）
- *   2. title    — 站点标题
- *   3. themeConfig — 主题配置（核心部分）
- *     3.1 nav      — 顶部导航栏菜单（支持多级嵌套）
- *     3.2 sidebar  — 左侧边栏配置（按路由路径匹配不同侧边栏）
- *     3.3 socialLinks — 社交链接图标
- *     3.4 footer   — 页脚版权信息
- *     3.5 search   — 本地搜索配置（中文翻译）
- *   4. markdown — Markdown 渲染配置（代码主题、行号、自定义容器）
- *
- * 自定义修改指引：
- *   - 添加导航菜单项：在 nav 数组中添加新对象
- *   - 添加侧边栏：在 sidebar 对象中添加新路由匹配规则
- *   - 修改搜索翻译：在 search.options.translations 中修改
- *   - 添加社交链接：在 socialLinks 数组中添加新对象
- *   - 修改代码块主题：在 markdown.theme 中修改 light/dark 主题
+ * 改这里：
+ *   - 导航菜单   → themeConfig.nav
+ *   - 侧边栏     → themeConfig.sidebar
+ *   - 社交链接   → themeConfig.socialLinks
+ *   - 页脚       → themeConfig.footer
+ *   - 搜索翻译   → themeConfig.search.options.translations
+ *   - 代码块主题 → markdown.theme（light/dark）
+ *   - 自定义容器 → markdown.container
  */
 import {defineConfig} from 'vitepress'
 import {set_sidebar as setSidebarDefault} from './gen_sidebar.js'
@@ -26,12 +17,6 @@ import {createRequire} from 'module'
 const require = createRequire(import.meta.url)
 
 export default defineConfig({
-    /* 如果是 GitHub 则需要设置 base ， 使用国内的服务器不用 */
-    // // 设置base
-    // base: "/vitepress/", // 路由为 GitHub 仓库名称
-    // /* 特别注意：如果设置了base，需要先链接base（base的路径名称），再链接图片 */
-    // head: [['link', {rel: 'icon', href: "/vitepress/标签logo.png"}]], // 网页标签页的图标
-
     head: [
         ['link', {rel: 'icon', href: "/标签logo.png"}],
         ['script', {}, `
@@ -52,10 +37,7 @@ export default defineConfig({
 
     title: "jackson凌の文档站", // 网站标签页的名称
     description: "A VitePress Site",
-    /* ── 主题配置 ────────────────────────────────────────────────
-     *  修改下方各配置项可自定义站点的导航、侧边栏、搜索等功能
-     *  完整配置参考：https://vitepress.dev/reference/default-theme-config
-     * ──────────────────────────────────────────────────────────── */
+    /* ── 主题配置（完整参考：https://vitepress.dev/reference/default-theme-config） ── */
     themeConfig: {
         //自定义上下页名
         docFooter: {
@@ -65,8 +47,6 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
 
         // 右侧 On this page 属性设置
-        // outlineTitle: false,
-        // outline: false,
         outline: [1, 3], // 指定右侧,展示的标题级别
         outlineTitle: '文章目录', // 指定右侧栏的title标签名称
         aside: false, // 禁用 On this page 属性
@@ -74,58 +54,12 @@ export default defineConfig({
         siteTitle: '知识文档站', // 左上角导航栏名称
         logo: '/标签logo.png', // 左上角导航栏图标
         /* ── 导航栏配置 ────────────────────────────────────────────
-         *  结构：一级菜单 → 二级菜单 → 三级菜单（支持无限嵌套）
-         *  每个对象包含：
-         *    text  — 显示文字（支持 emoji 和 <img> 图标）
-         *    link  — 跳转链接（一级菜单有 items 时可省略）
-         *    items — 子菜单数组
-         *
+         *  添加顶级导航：在 nav 数组末尾添加新对象
          *  图标用法：<img src="/xxx.png" class="nav-icon nav-icon--md">
-         *  尺寸变体：xs(1.0em) / sm(1.1em) / md(1.2em) / lg(1.3em) / xl(1.4em) / 2xl(1.5em) / 3xl(1.6em)
-         *  样式定义在 _nav.css 中
-         *
-         *  如需添加新的顶级导航：
-         *    在 nav 数组末尾添加新对象即可
+         *  尺寸变体：xs(1.0em) / sm / md / lg / xl / 2xl / 3xl(1.6em)
          * ──────────────────────────────────────────────────────────── */
         nav: [
             {text: '🏠首页', link: '/'},
-            /*            {
-                            text: '<img src="环境搭建.png" class="nav-icon nav-icon--3xl"> 环境搭建',
-                            items:
-                                [
-                                    {
-                                        text: '<img src="/jetbrains.png" class="nav-icon nav-icon--lg"> Jetbrains常见问题',
-                                        link: '/docs/测试界面.md'
-                                    },
-                                    {
-                                        text: 'Linux',
-                                        items:
-                                            [
-                                                {
-                                                    text: '<img src="/vmware.jpeg" class="nav-icon nav-icon--lg"> vmware',
-                                                    link: '/docs/测试界面.md'
-                                                },
-                                                {
-                                                    text: '<img src="/centos.png" class="nav-icon nav-icon--lg"> CentOS7.6',
-                                                    link: '/docs/测试界面.md'
-                                                },
-                                                {
-                                                    text: '<img src="/ubuntu.png" class="nav-icon nav-icon--lg"> Ubuntu',
-                                                    link: '/docs/测试界面.md'
-                                                },
-                                                {
-                                                    text: '<img src="/xshell.png" class="nav-icon nav-icon--lg"> XShell',
-                                                    link: '/docs/测试界面.md'
-                                                },
-                                                {
-                                                    text: '<img src="/bt.png" class="nav-icon nav-icon--lg"> 宝塔面板',
-                                                    link: '/docs/测试界面.md'
-                                                },
-                                            ]
-                                    },
-                                ]
-                        },
-            */
             {
                 text: '📝笔记',
                 items:
@@ -365,10 +299,6 @@ export default defineConfig({
                                         text: '<img src="/spring.png" class="nav-icon nav-icon--xs"> Spring',
                                         link: '/docs/后端/Spring/1. AOP.md'
                                     },
-                                    // {
-                                    //     text: '<img src="/springmvc.png" class="nav-icon nav-icon--xs"> SpringMVC',
-                                    //     link: '/docs/测试界面.md'
-                                    // },
                                     {
                                         text: '<img src="/mybatis.png" class="nav-icon nav-icon--xs"> MyBatis',
                                         link: '/docs/后端/MyBatis/Mybatis.md'
@@ -406,10 +336,6 @@ export default defineConfig({
                             text: '其他',
                             items:
                                 [
-                                    // {
-                                    //     text: '<img src="/javaweb.png" class="nav-icon nav-icon--xs"> Java Web',
-                                    //     link: '/docs/测试界面.md'
-                                    // },
                                     {
                                         text: '<img src="设计模式.png" class="nav-icon nav-icon--md">  设计模式',
                                         link: '/docs/后端/设计模式/工厂模式.md'
@@ -594,22 +520,9 @@ export default defineConfig({
         ],
 
         /* ── 侧边栏配置 ────────────────────────────────────────────
-         *  按 URL 路径前缀匹配不同的侧边栏内容
-         *  结构：{ '路由前缀': [侧边栏组...] }
-         *
-         *  每个侧边栏组包含：
-         *    text       — 分组标题
-         *    items      — 链接列表
-         *    collapsible — 是否可折叠（可选）
-         *    collapsed   — 初始是否折叠（可选）
-         *
-         *  自动生成侧边栏：
-         *    使用 ...setSidebarDefault('/docs/xxx') 展开指定目录下的所有 .md 文件
-         *    文件按名称中的数字自然排序，文件夹自动创建可折叠分组
-         *
-         *  如需添加新的侧边栏：
-         *    1. 在 sidebar 对象中添加新的路由前缀
-         *    2. 手动配置 items 或使用 setSidebarDefault() 自动生成
+         *  添加侧边栏：在 sidebar 对象中添加新路由前缀
+         *  自动生成：...setSidebarDefault('/docs/xxx') 展开目录下所有 .md 文件
+         *  手动配置：{ text: '标题', collapsible: true, collapsed: false, items: [...] }
          * ──────────────────────────────────────────────────────────── */
         sidebar:
         // 会根据导航栏中链接的文章路由来匹配不同的侧边栏，根据侧边栏前的路由来显示该路由下的文章内容
@@ -622,7 +535,6 @@ export default defineConfig({
                                 [
                                     {text: '随想录刷题计划', link: '/docs/算法/代码随想录/随想录刷题计划.md'},
                                     {text: '每日任务汇总', link: '/docs/算法/代码随想录/每日任务汇总.md'},
-                                    // ...setSidebarDefault('/docs/算法/代码随想录/训练营'),
                                     {
                                         collapsible: true,   // 允许折叠
                                         collapsed: false,    // 一开始就展开
@@ -1494,7 +1406,6 @@ export default defineConfig({
             ],
         /* ── 页脚 ────────────────────────────────────────────────── */
         footer: {
-            // message: '个人知识文档网站',
             copyright: 'Copyright © 2025 Jackson 凌 All Rights Reserved. | 粤ICP备2025441629号-1 ',
         },
 

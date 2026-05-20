@@ -1,24 +1,23 @@
 <!--
- * HomeExtras.vue — 首页扩展内容区
+ * HomeExtras.vue — 首页扩展内容区（TIP 标语 + 技术栈轮播 + 友情链接）
  *
- * 位于首页 Hero 区域下方，包含三个子区域：
- *   1. TIP 标语区 — 三张激励卡片，带悬浮光晕效果
- *   2. 技术栈区 — 圆形 3D 轮播，展示分类技术图标
- *   3. 友情链接区 — 四张链接卡片
- *
- * 使用方式：在 Layout.vue 的 #home-hero-after 插槽中挂载
- *
- * 自定义修改指引：
- *   - TIP 标语内容：修改 tips 数组（icon / title / text / color）
- *   - 技术栈数据：修改 categories 数组（name / desc / items）
- *   - 友情链接数据：修改 friendLinks 数组（name / desc / icon / color / link）
- *   - 轮播半径：修改 CAROUSEL_RADIUS（值越大卡片越分散）
- *   - 聚焦突出距离：修改 FOCUS_PUSH_Z（值越大立体感越强）
- *   - 透视强度：修改 CSS 中 .carousel-scene 的 perspective（值越小倾斜越夸张）
- *   - 入场动画延迟：修改 IntersectionObserver 的 threshold 和 transitionDelay
+ * 改这里：
+ *   - TIP 标语   → tips 数组（icon / title / text / color）
+ *   - 技术栈数据 → categories 数组（name / desc / items）
+ *   - 友情链接   → friendLinks 数组（name / desc / icon / color / link）
+ *   - 轮播半径   → CAROUSEL_RADIUS（值越大卡片越分散，推荐 380~500）
+ *   - 立体感     → FOCUS_PUSH_Z（推荐 30~80）
+ *   - 透视强度   → CSS .carousel-scene 的 perspective（值越小倾斜越夸张）
 -->
 <script setup>
 import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
+
+/* ── 常量 ─────────────────────────────────────────────────── */
+const ENTRANCE_ANIM_DELAY = 520   // 入场动画等待时长（ms）
+const ENTRANCE_STAGGER_DELAY = 30 // 入场动画元素错开延迟（ms/个）
+const WHEEL_DELTA_Y_THRESHOLD = 15 // 滚轮 deltaY 触发阈值
+const DRAG_THRESHOLD = 20         // 拖拽切换触发距离（px）
+const DRAG_DETECT_THRESHOLD = 5   // 拖拽位移检测阈值（px，区分点击与拖拽）
 
 /* ── 遮罩切换（从 Layout.vue 注入） ───────────────────────── */
 const toggleOverlay = inject('toggle-overlay', () => {})
@@ -147,20 +146,13 @@ const friendLinks = [
 ]
 
 /* ── 圆形 3D 立体轮播 ───────────────────────────────────────
- *  轮播原理：
- *    所有卡片通过 rotateY(angle) + translateZ(radius) 排列在圆周上，
- *    聚焦卡片额外 translateZ(FOCUS_PUSH_Z) 向前突出。
- *    旋转整个 carousel-track 实现卡片切换。
- *
- *  自定义修改：
- *    CAROUSEL_RADIUS — 卡片到圆心的距离（值越大卡片越分散，越小越紧凑）
- *                      桌面端推荐 380~500，移动端通过 CSS perspective 单独控制
- *    FOCUS_PUSH_Z    — 聚焦卡片向前突出的距离（影响立体感）
- *                      推荐 30~80，值太大会导致卡片超出容器
- *    ANGLE_STEP      — 自动计算，无需手动修改（360 / categories.length）
- *
- *  透视强度在 CSS 中通过 .carousel-scene 的 perspective 控制：
- *    桌面端 4200px / 移动端 3200px（值越小倾斜越夸张，越大越平）
+ *  原理：rotateY(angle) + translateZ(radius) 排列在圆周上，
+ *        聚焦卡片额外 translateZ(FOCUS_PUSH_Z) 向前突出
+ *  改这里：
+ *    CAROUSEL_RADIUS — 卡片到圆心距离（推荐 380~500）
+ *    FOCUS_PUSH_Z    — 聚焦突出距离（推荐 30~80）
+ *    ANGLE_STEP      — 自动计算，无需修改
+ *    透视强度         → CSS .carousel-scene 的 perspective
  * ─────────────────────────────────────────────────────────── */
 const CAROUSEL_RADIUS = 420
 const ANGLE_STEP = 360 / categories.length
@@ -266,20 +258,20 @@ onMounted(() => {
     ? Array.from(homeExtrasRef.value.querySelectorAll('.anim-item'))
     : Array.from(document.querySelectorAll('.home-extras .anim-item'))
   animItems.forEach((el, i) => {
-    el.style.transitionDelay = `${i * 30}ms`
+    el.style.transitionDelay = `${i * ENTRANCE_STAGGER_DELAY}ms`
     entranceObserver.observe(el)
   })
 
   // 入场动画结束后允许正常显示卡片
-  setTimeout(() => { animIn.value = false }, 520)
+  setTimeout(() => { animIn.value = false }, ENTRANCE_ANIM_DELAY)
 
   /* 滚轮切换 — 仅鼠标悬停在轮播区域时响应，deltaY > 15 阈值防止误触 */
   wheelHandler = (e) => {
     if (!isHovering.value) return
     e.preventDefault()
-    if (e.deltaY > 15) {
+    if (e.deltaY > WHEEL_DELTA_Y_THRESHOLD) {
       goNext()
-    } else if (e.deltaY < -15) {
+    } else if (e.deltaY < -WHEEL_DELTA_Y_THRESHOLD) {
       goPrev()
     }
   }
@@ -306,7 +298,7 @@ onMounted(() => {
   function onMouseMove(e) {
     if (!dragging) return
     e.preventDefault()
-    if (Math.abs(e.clientX - startX) > 5) dragMoved.value = true
+    if (Math.abs(e.clientX - startX) > DRAG_DETECT_THRESHOLD) dragMoved.value = true
   }
 
   function onMouseUp(e) {
@@ -314,7 +306,7 @@ onMounted(() => {
     dragging = false
     document.body.style.userSelect = ''
     const dx = startX - e.clientX
-    if (Math.abs(dx) < 20) return
+    if (Math.abs(dx) < DRAG_THRESHOLD) return
     if (dx > 0) goNext()
     else goPrev()
   }
@@ -327,14 +319,14 @@ onMounted(() => {
 
   function onTouchMove(e) {
     if (!dragging) return
-    if (Math.abs(e.touches[0].clientX - startX) > 5) dragMoved.value = true
+    if (Math.abs(e.touches[0].clientX - startX) > DRAG_DETECT_THRESHOLD) dragMoved.value = true
   }
 
   function onTouchEnd(e) {
     if (!dragging) return
     dragging = false
     const dx = startX - e.changedTouches[0].clientX
-    if (Math.abs(dx) < 20) return
+    if (Math.abs(dx) < DRAG_THRESHOLD) return
     if (dx > 0) goNext()
     else goPrev()
   }
@@ -573,15 +565,10 @@ function onIconError(e) {
 }
 
 /* ── 入场动画 ─────────────────────────────────────────────
- *  所有 .anim-item 初始 opacity: 0 + translateY(28px)，
- *  IntersectionObserver 检测到进入视口后添加 .is-visible，
- *  触发 opacity → 1, translateY → 0 的过渡动画。
- *
- *  自定义修改：
- *    - 28px：入场偏移距离（越大动画越明显）
- *    - 0.65s：动画时长
- *    - cubic-bezier(0.16, 1, 0.3, 1)：缓动曲线（弹性感）
- *    - transitionDelay 在 JS 中按索引递增 30ms
+ *  改这里：
+ *    - 28px   → 入场偏移距离（越大动画越明显）
+ *    - 0.65s  → 动画时长
+ *    - transitionDelay 在 JS 中按索引递增 ENTRANCE_STAGGER_DELAY
  * ─────────────────────────────────────────────────────────── */
 .anim-item {
   opacity: 0;
@@ -850,10 +837,10 @@ function onIconError(e) {
 }
 
 /* ── 圆形 3D 轮播场景 ──────────────────────────────────────
- *  自定义修改：
- *    perspective: 4200px — 透视距离，值越小倾斜越夸张，越大越平
- *    height: 380px       — 轮播区域高度
- *    margin-top: 80px    — 与标题的间距
+ *  改这里：
+ *    perspective — 透视距离（值越小倾斜越夸张，当前 4200px）
+ *    height      — 轮播区域高度（当前 380px）
+ *    margin-top  — 与标题的间距（当前 80px）
  * ─────────────────────────────────────────────────────────── */
 .carousel-scene {
   width: 100%;
@@ -1133,10 +1120,7 @@ function onIconError(e) {
   color: var(--vp-c-text-1);
 }
 
-/* ── 响应式 ───────────────────────────────────────────────
- *  断点 959px（与 VitePress 移动端断点一致）
- *  调整内容：轮播高度、透视距离、卡片尺寸、网格列数
- * ─────────────────────────────────────────────────────────── */
+/* ── 响应式（断点 959px，与 VitePress 移动端一致） ──────── */
 @media (max-width: 959px) {
   .home-extras {
     padding: 12px 16px 56px;
@@ -1308,10 +1292,7 @@ function onIconError(e) {
 </style>
 
 <style>
-/* ── Dark mode — 暗色模式适配 ──────────────────────────────
- *  非 scoped 样式，覆盖亮色模式的硬编码 rgba 值
- *  使用 rgba(31, 31, 35) 暖灰基底，与 _tokens.css 暗色主题一致
- * ─────────────────────────────────────────────────────────── */
+/* ── Dark mode — 暗色模式适配（非 scoped，覆盖硬编码色值） ── */
 .dark .tip-card {
   background: rgba(31, 31, 35, 0.65);
   border-color: rgba(161, 161, 170, 0.06);

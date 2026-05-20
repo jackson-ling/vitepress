@@ -73,8 +73,8 @@
 
 /* ── Navigation Icon — 导航栏图标工具类 ──────────────────────
  *  用法：<img src="xxx.png" class="nav-icon nav-icon--md">
- *  替代内联 style="vertical-align:middle;width:1.2em;height:1.2em;display:inline-block"
- *  尺寸使用 em 单位，随字体大小自适应
+ *  尺寸变体：xs(1.0em) → 3xl(1.6em)，每级递增 0.1em
+ *  如需新增尺寸，在下方添加 .nav-icon--xxx 即可
  * ──────────────────────────────────────────────────────────── */
 .nav-icon {
   vertical-align: middle;
@@ -97,10 +97,10 @@
   box-shadow: none !important;
 }
 
-/* 品牌按钮 — 蓝色渐变背景，白色文字 */
+/* 品牌按钮 — 蓝色渐变背景，改这里换首页按钮颜色 */
 .VPButton.brand {
   border-color: transparent !important;
-  background: linear-gradient(135deg, #2962c4, #4a8fe6) !important;
+  background: linear-gradient(135deg, #2962c4, #4a8fe6) !important; /* 改这里的两个色值 */
   color: #fff !important;
   box-shadow: var(--site-shadow-sm), 0 0 0 1px rgba(52, 120, 217, 0.24) !important;
 }

@@ -1,25 +1,15 @@
 <!--
  * WelcomeOverlay.vue — 首页欢迎遮罩
  *
- * 首次访问首页时展示全屏欢迎卡片，支持：
- *   - 首次自动展示（基于 sessionStorage 记忆）
- *   - 外部控制显示/隐藏（通过 Layout.vue 的 toggleOverlay）
- *   - Enter 键快捷进入
- *   - 滚动锁定（遮罩显示期间禁止页面滚动）
- *   - 进入/退出动画（淡入 + 内容上浮 / 淡出）
- *
- * 使用 inject('overlayState') 获取共享状态（在 Layout.vue 中 provide）
- *
- * 自定义修改指引：
- *   - 博客名：修改 Layout.vue 中 <WelcomeOverlay blog-name="xxx" />
- *   - 副标题：修改 template 中 .welcome-content__subtitle 的文字
- *   - 描述文字：修改 template 中 .welcome-content__desc 的文字
- *   - 背景色：修改 .welcome-overlay 的 background（同步修改 index.html）
- *   - 进入动画时长：修改 .overlay-in 的 animation（当前 0.5s）
- *   - 退出动画时长：修改 .overlay-exit 的 animation（当前 0.9s，需与
- *     Layout.vue 中 overlayState.close() 的 setTimeout 时长一致）
- *   - 内容入场延迟：修改各元素 animation-delay（0.3s ~ 0.6s）
- *   - 按钮样式：修改 .welcome-content__btn 相关属性
+ * 改这里：
+ *   - 博客名     → Layout.vue 中 <WelcomeOverlay blog-name="xxx" />
+ *   - 副标题     → .welcome-content__subtitle
+ *   - 描述文字   → .welcome-content__desc
+ *   - 背景色     → .welcome-overlay 的 background（需同步 index.html 的 welcome-blocking）
+ *   - 进入动画   → .overlay-in 的 animation（当前 0.5s）
+ *   - 退出动画   → .overlay-exit 的 animation（当前 0.9s，需与 Layout.vue 的 900ms 一致）
+ *   - 入场延迟   → 各元素 animation-delay（0.3s ~ 0.6s）
+ *   - 按钮样式   → .welcome-content__btn
 -->
 <script setup>
 import { inject, watch, onMounted, onUnmounted } from 'vue'
@@ -43,14 +33,9 @@ watch(() => state.show, (val) => {
   if (!val) emit('dismiss')
 })
 
-/* ── 滚动锁定 ─────────────────────────────────────────────
- *  遮罩显示期间禁止页面滚动，采用事件阻止方案（非 CSS overflow）：
- *    1. lockScroll() — 记录当前 scrollY，注册 scroll 事件强制回弹
- *    2. unlockScroll() — 移除事件监听，恢复到锁定前的滚动位置
- *
- *  为什么不用 overflow: hidden？
- *    因为 VitePress 的 .VPNav 使用 position: fixed，
- *    overflow: hidden 会导致导航栏宽度计算异常
+/* ── 滚动锁定（事件阻止方案，非 CSS overflow）
+ *  不用 overflow: hidden 是因为 VitePress 的 .VPNav 是 position: fixed，
+ *  overflow: hidden 会导致导航栏宽度计算异常
  * ─────────────────────────────────────────────────────────── */
 let savedScrollY = 0
 let scrollHandler = null
@@ -176,10 +161,8 @@ onUnmounted(() => {
 
 <style scoped>
 /* ── 遮罩层 ────────────────────────────────────────────────
- *  自定义修改：
- *    - #0d1321：深色背景色（同步修改 index.html 中的同名色值）
- *    - z-index: 10000：确保覆盖所有其他元素
- *    - 0.5s：入场动画时长（overlay-in）
+ *  改 #0d1321 换背景色（需同步 index.html 的 welcome-blocking）
+ *  改 0.5s 调入场动画时长
  * ─────────────────────────────────────────────────────────── */
 .welcome-overlay {
   position: fixed;
@@ -241,28 +224,8 @@ onUnmounted(() => {
   to { opacity: 0.04; }
 }
 
-/* 点阵网格 — 克制，仅作微妙装饰 */
-.welcome-bg__grid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(165, 180, 252, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black 10%, transparent 70%);
-  opacity: 0;
-  animation: grid-in 1.5s 0.3s ease-out forwards;
-}
-
-@keyframes grid-in {
-  from { opacity: 0; }
-  to { opacity: 0.6; }
-}
-
 /* ── 内容区 ────────────────────────────────────────────────
- *  自定义修改：
- *    - 0.7s：内容入场动画时长
- *    - 0.1s：内容入场动画延迟（在遮罩淡入后开始）
- *    - 12px：内容上浮距离
+ *  改 0.7s 调入场动画时长，改 12px 调上浮距离
  * ─────────────────────────────────────────────────────────── */
 .welcome-content {
   position: relative;
@@ -285,12 +248,7 @@ onUnmounted(() => {
   to { opacity: 0; transform: translateY(-12px); }
 }
 
-/* ── 标签（BLOG） ──────────────────────────────────────────
- *  自定义修改：
- *    - 'BLOG' 文字在 template 中修改
- *    - 14px 字号 / 0.2em 字间距 / 4px 圆角
- *    - 0.3s 入场延迟（与标题错开，形成层次感）
- * ─────────────────────────────────────────────────────────── */
+/* ── 标签（BLOG）— 改这里换标签文字样式 ──────────────────── */
 .welcome-content__tag {
   display: inline-block;
   font-family: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, monospace;
@@ -305,12 +263,7 @@ onUnmounted(() => {
   animation: fade-up 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ── 博客名 ────────────────────────────────────────────────
- *  自定义修改：
- *    - clamp(42px, 7vw, 56px)：响应式字号（最小 42px，最大 56px）
- *    - #f1f5f9：浅色文字（暗色背景上的高对比度白色）
- *    - -0.02em 字间距：紧凑排列
- * ─────────────────────────────────────────────────────────── */
+/* ── 博客名 — 改 clamp() 调响应式字号范围 ───────────────── */
 .welcome-content__title {
   font-size: clamp(42px, 7vw, 56px);
   font-weight: 800;
@@ -356,13 +309,7 @@ onUnmounted(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── 按钮 ──────────────────────────────────────────────────
- *  自定义修改：
- *    - 13px 44px：内边距（控制按钮大小）
- *    - 8px：圆角
- *    - rgba(148, 163, 184, 0.25)：边框色（slate 色调）
- *    - hover 时增加边框不透明度 + 淡底 + 光晕
- * ─────────────────────────────────────────────────────────── */
+/* ── 按钮 — 改这里换按钮大小、圆角、边框色 ─────────────── */
 .welcome-content__btn {
   display: inline-flex;
   align-items: center;
@@ -424,8 +371,7 @@ onUnmounted(() => {
   .welcome-content__desc,
   .welcome-content__btn,
   .welcome-content__hint,
-  .welcome-bg__noise,
-  .welcome-bg__grid {
+  .welcome-bg__noise {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

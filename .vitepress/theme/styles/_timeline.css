@@ -11,14 +11,14 @@
  *  动画：IntersectionObserver 触发入场（JS 在 SiteEnhancer.vue）
  * ============================================================ */
 
-/* ── 容器 ──────────────────────────────────────────────────── */
+/* ── 容器 — 改 padding-left 调竖线与内容的间距 ───────────── */
 .site-timeline {
   position: relative;
   padding-left: 36px;
   margin: 24px 0 32px;
 }
 
-/* 竖线 */
+/* 竖线 — 改 2px 调粗细，改色值换颜色 */
 .site-timeline::before {
   content: '';
   position: absolute;
@@ -42,7 +42,7 @@
   z-index: 1;
 }
 
-/* ── 日期标签 — 粗体段落 ──────────────────────────────────── */
+/* ── 日期标签 — 改这里换日期文字样式 ─────────────────────── */
 .site-timeline p:has(> strong:first-child:last-child) {
   position: relative;
   font-size: 16px;
@@ -81,7 +81,7 @@
   box-shadow: 0 0 0 4px var(--vp-c-bg), 0 0 0 6px rgba(52, 120, 217, 0.3);
 }
 
-/* ── 内容卡片 ──────────────────────────────────────────────── */
+/* ── 内容卡片 — 改这里换卡片背景、圆角、阴影 ─────────────── */
 .site-timeline p:not(:has(> strong:first-child:last-child)) {
   background: var(--site-card-bg);
   border: 1px solid var(--site-card-border);
@@ -196,37 +196,4 @@
   .site-timeline p:has(> strong:first-child:last-child)::before {
     transition: none !important;
   }
-}
-
-/* ── About Page — "关于我" 页面布局 ──────────────────────────
- *  用于 /docs/Contact 页面（或其他独立展示页面）的居中窄栏布局
- *
- *  使用方式：在 Markdown 文件中添加 CSS 类名
- *    <div class="about-page">
- *      内容...
- *    </div>
- *
- *  自定义修改：
- *    - 720px：内容区最大宽度（增大可显示更多内容，减小更紧凑）
- *    - 32px 24px 80px：内边距（上 左右 下）
- *    - 22px：h2 标题字号
- *    - 40px：h2 标题顶部间距（首个 h2 为 0）
- * ─────────────────────────────────────────────────────────── */
-.about-page {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-}
-
-.about-page h2 {
-  margin-top: 40px;
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-/* 首个 h2 无顶部间距 */
-.about-page h2:first-child {
-  margin-top: 0;
 }

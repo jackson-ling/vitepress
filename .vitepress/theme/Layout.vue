@@ -1,16 +1,13 @@
 <!--
  * Layout.vue — 自定义主题布局入口
  *
- * 本文件是 VitePress 自定义主题的核心布局组件，继承 DefaultTheme 并扩展以下功能：
- *   1. 欢迎遮罩（WelcomeOverlay）状态管理 — 通过 provide/inject 共享给子组件
- *   2. 主题切换动画 — View Transition API + 圆形裁剪效果
- *   3. 侧边栏文章切换过渡动画 — 两阶段淡出淡入
- *   4. 全局图片懒加载 — MutationObserver 监听新增图片
+ * 功能：欢迎遮罩状态管理、主题切换动画、路由过渡动画、图片懒加载
  *
- * 自定义修改指引：
- *   - 遮罩退出动画时长：搜索 "900"（overlayState.close 中的 setTimeout）
- *   - 主题切换动画时长：搜索 "300"（document.startViewTransition 后的 duration）
- *   - 路由过渡动画：搜索 "route-leave" / "route-enter"（对应 CSS 在 _layout.css）
+ * 改这里：
+ *   - 遮罩退出动画时长 → 搜索 "900"（overlayState.close 中的 setTimeout）
+ *   - 主题切换动画时长 → 搜索 "300"（document.startViewTransition 后的 duration）
+ *   - 路由过渡动画样式 → _layout.css 中的 .route-leave / .route-enter
+ *   - 欢迎页按钮样式  → 本文件末尾 <style> 中的 .hero-overlay-toggle
 -->
 <script setup>
 import { ref, reactive, nextTick, onMounted, onUnmounted, provide } from 'vue'
@@ -24,32 +21,20 @@ const { Layout } = DefaultTheme
 const { isDark } = useData()
 const router = useRouter()
 
-/* ── 欢迎遮罩共享状态 ────────────────────────────────────────
- *  使用 reactive 对象（非 ref）存储遮罩状态，确保 provide 后
- *  子组件通过 inject 获取的是同一引用，状态变更自动同步。
- *
+/* ── 欢迎遮罩共享状态（provide/inject 模式） ────────────────
  *  状态流转：closed → open() → showing → close() → exiting → closed
- *
- *  自定义修改：
- *    - 遮罩退出动画时长：修改 close() 中 setTimeout 的 900ms（需与
- *      WelcomeOverlay.vue 中 .overlay-exit 动画的 0.9s 保持一致）
- *    - 遮罩背景色：修改 WelcomeOverlay.vue 中 .welcome-overlay 的 background
- *      以及 index.html 中 html.welcome-blocking 的 background
+ *  改这里：
+ *    - 退出动画时长 → close() 中的 900ms（需与 WelcomeOverlay.vue 的 0.9s 一致）
+ *    - 遮罩背景色   → WelcomeOverlay.vue 的 .welcome-overlay + index.html 的 welcome-blocking
  * ─────────────────────────────────────────────────────────── */
 const overlayState = reactive({
   show: false,        // 是否显示遮罩
   exiting: false,     // 是否正在执行退出动画
   hasShownOnce: false,// 本次会话是否已展示过（防止重复自动展示）
-  firstDismissDone: false,
-  _autoTimer: null,
 
-  /** 打开遮罩 — 清除待触发的自动展示定时器，防止冲突 */
+  /** 打开遮罩 */
   open() {
     if (this.show) return
-    if (this._autoTimer) {
-      clearTimeout(this._autoTimer)
-      this._autoTimer = null
-    }
     this.hasShownOnce = true
     this.exiting = false
     this.show = true
@@ -92,13 +77,9 @@ function toggleOverlay() {
 provide('toggle-overlay', toggleOverlay)
 
 /* ── 主题切换动画（View Transition API + 圆形裁剪） ──────────
- *  点击主题切换按钮时，以点击位置为圆心扩散/收缩圆形裁剪区域，
- *  实现亮暗主题的丝滑过渡效果。
- *
- *  自定义修改：
- *    - 动画时长 300ms：修改 document.documentElement.animate 的 duration
- *    - 缓动曲线 ease-in：修改 easing 属性
- *    - 浏览器兼容性：enableTransitions() 检查 startViewTransition 支持
+ *  改这里：
+ *    - 动画时长 → document.documentElement.animate 的 duration（当前 300ms）
+ *    - 缓动曲线 → easing 属性（当前 ease-in）
  * ─────────────────────────────────────────────────────────── */
 const enableTransitions = () =>
   'startViewTransition' in document &&
@@ -136,22 +117,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   )
 })
 
-/* ── 欢迎遮罩关闭回调 ────────────────────────────────────────
- *  由 WelcomeOverlay 的 @dismiss 事件触发。
- *  overlayState.close() 已在关闭时移除 welcome-blocking 类，
- *  此处保留作为兜底（防止异常路径下类名残留）
- * ─────────────────────────────────────────────────────────── */
+/* ── 欢迎遮罩关闭回调（兜底移除 welcome-blocking 类） ──────── */
 function onWelcomeDismissed() {
   document.documentElement.classList.remove('welcome-blocking')
 }
 
-/* ── 侧边栏文章切换过渡动画（两阶段） ──────────────────────
- *  路由切换时为文档内容添加淡出/淡入动画：
- *    阶段 1：onBeforeRouteChange → 添加 route-leave（旧内容淡出上移）
- *    阶段 2：onAfterRouteChanged → 添加 route-enter（新内容从下方淡入）
- *
- *  动画样式定义在 _layout.css 中（.route-leave / .route-enter）
- *  动画时长 0.2s，如需调整请修改 _layout.css 中的 animation-duration
+/* ── 路由过渡动画（两阶段：淡出 → 淡入） ────────────────────
+ *  动画样式在 _layout.css 中，改 0.2s 调动画时长
  * ─────────────────────────────────────────────────────────── */
 function getTransitionTarget() {
   return document.querySelector('.VPDoc') || document.querySelector('.VPPage')
@@ -179,10 +151,7 @@ function onAfterRouteChanged() {
   })
 }
 
-/* ── 全局图片懒加载 ────────────────────────────────────────────
- *  为所有 <img> 标签自动添加 loading="lazy" 属性，
- *  包括初始渲染的图片和后续通过 JS 动态插入的图片（MutationObserver）
- * ─────────────────────────────────────────────────────────── */
+/* ── 全局图片懒加载（MutationObserver 监听新增图片） ──────── */
 function applyLazyLoading(root) {
   root.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading', 'lazy')
@@ -243,13 +212,7 @@ onUnmounted(() => {
 
 <style>
 /* ── custom-block 顶部留白优化 ─────────────────────────────
- *  减小容器内边距 + 消除标题与首个内容元素之间的多余间距
- *  用户习惯在 ::: 容器内使用 > #### 编写内容，
- *  blockquote 和 h2/h3/h4 的默认 margin 会产生大量留白
- *
- *  自定义修改：
- *    - 6px / 4px / 2px 均为间距值，增大可增加留白，减小可紧凑排版
- *    - !important 用于覆盖 VitePress 默认主题的内联样式
+ *  改 6px / 4px / 2px 调间距，增大 = 更多留白，减小 = 更紧凑
  * ──────────────────────────────────────────────────────────── */
 .custom-block {
   padding-top: 6px !important;
@@ -277,16 +240,14 @@ onUnmounted(() => {
   margin-top: 2px !important;
 }
 
-/* ── 首次访问：遮罩遮挡期间隐藏整个布局（导航栏 + 内容区） ── */
+/* ── 首页遮罩期间隐藏布局 ── */
 html.welcome-blocking .Layout {
   visibility: hidden;
   pointer-events: none;
 }
 
-/* ── View Transition — 主题切换动画 ────────────────────────────
- *  自定义修改：
- *    - z-index 控制新旧图层的堆叠顺序（9999 为新图层在上）
- *    - animation: none 禁用默认淡入淡出，改用 Layout.vue 中的圆形裁剪动画
+/* ── View Transition — 主题切换动画图层控制 ────────────────
+ *  改 z-index 控制新旧图层堆叠顺序（9999 = 新图层在上）
  * ──────────────────────────────────────────────────────────── */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -313,15 +274,12 @@ html.welcome-blocking .Layout {
 }
 
 /* ── 欢迎页按钮 — 流光 + 边框脉冲光晕 ───────────────────────
- *  首页 Hero 区域下方的"进入欢迎页"按钮
- *
- *  自定义修改：
- *    - 主色调 rgba(99, 102, 241) — 靛蓝色，替换为其他颜色可改变整体风格
- *    - 440px 按钮宽度（移动端 340px）
- *    - 20px 圆角（border-radius）
- *    - 3s 脉冲周期（border-pulse 动画）
- *    - 6s 流光周期（shimmer-sweep 动画）
- *    - 暗色模式色值在 .dark .hero-overlay-toggle 中单独配置
+ *  改这里：
+ *    - 主色调 → rgba(99, 102, 241)（靛蓝色），替换后需同步修改所有相关色值
+ *    - 按钮宽度 → 440px（移动端 340px）
+ *    - 圆角 → 20px
+ *    - 脉冲周期 → 3s（border-pulse）
+ *    - 流光周期 → 6s（shimmer-sweep）
  * ─────────────────────────────────────────────────────────── */
 .hero-overlay-toggle-wrap {
   display: flex;

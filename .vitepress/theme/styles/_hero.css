@@ -125,9 +125,9 @@
   animation: hero-fade-up 0.8s 0.5s ease-out both;
 }
 
-/* ── Keyframe Animations ──────────────────────────────────── */
+/* ── Keyframe Animations — 改这里调整首页动画效果 ──────────── */
 
-/* 通用入场动画 — 从下方 20px 淡入 */
+/* 通用入场动画 — 改 20px 调上浮距离，改 0.8s 调动画时长 */
 @keyframes hero-fade-up {
   from {
     opacity: 0;
@@ -139,7 +139,7 @@
   }
 }
 
-/* 光晕呼吸 — 缩放 + 透明度 + 饱和度周期性变化 */
+/* 光晕呼吸 — 改 4.5s 调呼吸周期，改 0.88/1.05 调缩放幅度 */
 @keyframes halo-pulse {
   0%, 100% {
     opacity: 0.5;
@@ -213,7 +213,7 @@
   pointer-events: none;
 }
 
-/* Logo 图片 — 悬浮动画 */
+/* Logo 图片 — 改 235px 调 Logo 大小，改 20px 调圆角 */
 .VPHome .VPHero .image-src {
   position: relative !important;
   top: auto !important;
@@ -223,7 +223,7 @@
   margin: 0 auto;
   display: block;
   border-radius: 20px;
-  animation: logo-float 3.5s ease-in-out infinite;
+  animation: logo-float 3.5s ease-in-out infinite; /* 改 3.5s 调浮动周期 */
   transition: scale var(--site-transition), filter var(--site-transition);
   will-change: transform;
 }

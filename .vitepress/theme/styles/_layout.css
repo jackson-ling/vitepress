@@ -11,12 +11,12 @@
  *    7. 侧边栏文件夹/文档图标
  * ============================================================ */
 
-/* ── Footer ────────────────────────────────────────────────── */
+/* ── Footer — 改这里换页脚样式 ────────────────────────────── */
 .VPFooter {
   margin-top: 0 !important;
   padding: 20px 24px !important;
   border-top: 1px solid var(--site-panel-border) !important;
-  background: var(--vp-c-bg-alt) !important;
+  background: var(--vp-c-bg-alt) !important;  /* 改 --vp-c-bg-alt 换页脚背景色 */
 }
 
 .VPFooter .container,
@@ -147,9 +147,8 @@
   text-align: center;
 }
 
-/* ── Sidebar ───────────────────────────────────────────────── */
+/* ── Sidebar — 侧边栏样式，改这里换侧边栏背景、边框 ──────── */
 
-/* 左侧边栏 — 右侧分割线 */
 .VPSidebar {
   border-right: 1px solid var(--vp-c-divider);
   padding-bottom: 32px !important;
@@ -262,11 +261,10 @@
   border-top-color: rgba(161, 161, 170, 0.06) !important;
 }
 
-/* ── Sidebar Folder / Document Icons ──────────────────────────
- *  通过 ::before 伪元素为侧边栏项添加文件夹/文档图标
- *  图片路径使用 URL 编码（中文文件名）
- *    文件夹 → /文件夹.png  → /%E6%96%87%E4%BB%B6%E5%A4%B9.png
- *    文档   → /文档.png    → /%E6%96%87%E6%A1%A3.png
+/* ── Sidebar Icons — 侧边栏文件夹/文档图标 ──────────────────
+ *  改这里换图标：替换 url() 中的路径即可
+ *  当前图标：文件夹 → /文件夹.png，文档 → /文档.png
+ *  中文文件名需 URL 编码（%E6%96%87%E4%BB%B6%E5%A4%B9 = 文件夹）
  * ──────────────────────────────────────────────────────────── */
 
 /* 文件夹组 — 左侧竖线标识层级 */
@@ -311,4 +309,27 @@
   vertical-align: middle;
   background-size: cover;
   margin-right: 4px;
+}
+
+/* ── About Page — "关于我"页面布局 ──────────────────────────
+ *  用法：<div class="about-page">内容...</div>
+ *  改这里换页面宽度、内边距、标题样式
+ * ─────────────────────────────────────────────────────────── */
+.about-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.about-page h2 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 首个 h2 无顶部间距 */
+.about-page h2:first-child {
+  margin-top: 0;
 }

@@ -173,58 +173,9 @@
   background: var(--vp-c-bg-soft);
 }
 
-/* ── Table of Contents (Right Sidebar) ─────────────────────── */
+/* ── Code Blocks — 代码块样式，改这里换圆角、边框、背景色 ──── */
 
-/* 活跃章节 — 左侧品牌色指示条 + 加粗 */
-.VPDocOutline .outline {
-  position: relative;
-}
-
-.VPDocOutline .outline-item.active > .outline-link {
-  color: var(--vp-c-brand-1) !important;
-  font-weight: 600;
-  padding-left: 8px;
-}
-
-/* 活跃指示条 — 品牌色渐变竖条 */
-.VPDocOutline .outline-item.active > .outline-link::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 3px;
-  height: 14px;
-  background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand-1));
-  border-radius: 0 3px 3px 0;
-  box-shadow: 2px 0 6px var(--vp-c-brand-soft);
-}
-
-.VPDocOutline .outline-link {
-  position: relative;
-  transition: color var(--site-transition-fast), padding-left var(--site-transition-fast);
-}
-
-.VPDocOutline .outline-link:hover {
-  color: var(--vp-c-brand-2) !important;
-}
-
-/* 嵌套目录项 — 缩进字号更小 */
-.VPDocOutline .outline-item > .children .outline-link {
-  font-size: 13.5px;
-  padding-left: 4px;
-}
-
-.VPDocOutline .outline-item > .children .active > .outline-link {
-  padding-left: 12px;
-}
-
-.VPDocOutline .outline-item > .children .active > .outline-link::before {
-  left: 0;
-  height: 12px;
-}
-
-/* ── Code Blocks ───────────────────────────────────────────── */
-
-/* 代码块容器 — 圆角、边框、顶部留白给 macOS 三圆点 */
+/* 代码块容器 */
 .vp-doc div[class*='language-'] {
   border: 1px solid var(--vp-code-block-divider-color);
   border-radius: var(--site-radius-lg);
@@ -234,7 +185,7 @@
   padding-top: 20px;
 }
 
-/* macOS 风格三圆点 — 使用 box-shadow 绘制三个彩色圆 */
+/* macOS 风格三圆点 — 改 #ff5f56 / #ffbd2e / #27c93f 换红黄绿颜色 */
 .vp-doc div[class*='language-']::before {
   content: "";
   display: block;
@@ -243,9 +194,9 @@
   left: 14px;
   width: 12px;
   height: 12px;
-  background-color: #ff5f56;   /* 红 */
+  background-color: #ff5f56;
   border-radius: 50%;
-  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;   /* 黄、绿 */
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
   z-index: 1;
 }
 
@@ -351,9 +302,8 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
   background: #6874a3;
 }
 
-/* ── 暗色模式 — 覆盖内联 color:red / color:blue ─────────────
- *  markdown 中大量使用 style="color:red" 和 style="color:blue"，
- *  暗色模式下红色太刺眼、蓝色几乎不可见，此处用属性选择器统一覆盖。
+/* ── 暗色模式 — 覆盖 markdown 内联 color ────────────────────
+ *  改 #f87171 换暗色模式红色，改 #60a5fa 换暗色模式蓝色
  * ──────────────────────────────────────────────────────────── */
 .dark .vp-doc [style*="color:red"],
 .dark .vp-doc [style*="color: red"] {
