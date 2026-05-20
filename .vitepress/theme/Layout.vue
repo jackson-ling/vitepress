@@ -68,6 +68,8 @@ const overlayState = reactive({
     if (typeof document !== 'undefined') {
       document.documentElement.classList.remove('welcome-blocking')
     }
+    // 立即解锁滚动（不等退出动画结束），避免遮罩淡出期间页面无法滚动
+    if (this._unlockScroll) this._unlockScroll()
     // ← 修改这里的 900 可调整退出动画等待时间
     setTimeout(() => {
       this.show = false

@@ -65,12 +65,14 @@ function lockScroll() {
 }
 
 function unlockScroll() {
-  if (scrollHandler) {
-    window.removeEventListener('scroll', scrollHandler)
-    scrollHandler = null
-  }
+  if (!scrollHandler) return
+  window.removeEventListener('scroll', scrollHandler)
+  scrollHandler = null
   window.scrollTo(0, savedScrollY)
 }
+
+// 暴露 unlockScroll 给 Layout.vue，以便在退出动画开始时立即解锁滚动
+state._unlockScroll = unlockScroll
 
 watch(() => state.show, (val) => {
   if (val) lockScroll()
