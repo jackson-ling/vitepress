@@ -1,7 +1,0 @@
-[      36ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/@vite/client:0
-[      45ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/app/composables/copyCode.js?v=40ce7743:0
-[      46ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/app/utils.js?v=40ce7743:0
-[      47ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/app/composables/head.js?v=40ce7743:0
-[      47ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/app/composables/preFetch.js?v=40ce7743:0
-[      48ms] [ERROR] Failed to load resource: net::ERR_CACHE_READ_FAILURE @ http://localhost:5173/node_modules/vitepress/dist/client/app/router.js?v=40ce7743:0
-[      51ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0
