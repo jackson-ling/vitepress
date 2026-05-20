@@ -11,9 +11,20 @@
 /* ── Navigation Bar ───────────────────────────────────────── */
 .VPNav {
   border-bottom: 1px solid var(--site-panel-border);
-  backdrop-filter: blur(20px) saturate(1.8);
   background: var(--site-panel-bg);
   position: relative;
+}
+
+/* backdrop-filter 仅在桌面端生效 ——
+ *  移动端 VPNavScreen（position: fixed）嵌套在 VPNav 内部，
+ *  backdrop-filter 会创建新的 containing block，
+ *  导致 VPNavScreen 相对于 VPNav 而非视口定位，从而不可见。
+ *  桌面端 VPNav 已由 VitePress 切换为 position: fixed，
+ *  且 VPNavScreen 在 768px+ 隐藏，不受影响。 */
+@media (min-width: 960px) {
+  .VPNav {
+    backdrop-filter: blur(20px) saturate(1.8);
+  }
 }
 
 /* 底部渐变光带 */

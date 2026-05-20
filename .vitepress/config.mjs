@@ -161,11 +161,11 @@ export default defineConfig({
                                     {text: '📋准备工作', link: '/docs/测试界面.md'},
                                     {text: '💡建站教程', link: '/docs/测试界面.md'},
                                     {
-                                        text: '<img src="建议.png" class="nav-icon nav-icon--xs"> 文档编写建议',
+                                        text: '<img src="/建议.png" class="nav-icon nav-icon--xs"> 文档编写建议',
                                         link: '/docs/测试界面.md'
                                     },
                                     {
-                                        text: '<img src="腾讯云.png" class="nav-icon nav-icon--xs"> 腾讯云部署',
+                                        text: '<img src="/腾讯云.png" class="nav-icon nav-icon--xs"> 腾讯云部署',
                                         link: '/docs/笔记/vitepress教程/腾讯云部署/腾讯云部署.md'
                                     },
                                     {
@@ -188,7 +188,7 @@ export default defineConfig({
                         },
                         {text: '🎉 蓝桥杯', link: '/docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
                         {
-                            text: '<img src="洛谷.png" class="nav-icon nav-icon--lg"> 洛谷',
+                            text: '<img src="/洛谷.png" class="nav-icon nav-icon--lg"> 洛谷',
                             link: '/docs/算法/洛谷/导论.md'
                         },
                         {text: '🎯 左程云 ', link: '/docs/算法/左程云/0. 导论.md'},
@@ -270,7 +270,7 @@ export default defineConfig({
                                         link: '/docs/前端/ElementPlus/elementplus.md'
                                     },
                                     {
-                                        text: '<img src="微信开发者工具.jpeg" class="nav-icon nav-icon--lg"> 微信小程序',
+                                        text: '<img src="/微信开发者工具.jpeg" class="nav-icon nav-icon--lg"> 微信小程序',
                                         link: '/docs/前端/微信小程序/1. HttpClient.md'
                                     },
                                 ]
@@ -291,7 +291,7 @@ export default defineConfig({
                                         link: '/docs/Java/IDEA/IDEA文章/1.软件安装包.md',
                                     },
                                     {
-                                        text: '<img src="快捷键.png" class="nav-icon nav-icon--3xl"> IDEA快捷键',
+                                        text: '<img src="/快捷键.png" class="nav-icon nav-icon--3xl"> IDEA快捷键',
                                         link: '/docs/Java/IDEA/IDEA快捷键/IDEA快捷键.md',
                                     },
                                     {

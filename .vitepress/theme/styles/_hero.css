@@ -246,7 +246,8 @@
 /* ── Hero Mobile ──────────────────────────────────────────── */
 @media (max-width: 959px) {
   .VPHome .VPHero {
-    padding-top: 80px !important;
+    /* 自定义修改：增大顶部间距，避免 logo 和光圈被导航栏遮挡 */
+    padding-top: 185px !important;
     padding-bottom: 24px !important;
     min-height: auto !important;
   }

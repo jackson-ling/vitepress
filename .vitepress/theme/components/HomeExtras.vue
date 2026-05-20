@@ -117,6 +117,13 @@ const categories = [
  * ─────────────────────────────────────────────────────────── */
 const friendLinks = [
   {
+    name: 'VitePress',
+    desc: 'Vue & Vite 驱动的静态站点生成器',
+    icon: '⚡',
+    color: '#eab308',
+    link: 'https://vitepress.dev',
+  },
+  {
     name: 'Irai',
     desc: '技术探索者，记录学习与生活',
     icon: '🌐',
@@ -129,13 +136,6 @@ const friendLinks = [
     icon: '📘',
     color: '#2563eb',
     link: 'https://programmercarl.com',
-  },
-  {
-    name: 'VitePress',
-    desc: 'Vue & Vite 驱动的静态站点生成器',
-    icon: '⚡',
-    color: '#eab308',
-    link: 'https://vitepress.dev',
   },
   {
     name: 'LeetCode',
@@ -236,6 +236,7 @@ function goNext() {
 let entranceObserver = null
 let wheelHandler = null
 let cleanupDrag = null
+let cleanupArrowAnimation = null
 
 onMounted(() => {
   /* 入场动画 — IntersectionObserver 触发，每个元素延迟 30ms 递增 */
@@ -338,12 +339,61 @@ onMounted(() => {
     scene.removeEventListener('touchmove', onTouchMove)
     scene.removeEventListener('touchend', onTouchEnd)
   }
+
+  /* 轮播箭头点击动效 — 解决移动端 :active/:hover 伪类粘滞问题
+   * 移动端 bug：tap 后 :hover 会粘滞，点击其他地方才消失
+   * 方案：内联 !important 覆盖粘滞伪类，检测触摸设备决定是否清除 */
+  const isTouchDevice = window.matchMedia('(hover: none)').matches
+  const arrowCleanups = []
+  document.querySelectorAll('.carousel-arrow').forEach((btn) => {
+    let blueTimer = null
+    let clearTimer = null
+    const setBlue = () => {
+      btn.style.setProperty('transition', 'background 0.25s ease, border-color 0.25s ease, color 0.25s ease', 'important')
+      btn.style.setProperty('background', 'var(--vp-c-brand-soft)', 'important')
+      btn.style.setProperty('border-color', 'rgba(52, 120, 217, 0.3)', 'important')
+      btn.style.setProperty('color', 'var(--vp-c-brand-1)', 'important')
+    }
+    const setWhite = () => {
+      btn.style.setProperty('transition', 'background 0.25s ease, border-color 0.25s ease, color 0.25s ease', 'important')
+      btn.style.setProperty('background', 'var(--site-card-bg)', 'important')
+      btn.style.setProperty('border-color', 'var(--site-card-border)', 'important')
+      btn.style.setProperty('color', 'var(--vp-c-text-2)', 'important')
+    }
+    const clearInline = () => {
+      btn.style.removeProperty('transition')
+      btn.style.removeProperty('background')
+      btn.style.removeProperty('border-color')
+      btn.style.removeProperty('color')
+    }
+    const onClick = () => {
+      clearTimeout(blueTimer)
+      clearTimeout(clearTimer)
+      setBlue()
+      blueTimer = setTimeout(() => {
+        setWhite()
+        // 触摸设备：保留内联样式防止粘滞 :hover 复蓝
+        // 非触摸设备：清除内联样式恢复 :hover
+        if (!isTouchDevice) {
+          clearTimer = setTimeout(clearInline, 20)
+        }
+      }, 200)
+    }
+    btn.addEventListener('click', onClick)
+    arrowCleanups.push(() => {
+      btn.removeEventListener('click', onClick)
+      clearTimeout(blueTimer)
+      clearTimeout(clearTimer)
+    })
+  })
+  cleanupArrowAnimation = () => arrowCleanups.forEach((fn) => fn())
 })
 
 onUnmounted(() => {
   if (entranceObserver) entranceObserver.disconnect()
   if (wheelHandler) window.removeEventListener('wheel', wheelHandler)
   if (cleanupDrag) cleanupDrag()
+  if (cleanupArrowAnimation) cleanupArrowAnimation()
 })
 
 /**
@@ -631,6 +681,10 @@ function onIconError(e) {
   margin-bottom: 52px;
 }
 
+.friends-section .section-header {
+  margin-bottom: 10px;
+}
+
 .friends-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -812,7 +866,8 @@ function onIconError(e) {
 /* ── 左右箭头 ───────────────────────────────────────────── */
 .carousel-arrow {
   position: absolute;
-  top: 160px !important;
+  /* 自定义修改：调整箭头位置，使其与轮播卡片视觉中心对齐 */
+  top: 100px;
   transform: translateY(-50%);
   z-index: 20;
   width: 40px;
@@ -827,13 +882,24 @@ function onIconError(e) {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 .carousel-arrow:hover {
   background: var(--vp-c-brand-soft);
   border-color: rgba(52, 120, 217, 0.2);
   color: var(--vp-c-brand-1);
+}
+
+.carousel-arrow:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 点击动效由 JS 内联样式控制，:active 仅保留按压缩放 */
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-arrow--prev {
@@ -1109,9 +1175,9 @@ function onIconError(e) {
   }
 
   .carousel-scene {
-    height: 320px;
+    height: 240px;
     perspective: 3200px;
-    margin-top: 90px;
+    margin-top: 40px;
   }
 
   .carousel-track {
@@ -1122,7 +1188,8 @@ function onIconError(e) {
   .carousel-arrow {
     width: 34px;
     height: 34px;
-    top: 130px;
+    /* 自定义修改：移动端箭头位置与卡片视觉中心对齐 */
+    top: 50px;
   }
 
   .carousel-arrow svg {

@@ -270,6 +270,11 @@
 
 /* ── Components Mobile ─────────────────────────────────────── */
 @media (max-width: 959px) {
+  /* 移动端隐藏顶部进度条，仅保留右下角回到顶部按钮 */
+  .site-progress {
+    display: none;
+  }
+
   .reading-tools {
     right: 16px;
     bottom: 18px;
