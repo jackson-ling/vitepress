@@ -8,3 +8,5 @@ cache
 *.local
 .idea
 .playwright-mcp
+.claude
+.agents
