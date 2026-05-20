@@ -237,8 +237,18 @@ let entranceObserver = null
 let wheelHandler = null
 let cleanupDrag = null
 let cleanupArrowAnimation = null
+let onTouchDetect = null
+
+const homeExtrasRef = ref(null)
+const prevArrowRef = ref(null)
+const nextArrowRef = ref(null)
 
 onMounted(() => {
+  /* 触摸设备检测 — 事件驱动，仅在实际触摸时标记（兼容混合设备） */
+  let touchedOnce = false
+  onTouchDetect = () => { touchedOnce = true }
+  window.addEventListener('touchstart', onTouchDetect, { once: true, passive: true })
+
   /* 入场动画 — IntersectionObserver 触发，每个元素延迟 30ms 递增 */
   entranceObserver = new IntersectionObserver(
     (entries) => {
@@ -252,7 +262,10 @@ onMounted(() => {
     { threshold: 0.06, rootMargin: '0px 0px -16px 0px' }
   )
 
-  document.querySelectorAll('.home-extras .anim-item').forEach((el, i) => {
+  const animItems = homeExtrasRef.value
+    ? Array.from(homeExtrasRef.value.querySelectorAll('.anim-item'))
+    : Array.from(document.querySelectorAll('.home-extras .anim-item'))
+  animItems.forEach((el, i) => {
     el.style.transitionDelay = `${i * 30}ms`
     entranceObserver.observe(el)
   })
@@ -273,7 +286,9 @@ onMounted(() => {
   window.addEventListener('wheel', wheelHandler, { passive: false })
 
   /* 拖拽切换 — 支持鼠标和触摸，位移 > 20px 才触发切换 */
-  const scene = document.querySelector('.home-extras .carousel-scene')
+  const scene = homeExtrasRef.value
+    ? homeExtrasRef.value.querySelector('.carousel-scene')
+    : document.querySelector('.home-extras .carousel-scene')
   if (!scene) return
 
   let startX = 0
@@ -342,16 +357,16 @@ onMounted(() => {
 
   /* 轮播箭头点击动效 — 解决移动端 :active/:hover 伪类粘滞问题
    * 移动端 bug：tap 后 :hover 会粘滞，点击其他地方才消失
-   * 方案：内联 !important 覆盖粘滞伪类，检测触摸设备决定是否清除 */
-  const isTouchDevice = window.matchMedia('(hover: none)').matches
+   * 方案：内联 !important 覆盖粘滞伪类，事件驱动检测触摸设备 */
   const arrowCleanups = []
-  document.querySelectorAll('.carousel-arrow').forEach((btn) => {
+  const arrowEls = [prevArrowRef.value, nextArrowRef.value].filter(Boolean)
+  arrowEls.forEach((btn) => {
     let blueTimer = null
     let clearTimer = null
     const setBlue = () => {
       btn.style.setProperty('transition', 'background 0.25s ease, border-color 0.25s ease, color 0.25s ease', 'important')
       btn.style.setProperty('background', 'var(--vp-c-brand-soft)', 'important')
-      btn.style.setProperty('border-color', 'rgba(52, 120, 217, 0.3)', 'important')
+      btn.style.setProperty('border-color', 'var(--site-arrow-active-border)', 'important')
       btn.style.setProperty('color', 'var(--vp-c-brand-1)', 'important')
     }
     const setWhite = () => {
@@ -374,7 +389,7 @@ onMounted(() => {
         setWhite()
         // 触摸设备：保留内联样式防止粘滞 :hover 复蓝
         // 非触摸设备：清除内联样式恢复 :hover
-        if (!isTouchDevice) {
+        if (!touchedOnce) {
           clearTimer = setTimeout(clearInline, 20)
         }
       }, 200)
@@ -392,6 +407,7 @@ onMounted(() => {
 onUnmounted(() => {
   if (entranceObserver) entranceObserver.disconnect()
   if (wheelHandler) window.removeEventListener('wheel', wheelHandler)
+  window.removeEventListener('touchstart', onTouchDetect)
   if (cleanupDrag) cleanupDrag()
   if (cleanupArrowAnimation) cleanupArrowAnimation()
 })
@@ -407,7 +423,7 @@ function onIconError(e) {
 </script>
 
 <template>
-  <div class="home-extras">
+  <div ref="homeExtrasRef" class="home-extras">
     <!-- ── TIP 标语区域 ──────────────────────────────────── -->
     <section class="tips-section">
       <div class="tips-grid">
@@ -440,12 +456,14 @@ function onIconError(e) {
       >
         <!-- 左右箭头 -->
         <button
+          ref="prevArrowRef"
           class="carousel-arrow carousel-arrow--prev"
           @click="goPrev"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <button
+          ref="nextArrowRef"
           class="carousel-arrow carousel-arrow--next"
           @click="goNext"
         >
@@ -865,6 +883,7 @@ function onIconError(e) {
 
 /* ── 左右箭头 ───────────────────────────────────────────── */
 .carousel-arrow {
+  --site-arrow-active-border: rgba(52, 120, 217, 0.3);
   position: absolute;
   /* 自定义修改：调整箭头位置，使其与轮播卡片视觉中心对齐 */
   top: 100px;
@@ -892,7 +911,7 @@ function onIconError(e) {
   color: var(--vp-c-brand-1);
 }
 
-.carousel-arrow:focus {
+.carousel-arrow:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
@@ -1323,6 +1342,10 @@ function onIconError(e) {
 
 .dark .tech-logo-card:hover {
   border-color: rgba(104, 116, 163, 0.12);
+}
+
+.dark .carousel-arrow {
+  --site-arrow-active-border: rgba(104, 116, 163, 0.3);
 }
 
 .dark .carousel-arrow:hover {

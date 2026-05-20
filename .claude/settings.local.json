@@ -115,7 +115,21 @@
       "Bash(/d/DevelopTool/node/nvm/nvm.exe use *)",
       "Bash(cmd //c \"move D:\\\\DevelopTool\\\\node\\\\nodejs\\\\node_cache D:\\\\DevelopTool\\\\node\\\\node_cache_temp\")",
       "Bash(cmd //c \"rmdir D:\\\\DevelopTool\\\\node\\\\nodejs\")",
-      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" node_modules/vitepress/bin/vitepress.js build)"
+      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" node_modules/vitepress/bin/vitepress.js build)",
+      "Bash(NODE_DEBUG=* node ./node_modules/vitepress/dist/node/cli.js build)",
+      "Bash(pnpm build *)",
+      "Bash(nvm root *)",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/node.exe -v)",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/npx.cmd pnpm *)",
+      "Bash(where pnpm *)",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/node.exe D:/DevelopTool/node/nvm/v18.20.4/node_modules/corepack/dist/corepack.js --version)",
+      "Bash(npm list *)",
+      "Bash(npm root *)",
+      "Read(//d/DevelopTool/node/nodejs/node_global/**)",
+      "Read(//d/DevelopTool/node/nodejs/**)",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/node.exe -e \"console.log\\(process.version\\)\")",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/node.exe ./node_modules/.bin/vitepress build)",
+      "Bash(D:/DevelopTool/node/nvm/v18.20.4/node.exe D:/vitepress/node_modules/vitepress/bin/vitepress.js build)"
     ]
   },
   "enabledPlugins": {
