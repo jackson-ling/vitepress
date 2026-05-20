@@ -14,6 +14,20 @@ export default defineConfig({
 
     head: [
         ['link', {rel: 'icon', href: "/标签logo.png"}],
+        ['script', {}, `
+          (function(){
+            var p=location.pathname;
+            if((p==='/'||p==='/index.html'||p.endsWith('/index'))&&!sessionStorage.getItem('welcome-overlay-shown')){
+              document.documentElement.classList.add('welcome-blocking');
+            }
+          })();
+        `],
+        ['style', {}, `
+          html.welcome-blocking,
+          html.welcome-blocking body {
+            background: #0d1321 !important;
+          }
+        `],
     ],
 
     title: "jackson凌の文档站", // 网站标签页的名称
@@ -451,7 +465,7 @@ export default defineConfig({
                     [
                         {
                             text: '认识 AI',
-                            link: '/docs/AI/认识 AI/认识 AI.md'
+                            link: '/docs/AI/认识AI/认识AI.md'
                         },
                         {
                             text: 'Claude Code',

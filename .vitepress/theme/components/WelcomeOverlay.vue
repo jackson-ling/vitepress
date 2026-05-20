@@ -62,11 +62,11 @@ function isHomePage() {
 function shouldAutoShow() {
   if (!isHomePage()) return false
   if (state.hasShownOnce) return false
-  return !localStorage.getItem('welcome-overlay-shown')
+  return !sessionStorage.getItem('welcome-overlay-shown')
 }
 
 function markAsShown() {
-  localStorage.setItem('welcome-overlay-shown', '1')
+  sessionStorage.setItem('welcome-overlay-shown', '1')
 }
 
 function handleEnter() {
@@ -85,10 +85,7 @@ onMounted(() => {
 
   if (!shouldAutoShow()) return
   state.hasShownOnce = true
-  state._autoTimer = setTimeout(() => {
-    state._autoTimer = null
-    state.show = true
-  }, 300)
+  state.show = true
 })
 
 onUnmounted(() => {

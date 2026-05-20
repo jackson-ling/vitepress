@@ -31,6 +31,10 @@ const overlayState = reactive({
   close() {
     if (!this.show || this.exiting) return
     this.exiting = true
+    // 立即移除遮挡类，让首页在遮罩淡出动画下方提前渲染
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('welcome-blocking')
+    }
     setTimeout(() => {
       this.show = false
       this.exiting = false
@@ -40,10 +44,6 @@ const overlayState = reactive({
 
 provide('overlayState', overlayState)
 
-// 首次访问时给 body 加标记，用 CSS 隐藏首页内容
-if (typeof document !== 'undefined' && !localStorage.getItem('welcome-overlay-shown')) {
-  document.body.classList.add('welcome-blocking')
-}
 
 function toggleOverlay() {
   if (overlayState.show) {
@@ -90,21 +90,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   )
 })
 
-/* ── 欢迎遮罩关闭后首页内容入场动画 ──────────────────────── */
+/* ── 欢迎遮罩关闭后展示首页内容 ──────────────────────── */
 function onWelcomeDismissed() {
-  document.body.classList.remove('welcome-blocking')
-
-  if (overlayState.firstDismissDone) {
-    // 后续通过按钮关闭遮罩 — 直接展示
-    const home = document.querySelector('.VPHome')
-    if (home) {
-      home.style.visibility = ''
-      home.style.opacity = ''
-    }
-    return
-  }
-
-  overlayState.firstDismissDone = true
+  document.documentElement.classList.remove('welcome-blocking')
 }
 
 /* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
@@ -219,8 +207,8 @@ onUnmounted(() => {
   margin-top: 2px !important;
 }
 
-/* ── 首次访问：遮罩遮挡期间隐藏首页内容 ──────────────────── */
-body.welcome-blocking .VPHome {
+/* ── 首次访问：遮罩遮挡期间隐藏整个布局（导航栏 + 内容区） ── */
+html.welcome-blocking .Layout {
   visibility: hidden;
   pointer-events: none;
 }
