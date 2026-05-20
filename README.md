@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- Wave SVG Header -->
-<img width="100%" src="public/主页logo.png" />
+<img width="500" src="public/主页logo.png" />
 
 **少想多做 • 循序渐进 • 深入思考** | 大二在读 | 励志成为 Java 后端工程师 🔥 目前正在找实习中
 
