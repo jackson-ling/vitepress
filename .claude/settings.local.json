@@ -99,7 +99,23 @@
       "Bash(grep -v \"^[+-]\\\\s*//\")",
       "Bash(grep -v \"^[+-]\\\\s*$\")",
       "Bash(grep -v \"^-\\\\s*//\")",
-      "Bash(grep -v \"^-$\")"
+      "Bash(grep -v \"^-$\")",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx vitepress build)",
+      "Bash(nvm list *)",
+      "Bash(nvm use *)",
+      "Bash(where node *)",
+      "Read(//d/DevelopTool/node/nvm//**)",
+      "Read(//d/DevelopTool/node/nvm/v18.20.4//**)",
+      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" -v)",
+      "Bash(/d/DevelopTool/node/nvm/v18.20.4/node.exe -e ' *)",
+      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" node_modules/.bin/npm view vitepress version)",
+      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" -e \"const https = require\\('https'\\); https.get\\('https://registry.npmjs.org/vitepress/latest', res => { let d = ''; res.on\\('data', c => d += c\\); res.on\\('end', \\(\\) => console.log\\(JSON.parse\\(d\\).version\\)\\); }\\)\")",
+      "Bash(\"/d/DevelopTool/node/nvm/v24.9.0/node.exe\" -v)",
+      "Bash(/d/DevelopTool/node/nvm/v24.9.0/node.exe *)",
+      "Bash(/d/DevelopTool/node/nvm/nvm.exe use *)",
+      "Bash(cmd //c \"move D:\\\\DevelopTool\\\\node\\\\nodejs\\\\node_cache D:\\\\DevelopTool\\\\node\\\\node_cache_temp\")",
+      "Bash(cmd //c \"rmdir D:\\\\DevelopTool\\\\node\\\\nodejs\")",
+      "Bash(\"/d/DevelopTool/node/nvm/v18.20.4/node.exe\" node_modules/vitepress/bin/vitepress.js build)"
     ]
   },
   "enabledPlugins": {
