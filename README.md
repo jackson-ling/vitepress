@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- Wave SVG Header -->
-<img width="500" src="public/主页logo.png" />
+<img width="300" src="public/主页logo.png" />
 
 **少想多做 • 循序渐进 • 深入思考** | 大二在读 | 励志成为 Java 后端工程师 🔥 目前正在找实习中
 
@@ -207,7 +207,7 @@ npm run docs:preview
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jackson-ling/vitepress&type=Date)](https://star-history.com/#jackson-ling/vitepress&Date)
+<a href="https://star-history.com/#jackson-ling/vitepress&Date"><img width="600" src="https://api.star-history.com/svg?repos=jackson-ling/vitepress&type=Date" /></a>
 
 </div>
 
