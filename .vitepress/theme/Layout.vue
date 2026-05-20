@@ -1,3 +1,17 @@
+<!--
+ * Layout.vue — 自定义主题布局入口
+ *
+ * 本文件是 VitePress 自定义主题的核心布局组件，继承 DefaultTheme 并扩展以下功能：
+ *   1. 欢迎遮罩（WelcomeOverlay）状态管理 — 通过 provide/inject 共享给子组件
+ *   2. 主题切换动画 — View Transition API + 圆形裁剪效果
+ *   3. 侧边栏文章切换过渡动画 — 两阶段淡出淡入
+ *   4. 全局图片懒加载 — MutationObserver 监听新增图片
+ *
+ * 自定义修改指引：
+ *   - 遮罩退出动画时长：搜索 "900"（overlayState.close 中的 setTimeout）
+ *   - 主题切换动画时长：搜索 "300"（document.startViewTransition 后的 duration）
+ *   - 路由过渡动画：搜索 "route-leave" / "route-enter"（对应 CSS 在 _layout.css）
+-->
 <script setup>
 import { ref, reactive, nextTick, onMounted, onUnmounted, provide } from 'vue'
 import { useData, useRouter } from 'vitepress'
@@ -10,16 +24,28 @@ const { Layout } = DefaultTheme
 const { isDark } = useData()
 const router = useRouter()
 
-/* ── 欢迎遮罩共享状态（组件销毁后仍保留） ─────────────────── */
+/* ── 欢迎遮罩共享状态 ────────────────────────────────────────
+ *  使用 reactive 对象（非 ref）存储遮罩状态，确保 provide 后
+ *  子组件通过 inject 获取的是同一引用，状态变更自动同步。
+ *
+ *  状态流转：closed → open() → showing → close() → exiting → closed
+ *
+ *  自定义修改：
+ *    - 遮罩退出动画时长：修改 close() 中 setTimeout 的 900ms（需与
+ *      WelcomeOverlay.vue 中 .overlay-exit 动画的 0.9s 保持一致）
+ *    - 遮罩背景色：修改 WelcomeOverlay.vue 中 .welcome-overlay 的 background
+ *      以及 index.html 中 html.welcome-blocking 的 background
+ * ─────────────────────────────────────────────────────────── */
 const overlayState = reactive({
-  show: false,
-  exiting: false,
-  hasShownOnce: false,
+  show: false,        // 是否显示遮罩
+  exiting: false,     // 是否正在执行退出动画
+  hasShownOnce: false,// 本次会话是否已展示过（防止重复自动展示）
   firstDismissDone: false,
   _autoTimer: null,
+
+  /** 打开遮罩 — 清除待触发的自动展示定时器，防止冲突 */
   open() {
     if (this.show) return
-    // 清除待触发的自动展示定时器，防止冲突
     if (this._autoTimer) {
       clearTimeout(this._autoTimer)
       this._autoTimer = null
@@ -28,6 +54,13 @@ const overlayState = reactive({
     this.exiting = false
     this.show = true
   },
+
+  /**
+   * 关闭遮罩 — 先标记 exiting 状态触发淡出动画，动画结束后隐藏
+   *
+   * ⚠️ setTimeout 时长必须与 WelcomeOverlay.vue 中
+   *    .welcome-overlay.is-exiting 的 animation-duration 一致（当前 900ms）
+   */
   close() {
     if (!this.show || this.exiting) return
     this.exiting = true
@@ -35,6 +68,7 @@ const overlayState = reactive({
     if (typeof document !== 'undefined') {
       document.documentElement.classList.remove('welcome-blocking')
     }
+    // ← 修改这里的 900 可调整退出动画等待时间
     setTimeout(() => {
       this.show = false
       this.exiting = false
@@ -55,7 +89,15 @@ function toggleOverlay() {
 
 provide('toggle-overlay', toggleOverlay)
 
-/* ── 主题切换动画（View Transition API + 圆形裁剪） ────────── */
+/* ── 主题切换动画（View Transition API + 圆形裁剪） ──────────
+ *  点击主题切换按钮时，以点击位置为圆心扩散/收缩圆形裁剪区域，
+ *  实现亮暗主题的丝滑过渡效果。
+ *
+ *  自定义修改：
+ *    - 动画时长 300ms：修改 document.documentElement.animate 的 duration
+ *    - 缓动曲线 ease-in：修改 easing 属性
+ *    - 浏览器兼容性：enableTransitions() 检查 startViewTransition 支持
+ * ─────────────────────────────────────────────────────────── */
 const enableTransitions = () =>
   'startViewTransition' in document &&
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
@@ -66,6 +108,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     return
   }
 
+  // 计算圆形裁剪路径：从点击位置扩散到能覆盖整个视口的半径
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(
@@ -79,6 +122,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     await nextTick()
   }).ready
 
+  // ← 修改 duration (300) 可调整主题切换动画时长
   document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
     {
@@ -90,12 +134,23 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   )
 })
 
-/* ── 欢迎遮罩关闭后展示首页内容 ──────────────────────── */
+/* ── 欢迎遮罩关闭回调 ────────────────────────────────────────
+ *  由 WelcomeOverlay 的 @dismiss 事件触发。
+ *  overlayState.close() 已在关闭时移除 welcome-blocking 类，
+ *  此处保留作为兜底（防止异常路径下类名残留）
+ * ─────────────────────────────────────────────────────────── */
 function onWelcomeDismissed() {
   document.documentElement.classList.remove('welcome-blocking')
 }
 
-/* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
+/* ── 侧边栏文章切换过渡动画（两阶段） ──────────────────────
+ *  路由切换时为文档内容添加淡出/淡入动画：
+ *    阶段 1：onBeforeRouteChange → 添加 route-leave（旧内容淡出上移）
+ *    阶段 2：onAfterRouteChanged → 添加 route-enter（新内容从下方淡入）
+ *
+ *  动画样式定义在 _layout.css 中（.route-leave / .route-enter）
+ *  动画时长 0.2s，如需调整请修改 _layout.css 中的 animation-duration
+ * ─────────────────────────────────────────────────────────── */
 function getTransitionTarget() {
   return document.querySelector('.VPDoc') || document.querySelector('.VPPage')
 }
@@ -122,7 +177,10 @@ function onAfterRouteChanged() {
   })
 }
 
-/* ── 全局图片懒加载 ──────────────────────────────────────────── */
+/* ── 全局图片懒加载 ────────────────────────────────────────────
+ *  为所有 <img> 标签自动添加 loading="lazy" 属性，
+ *  包括初始渲染的图片和后续通过 JS 动态插入的图片（MutationObserver）
+ * ─────────────────────────────────────────────────────────── */
 function applyLazyLoading(root) {
   root.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading', 'lazy')
@@ -132,9 +190,11 @@ function applyLazyLoading(root) {
 let observer
 
 onMounted(() => {
+  // 注册路由过渡钩子
   router.onBeforeRouteChange = onBeforeRouteChange
   router.onAfterRouteChanged = onAfterRouteChanged
 
+  // 初始扫描 + MutationObserver 监听新增节点
   applyLazyLoading(document.body)
   observer = new MutationObserver(mutations => {
     for (const m of mutations) {
@@ -184,6 +244,10 @@ onUnmounted(() => {
  *  减小容器内边距 + 消除标题与首个内容元素之间的多余间距
  *  用户习惯在 ::: 容器内使用 > #### 编写内容，
  *  blockquote 和 h2/h3/h4 的默认 margin 会产生大量留白
+ *
+ *  自定义修改：
+ *    - 6px / 4px / 2px 均为间距值，增大可增加留白，减小可紧凑排版
+ *    - !important 用于覆盖 VitePress 默认主题的内联样式
  * ──────────────────────────────────────────────────────────── */
 .custom-block {
   padding-top: 6px !important;
@@ -217,7 +281,11 @@ html.welcome-blocking .Layout {
   pointer-events: none;
 }
 
-/* ── View Transition — 主题切换动画 ──────────────────────────── */
+/* ── View Transition — 主题切换动画 ────────────────────────────
+ *  自定义修改：
+ *    - z-index 控制新旧图层的堆叠顺序（9999 为新图层在上）
+ *    - animation: none 禁用默认淡入淡出，改用 Layout.vue 中的圆形裁剪动画
+ * ──────────────────────────────────────────────────────────── */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -242,7 +310,17 @@ html.welcome-blocking .Layout {
   top: -2px;
 }
 
-/* ── 欢迎页按钮 — 流光 + 边框脉冲光晕 ─────────────────────── */
+/* ── 欢迎页按钮 — 流光 + 边框脉冲光晕 ───────────────────────
+ *  首页 Hero 区域下方的"进入欢迎页"按钮
+ *
+ *  自定义修改：
+ *    - 主色调 rgba(99, 102, 241) — 靛蓝色，替换为其他颜色可改变整体风格
+ *    - 440px 按钮宽度（移动端 340px）
+ *    - 20px 圆角（border-radius）
+ *    - 3s 脉冲周期（border-pulse 动画）
+ *    - 6s 流光周期（shimmer-sweep 动画）
+ *    - 暗色模式色值在 .dark .hero-overlay-toggle 中单独配置
+ * ─────────────────────────────────────────────────────────── */
 .hero-overlay-toggle-wrap {
   display: flex;
   justify-content: center;
@@ -331,6 +409,7 @@ html.welcome-blocking .Layout {
   z-index: 1;
 }
 
+/* 暗色模式 — 切换为紫罗兰色调 */
 .dark .hero-overlay-toggle {
   animation-name: border-pulse-dark;
   border-color: rgba(168, 130, 255, 0.12);
@@ -362,6 +441,7 @@ html.welcome-blocking .Layout {
   );
 }
 
+/* 移动端 — 缩小按钮尺寸 */
 @media (max-width: 959px) {
   .hero-overlay-toggle-wrap {
     margin-top: 24px;

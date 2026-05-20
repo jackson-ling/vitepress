@@ -95,7 +95,11 @@
       "Bash(pkill -f vitepress)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5175)",
       "Bash(pkill -f \"node.*5174\")",
-      "Bash(pkill -f \"node.*5175\")"
+      "Bash(pkill -f \"node.*5175\")",
+      "Bash(grep -v \"^[+-]\\\\s*//\")",
+      "Bash(grep -v \"^[+-]\\\\s*$\")",
+      "Bash(grep -v \"^-\\\\s*//\")",
+      "Bash(grep -v \"^-$\")"
     ]
   },
   "enabledPlugins": {

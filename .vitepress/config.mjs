@@ -1,10 +1,30 @@
+/**
+ * config.mjs — VitePress 站点配置
+ *
+ * 文件结构：
+ *   1. head     — HTML <head> 标签注入（favicon、欢迎遮罩脚本、初始背景色）
+ *   2. title    — 站点标题
+ *   3. themeConfig — 主题配置（核心部分）
+ *     3.1 nav      — 顶部导航栏菜单（支持多级嵌套）
+ *     3.2 sidebar  — 左侧边栏配置（按路由路径匹配不同侧边栏）
+ *     3.3 socialLinks — 社交链接图标
+ *     3.4 footer   — 页脚版权信息
+ *     3.5 search   — 本地搜索配置（中文翻译）
+ *   4. markdown — Markdown 渲染配置（代码主题、行号、自定义容器）
+ *
+ * 自定义修改指引：
+ *   - 添加导航菜单项：在 nav 数组中添加新对象
+ *   - 添加侧边栏：在 sidebar 对象中添加新路由匹配规则
+ *   - 修改搜索翻译：在 search.options.translations 中修改
+ *   - 添加社交链接：在 socialLinks 数组中添加新对象
+ *   - 修改代码块主题：在 markdown.theme 中修改 light/dark 主题
+ */
 import {defineConfig} from 'vitepress'
 import {set_sidebar as setSidebarDefault} from './gen_sidebar.js'
 import {createRequire} from 'module'
 
 const require = createRequire(import.meta.url)
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
     /* 如果是 GitHub 则需要设置 base ， 使用国内的服务器不用 */
     // // 设置base
@@ -32,6 +52,10 @@ export default defineConfig({
 
     title: "jackson凌の文档站", // 网站标签页的名称
     description: "A VitePress Site",
+    /* ── 主题配置 ────────────────────────────────────────────────
+     *  修改下方各配置项可自定义站点的导航、侧边栏、搜索等功能
+     *  完整配置参考：https://vitepress.dev/reference/default-theme-config
+     * ──────────────────────────────────────────────────────────── */
     themeConfig: {
         //自定义上下页名
         docFooter: {
@@ -49,6 +73,20 @@ export default defineConfig({
 
         siteTitle: '知识文档站', // 左上角导航栏名称
         logo: '/标签logo.png', // 左上角导航栏图标
+        /* ── 导航栏配置 ────────────────────────────────────────────
+         *  结构：一级菜单 → 二级菜单 → 三级菜单（支持无限嵌套）
+         *  每个对象包含：
+         *    text  — 显示文字（支持 emoji 和 <img> 图标）
+         *    link  — 跳转链接（一级菜单有 items 时可省略）
+         *    items — 子菜单数组
+         *
+         *  图标用法：<img src="/xxx.png" class="nav-icon nav-icon--md">
+         *  尺寸变体：xs(1.0em) / sm(1.1em) / md(1.2em) / lg(1.3em) / xl(1.4em) / 2xl(1.5em) / 3xl(1.6em)
+         *  样式定义在 _nav.css 中
+         *
+         *  如需添加新的顶级导航：
+         *    在 nav 数组末尾添加新对象即可
+         * ──────────────────────────────────────────────────────────── */
         nav: [
             {text: '🏠首页', link: '/'},
             /*            {
@@ -555,6 +593,24 @@ export default defineConfig({
 
         ],
 
+        /* ── 侧边栏配置 ────────────────────────────────────────────
+         *  按 URL 路径前缀匹配不同的侧边栏内容
+         *  结构：{ '路由前缀': [侧边栏组...] }
+         *
+         *  每个侧边栏组包含：
+         *    text       — 分组标题
+         *    items      — 链接列表
+         *    collapsible — 是否可折叠（可选）
+         *    collapsed   — 初始是否折叠（可选）
+         *
+         *  自动生成侧边栏：
+         *    使用 ...setSidebarDefault('/docs/xxx') 展开指定目录下的所有 .md 文件
+         *    文件按名称中的数字自然排序，文件夹自动创建可折叠分组
+         *
+         *  如需添加新的侧边栏：
+         *    1. 在 sidebar 对象中添加新的路由前缀
+         *    2. 手动配置 items 或使用 setSidebarDefault() 自动生成
+         * ──────────────────────────────────────────────────────────── */
         sidebar:
         // 会根据导航栏中链接的文章路由来匹配不同的侧边栏，根据侧边栏前的路由来显示该路由下的文章内容
             {
@@ -1413,6 +1469,11 @@ export default defineConfig({
             },
 
 
+        /* ── 社交链接 ──────────────────────────────────────────────
+         *  显示在导航栏右侧的图标链接
+         *  内置图标：'github' / 'twitter' / 'discord' 等
+         *  自定义 SVG：使用 icon: { svg: '...' } 格式
+         * ──────────────────────────────────────────────────────────── */
         socialLinks:
             [
                 {icon: 'github', link: 'https://github.com/jackson-ling'},
@@ -1431,12 +1492,19 @@ export default defineConfig({
                     link: 'https://blog.csdn.net/jackson0607?spm=1000.2115.3001.5343'
                 }
             ],
+        /* ── 页脚 ────────────────────────────────────────────────── */
         footer: {
             // message: '个人知识文档网站',
             copyright: 'Copyright © 2025 Jackson 凌 All Rights Reserved. | 粤ICP备2025441629号-1 ',
         },
 
-        // 设置主页收缩框
+        /* ── 本地搜索 ──────────────────────────────────────────────
+         *  使用 VitePress 内置的本地搜索（基于 MiniSearch）
+         *  自定义修改：
+         *    - buttonText / buttonAriaLabel：搜索按钮文字
+         *    - noResultsText：无结果提示
+         *    - footer.selectText / navigateText：底部操作提示
+         * ──────────────────────────────────────────────────────────── */
         search: {
             provider: "local",
             options: {
@@ -1457,7 +1525,14 @@ export default defineConfig({
             },
         },
     },
-    // markdown 配置
+    /* ── Markdown 渲染配置 ──────────────────────────────────────
+     *  自定义修改：
+     *    - theme.light / theme.dark：代码块语法高亮主题
+     *      可用主题：https://github.com/shikijs/shiki/blob/main/docs/themes.md
+     *    - lineNumbers：是否显示行号
+     *    - container.xxxLabel：自定义容器块的标签文字（tip / warning / danger 等）
+     *    - config：markdown-it 插件配置（当前注册了 :::timeline 自定义容器）
+     * ──────────────────────────────────────────────────────────── */
     markdown:
         {
             // 代码块双主题：亮色 github-light，暗色 one-dark-pro

@@ -1,17 +1,59 @@
+<!--
+ * HomeExtras.vue — 首页扩展内容区
+ *
+ * 位于首页 Hero 区域下方，包含三个子区域：
+ *   1. TIP 标语区 — 三张激励卡片，带悬浮光晕效果
+ *   2. 技术栈区 — 圆形 3D 轮播，展示分类技术图标
+ *   3. 友情链接区 — 四张链接卡片
+ *
+ * 使用方式：在 Layout.vue 的 #home-hero-after 插槽中挂载
+ *
+ * 自定义修改指引：
+ *   - TIP 标语内容：修改 tips 数组（icon / title / text / color）
+ *   - 技术栈数据：修改 categories 数组（name / desc / items）
+ *   - 友情链接数据：修改 friendLinks 数组（name / desc / icon / color / link）
+ *   - 轮播半径：修改 CAROUSEL_RADIUS（值越大卡片越分散）
+ *   - 聚焦突出距离：修改 FOCUS_PUSH_Z（值越大立体感越强）
+ *   - 透视强度：修改 CSS 中 .carousel-scene 的 perspective（值越小倾斜越夸张）
+ *   - 入场动画延迟：修改 IntersectionObserver 的 threshold 和 transitionDelay
+-->
 <script setup>
 import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
 
-/* ── 遮罩切换 ──────────────────────────────────────────────── */
+/* ── 遮罩切换（从 Layout.vue 注入） ───────────────────────── */
 const toggleOverlay = inject('toggle-overlay', () => {})
 
-/* ── TIP 标语数据 ─────────────────────────────────────────── */
+/* ── TIP 标语数据 ───────────────────────────────────────────
+ *  每个 tip 包含：
+ *    icon  — emoji 图标
+ *    title — 标题（如 TIP 1）
+ *    text  — 描述文字
+ *    color — 主题色（用于图标背景、标题色、光晕色）
+ *
+ *  如需增删 TIP 卡片，直接修改此数组即可，
+ *  网格布局会自动适配（桌面端 3 列，移动端 1 列）
+ * ─────────────────────────────────────────────────────────── */
 const tips = [
   { icon: '⏳', title: 'TIP 1', text: '明确目标目的，逐步积累，循序渐进，切忌急于求成', color: '#3478d9' },
   { icon: '💪', title: 'TIP 2', text: '少想多做，降低预期，重视基础，重复练习，构建体系', color: '#8b5cf6' },
   { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，学会主动探索，敢于尝试', color: '#f59e0b' },
 ]
 
-/* ── 技术模块数据 ─────────────────────────────────────────── */
+/* ── 技术模块数据 ───────────────────────────────────────────
+ *  轮播卡片数据源，每个分类包含：
+ *    name  — 分类中文名（如"后端基础"）
+ *    desc  — 分类英文名（如"Backend"）
+ *    items — 技术项数组，每项包含：
+ *      name  — 技术名称
+ *      icon  — 图标路径（/ 开头为 public 目录，空字符串则显示首字母 fallback）
+ *      color — 主题色（用于底部高亮条、fallback 背景）
+ *      link  — 官网链接
+ *
+ *  如需添加新分类：
+ *    1. 在 categories 数组末尾添加新对象
+ *    2. ANGLE_STEP 会自动重新计算（360 / categories.length）
+ *    3. 轮播会自动适配新的卡片数量
+ * ─────────────────────────────────────────────────────────── */
 const categories = [
   {
     name: '后端基础',
@@ -62,7 +104,17 @@ const categories = [
   },
 ]
 
-/* ── 友情链接数据 ─────────────────────────────────────────── */
+/* ── 友情链接数据 ───────────────────────────────────────────
+ *  每个链接包含：
+ *    name  — 站点名称
+ *    desc  — 一句话描述
+ *    icon  — emoji 图标
+ *    color — 主题色（顶部渐变条、头像背景、底部链接色）
+ *    link  — 站点 URL
+ *
+ *  如需增删友情链接，直接修改此数组即可，
+ *  网格布局会自动适配（桌面端 4 列，移动端 2 列）
+ * ─────────────────────────────────────────────────────────── */
 const friendLinks = [
   {
     name: 'Irai',
@@ -94,18 +146,40 @@ const friendLinks = [
   },
 ]
 
-/* ── 圆形 3D 立体轮播 ─────────────────────────────────────── */
-const CAROUSEL_RADIUS = 420   // ← 卡片间距：值越大卡片越分散，越小越紧凑
-const ANGLE_STEP = 360 / categories.length  // 72° per card（自动计算，卡片数量变化时会联动）
-const FOCUS_PUSH_Z = 50       // ← 聚焦卡片向前突出的距离，影响立体感
+/* ── 圆形 3D 立体轮播 ───────────────────────────────────────
+ *  轮播原理：
+ *    所有卡片通过 rotateY(angle) + translateZ(radius) 排列在圆周上，
+ *    聚焦卡片额外 translateZ(FOCUS_PUSH_Z) 向前突出。
+ *    旋转整个 carousel-track 实现卡片切换。
+ *
+ *  自定义修改：
+ *    CAROUSEL_RADIUS — 卡片到圆心的距离（值越大卡片越分散，越小越紧凑）
+ *                      桌面端推荐 380~500，移动端通过 CSS perspective 单独控制
+ *    FOCUS_PUSH_Z    — 聚焦卡片向前突出的距离（影响立体感）
+ *                      推荐 30~80，值太大会导致卡片超出容器
+ *    ANGLE_STEP      — 自动计算，无需手动修改（360 / categories.length）
+ *
+ *  透视强度在 CSS 中通过 .carousel-scene 的 perspective 控制：
+ *    桌面端 4200px / 移动端 3200px（值越小倾斜越夸张，越大越平）
+ * ─────────────────────────────────────────────────────────── */
+const CAROUSEL_RADIUS = 420
+const ANGLE_STEP = 360 / categories.length
+const FOCUS_PUSH_Z = 50
 
 const focusedIndex = ref(0)
-const animIn = ref(true)
-const isHovering = ref(false)
-const dragMoved = ref(false)
+const animIn = ref(true)       // 入场动画阶段（true = 卡片隐藏，false = 正常显示）
+const isHovering = ref(false)  // 鼠标是否悬停在轮播区域
+const dragMoved = ref(false)   // 本次拖拽是否产生了位移（用于区分点击和拖拽）
 
-const trackAngle = ref(0)
+const trackAngle = ref(0)      // 轨道旋转角度（负值 = 向右切换）
 
+/**
+ * 计算每张卡片的 3D 变换样式
+ * 根据与聚焦卡片的距离计算 opacity 和 brightness：
+ *   距离 0（聚焦）→ opacity 1, brightness 1
+ *   距离 1（相邻）→ opacity 0.7, brightness 0.85
+ *   距离 2+（远处）→ opacity 0.35, brightness 0.6
+ */
 const carouselItems = computed(() => {
   return categories.map((_, i) => {
     const angle = i * ANGLE_STEP
@@ -127,6 +201,7 @@ const carouselItems = computed(() => {
   })
 })
 
+/** 切换到指定索引的卡片（自动计算最短旋转路径） */
 function switchTo(idx) {
   const len = categories.length
   const newIdx = ((idx % len) + len) % len
@@ -136,11 +211,13 @@ function switchTo(idx) {
   focusedIndex.value = newIdx
 }
 
+/** 卡片点击 — 仅在未产生拖拽位移时触发切换 */
 function onCardClick(idx) {
   if (dragMoved.value) return
   switchTo(idx)
 }
 
+/** 切换到上一张 / 下一张 */
 function goPrev() {
   trackAngle.value += ANGLE_STEP
   focusedIndex.value = (focusedIndex.value - 1 + categories.length) % categories.length
@@ -151,13 +228,17 @@ function goNext() {
   focusedIndex.value = (focusedIndex.value + 1) % categories.length
 }
 
-/* ── 事件监听 ─────────────────────────────────────────────── */
+/* ── 事件监听 ───────────────────────────────────────────────
+ *  入场动画：IntersectionObserver 监听 .anim-item 元素进入视口
+ *  滚轮切换：鼠标悬停在轮播区域时，滚轮上下滚动切换卡片
+ *  拖拽切换：鼠标左键拖拽或触摸滑动切换卡片（位移 > 20px 触发）
+ * ─────────────────────────────────────────────────────────── */
 let entranceObserver = null
 let wheelHandler = null
 let cleanupDrag = null
 
 onMounted(() => {
-  /* 入场动画 */
+  /* 入场动画 — IntersectionObserver 触发，每个元素延迟 30ms 递增 */
   entranceObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -175,9 +256,10 @@ onMounted(() => {
     entranceObserver.observe(el)
   })
 
+  // 入场动画结束后允许正常显示卡片
   setTimeout(() => { animIn.value = false }, 520)
 
-  /* 滚轮 — 仅鼠标悬停在轮播区域时响应 */
+  /* 滚轮切换 — 仅鼠标悬停在轮播区域时响应，deltaY > 15 阈值防止误触 */
   wheelHandler = (e) => {
     if (!isHovering.value) return
     e.preventDefault()
@@ -189,7 +271,7 @@ onMounted(() => {
   }
   window.addEventListener('wheel', wheelHandler, { passive: false })
 
-  /* 拖拽（鼠标 + 触摸） */
+  /* 拖拽切换 — 支持鼠标和触摸，位移 > 20px 才触发切换 */
   const scene = document.querySelector('.home-extras .carousel-scene')
   if (!scene) return
 
@@ -264,6 +346,10 @@ onUnmounted(() => {
   if (cleanupDrag) cleanupDrag()
 })
 
+/**
+ * 图标加载失败时的 fallback — 隐藏 <img>，显示首字母
+ * 注意：依赖 DOM 结构（img + nextElementSibling），修改 template 时需同步更新
+ */
 function onIconError(e) {
   e.target.style.display = 'none'
   e.target.nextElementSibling.style.display = 'flex'
@@ -328,7 +414,7 @@ function onIconError(e) {
             :style="animIn ? { opacity: '0' } : carouselItems[i].style"
             @click="onCardClick(i)"
           >
-            <!-- 非聚焦卡片的点击拦截层 -->
+            <!-- 非聚焦卡片的点击拦截层 — 点击时切换到该卡片 -->
             <div v-if="!carouselItems[i].focused" class="card-click-overlay" @click.stop="onCardClick(i)"></div>
             <div class="category-block">
               <div class="category-header">
@@ -418,7 +504,17 @@ function onIconError(e) {
   position: relative;
 }
 
-/* ── 入场动画 ───────────────────────────────────────────── */
+/* ── 入场动画 ─────────────────────────────────────────────
+ *  所有 .anim-item 初始 opacity: 0 + translateY(28px)，
+ *  IntersectionObserver 检测到进入视口后添加 .is-visible，
+ *  触发 opacity → 1, translateY → 0 的过渡动画。
+ *
+ *  自定义修改：
+ *    - 28px：入场偏移距离（越大动画越明显）
+ *    - 0.65s：动画时长
+ *    - cubic-bezier(0.16, 1, 0.3, 1)：缓动曲线（弹性感）
+ *    - transitionDelay 在 JS 中按索引递增 30ms
+ * ─────────────────────────────────────────────────────────── */
 .anim-item {
   opacity: 0;
   transform: translateY(28px);
@@ -448,6 +544,7 @@ function onIconError(e) {
   cursor: default;
 }
 
+/* 光晕背景 — hover 时增强 */
 .tip-glow {
   position: absolute;
   inset: -12px;
@@ -625,7 +722,7 @@ function onIconError(e) {
   overflow: hidden;
 }
 
-/* 底部链接提示 */
+/* 底部链接提示 — hover 时淡入 */
 .friend-card__footer {
   display: flex;
   align-items: center;
@@ -680,12 +777,17 @@ function onIconError(e) {
   font-weight: 500;
 }
 
-/* ── 圆形 3D 轮播场景 ────────────────────────────────────── */
+/* ── 圆形 3D 轮播场景 ──────────────────────────────────────
+ *  自定义修改：
+ *    perspective: 4200px — 透视距离，值越小倾斜越夸张，越大越平
+ *    height: 380px       — 轮播区域高度
+ *    margin-top: 80px    — 与标题的间距
+ * ─────────────────────────────────────────────────────────── */
 .carousel-scene {
   width: 100%;
   height: 380px;
   position: relative;
-  perspective: 4200px;  /* ← 倾斜程度：值越小倾斜越夸张，越大越平 */
+  perspective: 4200px;
   overflow: visible;
   cursor: grab;
   margin-top: 80px;
@@ -695,6 +797,7 @@ function onIconError(e) {
   cursor: grabbing;
 }
 
+/* 轮播轨道 — 通过 rotateY 实现卡片切换 */
 .carousel-track {
   width: 320px;
   height: 100%;
@@ -852,6 +955,7 @@ function onIconError(e) {
   border-color: rgba(52, 120, 217, 0.15);
 }
 
+/* 底部高亮条 — hover 时从中心展开 */
 .logo-accent {
   position: absolute;
   bottom: 0;
@@ -867,6 +971,7 @@ function onIconError(e) {
   width: 55%;
 }
 
+/* 渐变边框 — hover 时显示 */
 .tech-logo-card::before {
   content: '';
   position: absolute;
@@ -908,6 +1013,7 @@ function onIconError(e) {
   transform: scale(1.1);
 }
 
+/* 图标 fallback — 加载失败或无图标时显示首字母 */
 .logo-fallback {
   width: 28px;
   height: 28px;
@@ -942,7 +1048,10 @@ function onIconError(e) {
   color: var(--vp-c-text-1);
 }
 
-/* ── 响应式 ─────────────────────────────────────────────── */
+/* ── 响应式 ───────────────────────────────────────────────
+ *  断点 959px（与 VitePress 移动端断点一致）
+ *  调整内容：轮播高度、透视距离、卡片尺寸、网格列数
+ * ─────────────────────────────────────────────────────────── */
 @media (max-width: 959px) {
   .home-extras {
     padding: 12px 16px 56px;
@@ -1001,7 +1110,7 @@ function onIconError(e) {
 
   .carousel-scene {
     height: 320px;
-    perspective: 3200px;  /* ← 移动端倾斜程度 */
+    perspective: 3200px;
     margin-top: 90px;
   }
 
@@ -1063,7 +1172,7 @@ function onIconError(e) {
   }
 }
 
-/* ── Reduced Motion ─────────────────────────────────────── */
+/* ── Reduced Motion — 无障碍适配 ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .anim-item {
     transition: none !important;
@@ -1113,7 +1222,10 @@ function onIconError(e) {
 </style>
 
 <style>
-/* ── Dark mode — Warm Editorial Dark 适配 ─────────────────── */
+/* ── Dark mode — 暗色模式适配 ──────────────────────────────
+ *  非 scoped 样式，覆盖亮色模式的硬编码 rgba 值
+ *  使用 rgba(31, 31, 35) 暖灰基底，与 _tokens.css 暗色主题一致
+ * ─────────────────────────────────────────────────────────── */
 .dark .tip-card {
   background: rgba(31, 31, 35, 0.65);
   border-color: rgba(161, 161, 170, 0.06);
