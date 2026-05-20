@@ -102,6 +102,15 @@
   animation: doc-route-enter 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
+/* 独立页面（VPPage）使用相同的路由过渡动画 */
+.VPPage.route-leave {
+  animation: doc-route-leave 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.VPPage.route-enter {
+  animation: doc-route-enter 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
 /* ── Page Layout — 独立页面（描述页、联系页等） ─────────────── */
 .VPPage {
   max-width: 860px !important;

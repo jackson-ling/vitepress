@@ -96,24 +96,28 @@ function onWelcomeDismissed() {
 }
 
 /* ── 侧边栏文章切换过渡动画（两阶段） ────────────────────── */
+function getTransitionTarget() {
+  return document.querySelector('.VPDoc') || document.querySelector('.VPPage')
+}
+
 function onBeforeRouteChange() {
-  const doc = document.querySelector('.VPDoc')
-  if (!doc) return
-  doc.classList.remove('route-enter')
-  doc.classList.add('route-leave')
+  const target = getTransitionTarget()
+  if (!target) return
+  target.classList.remove('route-enter')
+  target.classList.add('route-leave')
 }
 
 function onAfterRouteChanged() {
   nextTick(() => {
-    const doc = document.querySelector('.VPDoc')
-    if (!doc) return
-    doc.classList.remove('route-leave')
-    doc.classList.add('route-enter')
+    const target = getTransitionTarget()
+    if (!target) return
+    target.classList.remove('route-leave')
+    target.classList.add('route-enter')
     const cleanup = () => {
-      doc.classList.remove('route-enter')
-      doc.removeEventListener('animationend', cleanup)
+      target.classList.remove('route-enter')
+      target.removeEventListener('animationend', cleanup)
     }
-    doc.addEventListener('animationend', cleanup)
+    target.addEventListener('animationend', cleanup)
     setTimeout(cleanup, 300)
   })
 }
