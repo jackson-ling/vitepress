@@ -8,6 +8,12 @@ outline: [2, 3]
 
 ---
 
+## 核心概念扫盲
+
+> #### 马克（视频教程）：https://www.bilibili.com/video/BV1E7wtzaEdq/
+>
+> #### 鱼皮（文字教程）：https://juejin.cn/post/7613234803012321314
+
 ## 什么是 AI
 
 ### 发展历程
@@ -63,10 +69,11 @@ outline: [2, 3]
 
 ### prompt 提示词
 
-<br/>
-<img src="./9.png" style="width:900px"/>
+> #### 优质提示词：https://github.com/ai-boost/awesome-prompts
 
-#### 优质提示词：https://github.com/ai-boost/awesome-prompts
+<img src="./9.png" style="width:900px"/>
+<br/>
+<img src="./16.png" style="width:900px"/>
 
 ### AI 编程助手推荐
 

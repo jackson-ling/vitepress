@@ -71,44 +71,42 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="/github.png" class="nav-icon nav-icon--3xl"> Github使用技巧',
-                                        link: '/docs/笔记/Github使用指南.md'
+                                        text: '<img src="/github.png" class="nav-icon nav-icon--3xl"> 使用技巧',
+                                        link: '/docs/笔记/Github/Github使用指南.md'
                                     },
-                                    {text: '⭐优质开源项目', link: '/docs/测试界面.md'},
+                                    {
+                                        text: '⭐ 优质开源项目',
+                                        link: '/docs/笔记/Github/优质开源项目.md'
+                                    },
                                 ]
                         },
                         {text: '🔍常用网站', link: '/docs/笔记/常用网站.md'},
                         {text: '🖊️随笔', link: '/docs/笔记/随笔/随笔乱记.md'},
-                        {
-                            text: 'Markdown',
-                            items:
-                                [
-                                    {
-                                        text: '<img src="/markdown.png" class="nav-icon nav-icon--3xl"> Markdown语法',
-                                        link: '/docs/测试界面.md'
-                                    },
-                                    {text: 'Markdown @ emoji', link: '/docs/笔记/markdown/markdown@emoji.md'},
-                                ]
-                        },
+                        {text: '📝面试复盘', link: '/docs/笔记/面试复盘/面试复盘.md'},
                         {
                             text: 'Vitepress',
                             items:
                                 [
-                                    {text: '📋准备工作', link: '/docs/测试界面.md'},
-                                    {text: '💡建站教程', link: '/docs/测试界面.md'},
                                     {
-                                        text: '<img src="/建议.png" class="nav-icon nav-icon--xs"> 文档编写建议',
+                                        text: '📋准备工作',
                                         link: '/docs/测试界面.md'
                                     },
+                                    // {
+                                    //     text: '💡建站教程',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
+                                    // {
+                                    //     text: '<img src="/建议.png" class="nav-icon nav-icon--xs"> 文档编写建议',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
                                     {
                                         text: '<img src="/腾讯云.png" class="nav-icon nav-icon--xs"> 腾讯云部署',
                                         link: '/docs/笔记/vitepress教程/腾讯云部署/腾讯云部署.md'
                                     },
-                                    {
-                                        text: '<img src="/githubaction.png" class="nav-icon nav-icon--xs"> Github部署',
-                                        link: '/docs/测试界面.md'
-                                    },
-
+                                    // {
+                                    //     text: '<img src="/githubaction.png" class="nav-icon nav-icon--xs"> Github部署',
+                                    //     link: '/docs/测试界面.md'
+                                    // },
                                 ]
                         },
 
