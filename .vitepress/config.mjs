@@ -82,6 +82,7 @@ export default defineConfig({
                         },
                         {text: '🔍常用网站', link: '/docs/笔记/常用网站.md'},
                         {text: '🖊️随笔', link: '/docs/笔记/随笔/随笔乱记.md'},
+                        {text: '🎯八股文', link: '/docs/笔记/八股文/0. 八股来源.md'},
                         {text: '📝面试复盘', link: '/docs/笔记/面试复盘/面试复盘.md'},
                         {
                             text: 'Vitepress',
@@ -121,12 +122,11 @@ export default defineConfig({
                             link: '/docs/算法/灵神题单/网格图/一、网格图DFS/1. LeetCode 200.md'
                         },
                         {text: '🎉 蓝桥杯', link: '/docs/算法/蓝桥杯/JavaB组省赛/0. 导论.md'},
-                        {
-                            text: '<img src="/洛谷.png" class="nav-icon nav-icon--lg"> 洛谷',
-                            link: '/docs/算法/洛谷/导论.md'
-                        },
                         {text: '🎯 左程云 ', link: '/docs/算法/左程云/0. 导论.md'},
-                        {text: '🚀 算法总结', link: '/docs/测试界面.md'},
+                        {
+                            text: '<img src="/java深色.png" class="nav-icon nav-icon--3xl"> 数据结构',
+                            link: '/docs/算法/数据结构/Java/马踏棋盘算法.md'
+                        },
                         {
                             text: '代码随想录', items:
                                 [
@@ -134,21 +134,6 @@ export default defineConfig({
                                     {text: '算法训练营', link: '/docs/算法/代码随想录/训练营/数组/Day 1.md'},
                                     {text: '题目汇总', link: '/docs/算法/代码随想录/题目汇总.md'},
                                 ]
-                        },
-                        {
-                            text: '数据结构',
-                            items:
-                                [
-                                    {
-                                        text: '<img src="/java深色.png" class="nav-icon nav-icon--3xl"> Java版本',
-                                        link: '/docs/算法/数据结构/Java/马踏棋盘算法.md'
-                                    },
-                                    {
-                                        text: '<img src="/C语言.png" class="nav-icon nav-icon--lg"> C语言版本',
-                                        link: '/docs/测试界面.md'
-                                    },
-                                ]
-
                         },
                     ]
             },
@@ -527,6 +512,15 @@ export default defineConfig({
         sidebar:
         // 会根据导航栏中链接的文章路由来匹配不同的侧边栏，根据侧边栏前的路由来显示该路由下的文章内容
             {
+                '/docs/笔记/八股文': [
+                    {
+                        text: '八股文',
+                        items:
+                            [
+                                ...setSidebarDefault('/docs/笔记/八股文'),
+                            ]
+                    }
+                ],
                 '/docs/算法/代码随想录/训练营':
                     [
                         {
@@ -685,31 +679,6 @@ export default defineConfig({
                             items:
                                 [
                                     ...setSidebarDefault('/docs/算法/左程云'),
-                                ]
-                        }
-                    ],
-                '/docs/算法/洛谷':
-                    [
-                        {
-                            text: '导论',
-                            link: '/docs/算法/洛谷/导论.md'
-                        },
-                        {
-                            collapsible: true,   // 允许折叠
-                            collapsed: false,    // 一开始就展开
-                            text: '蓝桥杯真题',
-                            items:
-                                [
-                                    ...setSidebarDefault('/docs/算法/洛谷/蓝桥杯真题'),
-                                ]
-                        },
-                        {
-                            collapsible: true,   // 允许折叠
-                            collapsed: false,    // 一开始就展开
-                            text: '洛谷题单',
-                            items:
-                                [
-                                    ...setSidebarDefault('/docs/算法/洛谷/洛谷题单'),
                                 ]
                         }
                     ],
