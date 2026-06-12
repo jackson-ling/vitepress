@@ -84,6 +84,7 @@ export default defineConfig({
                         {text: '🖊️随笔', link: '/docs/笔记/随笔/随笔乱记.md'},
                         {text: '🎯八股文', link: '/docs/笔记/八股文/0. 八股来源.md'},
                         {text: '📝面试复盘', link: '/docs/笔记/面试复盘/面试复盘.md'},
+                        {text: '⏳实习日记', link: 'docs/笔记/实习日记/赣州骏烨科技（第一段）/Day 0（5.31）.md'},
                         {
                             text: 'Vitepress',
                             items:
@@ -518,6 +519,15 @@ export default defineConfig({
                         items:
                             [
                                 ...setSidebarDefault('/docs/笔记/八股文'),
+                            ]
+                    }
+                ],
+                'docs/笔记/实习日记/': [
+                    {
+                        text: '实习日记',
+                        items:
+                            [
+                                ...setSidebarDefault('/docs/笔记/实习日记/'),
                             ]
                     }
                 ],
