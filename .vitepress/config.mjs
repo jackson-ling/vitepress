@@ -323,7 +323,7 @@ export default defineConfig({
                             items:
                                 [
                                     {
-                                        text: '<img src="设计模式.png" class="nav-icon nav-icon--md">  设计模式',
+                                        text: '<img src="/设计模式.png" class="nav-icon nav-icon--md">  设计模式',
                                         link: '/docs/后端/设计模式/工厂模式.md'
                                     },
                                     {

@@ -70,7 +70,7 @@ outline: [2, 3]
    - [LibHunt 使用教程](https://blog.csdn.net/LANNY8588/article/details/115754015)
 
 4. [searchcode](https://searchcode.com/)
-   - 从全网根据 == 代码片段搜索==，并且可以选择平台选择语言进行过滤，通过搜索出来的代码片段跳转到仓库
+   - 从全网根据代码片段搜索，并且可以选择平台选择语言进行过滤，通过搜索出来的代码片段跳转到仓库
 
 5. [codelf](https://unbug.github.io/codelf/)
    - 变量名命名工具

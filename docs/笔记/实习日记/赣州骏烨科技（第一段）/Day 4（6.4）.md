@@ -3,7 +3,7 @@ aside: right
 outline: [2, 3]
 ---
 
-<h1 style="text-align: center; font-weight: bold;">Day 3（6.3）</h1>
+<h1 style="text-align: center; font-weight: bold;">Day 4（6.4）</h1>
 
 ---
 
