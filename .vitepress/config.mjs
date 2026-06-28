@@ -17,6 +17,7 @@ import {createRequire} from 'module'
 const require = createRequire(import.meta.url)
 
 export default defineConfig({
+    base: '/vitepress/', // Github page 部署，项目仓库名称
     // README.md 是给 GitHub 看的，不参与 VitePress 构建
     srcExclude: ['README.md'],
     head: [
