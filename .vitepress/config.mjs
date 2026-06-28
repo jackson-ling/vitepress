@@ -20,7 +20,7 @@ const require = createRequire(import.meta.url)
 const base = process.env.GITHUB_ACTIONS ? '/vitepress/' : '/'
 
 export default defineConfig({
-    base,
+    // base, // 使用自定义域名无需配置
     // README.md 是给 GitHub 看的，不参与 VitePress 构建
     srcExclude: ['README.md'],
     head: [
