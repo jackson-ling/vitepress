@@ -113,6 +113,12 @@ export const set_sidebar = (pathname) => {
     // 去除前导 /，确保 path.join 正确拼接为项目内相对路径
     const relPath = pathname.replace(/^\//, '')
     const dirPath = path.join(DIR_PATH, relPath)
+
+    // 目录不存在时返回空数组，避免构建报错
+    if (!fs.existsSync(dirPath)) {
+        return []
+    }
+
     const files = fs.readdirSync(dirPath)
     const items = difference(files, WHITE_LIST)
     return getList(items, dirPath, pathname, true)
