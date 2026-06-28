@@ -17,10 +17,13 @@ import {createRequire} from 'module'
 const require = createRequire(import.meta.url)
 
 // GitHub Pages 部署时加前缀，本地开发用 /
-const base = process.env.GITHUB_ACTIONS ? '/vitepress/' : '/'
+// const base = process.env.GITHUB_ACTIONS ? '/vitepress/' : '/'
+
+// 自定义域名下 base 为 /，无需子路径前缀
+const base = '/'
 
 export default defineConfig({
-    // base, // 使用自定义域名无需配置
+    base,
     // README.md 是给 GitHub 看的，不参与 VitePress 构建
     srcExclude: ['README.md'],
     head: [
