@@ -103,14 +103,14 @@ outline: [2, 3]
 ### 解决 Maven 面板报红
 
 <br/>
-<img src="./maven常见问题-1.png" style="width:900px"/>
+<img src="./Maven常见问题-1.png" style="width:900px"/>
 
 > #### 问题现象：Maven 项目中添加的依赖，未正确下载，造成右侧 Maven 面板中的依赖报红，再次 reload 重新加载也不会再下载
 >
 > #### 产生原因：由于网络原因，依赖没有下载完整导致的，在 maven 仓库中生成了 <span style="color:red">xxx.lastUpdated 文件</span>，该文件不删除，不会再重新下载
 
 <br/>
-<img src="./maven常见问题-2.png" style="width:900px"/>
+<img src="./Maven常见问题-2.png" style="width:900px"/>
 
 #### 解决方案
 
