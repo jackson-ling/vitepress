@@ -411,7 +411,7 @@ class Solution {
 
 #### 前序和后序不能唯一确定一棵二叉树，因为没有中序遍历无法确定左右部分，也就是无法分割
 
-<image src="https://file1.kamacoder.com/i/algo/20210203154720326.png" />
+<img src="https://file1.kamacoder.com/i/algo/20210203154720326.png" />
 
 #### tree1 的前序遍历是[1 2 3]， 后序遍历是[3 2 1]。
 

@@ -229,7 +229,7 @@ class Solution{
 
 我们只需要调整前序遍历中非迭代法代码中**处理左右孩子的顺序**，利用栈的特点进而改变元素遍历的顺序，变化过程如下
 
-<image src="https://file1.kamacoder.com/i/algo/20200808200338924.png"/>
+<img src="https://file1.kamacoder.com/i/algo/20200808200338924.png"/>
 
 - 第一步：调整前序遍历中非迭代法代码中处理左右孩子的顺序，即**先处理左孩子，后处理右孩子**，这样得到元素的**遍历顺序**就是<span style="color:red;font-weight:bold">根右左</span>
 - 第二步：此时遍历顺序就是**根右左**存储在数组中，我们只需要让**数组逆序输出**，得到元素的遍历顺序就可以由**根右左**--><span style="color:red;font-weight:bold">左右根</span>

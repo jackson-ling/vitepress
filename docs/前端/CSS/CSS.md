@@ -377,7 +377,7 @@ outline: [2, 3]
 </body>
 ```
 
-<image src="./浮动效果图.png" style="width:600px;margin: 0px auto"/>
+<img src="./浮动效果图.png" style="width:600px;margin: 0px auto"/>
 
 ## CSS 定位
 
@@ -532,7 +532,7 @@ outline: [2, 3]
 </body>
 ```
 
-<image src="./固态定位.gif" style="width:500px;margin:0px auto"/>
+<img src="./固态定位.gif" style="width:500px;margin:0px auto"/>
 
 ## 盒子模型
 
@@ -540,7 +540,7 @@ outline: [2, 3]
 
 > - #### CSS 盒模型本质上是一个盒子，封装周围的 HTML 元素，它包括：边距（margin），边框（border），填充（padding），和实际内容（content）
 
-<image src="./盒子模型-1.png" style="width:700px;margin:0px auto"/>
+<img src="./盒子模型-1.png" style="width:700px;margin:0px auto"/>
 
 ### 属性
 
@@ -562,7 +562,7 @@ outline: [2, 3]
 
 <br/>
 
-<image src="./盒子模型-2.png" style="width:700px;margin:0px auto"/>
+<img src="./盒子模型-2.png" style="width:700px;margin:0px auto"/>
 
 ### 示例代码
 
@@ -613,7 +613,7 @@ outline: [2, 3]
 </body>
 ```
 
-<image src="./盒子模型-3.png" style="width:800px;margin:0px auto"/>
+<img src="./盒子模型-3.png" style="width:800px;margin:0px auto"/>
 
 ## Tlias 员工管理界面案例
 

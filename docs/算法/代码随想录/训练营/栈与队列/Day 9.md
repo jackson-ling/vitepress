@@ -34,7 +34,7 @@ outline: [2, 3]
 
 #### 动画演示
 
-<image src="https://file1.kamacoder.com/i/algo/232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC2.gif"/>
+<img src="https://file1.kamacoder.com/i/algo/232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC2.gif"/>
 
 ### （2）题解
 
@@ -156,7 +156,7 @@ class MyStack {
 
 #### 动图分析
 
-<image src="https://file1.kamacoder.com/i/algo/20.%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7.gif"/>
+<img src="https://file1.kamacoder.com/i/algo/20.%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7.gif"/>
 
 ### （2）题解
 

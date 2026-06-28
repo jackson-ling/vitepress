@@ -106,7 +106,7 @@ https://programmercarl.com/%E5%91%A8%E6%80%BB%E7%BB%93/20200927%E4%BA%8C%E5%8F%8
 - 外侧节点需要相同：左子树的左孩子 = 右子树的右孩子
 - 内侧节点需要相同：左子树的右孩子 = 右子树的左孩子
 
-<image src="https://file1.kamacoder.com/i/algo/20210203144624414.png"/>
+<img src="https://file1.kamacoder.com/i/algo/20210203144624414.png"/>
 
 ### 题解
 
@@ -235,7 +235,7 @@ class Solution {
 
 #### 本题依然可以采用上题的思路，采用后序遍历，但是<span style = "color:red;font-weight:bold">需要判断空节点</span>
 
-<image src="https://file1.kamacoder.com/i/algo/111.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6.png"/>
+<img src="https://file1.kamacoder.com/i/algo/111.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6.png"/>
 
 ### 后序遍历
 

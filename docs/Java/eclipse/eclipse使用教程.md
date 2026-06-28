@@ -14,21 +14,21 @@ https://www.eclipse.org/downloads/packages/release
 
 ## 汉化
 
-<image src="./1.png" style="width:700px;margin:0px auto"/>
+<img src="./1.png" style="width:700px;margin:0px auto"/>
 <hr/>
-<image src="./2.png" style="width:700px;margin:0px auto"/>
+<img src="./2.png" style="width:700px;margin:0px auto"/>
 
 <h2>镜像源地址：https://mirrors.nju.edu.cn/eclipse/technology/babel/update-site/latest/</h2>
 
 <hr/>
 
-<image src="./3.png" style="width:700px;margin:0px auto"/>
+<img src="./3.png" style="width:700px;margin:0px auto"/>
 <hr/>
 
-<image src="./4.png" style="width:700px;margin:0px auto"/>
+<img src="./4.png" style="width:700px;margin:0px auto"/>
 <hr/>
 
-<image src="./8.png" style="width:700px;margin:0px auto"/>
+<img src="./8.png" style="width:700px;margin:0px auto"/>
 <hr/>
 
 ## 工作空间
@@ -39,16 +39,16 @@ https://www.eclipse.org/downloads/packages/release
 
 > <h2>快捷键：ctrl + " + " / " - "</h2>
 
-<image src="./5.png" style="width:700px;margin:0px auto"/>
+<img src="./5.png" style="width:700px;margin:0px auto"/>
 <hr/>
-<image src="./6.png" style="width:700px;margin:0px auto"/>
+<img src="./6.png" style="width:700px;margin:0px auto"/>
 <hr/>
-<image src="./7.png" style="width:700px;margin:0px auto"/>
+<img src="./7.png" style="width:700px;margin:0px auto"/>
 <hr/>
 
 ## 设置代码提示
 
-<image src="./9.png" style="width:700px;margin:0px auto"/>
+<img src="./9.png" style="width:700px;margin:0px auto"/>
 <h2>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</h2>
 <hr/>
 

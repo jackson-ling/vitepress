@@ -133,9 +133,9 @@ class Solution {
 
 #### 利用后序遍历实现向上返回的操作，即回溯的过程，本题的两种情况如下
 
-<image src="https://file1.kamacoder.com/i/algo/20220922173502.png" style="width:600px;margin:0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/20220922173502.png" style="width:600px;margin:0px auto"/>
 <br/>
-<image src="https://file1.kamacoder.com/i/algo/20220922173530.png" style="width:600px;margin:0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/20220922173530.png" style="width:600px;margin:0px auto"/>
 
 ### 题解
 

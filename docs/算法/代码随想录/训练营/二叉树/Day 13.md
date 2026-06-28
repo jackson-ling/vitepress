@@ -25,13 +25,13 @@ outline: [2, 3]
 
 #### 1. 完全二叉树的定义：强调顺序，具体如下图
 
-<image src="https://file1.kamacoder.com/i/algo/20200920221638903-20230310123444151.png"/>
+<img src="https://file1.kamacoder.com/i/algo/20200920221638903-20230310123444151.png"/>
 
 #### 2. 满二叉树
 
 <br/>
 
-<image src="https://file1.kamacoder.com/i/algo/20201124092543662.png" style="width: 600px; margin: 0 auto;"/>
+<img src="https://file1.kamacoder.com/i/algo/20201124092543662.png" style="width: 600px; margin: 0 auto;"/>
 
 #### 3. 判定是满二叉树的思路：<span style="color:red;font-weight:bold">只在最外层遍历左右子树</span>，计算深度，如果<span style="color:red;font-weight:bold">左子树深度 = 右子树深度</span>，则说明是满二叉树
 
@@ -40,7 +40,7 @@ outline: [2, 3]
 > - <h4>如果左右子树<span style="color:red;font-weight:bold">是</span>满二叉树：直接采用公式计算，提高效率</h4>
 > - <h4>如果左右子树<span style="color:red;font-weight:bold">不是</span>满二叉树：则利用后序遍历分别递归左孩子，和右孩子，递归到某一深度一定会有左孩子或者右孩子为满二叉树</h4>
 
-<image src="https://file1.kamacoder.com/i/algo/20220829163709.png" style="width: 600px; margin: 0 auto;"/>
+<img src="https://file1.kamacoder.com/i/algo/20220829163709.png" style="width: 600px; margin: 0 auto;"/>
 
 ### 普通二叉树
 
@@ -163,7 +163,7 @@ class Solution {
 
 ### 回溯图解
 
-<image src="https://file1.kamacoder.com/i/algo/20210204151702443.png" style="width: 600px; margin: 0 auto;"/>
+<img src="https://file1.kamacoder.com/i/algo/20210204151702443.png" style="width: 600px; margin: 0 auto;"/>
 
 ### 题解
 

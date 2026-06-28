@@ -33,7 +33,7 @@ outline: [2, 3]
 
 > **遍历波兰表达式，遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中**
 
-<image src="https://file1.kamacoder.com/i/algo/150.%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC.gif" style="margin-left: 20s0px;"/>
+<img src="https://file1.kamacoder.com/i/algo/150.%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC.gif" style="margin-left: 20s0px;"/>
 
 #### ⚠️ 计算注意点
 

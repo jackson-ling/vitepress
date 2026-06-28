@@ -149,7 +149,7 @@ class Solution {
 
 根据二叉搜索树的特性，中序遍历正好是有序的，然而有一个误区（忽略考虑了子树），**不是左孩子比根节点小右孩子比根节点大的就是二叉搜索树**，如下图
 
-<image src="https://file1.kamacoder.com/i/algo/20230310000824.png" style="margin: 0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/20230310000824.png" style="margin: 0px auto"/>
 
 ### 题解
 

@@ -23,14 +23,14 @@ outline: [2, 3]
 
 此时还需要考虑是否是**最近公共祖先**，如下图
 
-<image src="https://file1.kamacoder.com/i/algo/20220926164214.png" style="width:500px;margin:0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/20220926164214.png" style="width:500px;margin:0px auto"/>
 
 如果向左遍历错失 q，向右遍历错失了 p，整理后可以得到以下思路
 
 - 首先向左右搜索遍历，依据二叉搜索树节点值的大小关系，找到符合条件的节点返回
 - 然后剩余的情况就是中间节点的情况，直接返回即可
 
-<image src="https://file1.kamacoder.com/i/algo/20220926165141.png" style="width:500px;margin:0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/20220926165141.png" style="width:500px;margin:0px auto"/>
 
 ### 题解
 
@@ -103,9 +103,9 @@ class Solution {
   - 第四种情况：删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点
   - 第五种情况：左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，返回删除节点右孩子为新的根节点。
 
-<image src="./二叉搜索树删除.png" style="width:500px;margin:0px auto"/>
+<img src="./二叉搜索树删除.png" style="width:500px;margin:0px auto"/>
 
-<image src="https://file1.kamacoder.com/i/algo/450.%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.gif" style="margin:0px auto"/>
+<img src="https://file1.kamacoder.com/i/algo/450.%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.gif" style="margin:0px auto"/>
 
 ### 题解
 
