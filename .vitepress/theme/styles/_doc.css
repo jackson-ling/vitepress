@@ -200,6 +200,14 @@
   z-index: 1;
 }
 
+/* 代码符号保持原样显示，避免 JetBrains Mono / Cascadia Code 连字把 != 渲染成 ≠ */
+.vp-doc div[class*='language-'] pre,
+.vp-doc div[class*='language-'] code,
+.vp-doc :not(pre) > code {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
 /* 代码块文字色 — 亮色模式 */
 .vp-doc div[class*='language-'] pre,
 .vp-doc div[class*='language-'] code {

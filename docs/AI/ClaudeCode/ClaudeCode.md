@@ -4,8 +4,6 @@ aside: left
 ---
 
 <h1 style="text-align: center;">Claude Code 介绍与使用</h1>
- 
-- - -
 
 ## 视频教程
 
