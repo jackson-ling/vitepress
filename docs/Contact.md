@@ -7,7 +7,7 @@ layout: page
 ## 👋 关于我
 
 <div style="margin-bottom: 32px; line-height: 1.85; color: var(--vp-c-text-2); font-size: 18px;">
-<p>目前大二在读，励志成为优秀的 Java 后端工程师，目前正在找实习中......</p>
+<p>28 届全日制本科生，励志成为优秀的 Java 后端工程师，目前正在找实习中......</p>
 <p>日常关注 Spring 生态、微服务架构，以及 AI 在后端开发中的应用</p>
 <p>始终坚持少想多做，循序渐进，深入思考，用文档记录成长，分享技术学习心得</p>
 </div>

@@ -433,10 +433,6 @@ export default defineConfig({
                             link: '/docs/AI/SpringAI/springai.md'
                         },
                         {
-                            text: 'LangChain4j',
-                            link: '/docs/测试界面.md'
-                        },
-                        {
                             text: 'Ollama',
                             link: '/docs/AI/Ollama/ollama.md'
                         },
@@ -454,62 +450,12 @@ export default defineConfig({
                             text: `<img src="${base}pycharm.png" class="nav-icon nav-icon--lg"> Pycharm`,
                             link: '/docs/Python/PyCharm/文章/1.python解释器安装.md'
                         },
-                        {text: '📝基础语法', link: '/docs/测试界面.md'},
-                        {
-                            text: '📊数据分析', items:
-                                [
-                                    {
-                                        text: `<img src="${base}numpy.png" class="nav-icon nav-icon--md"> NumPy`,
-                                        link: '/docs/测试界面.md'
-                                    },
-                                    {
-                                        text: `<img src="${base}pandas.png" class="nav-icon nav-icon--xs"> Pandas`,
-                                        link: '/docs/测试界面.md'
-                                    },
-                                    {
-                                        text: `<img src="${base}matplotlib.png" class="nav-icon nav-icon--md"> Matplotlib`,
-                                        link: '/docs/测试界面.md'
-                                    },
-                                ]
-                        },
+                        {text: '📝基础语法', link: 'docs/Python/基础语法/基础语法.md'},
+                        {text: '⚡ FastAPI', link: 'docs/Python/fastapi/fastapi.md'},
+                        {text: '🤖 Agent', link: "docs/Python/agent/LangChain/langchain.md"},
                         {text: '🐍爬虫', link: '/docs/Python/爬虫/基本介绍.md'},
-                        {text: '🤖网页自动化', link: '/docs/测试界面.md'},
                     ]
             },
-            {
-                text: '408',
-                items:
-                    [
-                        {
-                            text: '数学', items:
-                                [
-                                    {text: '高等数学', link: '/docs/测试界面.md'},
-                                    {text: '线性代数', link: '/docs/测试界面.md'},
-                                    {text: '概率论', link: '/docs/测试界面.md'},
-                                ]
-                        },
-                        {
-                            text: '专业课',
-                            items:
-                                [
-                                    {text: '数据结构', link: '/docs/测试界面.md'},
-                                    {text: '计算机组原理', link: '/docs/测试界面.md'},
-                                    {text: '操作系统', link: '/docs/测试界面.md'},
-                                    {text: '计算机网络', link: '/docs/测试界面.md'},
-                                ]
-                        },
-                        {
-                            text: 'C/C++', items:
-                                [
-                                    {
-                                        text: `<img src="${base}clion.png" class="nav-icon nav-icon--lg"> Clion`,
-                                        link: '/docs/测试界面.md'
-                                    },
-                                ]
-                        },
-                    ]
-            },
-
         ],
 
         /* ── 侧边栏配置 ────────────────────────────────────────────
@@ -1317,6 +1263,30 @@ export default defineConfig({
                                     ...setSidebarDefault('/docs/Python/PyCharm/文章'),
                                 ]
                         }
+                    ],
+                '/docs/Python/agent':
+                    [
+                        {
+                            text: "Agent",
+                            items:
+                                [
+                                    {
+                                        text: '环境准备',
+                                        items:
+                                            [
+                                                ...setSidebarDefault('/docs/Python/agent/环境准备'),
+                                            ]
+                                    },
+                                    {
+                                        text: "技术框架",
+                                        items:
+                                            [
+                                                {text: "LangChain", link: "docs/Python/agent/LangChain/langchain.md"},
+                                                {text: "LangGraph", link: "docs/Python/agent/LangGraph/langgraph.md"},
+                                            ]
+                                    },
+                                ]
+                        },
                     ],
                 '/docs/Python/爬虫':
                     [
