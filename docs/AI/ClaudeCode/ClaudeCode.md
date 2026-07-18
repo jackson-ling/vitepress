@@ -215,33 +215,34 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## skill
 
+#### 安装 skill
+
 > #### anthropics 官方 skill：https://github.com/anthropics/skills
->
-> #### 完整的 skill 包含以下几部分
->
-> #### 1. SKILL.md
->
-> - Skill 的核心定义文件
-> - 描述 Skill 的用途、适用场景、执行规则、工作流程
-> - Claude Code 会通过该文件理解什么时候调用该 Skill，以及如何执行任务
->
-> #### 2. Scripts（脚本）
->
-> - 用于封装可重复执行的自动化操作
-> - 可以包含 Python、Shell 等脚本
-> - 负责处理复杂计算、文件处理、数据转换等任务
->
-> #### 3. References（参考资料）
->
-> - 存放 Skill 执行过程中需要参考的文档、规范、示例等内容
-> - 用于补充上下文信息，帮助 Claude 更准确完成任务
->
-> #### 4. Assets（资源文件）
->
-> - 存放模板、图片、配置文件、示例代码等静态资源
-> - 在生成内容或执行任务时直接复用
->
-> #### 5. Templates（模板）
->
-> - 提供固定格式的输出模板
-> - 用于保证生成内容的一致性，例如报告、文档、代码结构等
+
+```bash
+npx skills add anthropics/skills -g # 全局安装官方 skill
+
+npx superpowers-zh -g # 全局安装中文增强版 superpowers
+```
+
+#### 完整的 skill 包含以下几部分
+
+#### （1）SKILL.md
+
+> #### Skill 的核心定义文件，描述 Skill 的用途、适用场景、执行规则、工作流程，Claude Code 会通过该文件理解什么时候调用该 Skill，以及如何执行任务
+
+#### （2）Scripts（脚本）
+
+> #### 用于封装可重复执行的自动化操作，可以包含 Python、Shell 等脚本，负责处理复杂计算、文件处理、数据转换等任务
+
+#### （3）References（参考资料）
+
+> #### 存放 Skill 执行过程中需要参考的文档、规范、示例等内容，用于补充上下文信息，帮助 Claude 更准确完成任务
+
+#### （4）Assets（资源文件）
+
+> #### 存放模板、图片、配置文件、示例代码等静态资源，在生成内容或执行任务时直接复用
+
+#### （5）Templates（模板）
+
+> #### 提供固定格式的输出模板，用于保证生成内容的一致性，例如报告、文档、代码结构等
