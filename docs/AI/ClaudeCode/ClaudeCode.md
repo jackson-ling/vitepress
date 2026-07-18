@@ -5,101 +5,82 @@ aside: left
 
 <h1 style="text-align: center;">Claude Code 介绍与使用</h1>
 
-## 视频教程
+## 官方文档
 
-> #### https://www.bilibili.com/video/BV14rzQB9EJj/
+> #### https://code.claude.com/docs/zh-CN/overview
 
 ## 安装配置
 
-#### 教程资料
+#### （1）相关资料
 
-> #### https://blog.csdn.net/weixin_41793160/article/details/149313024
+> #### CSDN 安装教程：https://blog.csdn.net/weixin_41793160/article/details/149313024
+>
+> #### 马克 ClaudeCode 使用教程：https://www.bilibili.com/video/BV14rzQB9EJj/
 
-#### （1）环境检查
-
-> #### 电脑中需要安装 node 环境，安装前检查 npm 全局安装包的路径，采用 npm 全局安装 Claude Code
+#### （2）安装 ClaudeCode
 
 ```bash
+# 电脑要求有 node 环境，没有则需要装 nodejs，首先执行环境检查
 node -v
 npm -v
-```
 
-#### （2）运行如下命令进行安装（cmd）
-
-```bash
+# 安装 ClaudeCode
 npm uninstall -g @anthropic-ai/claude-code # 卸载已安装的 Claude Code（未安装请跳过）
 
-npm install -g @anthropic-ai/claude-code # 安装官方原版包
-```
+npm install -g @anthropic-ai/claude-code@latest # 安装官方原版包
 
-#### （3）安装验证
-
-```bash
+# 安装验证
 claude -v
+
+# 启动 Claude Code
+claude
+
+# 启动 Claude Code（指定命令无需确认，只对当前会话生效）
+claude --dangerously-skip-permissions
 ```
 
-#### （4）配置环境变量
+#### （3）配置 ClaudeCode
 
-> #### 变量名：ANTHROPIC_BASE_URL，变量值：https://api.aicodemirror.com/api/claudecode
+> #### ANTHROPIC_BASE_URL：调用地址
 >
-> #### 变量名：ANTHROPIC_AUTH_TOKEN，变量值：你的密钥
-
-```bash
-# 设置环境变量
-setx ANTHROPIC_BASE_URL "url" # 如果采用中转站，请使用其提供的 url
-setx ANTHROPIC_AUTH_TOKEN "你的token"
-
-# 验证是否成功
-echo %ANTHROPIC_BASE_URL%
-echo %ANTHROPIC_AUTH_TOKEN%
-```
-
-#### （5）启动使用
-
-> #### 启动时是否需要科学上网取决于环境变量中配置的 url
-
-```bash
-cd /somepath # 进入项目目录
-
-claude # 启动 claude code
-```
-
-#### （6）修改 cmd 设置中的默认配置文件
-
-<br/>
-<img src="./3.png" style="width:900px"/>
-
-## 首次使用
-
-#### （1）选择一个颜色主题后，回车
-
-<br/>
-<img src="./1.png" style="width:900px"/>
-
-#### （2）进入对话框
-
-> #### 配置好环境变量后即可直接进入对话界面，同时可以使用 /login 命令手动触发登录（账号 / 密钥）
-
-<img src="./2.png" style="width:900px"/>
-
-#### （3）退出 claude code
-
-> #### 执行两次 ctrl + c 退出
-
-## CC-Switch
-
-> #### Github 官网：https://github.com/farion1231/cc-switch
+> #### ANTHROPIC_API_KEY：使用官方模型时配置
 >
-> #### 一个用于统一管理 Claude Code、Codex、Gemini CLI、OpenCode、OpenClaw 等 AI 编程 CLI 的跨平台桌面工具
+> #### ANTHROPIC_AUTH_TOKEN：使用中转站 / 第三方时配置
+>
+> #### ANTHROPIC_MODEL：默认使用模型
+>
+> #### ANTHROPIC_DEFAULT_HAIKU_MODEL: HAIKU 占位模型，低
+>
+> #### ANTHROPIC_DEFAULT_SONNET_MODEL: SONNET 占位模型，中
+>
+> #### ANTHROPIC_DEFAULT_OPUS_MODEL：OPUS 占位模型，高
+>
+> #### CLAUDE_CODE_EFFORT_LEVEL：模型默认思考强度
 
-## 常用命令
+```json
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "",
+    "ANTHROPIC_BASE_URL": "",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "",
+    "ANTHROPIC_MODEL": "",
+    "ANTHROPIC_REASONING_MODEL": ""
+  },
+  "effortLevel": "medium",
 
-#### （1）切换模式：shift + tab
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "skipDangerousModePermissionPrompt": true,
 
-<br/>
-<img src="./4.png" style="width:800px"/>
+  "autoCompactEnabled": true,
+  "theme": "dark"
+}
+```
 
-#### （2）多行输入（打开记事本 / vscode 编辑）：ctrl + g
+#### （4）配置默认文本编辑器，使用 ctrl + g 可以打开编辑器编辑对话，这里配置成 vscode
 
 ```bash
 # 查看 vscode 的路径（前提是配置了环境变量）
@@ -118,93 +99,149 @@ echo %EDITOR%
 echo %VISUAL%
 ```
 
-#### （3）任务管理
+#### （4）安装 CC-Switch
+
+> #### Github 官网：https://github.com/farion1231/cc-switch
+>
+> #### 一个用于统一管理 Claude Code、Codex、Gemini CLI、OpenCode、OpenClaw 等 AI 编程 CLI 的跨平台桌面工具
+
+## 常用命令
 
 ```bash
-ctrl + b # 将任务置于后台
+shift + tab # 切换模式：默认模式 / 自动模式 / 计划模式
 
+ctrl + g # 多行输入（打开记事本 / vscode 编辑），可自定义配置打开的编辑器
+
+@ 文件名 # 指定文件操作
+
+/init # 依据项目创建 claude.md 文件
+
+/memory # 编辑 claude.md 文件
+
+/review # 代码审查
+
+/skills # 技能管理
+
+/plungin # 插件管理
+
+/mcp # MCP 工具管理
+
+/hooks # 钩子操作
+
+/compact # 压缩上下文
+
+/clear # 清空上下文
+
+/resume # 查看历史会话
+
+! # 执行 bash 命令
+
+/rewind 或 双击esc # 回滚（无法回滚已执行的文件修改、删除、命令操作及环境变化，只能依靠 Git 等版本控制工具恢复）
+
+ctrl + b # 将任务置于后台
 /tasks # 查看所有任务
 ```
 
-#### （4）回滚：双击 esc
+## ClAUDE.md
 
-#### （5）执行 bash 命令：输入 ！，后续输入命令
+> #### andrej-karpathy-skills：https://github.com/multica-ai/andrej-karpathy-skills
 
-#### （6）查看历史会话：/resume
+```
+# CLAUDE.md
 
-> #### 启动 claudecode 并恢复上一次对话：claude -c
+Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
-#### （7）压缩上下文，减少 token 消耗：/compact
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
-#### （8）清空上下文：/clear
+## 1. Think Before Coding
 
-#### （9）创建 claude.md 文件：/init
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-> #### 可以通过 /menmory 命令编辑项目和用户的 claude.md（类似 rules 文件）
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
-#### （10）钩子操作：/hooks
+## 2. Simplicity First
 
-> #### 代码格式化：jq -r '.tool_input.file_path' | xargs prettier --write
+**Minimum code that solves the problem. Nothing speculative.**
 
-#### （11）skill 相关操作：/skills
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
 
-#### （12）agent 相关操作：/agents
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
-<br/>
-<img src="./5.png" style="width:800px"/>
+## 3. Surgical Changes
 
-#### （13）安装插件：/plungin
+**Touch only what you must. Clean up only your own mess.**
 
-> #### plungin 更像是一个工具集合：skill + subagent + mcp 等
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
 
-#### （14）查看 mcp 工具：/mcp
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
 
-> #### 首先需要执行相关的命令安装 mcp 工具
+The test: Every changed line should trace directly to the user's request.
 
-#### （15）当前会话采用全自动模式，有一定风险，不询问是否执行指令
+## 4. Goal-Driven Execution
 
-```bash
-claude --dangerously-skip-permissions
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
 ```
 
-## 使用千问模型
+## skill
 
-> #### 在环境变量中配置以下三个内容
-
-```bash
-ANTHROPIC_BASE_URL=https://dashscope.aliyuncs.com/apps/anthropic
-ANTHROPIC_AUTH_TOKEN=YOUR_DASHSCOPE_API_KEY  # 用百炼 API KEY 替换 YOUR_DASHSCOPE_API_KEY
-ANTHROPIC_MODEL=qwen3-coder-plus # 可按需替换为其他支持的模型
-```
-
-## skill 整理
-
-> #### agent-brower：模拟浏览器行为进行网页自动化操作，适用于爬虫、表单提交或前端交互测试。
+> #### anthropics 官方 skill：https://github.com/anthropics/skills
 >
-> #### superpowers：提供通用 AI 能力增强，如任务规划、工具调用，适用于复杂多步骤任务的智能代理。
+> #### 完整的 skill 包含以下几部分
 >
-> #### pdf processing：提取、解析或生成 PDF 文件内容，适用于文档审核、数据抽取或报告生成。
+> #### 1. SKILL.md
 >
-> #### tavily：集成实时网络搜索 API，获取最新信息或验证事实，适用于需外部知识支持的问答系统。
+> - Skill 的核心定义文件
+> - 描述 Skill 的用途、适用场景、执行规则、工作流程
+> - Claude Code 会通过该文件理解什么时候调用该 Skill，以及如何执行任务
 >
-> #### fronted design：生成或优化前端界面代码（HTML/CSS/JS），适用于快速原型设计或 UI 组件开发。
+> #### 2. Scripts（脚本）
 >
-> #### context7：管理和注入长对话或文档的上下文片段，适用于大模型记忆增强或复杂知识库检索。
+> - 用于封装可重复执行的自动化操作
+> - 可以包含 Python、Shell 等脚本
+> - 负责处理复杂计算、文件处理、数据转换等任务
 >
-> #### systematic debugging：按步骤分析错误日志并定位代码问题，适用于软件调试、故障排查。
+> #### 3. References（参考资料）
 >
-> #### marketing skills：策划内容、优化 SEO 或生成营销文案，适用于广告投放、社交媒体运营。
+> - 存放 Skill 执行过程中需要参考的文档、规范、示例等内容
+> - 用于补充上下文信息，帮助 Claude 更准确完成任务
 >
-> #### tmux：管理终端会话和窗口，适用于远程开发、多任务并行操作或保持长期运行的服务。
+> #### 4. Assets（资源文件）
 >
-> #### skill creator：定义并生成新 skill 的元数据与逻辑，适用于扩展 AI Agent 的能力库。
+> - 存放模板、图片、配置文件、示例代码等静态资源
+> - 在生成内容或执行任务时直接复用
 >
-> #### webapp testing：执行 Web 应用功能、性能或兼容性测试，适用于自动化测试流程或回归测试。
+> #### 5. Templates（模板）
 >
-> #### DOCX：读取、编辑或生成 Microsoft Word 文档，适用于报告撰写、合同处理或格式转换。
->
-> #### changelog maintenance：自动生成或更新版本变更日志，适用于软件项目发布管理或协作记录。
->
-> #### gpt researcher：搜索并整合网络信息形成研究报告，适用于竞品分析、学术综述或市场调研。
->
-> #### code refactoring：优化代码结构而不改变外部行为，适用于提升可读性、降低复杂度或技术债务清理。
+> - 提供固定格式的输出模板
+> - 用于保证生成内容的一致性，例如报告、文档、代码结构等
