@@ -156,7 +156,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s" # 日志格式
 )
 
-# 定义异常处理器, 捕获所有异常 ---> 返回的对象的类型得是 Response
+# 异常处理器, 捕获所有异常 ---> 返回的对象的类型得是 Response
 @app.exception_handler(Exception)
 def handle_exception(request: Request, exc: Exception):
     logging.error(f"处理异常, 请求路径: {request.url},  捕获到异常: {exc}")
@@ -240,12 +240,6 @@ async def get_news_list(commons=Depends(common_parameters)):
 
 <img src="./3.png" style="width:1000px;">
 
-### 安装依赖
-
-```bash
-pip install "sqlalchemy[asyncio]" aiomysql
-```
-
 ### 建表操作
 
 > #### FastAPI 应用启动时实现创建数据库表
@@ -273,17 +267,40 @@ async_engine = create_async_engine(
 # 2. 定义模型类： 基类 + 表对应的模型类
 # 基类：创建时间、更新时间；书籍表：id、书名、作者、价格、出版社
 class Base(DeclarativeBase):
-    create_time: Mapped[datetime] = mapped_column(DateTime, insert_default=func.now(), default=func.now, comment="创建时间")
-    update_time: Mapped[datetime] = mapped_column(DateTime, insert_default=func.now(), default=func.now, onupdate=func.now(), comment="修改时间")
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.now,
+        comment="创建时间"
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.now,
+        onupdate=datetime.now,
+        comment="更新时间"
+    )
 
-class Book(Base):
-    __tablename__ = "book"
 
-    id: Mapped[int] = mapped_column(primary_key=True, comment="书籍id")
-    bookname: Mapped[str] = mapped_column(String(255), comment="书名")
-    author: Mapped[str] = mapped_column(String(255), comment="作者")
-    price: Mapped[float] = mapped_column(Float, comment="价格")
-    publisher: Mapped[str] = mapped_column(String(255), comment="出版社")
+class News(Base):
+    __tablename__ = "news"
+
+    # 创建索引：提升查询速度 → 添加目录
+    __table_args__ = (
+        Index('fk_news_category_idx', 'category_id'),  # 高频查询场景
+        Index('idx_publish_time', 'publish_time')  # 按发布时间排序
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True, comment="新闻ID")
+    title: Mapped[str] = mapped_column(String(255), nullable=False, comment="新闻标题")
+    description: Mapped[Optional[str]] = mapped_column(String(500), comment="新闻简介")
+    content: Mapped[str] = mapped_column(Text, nullable=False, comment="新闻内容")
+    image: Mapped[Optional[str]] = mapped_column(String(255), comment="封面图片URL")
+    author: Mapped[Optional[str]] = mapped_column(String(50), comment="作者")
+    category_id: Mapped[int] = mapped_column(Integer, ForeignKey('news_category.id'), nullable=False, comment="分类ID")
+    views: Mapped[int] = mapped_column(Integer, default=0, nullable=False, comment="浏览量")
+    publish_time: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, comment="发布时间")
+
+    def __repr__(self): # 类似 Java 中的 toString 方法
+        return f"<News(id={self.id}, title='{self.title}', views={self.views})>"
 
 # 3. 建表：定义函数建表 → FastAPI 启动的时候调用建表的函数
 async def create_tables():
@@ -458,6 +475,39 @@ async def get_book_list(
     return books
 ```
 
+### 联表查询
+
+```python
+# 获取收藏列表：获取的是某个用户的收藏列表 + 分页功能
+async def get_favorite_list(
+        db: AsyncSession,
+        user_id: int,
+        page: int = 1,
+        page_size: int = 10
+):
+    # 总量 + 收藏的新闻列表
+    count_query = select(func.count()).where(Favorite.user_id == user_id)
+    count_result = await db.execute(count_query)
+    total = count_result.scalar_one()
+
+    # 获取收藏列表 - 联表查询 join() + 收藏时间排序 + 分页
+    # select(查询主体模型类, 字段别名).join(联合查询的模型类, 联合查询的条件).where().order_by().offset().limit()
+    # 别名： Favorite.created_at.label("favorite_time")
+    offset = (page - 1) * page_size
+    # [
+    #   (新闻对象, 收藏时间, 收藏id)
+    # ]
+    query = (select(News, Favorite.created_at.label("favorite_time"), Favorite.id.label("favorite_id"))
+             .join(Favorite, Favorite.news_id == News.id)
+             .where(Favorite.user_id == user_id)
+             .order_by(Favorite.created_at.desc())
+             .offset(offset).limit(page_size)
+             )
+    result = await db.execute(query)
+    rows = result.all()
+    return rows, total
+```
+
 ### 新增操作
 
 ```python
@@ -492,28 +542,56 @@ class BookUpdate(BaseModel):
     price: float
     publisher: str
 
-
+# 更新字段
 @app.put("/book/update_book/{book_id}")
 async def update_book(book_id: int, data: BookUpdate, db: AsyncSession = Depends(get_database)):
     # 1. 查找图书
     db_book = await db.get(Book, book_id)
-
     # 如果未找到 抛出异常
     if db_book is None:
         raise HTTPException(
             status_code=404,
             detail="查无此书"
         )
-
     # 2. 找到了则修改：重新赋值
     db_book.bookname = data.bookname
     db_book.author = data.author
     db_book.price = data.price
     db_book.publisher = data.publisher
-
     # 3. 提交到数据库
     await db.commit()
     return db_book
+
+# 更新值与校验
+async def increase_news_views(db: AsyncSession, news_id: int):
+    stmt = update(News).where(News.id == news_id).values(views=News.views + 1) # 更新数量
+    result = await db.execute(stmt)
+    await db.commit()
+    # 更新 → 检查数据库是否真的命中了数据 → 命中了返回True
+    return result.rowcount > 0
+
+# 更新对象
+async def change_password(db: AsyncSession, user: User, old_password: str, new_password: str):
+    if not security.verify_password(old_password, user.password):
+        return False
+    hashed_new_pwd = security.get_hash_password(new_password)
+    user.password = hashed_new_pwd
+    # 更新: 由SQLAlchemy真正接管这个 User 对象，确保可以 commit
+    # 规避 session 过期或关闭导致的不能提交的问题
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
+    return True
+
+# 更新对象写法
+async def update_user(db: AsyncSession, username: str, user_data: UserUpdateRequest):
+    # update(User).where(User.username == username).values(字段=值, 字段=值)
+    # user_data 是一个Pydantic类型，得到字典 → ** 解包
+    # 没有设置值的不更新
+    query = update(User).where(User.username == username).values(**user_data.model_dump(
+        exclude_unset=True,
+        exclude_none=True
+    ))
 ```
 
 ### 删除操作
@@ -533,4 +611,318 @@ async def delete_book(book_id: int, db: AsyncSession = Depends(get_database)):
     await db.delete(db_book)
     await db.commit()
     return {"msg": "删除图书成功"}
+```
+
+## 后端模块
+
+### 安装依赖
+
+```bash
+pip install "sqlalchemy[asyncio]" aiomysql
+```
+
+### ORM 配置
+
+```python
+from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession, create_async_engine
+
+# 数据库URL
+ASYNC_DATABASE_URL = "mysql+aiomysql://root:123456@localhost:3306/news_api?charset=utf8mb4"
+
+# 创建异步引擎
+async_engine = create_async_engine(
+    ASYNC_DATABASE_URL,
+    echo=True,  # 可选：输出SQL日志
+    pool_size=10,  # 设置连接池中保持的持久连接数
+    max_overflow=20  # 设置连接池允许创建的额外连接数
+)
+
+# 创建异步会话工厂
+AsyncSessionLocal = async_sessionmaker(
+    bind=async_engine,
+    class_=AsyncSession,
+    expire_on_commit=False
+)
+
+# 依赖项，用于获取数据库会话
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
+```
+
+### Redis 配置
+
+#### （1）安装依赖
+
+```bash
+pip install redis
+```
+
+#### （2）Redis 配置及方法封装
+
+```python
+import json
+from typing import Any
+import redis.asyncio as redis
+
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+# 创建 Redis 的连接对象
+redis_client = redis.Redis(
+    host=REDIS_HOST,  # Redis 服务器的主机地址
+    port=REDIS_PORT,  # Redis 端口号
+    db=REDIS_DB,  # Redis 数据库编号，0~15
+    decode_responses=True  # 是否将字节数据解码为字符串
+)
+
+# 设置 和 读取（字符串 和 列表或字典）"[{}]"
+# 读取：字符串
+async def get_cache(key: str):
+    # return await redis_client.get(key)
+    try:
+        return await redis_client.get(key)
+    except Exception as e:
+        print(f"获取缓存失败：{e}")
+        return None
+
+# 读取：列表或字典
+async def get_json_cache(key: str):
+    try:
+        data = await redis_client.get(key)
+        if data:
+            return json.loads(data)  # 序列化
+        return None
+    except Exception as e:
+        print(f"获取 JSON 缓存失败：{e}")
+        return None
+
+# 设置缓存 setex(key, expire, value)
+async def set_cache(key: str, value: Any, expire: int = 3600):
+    try:
+        if isinstance(value, (dict, list)):
+            # 转字符串再存
+            value = json.dumps(value, ensure_ascii=False)  # 中文正常保存
+        await redis_client.setex(key, expire, value)
+        return True
+    except Exception as e:
+        print(f"设置缓存失败：{e}")
+        return False
+```
+
+### 项目结构
+
+> #### 开发流程如下
+>
+> #### （1）编写数据库配置类，数据库表模型，util 包工具类设置等基础准备工作
+>
+> #### （2）编写接口路由，在 main.py 中完成路由挂载，定义实体模型并实现 CRUD 操作方法，由路由层调用完成接口业务
+
+```
+fastapi_backend/
+    ├── crud/                  # 数据库增删改查逻辑（封装数据库操作）
+    │   ├── news.py
+    │   └── users.py
+    │
+    ├── models/                # 数据库模型（SQLAlchemy ORM）
+    │   ├── news.py
+    │   └── users.py
+    │
+    ├── routers/               # 路由层（按模块划分）
+    │   ├── news.py
+    │   └── users.py
+    │
+    ├── schemas/               # 数据验证模型（Pydantic）
+    │   ├── news.py
+    │   └── users.py
+    │
+    ├── utils/                 # 工具函数
+    │
+    ├── config/                # 配置相关
+    │   └── db_conf.py
+    │
+    ├── main.py
+    │
+    └── test_main.http
+```
+
+### 路由挂载
+
+#### （1）定义路由
+
+```python
+# 创建 APIRouter 实例
+# prefix 路由前缀（API 接口规范文档）
+# tags 分组 标签
+router = APIRouter(prefix="/api/news", tags=["news"])
+
+# 接口实现流程
+# 1. 模块化路由 → API 接口规范文档
+# 2. 定义模型类 → 数据库表（数据库设计文档）
+# 3. 在 crud 文件夹里面创建文件，封装操作数据库的方法
+# 4. 在路由处理函数里面调用 crud 封装好的方法，响应结果
+@router.get("/categories")
+async def get_categories(skip: int = 0, limit: int = 100, db: AsyncSession = Depends(get_db)):
+    # 先获取数据库里面新闻分类数据 → 先定义模型类 → 封装查询数据的方法
+    categories = await news.get_categories(db, skip, limit)
+    return {
+        "code": 200,
+        "message": "获取新闻分类成功",
+        "data": categories
+    }
+```
+
+#### （2）main.py 中实现路由挂载
+
+```python
+# main.py 中实现路由挂载
+app.include_router(router)
+```
+
+### 跨域问题
+
+> #### 跨域资源共享（CORS）是一种浏览器安全机制，用于允许运行在一个源（Origin）的 Web 应用，通过浏览器向另一个源的服务器发起跨域 HTTP 请求，并在服务器授权的前提下获取资源
+>
+> #### 跨域判断：协议，域名，端口三个条件一个不同就造成跨域，都相同即为同源
+>
+> #### 在 <span style="color: red;">main.py</span> 中添加如下代码配置跨域资源共享
+
+```python
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],     # 允许的源，开发阶段允许所有源，生产环境需要指定源
+    allow_credentials=True,  # 允许携带cookie
+    allow_methods=["*"],     # 允许的请求方法
+    allow_headers=["*"],     # 允许的请求头
+)
+```
+
+### 密码加密
+
+> #### 安装 passlib 模块：pip install "passlib[bcrypt]==1.7.4"，官方长期稳定版本
+
+```python
+from passlib.context import CryptContext
+
+# 创建密码加密上下文
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
+)
+
+# 加密
+def get_password_hash(password: str) -> str:
+    return pwd_context.hash(password)
+
+# 密码校验
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
+```
+
+### 响应封装
+
+#### （1）响应结果封装
+
+```python
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+
+def success_response(message: str = "success", data=None):
+    content = {
+        "code": 200,
+        "message": message,
+        "data": data
+    }
+    # 目标：把任何的 FastAPI、Pydantic、ORM 对象 都要正常响应 → code、message、data
+    return JSONResponse(content=jsonable_encoder(content))
+```
+
+#### （2）调用示例
+
+```python
+# data 数据类型
+class UserAuthResponse(BaseModel):
+    token: str
+    user_info: UserInfoResponse = Field(..., alias="userInfo")
+
+    # 模型类配置
+    model_config = ConfigDict(
+        populate_by_name=True,  # alias / 字段名兼容
+        from_attributes=True  # 允许从 ORM 对象属性中取值
+    )
+
+@router.post("/register")
+async def register(user_data: UserRequest, db: AsyncSession = Depends(get_db)):  # 用户信息 和 db
+    # 注册逻辑：验证用户是否存在 -> 创建用户 → 生成 Token  → 响应结果
+    existing_user = await users.get_user_by_username(db, user_data.username)
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="用户已存在")
+    user = await users.create_user(db, user_data)
+    token = await users.create_token(db, user.id)
+
+    # model_validate 方法：将 ORM 对象转换为 Pydantic 模型实例
+    response_data = UserAuthResponse(token=token, user_info=UserInfoResponse.model_validate(user))
+    return success_response(message="注册成功", data=response_data)
+```
+
+### 全局异常处理器
+
+> #### 定义异常处理类 -> 定义注册类 -> 在 main.py 中注册
+
+```python
+# 异常处理类
+DEBUG_MODE = True  # 开发模式：返回详细错误信息，生产模式：返回简化错误信息
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """
+    处理 HTTPException 异常
+    """
+    # HTTPException 通常是业务逻辑主动抛出的，data 保持 None
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "code": exc.status_code,
+            "message": exc.detail,
+            "data": None
+        }
+    )
+......
+
+# 注册类
+def register_exception_handlers(app):
+    """
+    注册全局异常处理：子类在前，父类在后；具体在前，抽象在后
+    """
+    app.add_exception_handler(HTTPException, http_exception_handler)  # 业务
+    app.add_exception_handler(IntegrityError, integrity_error_handler)  # 数据完整性约束
+    app.add_exception_handler(SQLAlchemyError, sqlalchemy_error_handler)  # 数据库
+    app.add_exception_handler(Exception, general_exception_handler)  # 兜底
+
+# main.py 中注册
+register_exception_handlers(app)
+```
+
+### 获取 token
+
+```python
+# 整合 根据 Token 查询用户，返回用户
+async def get_current_user(
+        authorization: str = Header(..., alias="Authorization"),
+        db: AsyncSession = Depends(get_db)
+):
+    # Bearer xxxxx
+    # token = authorization.split(" ")[1]
+    token = authorization.replace("Bearer ", "")
+    user = await users.get_user_by_token(db, token)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="无效的令牌或已经过期的令牌")
+
+    return user
 ```

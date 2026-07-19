@@ -246,3 +246,9 @@ npx superpowers-zh -g # 全局安装中文增强版 superpowers
 #### （5）Templates（模板）
 
 > #### 提供固定格式的输出模板，用于保证生成内容的一致性，例如报告、文档、代码结构等
+
+## Agent
+
+> #### agency-agents：https://github.com/msitarzewski/agency-agents
+>
+> #### 中文版本：https://github.com/jnMetaCode/agency-agents-zh
