@@ -18,6 +18,7 @@ const ENTRANCE_STAGGER_DELAY = 30 // 入场动画元素错开延迟（ms/个）
 const WHEEL_DELTA_Y_THRESHOLD = 15 // 滚轮 deltaY 触发阈值
 const DRAG_THRESHOLD = 20         // 拖拽切换触发距离（px）
 const DRAG_DETECT_THRESHOLD = 5   // 拖拽位移检测阈值（px，区分点击与拖拽）
+const MOBILE_TRANSITION_DURATION = 300 // 移动端卡片切换动画时长（ms）
 
 /* ── 遮罩切换（从 Layout.vue 注入） ───────────────────────── */
 const toggleOverlay = inject('toggle-overlay', () => {})
@@ -159,11 +160,26 @@ const ANGLE_STEP = 360 / categories.length
 const FOCUS_PUSH_Z = 50
 
 const focusedIndex = ref(0)
+const previousIndex = ref(null)
+const transitionDirection = ref('next')
 const animIn = ref(true)       // 入场动画阶段（true = 卡片隐藏，false = 正常显示）
 const isHovering = ref(false)  // 鼠标是否悬停在轮播区域
 const dragMoved = ref(false)   // 本次拖拽是否产生了位移（用于区分点击和拖拽）
 
 const trackAngle = ref(0)      // 轨道旋转角度（负值 = 向右切换）
+let carouselTransitionTimer = null
+
+/** 更新当前卡片并记录移动端切换方向 */
+function updateFocusedIndex(newIndex, direction) {
+  if (newIndex === focusedIndex.value) return
+  clearTimeout(carouselTransitionTimer)
+  previousIndex.value = focusedIndex.value
+  transitionDirection.value = direction
+  focusedIndex.value = newIndex
+  carouselTransitionTimer = setTimeout(() => {
+    previousIndex.value = null
+  }, MOBILE_TRANSITION_DURATION)
+}
 
 /**
  * 计算每张卡片的 3D 变换样式
@@ -200,7 +216,7 @@ function switchTo(idx) {
   const diff = newIdx - focusedIndex.value
   const normalizedDiff = ((diff + len / 2) % len + len) % len - len / 2
   trackAngle.value += -normalizedDiff * ANGLE_STEP
-  focusedIndex.value = newIdx
+  updateFocusedIndex(newIdx, normalizedDiff >= 0 ? 'next' : 'prev')
 }
 
 /** 卡片点击 — 仅在未产生拖拽位移时触发切换 */
@@ -212,12 +228,12 @@ function onCardClick(idx) {
 /** 切换到上一张 / 下一张 */
 function goPrev() {
   trackAngle.value += ANGLE_STEP
-  focusedIndex.value = (focusedIndex.value - 1 + categories.length) % categories.length
+  updateFocusedIndex((focusedIndex.value - 1 + categories.length) % categories.length, 'prev')
 }
 
 function goNext() {
   trackAngle.value -= ANGLE_STEP
-  focusedIndex.value = (focusedIndex.value + 1) % categories.length
+  updateFocusedIndex((focusedIndex.value + 1) % categories.length, 'next')
 }
 
 /* ── 事件监听 ───────────────────────────────────────────────
@@ -402,6 +418,7 @@ onUnmounted(() => {
   window.removeEventListener('touchstart', onTouchDetect)
   if (cleanupDrag) cleanupDrag()
   if (cleanupArrowAnimation) cleanupArrowAnimation()
+  clearTimeout(carouselTransitionTimer)
 })
 
 /**
@@ -470,7 +487,13 @@ function onIconError(e) {
             v-for="(cat, i) in categories"
             :key="cat.name"
             class="carousel-card anim-item"
-            :class="{ 'is-focused': carouselItems[i].focused }"
+            :class="{
+              'is-focused': carouselItems[i].focused,
+              'is-leaving': previousIndex === i,
+              'is-entering': carouselItems[i].focused && previousIndex !== null,
+              'slide-next': transitionDirection === 'next',
+              'slide-prev': transitionDirection === 'prev',
+            }"
             :style="animIn ? { opacity: '0' } : carouselItems[i].style"
             @click="onCardClick(i)"
           >
@@ -513,6 +536,19 @@ function onIconError(e) {
               </div>
             </div>
           </div>
+        </div>
+        <div
+          class="carousel-pagination"
+          role="status"
+          :aria-label="`第 ${focusedIndex + 1} 张，共 ${categories.length} 张`"
+        >
+          <span
+            v-for="(_, i) in categories"
+            :key="i"
+            class="carousel-pagination-dot"
+            :class="{ 'is-active': i === focusedIndex }"
+            aria-hidden="true"
+          ></span>
         </div>
       </div>
     </section>
@@ -916,6 +952,10 @@ function onIconError(e) {
   right: 8px;
 }
 
+.carousel-pagination {
+  display: none;
+}
+
 /* ── 轮播卡片 ───────────────────────────────────────────── */
 .carousel-card {
   position: absolute;
@@ -1256,6 +1296,7 @@ function onIconError(e) {
 
   .carousel-track {
     position: relative;
+    display: grid;
     grid-column: 2;
     grid-row: 1;
     left: auto;
@@ -1267,7 +1308,9 @@ function onIconError(e) {
   }
 
   .carousel-card {
-    position: absolute;
+    position: relative;
+    grid-area: 1 / 1;
+    align-self: center;
     transform: none !important;
     opacity: 0 !important;
     visibility: hidden;
@@ -1276,10 +1319,31 @@ function onIconError(e) {
   }
 
   .carousel-card.is-focused {
-    position: relative;
     opacity: 1 !important;
     visibility: visible;
     pointer-events: auto;
+  }
+
+  .carousel-card.is-leaving {
+    opacity: 1 !important;
+    visibility: visible;
+    pointer-events: none;
+  }
+
+  .carousel-card.is-entering.slide-next .category-block {
+    animation: mobile-card-enter-next 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .carousel-card.is-leaving.slide-next .category-block {
+    animation: mobile-card-leave-next 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .carousel-card.is-entering.slide-prev .category-block {
+    animation: mobile-card-enter-prev 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .carousel-card.is-leaving.slide-prev .category-block {
+    animation: mobile-card-leave-prev 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .carousel-arrow {
@@ -1299,6 +1363,50 @@ function onIconError(e) {
   .carousel-arrow:active {
     transform: scale(0.95);
   }
+
+  .carousel-pagination {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .carousel-pagination-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vp-c-divider);
+    transform: scale(0.75);
+    transition: transform 200ms ease, background 200ms ease;
+  }
+
+  .carousel-pagination-dot.is-active {
+    background: var(--vp-c-brand-1);
+    transform: scale(1);
+  }
+}
+
+@keyframes mobile-card-enter-next {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes mobile-card-leave-next {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-18px); }
+}
+
+@keyframes mobile-card-enter-prev {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes mobile-card-leave-prev {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(18px); }
 }
 
 /* ── Reduced Motion — 无障碍适配 ─────────────────────────── */
@@ -1351,13 +1459,20 @@ function onIconError(e) {
 
 @media (max-width: 640px) and (prefers-reduced-motion: reduce) {
   .carousel-card {
-    position: absolute !important;
     opacity: 0 !important;
   }
 
   .carousel-card.is-focused {
-    position: relative !important;
     opacity: 1 !important;
+  }
+
+  .carousel-card.is-leaving {
+    opacity: 0 !important;
+    visibility: hidden;
+  }
+
+  .carousel-card .category-block {
+    animation: none !important;
   }
 }
 </style>
