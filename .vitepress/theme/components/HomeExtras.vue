@@ -1242,6 +1242,65 @@ function onIconError(e) {
   }
 }
 
+@media (max-width: 640px) {
+  .carousel-scene {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    align-items: center;
+    column-gap: 8px;
+    height: auto;
+    perspective: none;
+    margin-bottom: 40px;
+    cursor: default;
+  }
+
+  .carousel-track {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    transform: none !important;
+  }
+
+  .carousel-card {
+    position: absolute;
+    transform: none !important;
+    opacity: 0 !important;
+    visibility: hidden;
+    filter: none !important;
+    pointer-events: none;
+  }
+
+  .carousel-card.is-focused {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .carousel-arrow {
+    position: static;
+    grid-row: 1;
+    transform: none;
+  }
+
+  .carousel-arrow--prev {
+    grid-column: 1;
+  }
+
+  .carousel-arrow--next {
+    grid-column: 3;
+  }
+
+  .carousel-arrow:active {
+    transform: scale(0.95);
+  }
+}
+
 /* ── Reduced Motion — 无障碍适配 ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .anim-item {
@@ -1287,6 +1346,18 @@ function onIconError(e) {
   .logo-fallback,
   .logo-accent {
     transition: none !important;
+  }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .carousel-card {
+    position: absolute !important;
+    opacity: 0 !important;
+  }
+
+  .carousel-card.is-focused {
+    position: relative !important;
+    opacity: 1 !important;
   }
 }
 </style>

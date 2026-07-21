@@ -148,9 +148,10 @@
 
 /* 表格 — 圆角、斑马纹 */
 .vp-doc table {
-  display: table;
+  display: block;
   width: 100%;
-  overflow: hidden;
+  max-width: 100%;
+  overflow-x: auto;
   border-radius: var(--site-radius);
   font-size: 14.5px;
   border-collapse: collapse;
@@ -343,6 +344,24 @@ html:not(.dark) .vp-doc div[class*='language-'] span {
   .vp-doc {
     font-size: 15.5px;
     line-height: 1.8;
+  }
+
+  /* Markdown 中固定尺寸的 HTML 元素在手机端收缩到正文宽度 */
+  .vp-doc [style*='width:'],
+  .vp-doc [width] {
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* 清除正文内联定位的横向偏移，避免元素收缩后仍被推出视口 */
+  .vp-doc [style*='position'][style*='left:'] {
+    left: 0 !important;
+  }
+
+  /* 固定宽高图片在收缩后保持原始比例 */
+  .vp-doc img[style*='height:'],
+  .vp-doc img[height] {
+    height: auto !important;
   }
 
   .vp-doc h1 {

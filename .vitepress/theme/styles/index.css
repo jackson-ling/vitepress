@@ -9,5 +9,5 @@
 @import './_hero.css';        /* 首页 Hero 区域、光晕动画、特性卡片 */
 @import './_layout.css';      /* 文档布局、侧边栏、页脚 */
 @import './_doc.css';         /* 文章排版、代码块、目录 */
-@import './_components.css';  /* 进度条、回到顶部、图片预览 */
+@import './_components.css';  /* 进度条、回到顶部 */
 @import './_timeline.css';    /* 时间线容器 */

@@ -1,13 +1,12 @@
 /* ============================================================
- *  Components — 阅读进度条、回到顶部按钮、图片预览
+ *  Components — 阅读进度条、回到顶部按钮
  *
  *  包含：
  *    1. 阅读进度条（.site-progress）— 顶部固定，随滚动填充
  *    2. 回到顶部按钮（.reading-tools）— 右下角固定，带进度环
- *    3. 图片预览（.image-preview）— 全屏遮罩，支持缩放/拖拽
- *    4. Vue <Transition> 动画类
- *    5. 移动端响应式
- *    6. prefers-reduced-motion 无障碍适配
+ *    3. Vue <Transition> 动画类
+ *    4. 移动端响应式
+ *    5. prefers-reduced-motion 无障碍适配
  *
  *  对应 Vue 组件：SiteEnhancer.vue
  * ============================================================ */
@@ -122,138 +121,6 @@
 .reading-tools-leave-to {
   opacity: 0;
   transform: translateY(8px);
-}
-
-/* ── Image Preview — 图片预览组件 ───────────────────────────
- *  全屏遮罩 + 缩放/拖拽，改这里换遮罩透明度、圆角、工具栏样式
- * ──────────────────────────────────────────────────────────── */
-.image-preview {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 56px 24px 24px;   /* 顶部留白给工具栏 */
-  background: rgba(15, 23, 42, 0.82);
-  backdrop-filter: blur(10px);
-  cursor: zoom-out;   /* 点击遮罩关闭 */
-}
-
-.image-preview__img {
-  max-width: min(96vw, 1280px);
-  max-height: calc(100vh - 96px);
-  object-fit: contain;
-  border-radius: var(--site-radius);
-  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.34);
-  cursor: default;
-  transform-origin: center;
-  transition: transform var(--site-transition-fast);
-  user-select: none;
-  touch-action: none;   /* 禁止浏览器默认触摸行为（缩放、滑动） */
-}
-
-/* 工具栏 — 顶部居中，圆角胶囊形 */
-.image-preview__toolbar {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 5px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.72);
-  color: #fff;
-  transform: translateX(-50%);
-}
-
-.image-preview__toolbar button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  transition: background var(--site-transition-fast), transform var(--site-transition-fast);
-}
-
-.image-preview__toolbar button:hover {
-  background: rgba(37, 99, 235, 0.9);
-  transform: translateY(-1px);
-}
-
-.image-preview__toolbar svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-/* 缩放百分比显示 */
-.image-preview__toolbar span {
-  min-width: 48px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/* 关闭按钮 — 右上角圆形 */
-.image-preview__close {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.72);
-  color: #fff;
-  cursor: pointer;
-  transition: background var(--site-transition-fast), transform var(--site-transition-fast);
-}
-
-.image-preview__close:hover {
-  background: rgba(37, 99, 235, 0.9);
-  transform: translateY(-1px);
-}
-
-.image-preview__close svg {
-  width: 22px;
-  height: 22px;
-  fill: currentColor;
-}
-
-/* Vue <Transition name="image-preview"> 动画类 */
-.image-preview-enter-active,
-.image-preview-leave-active {
-  transition: opacity var(--site-transition-fast);
-}
-
-.image-preview-enter-active .image-preview__img,
-.image-preview-leave-active .image-preview__img {
-  transition: transform var(--site-transition-fast);
-}
-
-.image-preview-enter-from,
-.image-preview-leave-to {
-  opacity: 0;
-}
-
-.image-preview-enter-from .image-preview__img,
-.image-preview-leave-to .image-preview__img {
-  transform: scale(0.96);
 }
 
 /* ── Components Mobile ─────────────────────────────────────── */
