@@ -8,10 +8,6 @@
 /* 锚点滚动偏移 — 点击目录链接时，标题不被导航栏遮挡 */
 html {
   scroll-padding-top: calc(var(--vp-nav-height) + 16px);
-  transition:
-    --vp-c-bg 0.35s ease,
-    --vp-c-text-1 0.35s ease,
-    --vp-c-brand-1 0.35s ease;
 }
 
 body {
@@ -19,20 +15,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(52, 120, 217, 0.12);
-}
-
-/* 主题切换平滑过渡 — 覆盖所有可能变色的根级容器 */
-html,
-body,
-.VPNav,
-.VPSidebar,
-.vp-doc,
-.VPDocFooter,
-.VPFooter {
-  transition:
-    background-color var(--site-transition-slow),
-    color var(--site-transition-slow),
-    border-color var(--site-transition-slow);
 }
 
 /* 文本选择样式 — 品牌色高亮选中文本 */

@@ -1534,3 +1534,45 @@ for chunk in customer_service_agent.stream(
 > #### 类型二：Wrap-style-hooks
 >
 > #### 两种 hook 函数类型都可以分别基于注解和类实现
+
+### 记忆与摘要
+
+```python
+from langchain.agents.middleware import SummarizationMiddleware
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver
+
+# 创建带摘要中间件的 Agent
+agent = create_agent(
+    model=model_out,
+    tools=[],
+    checkpointer=InMemorySaver(),
+    middleware=[
+        SummarizationMiddleware(
+            model=model_in,
+            trigger=[
+                ("tokens", 100),  # 超过 100 tokens 就摘要
+            ],
+            keep=("messages", 2),
+            summary_prompt="对历史消息摘要，消息列表如下\n{messages}",
+        )
+    ]
+)
+
+config = {"configurable": {"thread_id": "1"}}
+
+print("\n进行多轮对话...")
+conversations = [
+    "我叫张三，是工程师。这里是一段非常长非常长的废话..." * 20, # 强制撑爆 100 tokens
+    "请总结一下我的信息"
+]
+
+for msg in conversations:
+    response = agent.invoke(
+        {"messages": [{"role": "user", "content": msg}]},
+        config=config
+    )
+    for msg in response["messages"]:
+        msg.pretty_print()
+    print("*" * 50)
+```

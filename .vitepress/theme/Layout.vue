@@ -1,11 +1,10 @@
 <!--
  * Layout.vue — 自定义主题布局入口
  *
- * 功能：欢迎遮罩状态管理、主题切换动画、路由过渡动画、图片懒加载
+ * 功能：欢迎遮罩状态管理、原生主题切换、路由过渡动画、图片懒加载
  *
  * 改这里：
  *   - 遮罩退出动画时长 → 搜索 "900"（overlayState.close 中的 setTimeout）
- *   - 主题切换动画时长 → 搜索 "300"（document.startViewTransition 后的 duration）
  *   - 路由过渡动画样式 → _layout.css 中的 .route-leave / .route-enter
  *   - 欢迎页按钮样式  → 本文件末尾 <style> 中的 .hero-overlay-toggle
 -->
@@ -76,45 +75,9 @@ function toggleOverlay() {
 
 provide('toggle-overlay', toggleOverlay)
 
-/* ── 主题切换动画（View Transition API + 圆形裁剪） ──────────
- *  改这里：
- *    - 动画时长 → document.documentElement.animate 的 duration（当前 300ms）
- *    - 缓动曲线 → easing 属性（当前 ease-in）
- * ─────────────────────────────────────────────────────────── */
-const enableTransitions = () =>
-  'startViewTransition' in document &&
-  window.matchMedia('(prefers-reduced-motion: no-preference)').matches
-
-provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
-  if (!enableTransitions()) {
-    isDark.value = !isDark.value
-    return
-  }
-
-  // 计算圆形裁剪路径：从点击位置扩散到能覆盖整个视口的半径
-  const clipPath = [
-    `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
-    )}px at ${x}px ${y}px)`
-  ]
-
-  await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
-
-  // ← 修改 duration (300) 可调整主题切换动画时长
-  document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      easing: 'ease-in',
-      fill: 'forwards',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
-    }
-  )
+/* ── 主题切换 ─────────────────────────────────────────────── */
+provide('toggle-appearance', () => {
+  isDark.value = !isDark.value
 })
 
 /* ── 欢迎遮罩关闭回调（兜底移除 welcome-blocking 类） ──────── */
@@ -244,25 +207,6 @@ onUnmounted(() => {
 html.welcome-blocking .Layout {
   visibility: hidden;
   pointer-events: none;
-}
-
-/* ── View Transition — 主题切换动画图层控制 ────────────────
- *  改 z-index 控制新旧图层堆叠顺序（9999 = 新图层在上）
- * ──────────────────────────────────────────────────────────── */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root),
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root),
-.dark::view-transition-old(root) {
-  z-index: 9999;
 }
 
 .VPSwitchAppearance .check {

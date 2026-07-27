@@ -1271,6 +1271,8 @@ export default defineConfig({
                             items:
                                 [
                                     {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
                                         text: '环境准备',
                                         items:
                                             [
@@ -1278,11 +1280,21 @@ export default defineConfig({
                                             ]
                                     },
                                     {
-                                        text: "技术框架",
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: "LangChain",
                                         items:
                                             [
-                                                {text: "LangChain", link: "docs/Python/agent/LangChain/langchain.md"},
-                                                {text: "LangGraph", link: "docs/Python/agent/LangGraph/langgraph.md"},
+                                                ...setSidebarDefault('/docs/Python/agent/LangChain'),
+                                            ]
+                                    },
+                                    {
+                                        collapsible: true,   // 允许折叠
+                                        collapsed: false,    // 一开始就展开
+                                        text: "LangGraph",
+                                        items:
+                                            [
+                                                ...setSidebarDefault('/docs/Python/agent/LangGraph'),
                                             ]
                                     },
                                 ]
