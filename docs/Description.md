@@ -1,5 +1,5 @@
 ---
-layout:page
+layout: page
 ---
 
 <span style="font-size: 30px; display: block; text-align: center;">**站点介绍**</span>
