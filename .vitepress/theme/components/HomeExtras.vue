@@ -36,7 +36,7 @@ const toggleOverlay = inject('toggle-overlay', () => {})
 const tips = [
   { icon: '⏳', title: 'TIP 1', text: '明确目标目的，逐步积累，循序渐进，及时反馈，切忌急于求成', color: '#3478d9' },
   { icon: '💪', title: 'TIP 2', text: '少空想，多实践，降低预期，重视基础，大量重复，构建体系', color: '#8b5cf6' },
-  { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，对比过去看进步，学会主动探索，敢于尝试', color: '#f59e0b' },
+  { icon: '🚀', title: 'TIP 3', text: '保持独立思考，总结复盘，对比过去看进步，学会主动探索，敢于尝试，别设限', color: '#f59e0b' },
 ]
 
 /* ── 技术模块数据 ───────────────────────────────────────────
