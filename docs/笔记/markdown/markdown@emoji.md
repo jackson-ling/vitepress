@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-<h2><center>常用emoji</center></h2>
+<h2><center>常用 emoji</center></h2>
 
 ```js
   star: "⭐",
@@ -42,7 +42,7 @@ layout: doc
   o: "⭕",
 ```
 
-<h2><center>emoji全集</center></h2>
+<h2><center>emoji 全集</center></h2>
 
 ```js
 // Generated, don't edit
