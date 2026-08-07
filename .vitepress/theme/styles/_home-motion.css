@@ -66,7 +66,7 @@
   z-index: 1000;
   inset: 0;
   overflow: hidden;
-  color: #172033;
+  color: var(--ink);
   background: transparent;
   perspective: 800px;
 }
@@ -75,7 +75,7 @@
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: #d2d2d2;
+  background: var(--bg);
   will-change: opacity;
 }
 
@@ -88,7 +88,7 @@
   height: 240px;
   opacity: 0;
   overflow: visible;
-  background: #d2d2d2;
+  background: var(--bg);
   transform: translate3d(-50%, -50%, 0) scale(1);
   transform-origin: center;
   transform-style: preserve-3d;
@@ -111,7 +111,7 @@
   left: 0;
   width: 13px;
   height: 1px;
-  background: #172033;
+  background: var(--ink);
 }
 
 .loader-sheet > i::after {
@@ -147,7 +147,7 @@
   height: 6px;
   border-radius: 0;
   opacity: 0;
-  background: #172033;
+  background: var(--ink);
   box-shadow: 0 0 0 0 rgba(52, 120, 217, 0.18);
   transform: translate(-50%, -50%) scale(0.2);
   transition: opacity 160ms ease;
@@ -253,7 +253,7 @@
   left: 50%;
   min-width: 3ch;
   margin: 0;
-  color: #172033;
+  color: var(--ink);
   font: 500 clamp(28px, 3vw, 44px)/1 "Bahnschrift Condensed", Consolas, monospace;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
@@ -297,7 +297,7 @@
   left: 0;
   width: 13px;
   height: 1px;
-  background: #172033;
+  background: var(--ink);
 }
 
 .loader-mark::after {
@@ -376,7 +376,7 @@
     width: 240px;
     height: 240px;
     opacity: 1;
-    background: #d2d2d2;
+    background: var(--bg);
     border-radius: 0;
     transform: translate3d(-50%, -50%, 0);
   }
@@ -398,7 +398,7 @@
     width: calc(100vw + 2px);
     height: calc(100dvh + 2px);
     opacity: 0;
-    background: #f8fbff;
+    background: var(--bg);
     transform: translate3d(-50%, -50%, 0);
   }
 }
@@ -406,7 +406,7 @@
 @keyframes loader-curtain-out {
   0% {
     opacity: 1;
-    background: #d2d2d2;
+    background: var(--bg);
   }
   82%, 88% {
     opacity: 1;
@@ -432,9 +432,9 @@
 }
 
 @keyframes loader-seed-square {
-  0% { opacity: 1; background: #172033; transform: translate(-50%, -50%) scale(1); }
-  72% { opacity: 1; background: #d2d2d2; transform: translate(-50%, -50%) scale(40); }
-  100% { opacity: 0; background: #d2d2d2; transform: translate(-50%, -50%) scale(40); }
+  0% { opacity: 1; background: var(--ink); transform: translate(-50%, -50%) scale(1); }
+  72% { opacity: 1; background: var(--bg); transform: translate(-50%, -50%) scale(40); }
+  100% { opacity: 0; background: var(--bg); transform: translate(-50%, -50%) scale(40); }
 }
 
 @keyframes loader-wordmark-in {
