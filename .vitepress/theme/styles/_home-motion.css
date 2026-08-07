@@ -403,7 +403,7 @@
   to {
     width: calc(100vw + 2px);
     height: calc(100dvh + 2px);
-    opacity: 0;
+    opacity: 1;
     background: var(--loader-bg);
     transform: translate3d(-50%, -50%, 0);
   }
@@ -419,7 +419,7 @@
     background: var(--loader-bg);
   }
   to {
-    opacity: 0;
+    opacity: 1;
     background: var(--loader-bg);
   }
 }
