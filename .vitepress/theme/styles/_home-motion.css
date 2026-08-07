@@ -1215,6 +1215,17 @@
 }
 
 @media (max-width: 700px) {
+  /* 手机端固定视口高度，阻止真实页面滚动 */
+  .scroll-track {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  /* 手机端 CSS transition 驱动场景切换动画 */
+  .motion-item {
+    transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
+  }
+
   .scene {
     inset: 0;
     height: 100%;
@@ -1307,6 +1318,20 @@
     margin: 10px 0 0;
     padding-top: 0;
     border-top: 0;
+  }
+
+  /* 手机端技术栈标题居中 */
+  .tech-scene .scene-title {
+    left: 50%;
+    width: calc(100% - 12vw);
+    transform: translateX(-50%);
+  }
+
+  /* 手机端技术序列居中显示 */
+  .tech-scene .tech-sequence {
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .tech-grid {

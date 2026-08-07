@@ -114,6 +114,16 @@ let pointerY = 0
 let activeTechIndex = -1
 const timeoutIds = []
 
+// 手机端离散切换状态
+const isMobile = () => window.innerWidth <= 700
+let mobileStep = 0
+let mobileTransitioning = false
+let mobileLockTimer = null
+let touchStartX = 0
+let touchStartY = 0
+let touchStartTime = 0
+let touchHandled = false
+
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value))
 const ease = value => value * value * (3 - 2 * value)
 const range = (value, start, end) => clamp((value - start) / (end - start))
@@ -221,6 +231,58 @@ function onImageError(event, fallbackText) {
   const fallback = document.createElement('b')
   fallback.textContent = fallbackText.charAt(0) || '?'
   event.currentTarget.replaceWith(fallback)
+}
+
+function mobileGoTo(step) {
+  const maxStep = 1 + techCategories.length + 1
+  const clamped = Math.max(0, Math.min(maxStep, step))
+  console.log('[mobile] goto', step, 'clamped', clamped, 'cur', mobileStep, 'mt', mobileTransitioning)
+  if (clamped === mobileStep) return
+  mobileStep = clamped
+  mobileTransitioning = true
+  renderMobile()
+  if (mobileLockTimer) clearTimeout(mobileLockTimer)
+  mobileLockTimer = setTimeout(() => {
+    console.log('[mobile] unlock', mobileStep)
+    mobileTransitioning = false
+    mobileLockTimer = null
+  }, 350)
+}
+
+function onTouchStart(e) {
+  if (!isMobile() || mobileTransitioning) { console.log('[mobile] start BLOCKED', mobileStep, mobileTransitioning); return }
+  const touch = e.touches[0]
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+  touchStartTime = Date.now()
+  touchHandled = false
+}
+
+function onTouchMove(e) {
+  if (!isMobile()) return
+  e.preventDefault()
+}
+
+function onTouchEnd(e) {
+  if (!isMobile() || touchHandled) return
+  const touch = e.changedTouches[0]
+  const deltaY = touch.clientY - touchStartY
+  const deltaX = touch.clientX - touchStartX
+  const elapsed = Date.now() - touchStartTime
+  console.log('[mobile] end', Math.round(deltaY), Math.round(deltaX), elapsed, 'step', mobileStep, 'mt', mobileTransitioning)
+  if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && Math.abs(deltaX) > 30) return
+  if (elapsed < 150 && Math.abs(deltaY) < 20) return
+  if (Math.abs(deltaY) < 50) return
+  touchHandled = true
+  mobileGoTo(deltaY < 0 ? mobileStep + 1 : mobileStep - 1)
+}
+
+function onTouchCancel() {
+  console.log('[mobile] cancel', mobileStep, mobileTransitioning)
+  touchHandled = false
+  touchStartX = 0
+  touchStartY = 0
+  touchStartTime = 0
 }
 
 onMounted(() => {
@@ -451,13 +513,116 @@ onMounted(() => {
     activeChapter.value = progress < 0.16 ? 0 : progress < 0.34 ? 1 : progress < 0.84 ? 2 : 3
   }
 
+  // 手机端直接设置每个 step 的最终 CSS 状态，不依赖桌面 progress 模型
+  function renderMobile() {
+    // Hero
+    const heroShow = mobileStep === 0
+    setVars(heroElement, {
+      tx: '0px', ty: '0px', tz: '0px',
+      rx: '0deg', ry: '0deg', rz: '0deg',
+      scale: heroShow ? 1 : 0.84,
+      alpha: heroShow ? 1 : 0,
+      blur: '0px',
+    })
+    if (heroElement) heroElement.style.pointerEvents = heroShow ? 'auto' : 'none'
+
+    // Tips
+    const tipsShow = mobileStep === 1
+    tipCards.forEach(card => {
+      setVars(card, {
+        tx: '0px', ty: '0px', tz: '0px',
+        rx: '0deg', ry: '0deg', rz: '0deg',
+        scale: tipsShow ? 1 : 0.9,
+        alpha: tipsShow ? 1 : 0,
+        blur: '0px',
+      })
+      card.style.pointerEvents = tipsShow ? 'auto' : 'none'
+      card.style.zIndex = '10'
+    })
+
+    // Tech 场景
+    const techShow = mobileStep >= 2 && mobileStep <= 1 + techCategories.length
+    const activeCardIndex = techShow ? mobileStep - 2 : -1
+    const cardStep = window.innerWidth * 0.84
+
+    setVars(techTitle, {
+      tx: '0px',
+      ty: techShow ? '0px' : '20px',
+      tz: techShow ? '0px' : '-180px',
+      rx: techShow ? '0deg' : '8deg',
+      ry: '0deg', rz: '0deg',
+      scale: techShow ? 1 : 0.92,
+      alpha: techShow ? 1 : 0,
+      blur: '0px',
+    })
+
+    techCards.forEach((card, index) => {
+      const delta = index - activeCardIndex
+      const isActive = index === activeCardIndex
+      const isVisible = techShow && Math.abs(delta) <= 1
+      setVars(card, {
+        tx: techShow ? `${delta * cardStep}px` : '0px',
+        ty: techShow ? '0px' : '110px',
+        tz: '0px',
+        rx: '0deg',
+        ry: isActive ? '0deg' : `${-delta * 3}deg`,
+        rz: '0deg',
+        scale: isActive ? 1 : (isVisible ? 0.94 : 0.9),
+        alpha: techShow ? (isActive ? 1 : (isVisible ? 0.35 : 0)) : 0,
+        blur: '0px',
+      })
+      card.dataset.active = String(isActive)
+      card.style.pointerEvents = isActive ? 'auto' : 'none'
+      card.style.zIndex = isActive ? '30' : String(20 - Math.abs(delta))
+    })
+
+    if (techSequence) {
+      techSequence.style.setProperty('--tx', '0px')
+      techSequence.style.transform = 'translateX(-50%)'
+      if (techShow && activeCardIndex >= 0 && activeCardIndex < techCategories.length) {
+        techCounter.textContent = `${String(activeCardIndex + 1).padStart(2, '0')} / ${String(techCategories.length).padStart(2, '0')}`
+        techName.textContent = techCategories[activeCardIndex]?.name || ''
+      }
+    }
+
+    // Friends
+    const friendsShow = mobileStep === 1 + techCategories.length + 1
+    setVars(friendTitle, {
+      tx: '-50%', ty: friendsShow ? '0px' : '26px',
+      tz: friendsShow ? '0px' : '-200px',
+      rx: friendsShow ? '0deg' : '9deg',
+      ry: '0deg', rz: '0deg',
+      scale: friendsShow ? 1 : 0.9,
+      alpha: friendsShow ? 1 : 0,
+      blur: '0px',
+    })
+    friends.forEach(card => {
+      setVars(card, {
+        tx: '0px', ty: '0px', tz: '0px',
+        rx: '0deg', ry: '0deg', rz: '0deg',
+        scale: friendsShow ? 1 : 0.68,
+        alpha: friendsShow ? 1 : 0,
+        blur: '0px',
+      })
+      card.style.pointerEvents = friendsShow ? 'auto' : 'none'
+    })
+    setVars(footer, { ty: friendsShow ? '0px' : '18px', alpha: friendsShow ? 1 : 0 })
+
+    // 进度条
+    const maxStep = 1 + techCategories.length + 1
+    progressBar.style.transform = `scaleY(${Math.max(0.02, mobileStep / maxStep)})`
+    activeChapter.value = mobileStep === 0 ? 0 : mobileStep === 1 ? 1 : mobileStep <= 1 + techCategories.length ? 2 : 3
+  }
+
   function render() {
-    currentProgress += (targetProgress - currentProgress) * (reducedMotion ? 1 : 0.072)
-    if (Math.abs(targetProgress - currentProgress) < 0.00008) currentProgress = targetProgress
-    scrollVelocity += ((currentProgress - previousProgress) - scrollVelocity) * 0.2
-    scrollVelocity *= 0.94
-    previousProgress = currentProgress
-    if (!reducedMotion) {
+    if (isMobile()) {
+      renderMobile()
+    } else if (!reducedMotion) {
+      currentProgress += (targetProgress - currentProgress) * 0.072
+      if (Math.abs(targetProgress - currentProgress) < 0.00008) currentProgress = targetProgress
+      scrollVelocity += ((currentProgress - previousProgress) - scrollVelocity) * 0.2
+      scrollVelocity *= 0.94
+      previousProgress = currentProgress
       animateHero(currentProgress)
       animateTips(currentProgress)
       animateTech(currentProgress)
@@ -472,6 +637,12 @@ onMounted(() => {
   window.addEventListener('resize', updateTargetProgress, { passive: true })
   stage.addEventListener('pointermove', onStagePointerMove)
   stage.addEventListener('pointerleave', onStagePointerLeave)
+
+  stage.addEventListener('touchstart', onTouchStart, { passive: true })
+  stage.addEventListener('touchmove', onTouchMove, { passive: false })
+  stage.addEventListener('touchend', onTouchEnd, { passive: true })
+  stage.addEventListener('touchcancel', onTouchCancel, { passive: true })
+
   updateTargetProgress()
   prepareEntrance()
   renderFrameId = requestAnimationFrame(render)
@@ -480,6 +651,14 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', updateTargetProgress)
   window.removeEventListener('resize', updateTargetProgress)
+  const stage = homeMotionRef.value?.querySelector('.motion-stage')
+  if (stage) {
+    stage.removeEventListener('touchstart', onTouchStart)
+    stage.removeEventListener('touchmove', onTouchMove)
+    stage.removeEventListener('touchend', onTouchEnd)
+    stage.removeEventListener('touchcancel', onTouchCancel)
+  }
+  if (mobileLockTimer) clearTimeout(mobileLockTimer)
   cancelAnimationFrame(renderFrameId)
   cancelAnimationFrame(loaderFrameId)
   timeoutIds.forEach(id => clearTimeout(id))

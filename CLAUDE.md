@@ -6,7 +6,7 @@
 
 这是一个基于 VitePress 构建的个人中文技术知识库网站。代码库根目录就是 VitePress 源码根目录：`index.md` 是首页，大多数文章位于 `docs/` 下，静态资源位于 `public/` 下。`README.md` 用于说明 GitHub 代码库，并明确排除在网站构建之外。
 
-使用 Node.js 18（`.nvmrc`；`package.json` 要求版本范围为 `>=18.0.0 <19.0.0`）和 npm。`package-lock.json` 是依赖版本的权威来源，CI 使用 `npm ci` 安装依赖。
+使用 Node.js 24.9.0（`.nvmrc`；`package.json` 要求版本范围为 `>=24.0.0 <25.0.0`）和 npm。`package-lock.json` 是依赖版本的权威来源，CI 使用 `npm ci` 安装依赖。后续开发和验证统一使用 Node 24，不要切回 Node 18。
 
 ## 命令
 
@@ -68,4 +68,4 @@ NODE_OPTIONS=--max-old-space-size=5120 npm run docs:build
 
 `npm run docs:build` 会处理根目录内容、生成的侧边栏配置、Markdown 扩展和自定义 Vue 主题，并生成 `.vitepress/dist`。`.vitepress/dist` 属于生成输出，请修改源文件，不要直接修改该目录中的内容。
 
-`.github/workflows/deploy.yml` 会在推送到 `main` 分支或手动触发时运行。该工作流使用 Node.js 18，执行 `npm ci` 和 `npm run docs:build`，然后上传 `.vitepress/dist`，并通过 GitHub Pages Actions 完成部署。该工作流不会运行测试或 Lint 检查。
+`.github/workflows/deploy.yml` 会在推送到 `main` 分支或手动触发时运行。该工作流使用 Node.js 24.9.0，执行 `npm ci` 和 `npm run docs:build`，然后上传 `.vitepress/dist`，并通过 GitHub Pages Actions 完成部署。该工作流不会运行测试或 Lint 检查。
