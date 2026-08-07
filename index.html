@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="welcome-blocking">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--
-      welcome-blocking: 首次加载时立即展示深色遮罩，防止白屏闪烁。
-      Vue 挂载后由 Layout.vue / WelcomeOverlay.vue 移除该 class。
-    -->
-    <style>
-      html.welcome-blocking::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        z-index: 10000;
-        background: #0d1321;
-      }
-    </style>
+    <script>
+      try {
+        if (sessionStorage.getItem('homepage-motion-intro-played-v3') === '1') {
+          document.documentElement.classList.add('home-motion-intro-seen')
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="app"></div>

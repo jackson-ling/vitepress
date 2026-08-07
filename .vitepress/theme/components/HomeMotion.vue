@@ -1,0 +1,577 @@
+<!--
+ * 首页滚动动画
+ *
+ * 首页标题、Logo、按钮和页脚继续读取 VitePress 配置；TIP、技术栈和友链在下方数组中维护。
+ -->
+<script setup>
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useData } from 'vitepress'
+
+const INTRO_KEY = 'homepage-motion-intro-played-v3'
+
+const tips = [
+  { icon: '⏳', tone: 'blue', title: 'TIP 1', text: '明确目标目的，逐步积累，循序渐进，及时反馈，切忌急于求成' },
+  { icon: '💪', tone: 'purple', title: 'TIP 2', text: '少空想，多实践，降低预期，重视基础，大量重复，构建体系' },
+  { icon: '🚀', tone: 'amber', title: 'TIP 3', text: '保持独立思考，总结复盘，对比过去看进步，学会主动探索，敢于尝试，别设限' },
+]
+
+const techCategories = [
+  {
+    name: '后端基础',
+    desc: 'Backend',
+    accent: '#6DB33B',
+    items: [
+      { name: 'Spring', icon: '/spring.png', link: 'https://spring.io' },
+      { name: 'SpringBoot', icon: '/springboot.png', link: 'https://spring.io/projects/spring-boot' },
+      { name: 'MyBatis', icon: '/mybatis.png', link: 'https://mybatis.org/mybatis-3/' },
+      { name: 'MyBatis Plus', icon: '/mybatisplus.png', link: 'https://baomidou.com' },
+    ],
+  },
+  {
+    name: '数据存储',
+    desc: 'Database',
+    accent: '#4479A1',
+    items: [
+      { name: 'MySQL', icon: '/mysql.png', link: 'https://www.mysql.com' },
+      { name: 'Redis', icon: '/redis.png', link: 'https://redis.io' },
+    ],
+  },
+  {
+    name: '微服务',
+    desc: 'Microservices',
+    accent: '#6DB33B',
+    items: [
+      { name: 'SpringCloud', icon: '/springcloud.png', link: 'https://spring.io/projects/spring-cloud' },
+      { name: 'RabbitMQ', icon: '/rabbitmq.png', link: 'https://www.rabbitmq.com' },
+      { name: 'Elasticsearch', icon: '/elasticsearch.png', link: 'https://www.elastic.co/elasticsearch' },
+    ],
+  },
+  {
+    name: 'AI 应用',
+    desc: 'AI & LLM',
+    accent: '#3478d9',
+    items: [
+      { name: 'SpringAI', icon: '/spring.png', link: 'https://spring.io/projects/spring-ai' },
+      { name: 'LangChain4j', fallback: 'L', link: 'https://docs.langchain4j.dev' },
+      { name: 'Ollama', fallback: 'O', link: 'https://ollama.com' },
+      { name: 'Claude Code', fallback: 'C', link: 'https://docs.anthropic.com/en/docs/claude-code' },
+    ],
+  },
+  {
+    name: 'DevOps',
+    desc: 'DevOps',
+    accent: '#2496ED',
+    items: [
+      { name: 'Docker', icon: '/docker.png', link: 'https://www.docker.com' },
+      { name: 'Linux', icon: '/linux.png', link: 'https://www.linux.org' },
+      { name: 'Nginx', icon: '/ngnix.png', link: 'https://nginx.org' },
+      { name: 'Git', icon: '/git.png', link: 'https://git-scm.com' },
+    ],
+  },
+]
+
+const friendLinks = [
+  { name: 'VitePress', desc: 'Vue & Vite 驱动的静态站点生成器', icon: '⚡', color: '#eab308', link: 'https://vitepress.dev' },
+  { name: 'Irai', desc: '技术探索者，记录学习与生活', icon: '🌐', color: '#0d9488', link: 'http://iraionly.cn/' },
+  { name: '代码随想录', desc: '程序员卡尔的算法与编程教程', icon: '📘', color: '#2563eb', link: 'https://programmercarl.com' },
+  { name: 'LeetCode', desc: '全球领先的在线编程练习平台', icon: '🎯', color: '#ea580c', link: 'https://leetcode.cn' },
+]
+
+const chapters = [
+  { label: '首页', progress: 0 },
+  { label: '学习提示', progress: 0.22 },
+  { label: '技术栈', progress: 0.54 },
+  { label: '友情链接', progress: 1 },
+]
+
+const { frontmatter, isDark, theme } = useData()
+const hero = computed(() => frontmatter.value.hero || {})
+const heroImage = computed(() => {
+  const image = hero.value.image
+  if (typeof image === 'string') return image
+  if (!image) return ''
+  return isDark.value ? image.dark || image.light : image.light || image.dark
+})
+const loaderName = computed(() => String(hero.value.name || 'jackson凌').replace(/^博客の/i, ''))
+const copyright = computed(() => theme.value.footer?.copyright || '')
+
+const homeMotionRef = ref(null)
+const loaderRef = ref(null)
+const loaderCountRef = ref(null)
+const introReady = ref(false)
+const showLoader = ref(true)
+const activeChapter = ref(0)
+
+let renderFrameId = 0
+let loaderFrameId = 0
+let reducedMotion = false
+let targetProgress = 0
+let currentProgress = 0
+let previousProgress = 0
+let scrollVelocity = 0
+let pointerX = 0
+let pointerY = 0
+let activeTechIndex = -1
+const timeoutIds = []
+
+const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value))
+const ease = value => value * value * (3 - 2 * value)
+const range = (value, start, end) => clamp((value - start) / (end - start))
+const mix = (start, end, amount) => start + (end - start) * amount
+
+function setVars(element, values) {
+  if (!element) return
+  Object.entries(values).forEach(([name, value]) => element.style.setProperty(`--${name}`, value))
+}
+
+function setTimer(callback, delay) {
+  const id = window.setTimeout(callback, delay)
+  timeoutIds.push(id)
+  return id
+}
+
+function finishEntrance() {
+  try {
+    sessionStorage.setItem('welcome-overlay-shown', '1')
+  } catch {}
+  introReady.value = true
+  showLoader.value = false
+  document.documentElement.classList.remove('home-motion-loading', 'welcome-blocking')
+  document.documentElement.classList.add('home-motion-intro-seen')
+}
+
+function prepareEntrance() {
+  let shouldPlayEntrance = true
+  try {
+    shouldPlayEntrance = sessionStorage.getItem(INTRO_KEY) !== '1'
+    if (shouldPlayEntrance) sessionStorage.setItem(INTRO_KEY, '1')
+  } catch {}
+
+  if (!loaderRef.value || reducedMotion || !shouldPlayEntrance) {
+    finishEntrance()
+    return
+  }
+
+  document.documentElement.classList.add('home-motion-loading')
+  const loader = loaderRef.value
+  const loaderCount = loaderCountRef.value
+  const duration = 2600
+  const gatherDuration = 1150
+  const focusPause = 150
+  const frameDuration = 280
+  let startedAt = 0
+  loader.classList.add('is-seeding')
+
+  function updateLoader(now) {
+    const linear = clamp((now - startedAt) / duration)
+    const displayed = Math.min(100, Math.floor(100 * (1 - Math.pow(1 - linear, 2.2))))
+    if (loaderCount) loaderCount.value = String(displayed)
+    loader.style.setProperty('--load-progress', displayed / 100)
+    if (linear < 1) {
+      loaderFrameId = requestAnimationFrame(updateLoader)
+      return
+    }
+    setTimer(() => {
+      loader.classList.add('is-exiting')
+      setTimer(finishEntrance, 1160)
+    }, 220)
+  }
+
+  setTimer(() => {
+    loader.classList.add('is-framing')
+    setTimer(() => {
+      loader.classList.add('is-building')
+      startedAt = performance.now()
+      loaderFrameId = requestAnimationFrame(updateLoader)
+    }, frameDuration)
+  }, gatherDuration + focusPause)
+}
+
+function updateTargetProgress() {
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+  targetProgress = clamp(window.scrollY / maxScroll)
+}
+
+function scrollToProgress(progress) {
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+  window.scrollTo({ top: maxScroll * clamp(progress), behavior: reducedMotion ? 'auto' : 'smooth' })
+}
+
+function onStagePointerMove(event) {
+  pointerX = (event.clientX / window.innerWidth - 0.5) * 24
+  pointerY = (event.clientY / window.innerHeight - 0.5) * 16
+  const item = event.target.closest?.('.motion-item')
+  if (!item || !homeMotionRef.value?.contains(item)) return
+  const rect = item.getBoundingClientRect()
+  item.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`)
+  item.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`)
+}
+
+function onStagePointerLeave() {
+  pointerX = 0
+  pointerY = 0
+}
+
+function onTechCardClick(event, index) {
+  if (event.target.closest('a')) return
+  scrollToProgress(0.39 + (index / Math.max(1, techCategories.length - 1)) * 0.4)
+}
+
+function onImageError(event, fallbackText) {
+  const fallback = document.createElement('b')
+  fallback.textContent = fallbackText.charAt(0) || '?'
+  event.currentTarget.replaceWith(fallback)
+}
+
+onMounted(() => {
+  const root = homeMotionRef.value
+  if (!root) return
+  document.documentElement.classList.remove('welcome-blocking')
+  document.documentElement.classList.add('home-motion-active')
+  reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  const stage = root.querySelector('.motion-stage')
+  const progressBar = root.querySelector('.progress-rail span')
+  const heroElement = root.querySelector('.hero-cluster')
+  const tipCards = [...root.querySelectorAll('.tip-card')]
+  const techTitle = root.querySelector('.tech-scene .scene-title')
+  const techCards = [...root.querySelectorAll('.tech-card')]
+  const techSequence = root.querySelector('.tech-sequence')
+  const techCounter = root.querySelector('#techCounter')
+  const techName = root.querySelector('#techName')
+  const friendTitle = root.querySelector('.friends-scene .scene-title')
+  const friends = [...root.querySelectorAll('.friend-card')]
+  const footer = root.querySelector('.footer-scene')
+
+  function animateHero(progress) {
+    const exit = ease(range(progress, 0.09, 0.2))
+    setVars(heroElement, {
+      tx: `${pointerX * 0.09 - exit * window.innerWidth * 0.2}px`,
+      ty: `${-exit * 46 + pointerY * 0.04}px`,
+      tz: `${-exit * 620}px`,
+      rx: `${-exit * 9 + pointerY * -0.014}deg`,
+      ry: `${-exit * 18 + pointerX * 0.014}deg`,
+      rz: `${exit * -2.5}deg`,
+      scale: 1 - exit * 0.16,
+      alpha: 1 - exit,
+      blur: `${exit * 7}px`,
+    })
+    heroElement.style.pointerEvents = 1 - exit > 0.78 ? 'auto' : 'none'
+  }
+
+  function animateTips(progress) {
+    const enter = ease(range(progress, 0.12, 0.23))
+    const exit = ease(range(progress, 0.27, 0.37))
+    const mobile = window.innerWidth <= 700
+    const sceneAlpha = enter * (1 - exit)
+    const speedTilt = clamp(scrollVelocity * 1500, -7, 7)
+    tipCards.forEach((card, index) => {
+      const offset = index - 1
+      const delayed = ease(range(enter, index * 0.08, 0.76 + index * 0.08))
+      const stackX = mobile ? offset * -24 : offset * -330
+      const stackY = mobile ? offset * -145 : offset * 20
+      const exitX = mobile ? offset * 40 : offset * 210
+      setVars(card, {
+        tx: `${mix(stackX, 0, delayed) + exit * exitX + pointerX * 0.035}px`,
+        ty: `${mix(stackY, 0, delayed) - exit * (70 + Math.abs(offset) * 24) + pointerY * 0.02}px`,
+        tz: `${mix(-720 - Math.abs(offset) * 90, 34 - Math.abs(offset) * 18, delayed) - exit * 560}px`,
+        rx: `${mix(offset * -10, pointerY * -0.015, delayed) - exit * 12 + speedTilt * 0.25}deg`,
+        ry: `${mix(offset * 24, pointerX * 0.015, delayed) + exit * offset * 22 + speedTilt * 0.5}deg`,
+        rz: `${exit * offset * 3}deg`,
+        scale: mix(0.68, 1, delayed) - exit * 0.12,
+        alpha: sceneAlpha * delayed,
+        blur: `${(1 - delayed) * 13 + exit * 6}px`,
+      })
+      card.style.pointerEvents = sceneAlpha > 0.8 ? 'auto' : 'none'
+      card.style.zIndex = String(10 - Math.abs(offset))
+    })
+  }
+
+  function updateTechStatus(index, focus) {
+    if (index !== activeTechIndex) {
+      activeTechIndex = index
+      techCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(techCards.length).padStart(2, '0')}`
+      techName.textContent = techCategories[index]?.name || ''
+    }
+    techSequence.style.setProperty('--tech-progress', `${((focus + 1) / techCards.length) * 100}%`)
+  }
+
+  function animateTech(progress) {
+    const enter = ease(range(progress, 0.31, 0.38))
+    const exit = ease(range(progress, 0.79, 0.88))
+    const sceneAlpha = enter * (1 - exit)
+    const mobile = window.innerWidth <= 700
+    const gallery = ease(range(progress, 0.395, 0.45))
+    const visibleCount = Math.min(mobile ? 1 : 2, techCards.length)
+    const cardWidth = window.innerWidth * (mobile ? 0.8 : 0.4)
+    const cardGap = window.innerWidth * (mobile ? 0.04 : 0.08)
+    const deckWidth = cardWidth * visibleCount + cardGap * Math.max(0, visibleCount - 1)
+    const leftX = (window.innerWidth - deckWidth) / 2
+    const rightX = leftX + cardWidth + cardGap
+    const maxFocus = Math.max(0, techCards.length - visibleCount)
+    const focus = ease(range(progress, 0.45, 0.79)) * maxFocus
+    const nearest = gallery < 0.5 ? 0 : clamp(Math.round(focus), 0, techCards.length - 1)
+    const cardStep = cardWidth + cardGap
+    const speedTilt = clamp(scrollVelocity * 1500, -5, 5)
+    let carouselAlignmentX = 0
+
+    if (!mobile && gallery >= 0.999 && techCards.length > 1) {
+      let visibleWeight = 0
+      let weightedCenter = 0
+      techCards.forEach((card, index) => {
+        const delta = index - focus
+        const weight = Math.min(ease(clamp(2 - delta)), ease(clamp(1 + delta)))
+        const centeredWeight = Math.pow(weight, 4)
+        visibleWeight += centeredWeight
+        weightedCenter += (leftX + delta * cardStep + cardWidth / 2) * centeredWeight
+      })
+      carouselAlignmentX = visibleWeight > 0 ? window.innerWidth / 2 - weightedCenter / visibleWeight : 0
+    }
+
+    setVars(techTitle, {
+      tx: `${gallery * -cardStep}px`,
+      ty: `${mix(20, 0, enter) - exit * 64}px`,
+      tz: `${mix(-180, 0, enter) - exit * 580}px`,
+      rx: `${mix(8, 0, enter) - exit * 10}deg`,
+      ry: `${exit * -13}deg`,
+      scale: mix(0.92, 1, enter) - exit * 0.12,
+      alpha: sceneAlpha * (1 - gallery),
+      blur: `${(1 - enter) * 7 + exit * 6}px`,
+    })
+
+    techCards.forEach((card, index) => {
+      let cardX
+      let cardY
+      let cardAlpha
+      let cardScale
+      let cardDepth = 0
+      let cardRotateY = 0
+      let cardLayer = 20
+      if (mobile) {
+        const delta = index - ease(range(progress, 0.4, 0.79)) * maxFocus
+        const arrival = ease(clamp(1 - Math.max(0, delta)))
+        cardX = leftX + delta * cardStep
+        cardY = (1 - arrival) * 180
+        cardAlpha = delta < 0 ? clamp(1 + delta) : 1
+        cardScale = mix(0.92, 1, arrival)
+      } else if (gallery < 0.999) {
+        if (index === 0) {
+          cardX = mix(rightX, leftX, gallery)
+          cardY = 0
+          cardAlpha = 1
+          cardScale = 1
+        } else if (index === 1) {
+          cardX = mix(rightX + cardStep * 0.42, rightX, gallery)
+          cardY = mix(190, 0, gallery)
+          cardAlpha = gallery
+          cardScale = mix(0.94, 1, gallery)
+        } else {
+          cardX = rightX
+          cardY = 190
+          cardAlpha = 0
+          cardScale = 0.94
+        }
+      } else {
+        const delta = index - focus
+        const arrival = ease(clamp(2 - delta))
+        const departure = ease(clamp(1 + delta))
+        cardX = leftX + delta * cardStep + carouselAlignmentX
+        cardY = delta > 1 ? mix(180, 0, arrival) : 0
+        cardAlpha = Math.min(arrival, departure)
+        cardScale = delta > 1 ? mix(0.94, 1, arrival) : mix(0.965, 1, departure)
+        cardDepth = -Math.max(0, Math.abs(delta - 0.5) - 0.5) * 70
+        cardRotateY = clamp((delta - 0.5) * -2.4 + speedTilt * 0.32, -5, 5)
+        cardLayer = 30 - Math.round(Math.abs(delta - 0.5) * 2)
+      }
+      const active = cardAlpha > 0.05 && exit < 0.7
+      setVars(card, {
+        tx: `${cardX}px`,
+        ty: `${cardY + (1 - enter) * 110 - exit * 40}px`,
+        tz: `${cardDepth - exit * 420}px`,
+        rx: `${exit * -7}deg`,
+        ry: `${cardRotateY - exit * 5}deg`,
+        rz: '0deg',
+        scale: cardScale,
+        alpha: sceneAlpha * cardAlpha,
+        blur: `${exit * 4}px`,
+      })
+      card.dataset.active = String(active)
+      card.style.zIndex = String(cardLayer)
+      card.style.pointerEvents = sceneAlpha > 0.72 && cardAlpha > 0.7 ? 'auto' : 'none'
+    })
+
+    setVars(techSequence, {
+      tx: `${leftX}px`,
+      ty: `${mix(16, 0, enter) + exit * 24}px`,
+      tz: `${mix(-80, 0, enter) - exit * 300}px`,
+      alpha: sceneAlpha,
+    })
+    updateTechStatus(nearest, Math.min(focus + 1, techCards.length - 1))
+  }
+
+  function animateFriends(progress) {
+    const enter = ease(range(progress, 0.8, 0.91))
+    const footerIn = ease(range(progress, 0.94, 1))
+    const mobile = window.innerWidth <= 700
+    const speedTilt = clamp(scrollVelocity * 1400, -7, 7)
+    setVars(friendTitle, {
+      tx: '-50%',
+      ty: `${mix(26, 0, enter)}px`,
+      tz: `${mix(-200, 0, enter)}px`,
+      rx: `${mix(9, 0, enter)}deg`,
+      scale: mix(0.9, 1, enter),
+      alpha: enter,
+      blur: `${(1 - enter) * 8}px`,
+    })
+    friends.forEach((card, index) => {
+      const column = mobile ? index % 2 : index
+      const row = mobile ? Math.floor(index / 2) : 0
+      const center = mobile ? 0.5 : 1.5
+      const stackX = (center - column) * (mobile ? 170 : 280)
+      const stackY = mobile ? (0.5 - row) * 198 : (index - 1.5) * 34
+      const delayed = ease(range(enter, index * 0.055, 0.72 + index * 0.055))
+      setVars(card, {
+        tx: `${mix(stackX, 0, delayed) + pointerX * 0.022}px`,
+        ty: `${mix(stackY, 0, delayed) + pointerY * 0.016}px`,
+        tz: `${mix(-760 - index * 40, 24, delayed)}px`,
+        rx: `${mix((index - 1.5) * -12, pointerY * -0.014, delayed) + speedTilt * 0.22}deg`,
+        ry: `${mix((index - 1.5) * 19, pointerX * 0.014, delayed) + speedTilt * 0.42}deg`,
+        rz: `${mix((index - 1.5) * -2, 0, delayed)}deg`,
+        scale: mix(0.68, 1, delayed),
+        alpha: delayed,
+        blur: `${(1 - delayed) * 13}px`,
+      })
+      card.style.pointerEvents = delayed > 0.82 ? 'auto' : 'none'
+      card.style.zIndex = String(10 + index)
+    })
+    setVars(footer, { ty: `${mix(18, 0, footerIn)}px`, alpha: footerIn })
+  }
+
+  function updateChapter(progress) {
+    activeChapter.value = progress < 0.16 ? 0 : progress < 0.34 ? 1 : progress < 0.84 ? 2 : 3
+  }
+
+  function render() {
+    currentProgress += (targetProgress - currentProgress) * (reducedMotion ? 1 : 0.072)
+    if (Math.abs(targetProgress - currentProgress) < 0.00008) currentProgress = targetProgress
+    scrollVelocity += ((currentProgress - previousProgress) - scrollVelocity) * 0.2
+    scrollVelocity *= 0.94
+    previousProgress = currentProgress
+    if (!reducedMotion) {
+      animateHero(currentProgress)
+      animateTips(currentProgress)
+      animateTech(currentProgress)
+      animateFriends(currentProgress)
+      updateChapter(currentProgress)
+      progressBar.style.transform = `scaleY(${Math.max(0.02, currentProgress)})`
+    }
+    renderFrameId = requestAnimationFrame(render)
+  }
+
+  window.addEventListener('scroll', updateTargetProgress, { passive: true })
+  window.addEventListener('resize', updateTargetProgress, { passive: true })
+  stage.addEventListener('pointermove', onStagePointerMove)
+  stage.addEventListener('pointerleave', onStagePointerLeave)
+  updateTargetProgress()
+  prepareEntrance()
+  renderFrameId = requestAnimationFrame(render)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateTargetProgress)
+  window.removeEventListener('resize', updateTargetProgress)
+  cancelAnimationFrame(renderFrameId)
+  cancelAnimationFrame(loaderFrameId)
+  timeoutIds.forEach(id => clearTimeout(id))
+  document.documentElement.classList.remove('home-motion-active', 'home-motion-loading')
+})
+</script>
+
+<template>
+  <div ref="homeMotionRef" class="home-motion" :class="introReady ? 'intro-ready' : 'intro-pending'">
+    <div v-if="showLoader" ref="loaderRef" class="site-loader" role="status" aria-label="页面加载中">
+      <div class="loader-curtain" aria-hidden="true"></div>
+      <span class="loader-seed" aria-hidden="true"></span>
+      <span class="loader-mark loader-mark-tl" aria-hidden="true"></span>
+      <span class="loader-mark loader-mark-tr" aria-hidden="true"></span>
+      <span class="loader-mark loader-mark-bl" aria-hidden="true"></span>
+      <span class="loader-mark loader-mark-br" aria-hidden="true"></span>
+      <div class="loader-sheet" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+        <span class="loader-fold loader-fold-x"></span>
+        <span class="loader-fold loader-fold-y"></span>
+      </div>
+      <div class="loader-core">
+        <div class="loader-frame" aria-hidden="true">
+          <svg class="loader-progress-border" viewBox="0 0 240 240" preserveAspectRatio="none">
+            <path pathLength="100" d="M 0.5 0.5 H 239.5 V 239.5 H 0.5 Z"></path>
+          </svg>
+          <span class="loader-slash"></span>
+        </div>
+        <div class="loader-wordmark"><span>BLOG /</span><strong>{{ loaderName }}</strong></div>
+      </div>
+      <output ref="loaderCountRef" class="loader-count" aria-live="polite">0</output>
+    </div>
+
+    <main id="top" class="scroll-track">
+      <div class="motion-stage">
+        <div class="stage-grid" aria-hidden="true"></div>
+        <div class="ambient ambient-a" aria-hidden="true"></div>
+        <div class="ambient ambient-b" aria-hidden="true"></div>
+        <div class="stage-axis" aria-hidden="true"><span></span><i></i></div>
+
+        <section class="scene hero-scene" aria-label="首页介绍">
+          <div class="hero-cluster motion-item">
+            <div class="hero-layer hero-logo"><span class="logo-halo"></span><img :src="heroImage" :alt="`${hero.name || ''} Logo`" loading="eager" /></div>
+            <div class="hero-layer hero-copy">
+              <h1><span>{{ hero.name }}</span><strong>{{ hero.text }}</strong></h1>
+              <p>{{ hero.tagline }}</p>
+            </div>
+            <div class="hero-layer hero-actions">
+              <a v-for="action in hero.actions || []" :key="action.text" class="button" :class="{ 'brand-button': action.theme === 'brand' }" :href="action.link">{{ action.text }}</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene tips-scene" aria-label="学习提示">
+          <article v-for="(tip, index) in tips" :key="tip.title" class="glass-card tip-card motion-item" :data-tip="index">
+            <div class="card-shine"></div><span class="tip-icon" :class="tip.tone">{{ tip.icon }}</span><div><h2>{{ tip.title }}</h2><p>{{ tip.text }}</p></div>
+          </article>
+        </section>
+
+        <section id="tech" class="scene tech-scene" aria-label="技术栈">
+          <header class="scene-title motion-item"><h2><span>技术</span><span>栈</span></h2><p>Technologies I work with</p></header>
+          <div class="tech-deck">
+            <article v-for="(category, index) in techCategories" :key="category.name" class="glass-card tech-card motion-item" :data-tech="index" :style="{ '--accent': category.accent }" @click="onTechCardClick($event, index)">
+              <div class="card-shine"></div>
+              <h3><i></i>{{ category.name }}<small>{{ category.desc }}</small></h3>
+              <div class="tech-grid">
+                <a v-for="tech in category.items" :key="tech.name" :href="tech.link" target="_blank" rel="noopener">
+                  <img v-if="tech.icon" :src="tech.icon" alt="" @error="onImageError($event, tech.name)" /><b v-else>{{ tech.fallback }}</b>{{ tech.name }}
+                </a>
+              </div>
+            </article>
+          </div>
+          <div class="tech-sequence motion-item" aria-live="polite"><span id="techCounter">01 / 05</span><i aria-hidden="true"></i><strong id="techName">后端基础</strong></div>
+        </section>
+
+        <section class="scene friends-scene" aria-label="友情链接">
+          <header class="scene-title motion-item"><h2>友情链接</h2><p>Friendly Links</p></header>
+          <div class="friends-grid">
+            <a v-for="(friend, index) in friendLinks" :key="friend.name" class="glass-card friend-card motion-item" :data-friend="index" :style="{ '--friend': friend.color }" :href="friend.link" target="_blank" rel="noopener">
+              <div class="card-shine"></div><i>{{ friend.icon }}</i><h3>{{ friend.name }}</h3><p>{{ friend.desc }}</p><span>访问主页 →</span>
+            </a>
+          </div>
+        </section>
+
+        <footer class="scene footer-scene motion-item"><p>{{ copyright }}</p></footer>
+        <div class="progress-rail" aria-hidden="true"><span></span></div>
+        <nav class="chapter-rail" aria-label="首页章节">
+          <button v-for="(chapter, index) in chapters" :key="chapter.label" type="button" :class="{ 'is-active': activeChapter === index }" @click="scrollToProgress(chapter.progress)">{{ chapter.label }}</button>
+        </nav>
+      </div>
+    </main>
+  </div>
+</template>
+
+<style scoped src="../styles/_home-motion.css"></style>

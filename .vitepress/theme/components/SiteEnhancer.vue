@@ -77,7 +77,7 @@ function updateReadingState() {
   const height = document.documentElement.scrollHeight - window.innerHeight
   progress.value = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0
   // 滚动超过阈值时显示回顶按钮（首页也显示）
-  showTools.value = scrollTop > SCROLL_SHOW_THRESHOLD
+  showTools.value = !isHome.value && scrollTop > SCROLL_SHOW_THRESHOLD
   ticking = false
 }
 

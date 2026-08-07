@@ -1,13 +1,8 @@
-/* ============================================================
- *  VitePress Theme — Style Entry Point
- *  按职责拆分的样式模块，统一导入
- * ============================================================ */
-
-@import './_tokens.css';      /* 设计变量 / CSS 自定义属性 */
-@import './_base.css';        /* 全局基础样式、主题过渡 */
-@import './_nav.css';         /* 导航栏、按钮、导航图标 */
-@import './_hero.css';        /* 首页 Hero 区域、光晕动画、特性卡片 */
-@import './_layout.css';      /* 文档布局、侧边栏、页脚 */
-@import './_doc.css';         /* 文章排版、代码块、目录 */
-@import './_components.css';  /* 进度条、回到顶部 */
-@import './_timeline.css';    /* 时间线容器 */
+/* VitePress 主题样式入口 */
+@import './_tokens.css';
+@import './_base.css';
+@import './_nav.css';
+@import './_layout.css';
+@import './_doc.css';
+@import './_components.css';
+@import './_timeline.css';
