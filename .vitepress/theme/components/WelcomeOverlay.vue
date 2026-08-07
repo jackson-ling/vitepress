@@ -172,12 +172,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   background: #0d1321;
-  animation: overlay-in 0.5s ease-out both;
-}
-
-@keyframes overlay-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  opacity: 1;
 }
 
 /* ── 退出动画 ──────────────────────────────────────────────

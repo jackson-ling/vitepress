@@ -136,7 +136,7 @@ function finishEntrance() {
   } catch {}
   introReady.value = true
   showLoader.value = false
-  document.documentElement.classList.remove('home-motion-loading', 'welcome-blocking')
+  document.documentElement.classList.remove('home-motion-loading', 'welcome-blocking', 'entrance-bg')
   document.documentElement.classList.add('home-motion-intro-seen')
 }
 
@@ -226,8 +226,8 @@ function onImageError(event, fallbackText) {
 onMounted(() => {
   const root = homeMotionRef.value
   if (!root) return
+  document.documentElement.classList.add('home-motion-active', 'entrance-bg', 'home-motion-loading')
   document.documentElement.classList.remove('welcome-blocking')
-  document.documentElement.classList.add('home-motion-active')
   reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   const stage = root.querySelector('.motion-stage')
@@ -483,7 +483,7 @@ onUnmounted(() => {
   cancelAnimationFrame(renderFrameId)
   cancelAnimationFrame(loaderFrameId)
   timeoutIds.forEach(id => clearTimeout(id))
-  document.documentElement.classList.remove('home-motion-active', 'home-motion-loading')
+  document.documentElement.classList.remove('home-motion-active', 'home-motion-loading', 'welcome-blocking')
 })
 </script>
 

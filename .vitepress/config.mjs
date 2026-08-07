@@ -23,6 +23,13 @@ const require = createRequire(import.meta.url)
 // 自定义域名下 base 为 /，无需子路径前缀
 const base = '/'
 
+// ── 首屏初始化脚本（dev / production 共用） ──────────────────
+//  同步执行顺序：主题检测 → html.dark → welcome-blocking
+//  必须在 critical CSS 生效前完成，否则暗色模式会先闪亮色背景
+// ────────────────────────────────────────────────────────────
+const firstPaintScript = `(function(){try{var d=document.documentElement,s=localStorage.getItem("vitepress-theme-appearance")||"auto",m=window.matchMedia("(prefers-color-scheme:dark)").matches;if(!s||s==="auto"?m:s==="dark")d.classList.add("dark");var p=location.pathname;if((p==="/"||p==="/index.html"||p.endsWith("/index"))&&!sessionStorage.getItem("welcome-overlay-shown"))d.classList.add("welcome-blocking")}catch(e){}})()`
+const firstPaintCSS = `html.welcome-blocking,html.welcome-blocking body{background:rgb(242,244,247)!important}html.dark.welcome-blocking,html.dark.welcome-blocking body{background:rgb(13,18,32)!important}`
+
 export default defineConfig({
     base,
     lang: 'zh-cn',
@@ -33,24 +40,22 @@ export default defineConfig({
             pagefindPlugin({
                 customSearchQuery: chineseSearchOptimize,
             }),
+            {
+                name: 'vitepress:dev-critical-css',
+                transformIndexHtml(html, { server }) {
+                    if (!server) return // 只在 dev 模式注入
+                    return [
+                        { tag: 'script', children: firstPaintScript, injectTo: 'head-prepend' },
+                        { tag: 'style', children: firstPaintCSS, injectTo: 'head-prepend' },
+                    ]
+                },
+            },
         ],
     },
     head: [
         ['link', {rel: 'icon', href: `${base}标签logo.png`}],
-        ['script', {}, `
-          (function(){
-            var p=location.pathname;
-            if((p==='/'||p==='/index.html'||p.endsWith('/index'))&&!sessionStorage.getItem('welcome-overlay-shown')){
-              document.documentElement.classList.add('welcome-blocking');
-            }
-          })();
-        `],
-        ['style', {}, `
-          html.welcome-blocking,
-          html.welcome-blocking body {
-            background: #0d1321 !important;
-          }
-        `],
+        ['script', {}, firstPaintScript],
+        ['style', {}, firstPaintCSS],
     ],
 
     title: "jackson凌の文档站", // 网站标签页的名称

@@ -53,7 +53,6 @@ function applyLazyLoading(root) {
 let observer
 
 onMounted(() => {
-  document.documentElement.classList.remove('welcome-blocking')
   router.onBeforeRouteChange = onBeforeRouteChange
   router.onAfterRouteChanged = onAfterRouteChanged
   applyLazyLoading(document.body)
