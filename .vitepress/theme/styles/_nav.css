@@ -27,6 +27,27 @@
   }
 }
 
+/* 微信 WebView 下避免手机菜单整层淡入淡出和内容位移动画触发大面积重绘 */
+@media (max-width: 767px) {
+  .VPNavScreen,
+  .VPNavScreen.fade-enter-active,
+  .VPNavScreen.fade-leave-active,
+  .VPNavScreen.fade-enter-active .container,
+  .VPNavScreen.fade-leave-active .container {
+    transition: none !important;
+  }
+
+  .VPNavScreen.fade-enter-from,
+  .VPNavScreen.fade-leave-to {
+    opacity: 1 !important;
+  }
+
+  .VPNavScreen.fade-enter-from .container,
+  .VPNavScreen.fade-leave-to .container {
+    transform: none !important;
+  }
+}
+
 /* 底部渐变光带 */
 .VPNav::after {
   content: '';
