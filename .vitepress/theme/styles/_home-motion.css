@@ -1279,15 +1279,15 @@
 
   .tech-deck {
     top: 51%;
-    left: 0;
-    width: 100vw;
+    left: 50%;
+    width: 80vw;
     height: 280px;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
   }
 
   .tech-card {
     left: 0;
-    width: 80vw;
+    width: 100%;
     padding: 18px;
   }
 
