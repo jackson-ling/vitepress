@@ -10,7 +10,7 @@
   --cyan: #0f9f9b;
   --ink: #111827;
   --muted: #667085;
-  --bg: #f8fbff;
+  --bg: var(--vp-c-bg);
   --nav-bg: rgba(255, 255, 255, 0.88);
   --line: rgba(37, 99, 235, 0.13);
   --panel: rgba(255, 255, 255, 0.9);
@@ -35,6 +35,16 @@
 
 :global(html.home-motion-active .VPFooter) {
   display: none !important;
+}
+
+/* 隐藏首页滚动条，避免动画结束后滚动条突然出现/消失造成的视觉卡顿 */
+:global(html.home-motion-active) {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+:global(html.home-motion-active::-webkit-scrollbar) {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 :global(html.home-motion-loading),
@@ -207,14 +217,7 @@
 }
 
 .loader-slash {
-  position: absolute;
-  top: 29px;
-  right: 68px;
-  width: 2px;
-  height: 56px;
-  background: #3478d9;
-  transform: skewX(-22deg) scaleY(var(--load-progress));
-  transform-origin: bottom;
+  display: none;
 }
 
 .loader-wordmark {
@@ -239,7 +242,7 @@
 .loader-wordmark strong {
   margin-top: 7px;
   font-size: 35px;
-  line-height: 1;
+  line-height: 1.2;
   font-weight: 700;
 }
 
@@ -468,7 +471,7 @@
 :global(.dark .home-motion) {
   --ink: #edf2f8;
   --muted: #9ba8ba;
-  --bg: #0d1321;
+  --bg: var(--vp-c-bg);
   --nav-bg: rgba(13, 19, 33, 0.86);
   --line: rgba(125, 167, 230, 0.18);
   --panel: rgba(19, 29, 48, 0.92);
@@ -759,7 +762,7 @@
 }
 
 :global(.dark .home-motion .card-shine) {
-  opacity: 0.12;
+  opacity: 0;
 }
 
 /* Part 2：TIP */
@@ -857,9 +860,9 @@
 }
 
 .scene-title p {
-  margin: 0;
+  margin: 15px 0 0 0;
   color: var(--muted);
-  font: 13px Consolas, monospace;
+  font: 16px Consolas, monospace;
 }
 
 .tech-scene {
@@ -937,7 +940,7 @@
   margin: 28px 0 0 0.35em;
   padding-top: 12px;
   border-top: 1px solid color-mix(in srgb, var(--blue) 34%, transparent);
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .tech-scene .tech-sequence {
@@ -949,7 +952,7 @@
   align-items: center;
   gap: 9px;
   margin: 0 0 16px;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .tech-card h3 i {
@@ -963,7 +966,7 @@
 .tech-card small {
   margin-left: auto;
   color: var(--muted);
-  font: 11px Consolas, monospace;
+  font: 15px Consolas, monospace;
 }
 
 .tech-grid {
@@ -985,7 +988,7 @@
   border-radius: 8px;
   color: var(--muted);
   background: color-mix(in srgb, var(--panel-solid) 52%, transparent);
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -1023,7 +1026,7 @@
   align-items: center;
   gap: 10px;
   color: var(--muted);
-  font: 11px Consolas, monospace;
+  font: 13px Consolas, monospace;
   transform: translateX(-50%);
 }
 
