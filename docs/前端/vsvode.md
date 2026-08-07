@@ -165,8 +165,6 @@ terminal font size
 
 ### 前端开发
 
-> #### Chinese（Simplified） Language Pack：中文（简体）语言包
->
 > #### HTML CSS Support：HTML CSS 支持
 >
 > #### JavaScript（ES6） code snippets：支持 ES6 语法提示
@@ -205,7 +203,7 @@ terminal font size
 >
 > #### Markdown Emoji：narkdown 支持 emoji，例如：:smille: 语法将渲染为 😄
 >
-> #### Markdown Auto Space：保存时自动在<span style="color:red;">数字</span>或者<span style="color:red;">英文字符</span>前后添加空格
+> #### Markdown Auto Space：保存时自动在 <span style="color:red;"> 数字 </span> 或者 <span style="color:red;"> 英文字符 </span> 前后添加空格
 
 ```json
 // 在 setting.json 文件中配置如下内容，表示 Markdown Auto Space 插件在保存时只对数字和英文字符在前后添加空格
