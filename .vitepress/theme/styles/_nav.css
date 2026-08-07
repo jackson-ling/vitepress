@@ -27,11 +27,13 @@
   }
 }
 
-/* 微信 WebView 下只让菜单内容轻量过渡，固定背景面板保持稳定 */
+/* 微信 WebView 下避免手机菜单整层淡入淡出和内容位移动画触发大面积重绘 */
 @media (max-width: 767px) {
   .VPNavScreen,
   .VPNavScreen.fade-enter-active,
-  .VPNavScreen.fade-leave-active {
+  .VPNavScreen.fade-leave-active,
+  .VPNavScreen.fade-enter-active .container,
+  .VPNavScreen.fade-leave-active .container {
     transition: none !important;
   }
 
@@ -40,15 +42,9 @@
     opacity: 1 !important;
   }
 
-  .VPNavScreen.fade-enter-active .container,
-  .VPNavScreen.fade-leave-active .container {
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-
   .VPNavScreen.fade-enter-from .container,
   .VPNavScreen.fade-leave-to .container {
-    opacity: 0;
-    transform: translateY(-6px) !important;
+    transform: none !important;
   }
 }
 
