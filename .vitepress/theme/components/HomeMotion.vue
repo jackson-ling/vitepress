@@ -106,8 +106,13 @@ function prepareEntrance() {
   function updateLoader(now) {
     const linear = clamp((now - startedAt) / duration)
     const displayed = Math.min(100, Math.round(linear * 100))
+    const edgeProgress = offset => clamp(linear * 4 - offset)
     if (loaderCount) loaderCount.value = String(displayed)
-    loader.style.setProperty('--load-progress', displayed / 100)
+    loader.style.setProperty('--load-progress', linear)
+    loader.style.setProperty('--load-top', edgeProgress(0))
+    loader.style.setProperty('--load-right', edgeProgress(1))
+    loader.style.setProperty('--load-bottom', edgeProgress(2))
+    loader.style.setProperty('--load-left', edgeProgress(3))
     if (linear < 1) {
       loaderFrameId = requestAnimationFrame(updateLoader)
       return
@@ -595,9 +600,12 @@ onUnmounted(() => {
       </div>
       <div class="loader-core">
         <div class="loader-frame" aria-hidden="true">
-          <svg class="loader-progress-border" viewBox="0 0 240 240" preserveAspectRatio="none">
-            <path pathLength="100" d="M 0.5 0.5 H 239.5 V 239.5 H 0.5 Z"></path>
-          </svg>
+          <span class="loader-progress-border">
+            <i class="loader-progress-top"></i>
+            <i class="loader-progress-right"></i>
+            <i class="loader-progress-bottom"></i>
+            <i class="loader-progress-left"></i>
+          </span>
           <span class="loader-slash"></span>
         </div>
         <div class="loader-wordmark"><span>BLOG /</span><strong>{{ loaderName }}</strong></div>
