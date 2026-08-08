@@ -309,7 +309,7 @@ onMounted(() => {
     // 每组保留明确的居中停留区间，只在中段执行原有卡片接替动画。
     const focus = maxFocus === 0
       ? 0
-      : focusIndex + ease(range(focusPhase, 0.25, 0.75))
+      : focusIndex + ease(range(focusPhase, 0.08, 0.72))
     const nearest = gallery < 0.5 ? 0 : clamp(Math.round(focus), 0, techCards.length - 1)
     const cardStep = cardWidth + cardGap
     const speedTilt = clamp(scrollVelocity * 1500, -5, 5)
