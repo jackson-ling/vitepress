@@ -1,0 +1,66 @@
+@property --reveal-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.home-motion {
+  --blue: #3478d9;
+  --blue-deep: #245fae;
+  --cyan: #0f9f9b;
+  --ink: #111827;
+  --muted: #667085;
+  --bg: var(--vp-c-bg);
+  --loader-bg: rgb(242, 244, 247);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --line: rgba(37, 99, 235, 0.13);
+  --panel: rgba(255, 255, 255, 0.9);
+  --panel-solid: #ffffff;
+  --shadow: 0 26px 80px rgba(30, 79, 157, 0.14);
+  position: relative;
+  overflow-x: clip;
+  color: var(--ink);
+  background: var(--vp-c-bg);
+  font-family: "Microsoft YaHei UI", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+}
+
+:global(html.entrance-bg) .home-motion {
+  background: rgb(242, 244, 247);
+  transition: background 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:global(.VPHome:has(> .home-motion)) {
+  margin-bottom: 0 !important;
+}
+
+:global(.VPHome > .home-motion ~ .VPHero),
+:global(.VPHome > .home-motion ~ .VPHomeFeatures),
+:global(.VPHome > .home-motion ~ .VPHomeContent) {
+  display: none !important;
+}
+
+:global(html.home-motion-active .VPFooter) {
+  display: none !important;
+}
+
+/* 隐藏首页滚动条，避免动画结束后滚动条突然出现/消失造成的视觉卡顿 */
+:global(html.home-motion-active) {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+:global(html.home-motion-active::-webkit-scrollbar) {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+:global(html.home-motion-loading),
+:global(html.home-motion-loading body) {
+  height: 100%;
+  overflow: hidden;
+}
+
+:global(html.home-motion-intro-seen .site-loader),
+:global(html:not(.welcome-blocking):not(.home-motion-loading) .site-loader) {
+  display: none;
+}
+

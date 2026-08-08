@@ -198,3 +198,39 @@
     animation: none !important;
   }
 }
+
+/* Layout 全局细节覆盖集中在主题样式中，避免布局组件同时承担样式职责。 */
+.custom-block {
+  padding-top: 6px !important;
+}
+
+.custom-block .custom-block-title {
+  margin: 0 !important;
+}
+
+.custom-block .custom-block-title + p,
+.custom-block .custom-block-title + blockquote,
+.custom-block .custom-block-title + h2,
+.custom-block .custom-block-title + h3,
+.custom-block .custom-block-title + h4 {
+  margin-top: 4px !important;
+}
+
+.custom-block blockquote {
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+}
+
+.custom-block blockquote h2,
+.custom-block blockquote h3,
+.custom-block blockquote h4 {
+  margin-top: 2px !important;
+}
+
+.VPSwitchAppearance .check {
+  transform: none !important;
+}
+
+.VPSwitchAppearance .check .icon {
+  top: -2px;
+}

@@ -28,7 +28,7 @@ const route = useRoute()
 /* ── 侧边栏高亮（路径匹配 → 添加 sidebar-active-highlight 类） */
 const HIGHLIGHT_CLASS = 'sidebar-active-highlight'
 
-/** 判断当前是否为首页（基于路由路径，与 WelcomeOverlay 保持一致） */
+/** 判断当前是否为首页，供阅读进度和回顶工具显隐使用 */
 function isHomePage() {
   const path = route.path
   return path === '/' || path === '/index.html' || path.endsWith('/index')

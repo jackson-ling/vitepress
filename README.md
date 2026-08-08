@@ -154,9 +154,14 @@ npm run docs:preview
 
 ```
 ├── .vitepress/
-│   ├── config.mjs          # 站点配置（导航栏、侧边栏、主题等）
+│   ├── config.mjs           # VitePress 配置组合入口
+│   ├── config/              # 主题、首屏与 Markdown 配置
 │   ├── gen_sidebar.js       # 侧边栏自动生成工具
-│   └── theme/               # 自定义主题覆盖
+│   └── theme/
+│       ├── Layout.vue       # 布局生命周期与全局挂载
+│       ├── home-content.js  # 首页静态内容
+│       ├── components/      # 首页动画与页面增强组件
+│       └── styles/          # 按职责拆分的主题样式
 ├── docs/                    # 文档内容
 │   ├── Java/                # Java SE 三阶段笔记 + 练习题
 │   ├── 算法/                # 算法训练、竞赛题解
@@ -168,7 +173,7 @@ npm run docs:preview
 │   └── 项目/                # 项目实战笔记
 ├── public/                  # 静态资源（图标、图片）
 ├── index.md                 # 首页
-├── index.html               # 入口 HTML
+├── index.html               # 保留的兼容入口，日常配置不在此维护
 └── package.json
 ```
 
@@ -178,7 +183,7 @@ npm run docs:preview
 
 ## 自定义配置
 
-站点配置集中在 `.vitepress/config.mjs`，侧边栏通过 `gen_sidebar.js` 自动生成，可按需修改导航、搜索、主题等配置。
+`.vitepress/config.mjs` 只负责组合配置；导航和侧边栏位于 `.vitepress/config/theme.mjs`，Markdown 位于 `.vitepress/config/markdown.mjs`，首屏防闪逻辑位于 `.vitepress/config/first-paint.mjs`。部分侧边栏内容由 `gen_sidebar.js` 自动生成。
 
 ---
 

@@ -4,19 +4,14 @@
  * 保留默认导航、主题切换、路由过渡和图片懒加载，仅替换首页内容区域。
  -->
 <script setup>
-import { nextTick, onMounted, onUnmounted, provide } from 'vue'
-import { useData, useRouter } from 'vitepress'
+import { nextTick, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import HomeMotion from './components/HomeMotion.vue'
 import SiteEnhancer from './components/SiteEnhancer.vue'
 
 const { Layout } = DefaultTheme
-const { isDark } = useData()
 const router = useRouter()
-
-provide('toggle-appearance', () => {
-  isDark.value = !isDark.value
-})
 
 function getTransitionTarget() {
   return document.querySelector('.VPDoc') || document.querySelector('.VPPage')
@@ -86,40 +81,3 @@ onUnmounted(() => {
   </Layout>
   <SiteEnhancer />
 </template>
-
-<style>
-.custom-block {
-  padding-top: 6px !important;
-}
-
-.custom-block .custom-block-title {
-  margin: 0 !important;
-}
-
-.custom-block .custom-block-title + p,
-.custom-block .custom-block-title + blockquote,
-.custom-block .custom-block-title + h2,
-.custom-block .custom-block-title + h3,
-.custom-block .custom-block-title + h4 {
-  margin-top: 4px !important;
-}
-
-.custom-block blockquote {
-  margin-top: 4px !important;
-  padding-top: 4px !important;
-}
-
-.custom-block blockquote h2,
-.custom-block blockquote h3,
-.custom-block blockquote h4 {
-  margin-top: 2px !important;
-}
-
-.VPSwitchAppearance .check {
-  transform: none !important;
-}
-
-.VPSwitchAppearance .check .icon {
-  top: -2px;
-}
-</style>

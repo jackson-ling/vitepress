@@ -1,0 +1,233 @@
+@media (max-width: 900px) {
+  .chapter-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  /* 手机端固定视口高度，阻止真实页面滚动 */
+  .scroll-track {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  /* 手机端 CSS transition 驱动场景切换动画 */
+  .motion-item {
+    transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
+  }
+
+  .scene {
+    inset: 0;
+    height: 100%;
+    padding: 20px 16px;
+  }
+
+  .hero-cluster {
+    width: calc(100vw - 28px);
+  }
+
+  .hero-logo img {
+    width: 146px;
+  }
+
+  .hero-copy h1 {
+    font-size: 31px;
+  }
+
+  .hero-copy p {
+    font-size: 15px;
+  }
+
+  .button {
+    min-width: 102px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .tips-scene {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    width: calc(100% - 24px);
+  }
+
+  .tip-card {
+    width: 100%;
+    min-height: 0;
+    padding: 16px 18px;
+  }
+
+  .scene-title {
+    top: 6%;
+  }
+
+  .scene-title h2 {
+    font-size: 28px;
+  }
+
+  .tech-deck {
+    top: 51%;
+    left: 50%;
+    width: 80vw;
+    height: 280px;
+    transform: translate(-50%, -50%);
+  }
+
+  .tech-card {
+    left: 0;
+    width: 100%;
+    padding: 18px;
+  }
+
+  .tech-scene .scene-title,
+  .tech-scene .tech-sequence {
+    left: 0;
+  }
+
+  .tech-scene .scene-title {
+    top: 7%;
+    width: auto;
+  }
+
+  .tech-scene .scene-title h2 {
+    display: block;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .tech-scene .scene-title h2 span,
+  .tech-scene .scene-title h2 span:last-child {
+    display: inline;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .tech-scene .scene-title p {
+    margin: 10px 0 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  /* 手机端技术栈标题居中 */
+  .tech-scene .scene-title {
+    left: 50%;
+    width: calc(100% - 12vw);
+    transform: translateX(-50%);
+  }
+
+  /* 手机端技术序列居中显示 */
+  .tech-scene .tech-sequence {
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-sequence {
+    bottom: 6%;
+  }
+
+  .friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 106px;
+  }
+
+  .friend-card {
+    min-height: 200px;
+    padding: 0 12px 14px;
+  }
+
+  .friend-card i {
+    width: 46px;
+    height: 46px;
+    margin: 14px 0 9px;
+    font-size: 22px;
+  }
+
+  .friend-card p {
+    min-height: 36px;
+    font-size: 10.5px;
+  }
+
+  .progress-rail {
+    right: 8px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .scroll-track {
+    height: auto;
+  }
+
+  .motion-stage {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .scene {
+    position: relative;
+    inset: auto;
+    min-height: 100vh;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    pointer-events: auto;
+  }
+
+  .motion-item {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .tech-scene,
+  .friends-scene {
+    min-height: 760px;
+  }
+
+  .tech-deck {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: grid;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    margin: 160px auto 0;
+    transform: none;
+  }
+
+  .tech-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+  }
+
+  .friends-grid {
+    margin-top: 150px;
+  }
+
+  .progress-rail,
+  .chapter-rail,
+  .tech-sequence {
+    display: none;
+  }
+}
