@@ -121,6 +121,12 @@ echo %VISUAL%
 > #### ClaudeCode 工程化中的核心内容：<span style="color:red">Claude.md、Skills、Subagents、MCP、Hooks、Plugins</span>
 
 ```bash
+右键 # 粘贴
+
+ctrl + shift + - # 撤销
+
+alt + v # 粘贴图片
+
 /powerup # ClaudeCode 官方教学，v2.1.90 版本（2026 年 4 月 1 日发布）上限新命令
 
 /model # 切换模型

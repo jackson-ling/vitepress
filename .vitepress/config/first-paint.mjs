@@ -6,7 +6,7 @@
  */
 export const firstPaintScript = `(function(){try{var d=document.documentElement,s=localStorage.getItem("vitepress-theme-appearance")||"auto",m=window.matchMedia("(prefers-color-scheme:dark)").matches;if(!s||s==="auto"?m:s==="dark")d.classList.add("dark");var p=location.pathname;if((p==="/"||p==="/index.html"||p.endsWith("/index"))&&!sessionStorage.getItem("welcome-overlay-shown"))d.classList.add("welcome-blocking")}catch(e){}})()`
 
-export const firstPaintCSS = `html.welcome-blocking,html.welcome-blocking body{background:rgb(242,244,247)!important}html.dark.welcome-blocking,html.dark.welcome-blocking body{background:rgb(13,18,32)!important}`
+export const firstPaintCSS = `html.welcome-blocking,html.welcome-blocking body{background:rgb(242,244,247)!important}html.dark,html.dark body{background:rgb(13,18,32)!important}`
 
 /** VitePress dev 不读取 config.head，通过 Vite transform 单独注入同一份首屏资源。 */
 export function createDevFirstPaintPlugin() {
