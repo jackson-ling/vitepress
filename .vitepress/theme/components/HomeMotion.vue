@@ -298,7 +298,13 @@ onMounted(() => {
     const leftX = (window.innerWidth - deckWidth) / 2
     const rightX = leftX + cardWidth + cardGap
     const maxFocus = Math.max(0, techCards.length - visibleCount)
-    const focus = ease(range(progress, 0.45, 0.79)) * maxFocus
+    const rawFocus = ease(range(progress, 0.45, 0.79)) * maxFocus
+    const focusIndex = Math.min(Math.floor(rawFocus), Math.max(0, maxFocus - 1))
+    const focusPhase = rawFocus - focusIndex
+    // 每组保留明确的居中停留区间，只在中段执行原有卡片接替动画。
+    const focus = maxFocus === 0
+      ? 0
+      : focusIndex + ease(range(focusPhase, 0.25, 0.75))
     const nearest = gallery < 0.5 ? 0 : clamp(Math.round(focus), 0, techCards.length - 1)
     const cardStep = cardWidth + cardGap
     const speedTilt = clamp(scrollVelocity * 1500, -5, 5)
