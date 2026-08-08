@@ -75,7 +75,7 @@ export const homeFriendLinks = [
 
 export const homeChapters = [
   { label: '首页', progress: 0 },
-  { label: '学习提示', progress: 0.22 },
+  { label: '学习提示', progress: 0.18 },
   { label: '技术栈', progress: 0.54 },
   { label: '友情链接', progress: 1 },
 ]
