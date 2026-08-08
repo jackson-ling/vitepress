@@ -412,7 +412,7 @@
   --ink: #edf2f8;
   --muted: #9ba8ba;
   --bg: var(--vp-c-bg);
-  --loader-bg: rgb(13, 18, 32);
+  --loader-bg: rgb(24, 24, 27);
   --nav-bg: rgba(13, 19, 33, 0.86);
   --line: rgba(125, 167, 230, 0.18);
   --panel: rgba(19, 29, 48, 0.92);
@@ -421,7 +421,7 @@
 }
 
 :global(html.entrance-bg.dark) .home-motion {
-  background: rgb(13, 18, 32);
+  background: rgb(24, 24, 27);
   transition: background 1100ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 

@@ -13,6 +13,7 @@ import {
   homeTechCategories as techCategories,
   homeTips as tips,
 } from '../home-content.js'
+import { getTechSnapProgress } from '../tech-scroll-snap.mjs'
 
 const { frontmatter, isDark, theme } = useData()
 const hero = computed(() => frontmatter.value.hero || {})
@@ -42,6 +43,9 @@ let scrollVelocity = 0
 let pointerX = 0
 let pointerY = 0
 let activeTechIndex = -1
+let techSnapTimer = null
+let techSnapTarget = null
+let techSnapActive = false
 const timeoutIds = []
 
 // 手机端离散切换状态
@@ -128,9 +132,37 @@ function prepareEntrance() {
   }, gatherDuration + focusPause)
 }
 
+function cancelTechSnap() {
+  if (techSnapTimer) clearTimeout(techSnapTimer)
+  techSnapTimer = null
+  if (techSnapActive) {
+    // 取消浏览器尚未完成的平滑滚动，否则用户下一次滚动会被旧动画拉回去。
+    window.scrollTo({ top: window.scrollY, behavior: 'auto' })
+  }
+  techSnapTarget = null
+  techSnapActive = false
+}
+
 function updateTargetProgress() {
   const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
   targetProgress = clamp(window.scrollY / maxScroll)
+  if (techSnapActive && techSnapTarget !== null && Math.abs(targetProgress - techSnapTarget) < 0.0005) {
+    targetProgress = techSnapTarget
+    currentProgress = techSnapTarget
+    scrollVelocity = 0
+    techSnapTarget = null
+    techSnapActive = false
+  }
+  if (isMobile() || reducedMotion || techSnapActive) return
+  if (techSnapTimer) clearTimeout(techSnapTimer)
+  techSnapTimer = window.setTimeout(() => {
+    techSnapTimer = null
+    const snapProgress = getTechSnapProgress(targetProgress, techCategories.length)
+    if (snapProgress === null || Math.abs(snapProgress - targetProgress) < 0.0005) return
+    techSnapTarget = snapProgress
+    techSnapActive = true
+    scrollToProgress(snapProgress)
+  }, 300)
 }
 
 function scrollToProgress(progress) {
@@ -151,6 +183,10 @@ function onStagePointerMove(event) {
 function onStagePointerLeave() {
   pointerX = 0
   pointerY = 0
+}
+
+function onWheel() {
+  if (!isMobile()) cancelTechSnap()
 }
 
 function onTechCardClick(event, index) {
@@ -540,7 +576,12 @@ onMounted(() => {
     if (isMobile()) {
       renderMobile()
     } else if (!reducedMotion) {
-      currentProgress += (targetProgress - currentProgress) * 0.072
+      if (techSnapActive && techSnapTarget !== null && Math.abs(targetProgress - techSnapTarget) < 0.0005) {
+        currentProgress = targetProgress
+        scrollVelocity = 0
+      } else {
+        currentProgress += (targetProgress - currentProgress) * 0.072
+      }
       if (Math.abs(targetProgress - currentProgress) < 0.00008) currentProgress = targetProgress
       scrollVelocity += ((currentProgress - previousProgress) - scrollVelocity) * 0.2
       scrollVelocity *= 0.94
@@ -556,6 +597,7 @@ onMounted(() => {
   }
 
   window.addEventListener('scroll', updateTargetProgress, { passive: true })
+  window.addEventListener('wheel', onWheel, { passive: true })
   window.addEventListener('resize', updateTargetProgress, { passive: true })
   stage.addEventListener('pointermove', onStagePointerMove)
   stage.addEventListener('pointerleave', onStagePointerLeave)
@@ -572,6 +614,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateTargetProgress)
+  window.removeEventListener('wheel', onWheel)
   window.removeEventListener('resize', updateTargetProgress)
   const stage = homeMotionRef.value?.querySelector('.motion-stage')
   if (stage) {
@@ -581,6 +624,9 @@ onUnmounted(() => {
     stage.removeEventListener('touchcancel', onTouchCancel)
   }
   if (mobileLockTimer) clearTimeout(mobileLockTimer)
+  if (techSnapTimer) clearTimeout(techSnapTimer)
+  techSnapTarget = null
+  techSnapActive = false
   cancelAnimationFrame(renderFrameId)
   cancelAnimationFrame(loaderFrameId)
   timeoutIds.forEach(id => clearTimeout(id))
