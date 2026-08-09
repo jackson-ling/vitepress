@@ -30,7 +30,7 @@
 
 ![VitePress](https://img.shields.io/badge/VitePress-1.6-639?style=flat-square&logo=vitepress&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3.5-4FC08D?style=flat-square&logo=vue.js&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-24-339933?style=flat-square&logo=node.js&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18.20.4-339933?style=flat-square&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Markdown](https://img.shields.io/badge/Markdown-000?style=flat-square&logo=markdown&logoColor=white)
 
@@ -117,7 +117,7 @@
 
 ### 环境要求
 
-- **Node.js** >= 24.0.0 < 25.0.0
+- **Node.js** >= 18.20.4 < 19.0.0
 - **包管理器**：npm / pnpm / yarn
 
 ### 本地运行

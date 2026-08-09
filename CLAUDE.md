@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 这是一个基于 VitePress 的中文技术知识库，仓库根目录就是内容根目录：`index.md` 对应首页，`docs/**/*.md` 对应文章，`public/` 中的资源以根路径发布。README.md 仅用于 GitHub 项目说明，并通过 `srcExclude` 排除在网站构建之外。
 
-项目使用 Node.js 24.9.0（`.nvmrc`，`package.json` 要求 `>=24.0.0 <25.0.0`）和 npm；`package-lock.json` 是依赖版本来源。不要更换包管理器，也不要直接修改 `.vitepress/dist`。
+项目使用 Node.js 18.20.4（`.nvmrc`，`package.json` 要求 `>=18.20.4 <19.0.0`）和 npm；`package-lock.json` 是依赖版本来源。不要更换包管理器，也不要直接修改 `.vitepress/dist`。
 
 ## 常用命令
 
@@ -26,7 +26,7 @@ npm run docs:build
 npm run docs:preview
 ```
 
-仓库当前没有测试、Lint 或格式化脚本，因此没有可运行的单测命令。修改配置、主题或内容后，至少执行 `git diff --check` 和 `npm run docs:build`；构建内存不足时可设置 `NODE_OPTIONS=--max-old-space-size=5120`。CI 使用 Node.js 24.9.0、`npm ci` 和 `npm run docs:build`，产物目录为 `.vitepress/dist`。
+仓库没有 npm 封装的测试、Lint 或格式化脚本。技术栈滚动吸附的 Node 原生测试可单独运行：`node --test .vitepress/theme/tech-scroll-snap.test.mjs`。修改配置、主题或内容后，至少执行 `git diff --check` 和 `npm run docs:build`；构建内存不足时可设置 `NODE_OPTIONS=--max-old-space-size=5120`。CI 使用 Node.js 18.20.4、`npm ci` 和 `npm run docs:build`，产物目录为 `.vitepress/dist`。
 
 ## 整体架构
 

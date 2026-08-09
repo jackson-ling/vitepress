@@ -87,14 +87,13 @@ npm config set cache "D:\node\nodejs\node_cache"
 ### 常用操作
 
 ```bash
-nvm install 24.9.0
 nvm install 18.20.4
 
 nvm list available
-nvm use 24.9.0
+nvm use 18.20.4
 nvm list
 
-nvm uninstall 18.20.4
+nvm uninstall 16.20.2
 
 nvm current
 ```

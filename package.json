@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=24.0.0 <25.0.0"
+    "node": ">=18.20.4 <19.0.0"
   },
   "devDependencies": {
     "@types/dom-view-transitions": "^1.0.6",
