@@ -210,11 +210,11 @@ npm run docs:preview
 
 ## Star History
 
-<div align="center">
-
-<a href="https://star-history.com/#jackson-ling/vitepress&Date"><img width="600" src="https://api.star-history.com/svg?repos=jackson-ling/vitepress&type=Date" /></a>
-
-</div>
+<p align="center">
+  <a href="https://star-history.com/#jackson-ling/vitepress&amp;Date">
+    <img src="https://api.star-history.com/svg?repos=jackson-ling/vitepress&amp;type=Date" alt="Star History Chart" />
+  </a>
+</p>
 
 ---
 
@@ -225,7 +225,5 @@ npm run docs:preview
 **License**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
-
-Copyright &copy; 2025 Jackson 凌 | 粤ICP备2025441629号-1
 
 </div>

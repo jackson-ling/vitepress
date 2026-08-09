@@ -13,5 +13,5 @@ layout: page
 :::
 
 ::: danger <span style="font-size: 20px;">TIP</span>
-<span style="font-size: 20px;">目前仍在开发中，后续内容将会逐渐完善，敬请期待~~:smile:</span>
+<span style="font-size: 20px;">首页入场动画参照 <a href="https://trionn.com/">https://trionn.com/</a>，本站目前仍在开发中，后续内容将会逐渐完善，敬请期待~~:smile:</span>
 ::::
