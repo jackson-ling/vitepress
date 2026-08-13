@@ -1,12 +1,44 @@
-node_modules
-.DS_Store
-dist
-dist-ssr
-cache
-.cache
-.temp
+# 依赖
+node_modules/
+
+# VitePress / Vite 构建产物与缓存
+.vitepress/dist/
+.vitepress/cache/
+dist/
+dist-ssr/
+cache/
+.cache/
+.temp/
+coverage/
+
+# 本地环境变量与配置
+.env
+.env.*
+!.env.example
 *.local
-.idea
-.playwright-mcp
-.claude
-.agents
+
+# 日志与进程文件
+*.log
+*.pid
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 编辑器与操作系统文件
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 本地 AI / 浏览器工具状态
+.agents/
+.claude/
+.codex/
+.playwright-mcp/
+
+# 技能锁文件用于固定来源和内容哈希，应提交到仓库
+!skills-lock.json

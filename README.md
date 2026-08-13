@@ -1,212 +1,154 @@
 <div align="center">
 
-<!-- Wave SVG Header -->
-<img width="300" src="public/主页logo.png" />
+<img width="300" src="public/主页logo.webp" alt="jackson凌知识文档站" />
 
-**少想多做 • 循序渐进 • 深入思考** | 大二在读 | 励志成为 Java 后端工程师 🔥 目前正在找实习中
+# jackson凌の知识文档站
 
-[![在线预览](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88-0d1321?style=for-the-badge&logo=googlechrome&logoColor=f0e9d2)](https://jacksonling.cn/)
+一个持续整理 Java 后端、算法与工程实践的个人技术知识库
+
+[![在线预览](https://img.shields.io/badge/在线预览-0d1321?style=for-the-badge&logo=googlechrome&logoColor=white)](https://jacksonling.cn/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github)](https://github.com/jackson-ling)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee)](https://gitee.com/jacksonling)
 [![CSDN](https://img.shields.io/badge/CSDN-FC5531?style=for-the-badge&logo=csdn)](https://blog.csdn.net/jackson0607)
 
 </div>
 
----
+## 项目简介
 
-<!-- About Section -->
+本项目是基于 [VitePress](https://vitepress.dev/) 构建的中文技术知识库，仓库中的 600 余篇 Markdown 文档覆盖 Java 基础、算法训练、后端开发、前端基础、Python、AI 应用与项目实战。
 
-## 关于项目
+项目不仅用于归档学习笔记，也对默认 VitePress 主题进行了定制，提供首页动效、中文全文搜索、阅读进度、图片预览和响应式浏览体验。
 
-一个基于 **VitePress** 搭建的个人知识文档站点，系统性地记录了从 Java 基础语法到后端工程化开发的完整学习路径。内容涵盖 **Java SE**、**算法与数据结构**、**后端框架**、**前端基础**、**Python** 以及 **AI 应用**等多个方向，致力于构建清晰、可复用的技术知识体系。
+## 核心能力
 
----
+- **结构化内容导航**：顶部导航、手动侧边栏与目录扫描生成的侧边栏共同组织文档。
+- **中文全文搜索**：使用 Pagefind 构建搜索索引，并启用中文搜索优化。
+- **自定义动态首页**：包含首次访问 Loader、滚动场景、技术栈展示与移动端分页交互。
+- **阅读体验增强**：提供阅读进度、回到顶部、当前侧边栏高亮和时间线动画。
+- **正文图片预览**：基于 PhotoSwipe 支持图片缩放、拖拽和滚轮缩放。
+- **首屏主题适配**：开发与生产环境共用首屏逻辑，降低亮暗主题切换时的背景闪烁。
+- **自动化部署**：推送到 `main` 分支后，由 GitHub Actions 构建并部署到 GitHub Pages。
 
-<!-- Tech Stack -->
+## 内容地图
+
+| 板块 | 主要内容 |
+| --- | --- |
+| Java | Java 基础、面向对象、网络编程、JDBC、正则、Maven、单元测试与章节练习 |
+| 算法 | 代码随想录、灵神题单、左程云课程、蓝桥杯、数据结构与专题题解 |
+| 后端 | MySQL、Redis、Spring、Spring Boot、MyBatis、设计模式、Linux、Docker 与 Git |
+| 项目 | Tlias 智能学习辅助系统、苍穹外卖、中州养老等项目笔记 |
+| 前端 | HTML、CSS、JavaScript、TypeScript、Vue、Element Plus 与微信小程序 |
+| Python | Python 基础、爬虫、FastAPI、LangChain 与 LangGraph Agent |
+| AI | AI 基础、Claude Code、Spring AI、Ollama 与 ROS2 |
+| 笔记 | GitHub、Markdown、VitePress、面试复盘、八股文、随笔与实习日记 |
 
 ## 技术栈
 
 <div align="center">
 
-![VitePress](https://img.shields.io/badge/VitePress-1.6-639?style=flat-square&logo=vitepress&logoColor=white)
-![Vue](https://img.shields.io/badge/Vue-3.5-4FC08D?style=flat-square&logo=vue.js&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-18.20.4-339933?style=flat-square&logo=node.js&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Markdown](https://img.shields.io/badge/Markdown-000?style=flat-square&logo=markdown&logoColor=white)
+![VitePress](https://img.shields.io/badge/VitePress-1.6.4-646CFF?style=flat-square&logo=vitepress&logoColor=white)
+![Vue](https://img.shields.io/badge/Vue-3.5-42B883?style=flat-square&logo=vuedotjs&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18.20.4-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Pagefind](https://img.shields.io/badge/Pagefind-1.5-2F6FEB?style=flat-square)
+![PhotoSwipe](https://img.shields.io/badge/PhotoSwipe-5.4-111827?style=flat-square)
 
 </div>
-
----
-
-<!-- Content Sections -->
-
-## 内容板块
-
-<table>
-  <tr>
-    <td align="center" width="130">
-      <img src="public/java.png" width="48" /><br />
-      <b>Java</b>
-    </td>
-    <td>
-      韩顺平 Java 三阶段完整笔记（基础语法 → 面向对象高级 → 网络编程/JDBC/正则），配套章节练习题、IDEA / Maven 环境搭建
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="public/leetcode.png" width="48" /><br />
-      <b>算法</b>
-    </td>
-    <td>
-      代码随想录训练营、灵神题单、蓝桥杯真题、洛谷题单、左程云算法课、常用数据结构（Java 实现）
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="public/springboot.png" width="48" /><br />
-      <b>后端</b>
-    </td>
-    <td>
-      MySQL / Redis / Spring / MyBatis / SpringBoot / MyBatis Plus，设计模式与项目实战笔记，Linux / Docker / Git DevOps 内容
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="public/vue.png" width="48" /><br />
-      <b>前端</b>
-    </td>
-    <td>
-      HTML / CSS / JavaScript / TypeScript 基础，Vue 框架、Element Plus 组件库、微信小程序开发
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="public/python.png" width="48" /><br />
-      <b>Python</b>
-    </td>
-    <td>
-      PyCharm 环境搭建、爬虫（Urllib / Selenium / Scrapy）、数据分析（NumPy / Pandas / Matplotlib）
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <span style="font-size:48px">🤖</span><br />
-      <b>AI</b>
-    </td>
-    <td>
-      AI 基础认知、Claude Code 实践、SpringAI / LangChain4j 集成、Ollama 本地部署、ROS2（AIC 大赛）
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://img.shields.io/badge/408-F59E0B?style=for-the-badge&logo=datacamp&logoColor=white" height="28" /><br />
-      <b>408</b>
-    </td>
-    <td>
-      高等数学、线性代数、概率论、数据结构、计算机组成原理、操作系统、计算机网络
-    </td>
-  </tr>
-</table>
-
-
----
-
-<!-- Quick Start -->
 
 ## 快速开始
 
 ### 环境要求
 
-- **Node.js** >= 18.20.4 < 19.0.0
-- **包管理器**：npm / pnpm / yarn
+- Node.js `18.20.4`（项目版本范围：`>=18.20.4 <19.0.0`）
+- npm（依赖版本以 `package-lock.json` 为准）
 
-### 本地运行
+Windows 下使用 nvm 时，建议先确认当前终端已切换到项目版本：
+
+```powershell
+nvm use 18.20.4
+node -v
+```
+
+### 安装与运行
 
 ```bash
-# 克隆仓库
 git clone https://github.com/jackson-ling/vitepress.git
 cd vitepress
 
-# 安装依赖
-npm install
-
-# 启动开发服务器
+npm ci
 npm run docs:dev
 ```
 
-浏览器访问 `http://localhost:5173` 即可预览。
+开发服务器默认运行在 `http://localhost:5173`。
 
 ### 构建与预览
 
 ```bash
-# 构建生产版本
 npm run docs:build
-
-# 本地预览构建产物
 npm run docs:preview
 ```
 
----
+生产构建会同时生成 Pagefind 搜索索引，构建产物位于 `.vitepress/dist`。完整站点构建需要较多内存；如遇 Node.js 堆内存不足，可在当前终端设置：
 
-<!-- Project Structure -->
+```powershell
+$env:NODE_OPTIONS = '--max-old-space-size=5120'
+npm run docs:build
+```
 
 ## 项目结构
 
-```
+```text
+.
+├── .github/workflows/
+│   └── deploy.yml                 # GitHub Pages 构建与部署
 ├── .vitepress/
-│   ├── config.mjs           # VitePress 配置组合入口
-│   ├── config/              # 主题、首屏与 Markdown 配置
-│   ├── gen_sidebar.js       # 侧边栏自动生成工具
+│   ├── config.mjs                 # VitePress 配置组合入口
+│   ├── config/
+│   │   ├── first-paint.mjs        # 首屏主题与防闪逻辑
+│   │   ├── markdown.mjs           # Markdown 与自定义容器配置
+│   │   └── theme.mjs              # 导航、侧边栏、社交链接与页脚
+│   ├── gen_sidebar.js             # 基于文档目录生成侧边栏
 │   └── theme/
-│       ├── Layout.vue       # 布局生命周期与全局挂载
-│       ├── home-content.js  # 首页静态内容
-│       ├── components/      # 首页动画与页面增强组件
-│       └── styles/          # 按职责拆分的主题样式
-├── docs/                    # 文档内容
-│   ├── Java/                # Java SE 三阶段笔记 + 练习题
-│   ├── 算法/                # 算法训练、竞赛题解
-│   ├── 后端/                # 框架笔记、数据库、DevOps
-│   ├── 前端/                # 前端基础与框架
-│   ├── Python/              # Python 基础与爬虫
-│   ├── AI/                  # AI 相关技术
-│   ├── 408/                 # 考研专业课
-│   └── 项目/                # 项目实战笔记
-├── public/                  # 静态资源（图标、图片）
-├── index.md                 # 首页
-├── index.html               # 保留的兼容入口，日常配置不在此维护
-└── package.json
+│       ├── Layout.vue             # 自定义布局组合
+│       ├── home-content.js        # 首页内容数据
+│       ├── components/
+│       │   ├── HomeMotion.vue     # 首页动效与交互
+│       │   └── SiteEnhancer.vue   # 阅读与图片预览增强
+│       └── styles/                 # 按职责拆分的主题样式
+├── docs/                           # 各主题 Markdown 文档
+├── public/                         # 图片、图标等静态资源
+├── index.md                        # 站点首页内容入口
+├── package.json                    # 依赖与 npm 脚本
+└── README.md                       # GitHub 项目说明
 ```
 
----
+## 内容与配置维护
 
-<!-- Custom Config -->
+- 新增或修改文章时，编辑 `docs/` 下对应主题目录中的 Markdown 文件。
+- 修改首页标题和操作按钮时，编辑 `index.md`；修改首页 TIP、技术栈、友情链接或章节数据时，编辑 `.vitepress/theme/home-content.js`。
+- 修改导航、手动侧边栏或社交链接时，编辑 `.vitepress/config/theme.mjs`。
+- 部分侧边栏由 `.vitepress/gen_sidebar.js` 根据目录自动生成；移动或重命名文章后，需要同步检查路由和手动链接。
+- `README.md` 通过 `srcExclude` 排除，仅用于仓库说明，不会生成站点页面。
 
-## 自定义配置
+## 部署
 
-`.vitepress/config.mjs` 只负责组合配置；导航和侧边栏位于 `.vitepress/config/theme.mjs`，Markdown 位于 `.vitepress/config/markdown.mjs`，首屏防闪逻辑位于 `.vitepress/config/first-paint.mjs`。部分侧边栏内容由 `gen_sidebar.js` 自动生成。
+仓库使用 `.github/workflows/deploy.yml` 部署 GitHub Pages：
 
----
-
-<!-- Contact -->
+1. 推送到 `main` 分支，或在 Actions 页面手动触发工作流。
+2. 工作流使用 Node.js `18.20.4` 执行 `npm ci` 和 `npm run docs:build`。
+3. `.vitepress/dist` 作为 Pages 产物上传并发布。
 
 ## 联系作者
 
-> 目前大二在读，励志成为优秀的 Java 后端工程师，目前正在找实习中......
->
-> 若网站笔记有误和不足，或学习交流，欢迎通过以下方式联系
+若发现笔记内容有误，或希望交流学习与项目实践，可以通过以下方式联系：
 
 <div align="center">
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jackson-ling)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/jacksonling)
 [![CSDN](https://img.shields.io/badge/CSDN-FC5531?style=for-the-badge&logo=csdn&logoColor=white)](https://blog.csdn.net/jackson0607)
-[![WeChat](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://jacksonling.cn/docs/Contact.html)
+[![WeChat](https://img.shields.io/badge/微信-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://jacksonling.cn/docs/Contact.html)
 
 </div>
-
----
-
-<!-- Star History -->
 
 ## Star History
 
@@ -215,15 +157,3 @@ npm run docs:preview
     <img src="https://api.star-history.com/svg?repos=jackson-ling/vitepress&amp;type=Date" alt="Star History Chart" />
   </a>
 </p>
-
----
-
-<!-- Footer Wave -->
-
-<div align="center">
-
-**License**
-
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
-
-</div>
