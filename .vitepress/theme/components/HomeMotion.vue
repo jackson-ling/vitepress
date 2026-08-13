@@ -146,11 +146,6 @@ function scrollToProgress(progress) {
 function onStagePointerMove(event) {
   pointerX = (event.clientX / window.innerWidth - 0.5) * 24
   pointerY = (event.clientY / window.innerHeight - 0.5) * 16
-  const item = event.target.closest?.('.motion-item')
-  if (!item || !homeMotionRef.value?.contains(item)) return
-  const rect = item.getBoundingClientRect()
-  item.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`)
-  item.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`)
 }
 
 function onStagePointerLeave() {
@@ -635,7 +630,7 @@ onUnmounted(() => {
 
         <section class="scene tips-scene" aria-label="学习提示">
           <article v-for="(tip, index) in tips" :key="tip.title" class="glass-card tip-card motion-item" :data-tip="index">
-            <div class="card-shine"></div><span class="tip-icon" :class="tip.tone">{{ tip.icon }}</span><div><h2>{{ tip.title }}</h2><p>{{ tip.text }}</p></div>
+            <span class="tip-icon" :class="tip.tone">{{ tip.icon }}</span><div><h2>{{ tip.title }}</h2><p>{{ tip.text }}</p></div>
           </article>
         </section>
 
@@ -643,7 +638,6 @@ onUnmounted(() => {
           <header class="scene-title motion-item"><h2><span>技术</span><span>栈</span></h2><p>Technologies I work with</p></header>
           <div class="tech-deck">
             <article v-for="(category, index) in techCategories" :key="category.name" class="glass-card tech-card motion-item" :data-tech="index" :style="{ '--accent': category.accent }" @click="onTechCardClick($event, index)">
-              <div class="card-shine"></div>
               <h3><i></i>{{ category.name }}<small>{{ category.desc }}</small></h3>
               <div class="tech-grid">
                 <a v-for="tech in category.items" :key="tech.name" :href="tech.link" target="_blank" rel="noopener">
@@ -659,7 +653,7 @@ onUnmounted(() => {
           <header class="scene-title motion-item"><h2>友情链接</h2><p>Friendly Links</p></header>
           <div class="friends-grid">
             <a v-for="(friend, index) in friendLinks" :key="friend.name" class="glass-card friend-card motion-item" :data-friend="index" :style="{ '--friend': friend.color }" :href="friend.link" target="_blank" rel="noopener">
-              <div class="card-shine"></div><i>{{ friend.icon }}</i><h3>{{ friend.name }}</h3><p>{{ friend.desc }}</p><span>访问主页 →</span>
+              <i>{{ friend.icon }}</i><h3>{{ friend.name }}</h3><p>{{ friend.desc }}</p><span>访问主页 →</span>
             </a>
           </div>
         </section>

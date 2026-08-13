@@ -271,19 +271,6 @@
   transform-style: preserve-3d;
 }
 
-.card-shine {
-  position: absolute;
-  z-index: 4;
-  inset: 0;
-  opacity: 0.42;
-  pointer-events: none;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.94), transparent 28%);
-}
-
-:global(.dark .home-motion .card-shine) {
-  opacity: 0;
-}
-
 /* Part 2：TIP */
 .tips-scene {
   grid-template-columns: repeat(3, minmax(0, 1fr));
