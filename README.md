@@ -36,11 +36,20 @@
 
 ## 文档内容
 
-目前知识库包含 600 余篇 Markdown 文档，主要围绕以下方向持续整理：
+知识库目前收录 **600 余篇 Markdown 文档**，内容以 Java 后端学习路线为主，同时整理算法、项目实践和 AI 应用等方向。
 
-`Java` · `算法与数据结构` · `Spring 生态` · `数据库与中间件` · `项目实践` · `DevOps` · `前端基础` · `Python 与 Agent` · `AI 应用` · `学习与面试复盘`
+| 方向 | 文档规模 | 主要内容 |
+| :--- | :---: | --- |
+| [☕ Java](./docs/Java/) | 184 篇 | Java 基础、面向对象、常用 API、网络编程、JDBC、Maven、单元测试与章节练习 |
+| [🧩 算法与数据结构](./docs/算法/) | 174 篇 | 代码随想录、灵神题单、左程云课程、蓝桥杯、数据结构与专题题解 |
+| [🌱 后端开发](./docs/后端/) | 89 篇 | Spring、Spring Boot、MyBatis、MySQL、Redis、设计模式、Linux 与 Docker |
+| [🚀 项目实践](./docs/项目/) | 91 篇 | Tlias 智能学习辅助系统、苍穹外卖、中州养老等项目的开发与部署记录 |
+| [📝 学习笔记](./docs/笔记/) | 39 篇 | GitHub、Markdown、VitePress、八股文、面试复盘、随笔与实习日记 |
+| [🐍 Python](./docs/Python/) | 21 篇 | Python 基础、爬虫、FastAPI、LangChain 与 LangGraph Agent |
+| [🎨 前端基础](./docs/前端/) | 10 篇 | HTML、CSS、JavaScript、TypeScript、Vue、Element Plus 与微信小程序 |
+| [🤖 AI 应用](./docs/AI/) | 5 篇 | AI 基础、Claude Code、Spring AI、Ollama 与 ROS2 |
 
-完整内容和最新导航请直接访问：[jacksonling.cn](https://jacksonling.cn/)
+> 仓库目录适合查看 Markdown 源文件；完整导航、站内搜索和阅读体验请访问 **[在线文档站 →](https://jacksonling.cn/)**
 
 ## 技术实现
 
