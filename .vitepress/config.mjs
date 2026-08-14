@@ -7,6 +7,12 @@ import {
   firstPaintScript,
 } from './config/first-paint.mjs'
 import { markdown } from './config/markdown.mjs'
+import {
+  SITE_DESCRIPTION,
+  SITE_URL,
+  createSeoHead,
+  filterSitemapItems,
+} from './config/seo.mjs'
 import { createThemeConfig } from './config/theme.mjs'
 
 // 自定义域名部署在根路径；导航和静态资源 URL 依赖此值。
@@ -16,7 +22,11 @@ export default defineConfig({
   base,
   lang: 'zh-cn',
   title: 'jackson凌の文档站',
-  description: 'A VitePress Site',
+  description: SITE_DESCRIPTION,
+  sitemap: {
+    hostname: SITE_URL,
+    transformItems: filterSitemapItems,
+  },
   // README.md 只用于 GitHub 项目说明，不参与站点构建。
   srcExclude: ['README.md'],
   head: [
@@ -34,4 +44,7 @@ export default defineConfig({
   },
   themeConfig: createThemeConfig(base),
   markdown,
+  transformHead({ page, title, description }) {
+    return createSeoHead({ page, title, description })
+  },
 })

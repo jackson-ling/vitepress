@@ -30,7 +30,8 @@ npm run docs:preview
 
 ## 整体架构
 
-- `.vitepress/config.mjs` 是配置组合入口：设置站点元信息、根路径、README 排除规则、首屏资源注入、Pagefind 插件、主题配置和 Markdown 配置。
+- `.vitepress/config.mjs` 是配置组合入口：设置站点元信息、根路径、README 排除规则、首屏资源注入、Pagefind 插件，并组合主题、Markdown 与 SEO 配置。
+- `.vitepress/config/seo.mjs` 集中维护站点 URL、默认描述、canonical/社交分享元标签和 sitemap 过滤规则；页面路径先按 VitePress 输出规则转换为 `.html` URL，再进行 URI 编码。
 - `.vitepress/config/theme.mjs` 集中维护导航、手动侧边栏、社交链接和页脚。部分侧边栏由 `.vitepress/gen_sidebar.js` 根据目录递归生成：它按文件名中的数字自然排序，将目录转成可折叠分组，将 Markdown 转成链接。新增、移动或重命名文章时，必须同步检查手动链接和自动生成范围，避免破坏既有 URL 或顺序。
 - `.vitepress/config/first-paint.mjs` 提供开发和生产共用的首帧 CSS、脚本及 Vite 插件，用于首屏背景、亮暗主题占位和防白闪。根目录 `index.html` 只是低风险兼容入口，不是日常首屏逻辑维护位置。
 - `.vitepress/config/markdown.mjs` 配置 Shiki 双主题、代码行号、中文容器标签以及 `:::timeline` 自定义容器；时间线 HTML 由 Markdown 渲染阶段生成。
