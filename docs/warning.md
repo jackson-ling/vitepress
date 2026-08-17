@@ -121,6 +121,8 @@ outline: [2, 3]
 
 ## ⚠️ 老韩的肺腑之言
 
+> ❗❗❗ **韩顺平编程学习忠告** ❗❗❗：https://www.bilibili.com/video/BV1h54y117DX
+
 #### 1. <span style = "color:red;font-weight:bold">计算机基础很重要</span>，很重要，不要追求时髦的技术，否则会陷入迷茫
 
 #### 2. 选择适合自己的语言，不纠结，不同语言适用场景不同，不同语言逻辑语法大同小异，触类旁通，推荐学 JAVA，简单上手并好就业一些
@@ -173,3 +175,7 @@ outline: [2, 3]
 #### （2）<span style="color:red">做难且正确的事情</span>，难到别人无法到达轻易到达的程度，这才说明你<span style="color:red">不容易被替换</span>，能让你很快能速成的东西都不是什么能让你成长很多的东西
 
 > #### 一件事很容易能做到，那很多人都能做到了，当机会来临时，那凭什么是你呢？
+
+#### （3）学习中的大多数问题可以归于<span style="color:red">思维和行动上懒惰</span>，总想着走捷径，学习急于求成，走马观花，完美主义，有各种空想，导致焦虑，迷茫等等
+
+> #### <span style="color:red">行动</span>才是一切的核心，多<span style="color:red">输出</span>，多问为什么，多<span style="color:red">深入思考</span>，多<span style="color:red">总结复盘</span>，<span style="color:red">搞懂吃透</span>内容才是重点，摆脱急于求成，保持长期主义投入心态
