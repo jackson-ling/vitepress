@@ -178,4 +178,22 @@ outline: [2, 3]
 
 #### （3）学习中的大多数问题可以归于<span style="color:red">思维和行动上懒惰</span>，总想着走捷径，学习急于求成，走马观花，完美主义，有各种空想，导致焦虑，迷茫等等
 
-> #### <span style="color:red">行动</span>才是一切的核心，多<span style="color:red">输出</span>，多问为什么，多<span style="color:red">深入思考</span>，多<span style="color:red">总结复盘</span>，<span style="color:red">搞懂吃透</span>内容才是重点，摆脱急于求成，保持长期主义投入心态
+> #### <span style="color:red">行动</span>才是一切的核心，多<span style="color:red">输出</span>，多问为什么，多<span style="color:red">深入思考</span>，多<span style="color:red">总结复盘</span>，<span style="color:red">搞懂吃透</span>内容才是重点，摆脱急于求成，保持<span style="color:red">长期主义</span>投入心态
+
+#### （4）<span style="color:red">长期主义心态</span>，解决的是不再急于求成，问什么时候能怎么样，不会再焦虑地去扒拉各种速成秘籍，但不是行动上的佛系，怠慢
+
+> #### 允许慢，但要对比过去<span style="color:red">看进步</span>，低门槛启动，逐步<span style="color:red">递增</span>推进，<span style="color:red">刻意练习</span>
+
+#### （5）AI 时代提供便利，但古法编程仍有必要，AI 能力并不能代替个人硬实力，该学的学，该手写的手写，别想着走捷径，该走的路一段都不能少
+
+#### （6）千千的一些学习建议
+
+> #### AI 时代，获取知识的成本无限趋近于 0，更重要的是信息的判别能力，快速试错能力。每个方向都可以适当的了解，不要带着 “我不学 Java 了，那我过去半年的努力不就白费了？” 的这种思想，<span style="color:red">只要在学习，能力都是在提高的</span>，行动永远比空想有建议
+>
+> #### 国内的互联网，永远是业务、跨团队协作、沟通、背书、履历为导向。总得来说，你的<span style="color:red">软素质</span>远比技术工程能力更重要。前者才是真正决定你上下限的东西。所以不要只是一头学技术，抄代码式的学习。<span style="color:red">思考</span>是最宝贵的
+>
+> #### <span style="color:red">多复盘、多总结、多输出</span>。不要只是被动输入。学习后可以自己画流程图，写写笔记，总结一下，也可以整理成一个 html 界面，最好也要有点语言输出，用 AI，模拟面试，都可以
+>
+> #### 早点<span style="color:red">摆脱学生思维</span>，不要总问怎么办，可以吗。优先动手和行动，在一条路上走到最接近尽头的地方，再问问怎么办，差什么，该怎么努力
+>
+> #### 找优质圈子、优质信息源，不要在低价值的人、事上面浪费自己的精力。精力、时间是最宝贵的东西，千金难换
