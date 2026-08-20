@@ -8,7 +8,7 @@ export const HOME_INTRO_STORAGE_KEY = 'homepage-motion-intro-played-v3'
 export const homeTips = [
   { icon: '⏳', tone: 'blue', title: 'TIP 1', text: '明确目标，刻意练习，循序渐进，建立及时反馈，切忌急于求成，走马观花' },
   { icon: '💪', tone: 'purple', title: 'TIP 2', text: '少空想，多行动，降低预期，搞懂吃透，打牢基本功，大量重复，构建体系' },
-  { icon: '🚀', tone: 'amber', title: 'TIP 3', text: '保持独立思考，总结复盘，对比过去看进步，学会主动探索，敢于尝试，别设限' },
+  { icon: '🚀', tone: 'amber', title: 'TIP 3', text: '保持独立思考，总结复盘，对比过去看进步，跳出舒适区，敢于尝试，别自我设限' },
 ]
 
 export const homeTechCategories = [
