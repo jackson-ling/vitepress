@@ -70,7 +70,7 @@ export const homeFriendLinks = [
   { name: 'VitePress', desc: 'Vue & Vite 驱动的静态站点生成器', icon: '⚡', color: '#eab308', link: 'https://vitepress.dev' },
   { name: 'Irai', desc: '技术探索者，记录学习与生活', icon: '🌐', color: '#0d9488', link: 'http://iraionly.cn/' },
   { name: '代码随想录', desc: '程序员卡尔的算法与编程教程', icon: '📘', color: '#2563eb', link: 'https://programmercarl.com' },
-  { name: 'LeetCode', desc: '全球领先的在线编程练习平台', icon: '🎯', color: '#ea580c', link: 'https://leetcode.cn' },
+  { name: 'ZroImg', desc: '输入一句描述，让 AI 创造独一无二的视觉作品', icon: '🎯', color: '#ea580c', link: 'https://zroimg.com' },
 ]
 
 export const homeChapters = [
