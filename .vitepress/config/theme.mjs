@@ -51,6 +51,7 @@ export function createThemeConfig(base) {
                     {text: '🎯八股文', link: '/docs/笔记/八股文/0. 八股来源.md'},
                     {text: '📝面试复盘', link: '/docs/笔记/面试复盘/面试复盘.md'},
                     {text: '⏳实习日记', link: 'docs/笔记/实习日记/赣州骏烨科技（第一段）/Day 0（5.31）.md'},
+                    {text: '📚考研', link: 'docs/考研/基本常识.md'},
                     {
                         text: 'Vitepress',
                         items:
